@@ -25,7 +25,7 @@ const patientSchema = mongoose.Schema({
     date : { type : String },
     description : { type : String },
     attachment : { type : String },
-    doctorId : { type : mongoose.Schema.Types.ObjectId},
+    doctorId : { type : mongoose.Schema.Types.ObjectId, ref: 'Doctor'},
     doctorImage : { type : String },
     doctorName : { type : String },
   }]

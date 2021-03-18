@@ -93,7 +93,7 @@
 
               <!-- Add Item -->
               <div class="add-more-item text-right">
-                <a href="javascript:void(0);"><i class="fas fa-plus-circle"></i> Add Item</a>
+                <a (click)="addCreds()"><i class="fas fa-plus-circle"></i> Add Item</a>
               </div>
               <!-- /Add Item -->
 
@@ -102,56 +102,56 @@
                 <div class="card-body">
                   <div class="table-responsive">
                     <form [formGroup]="form" (submit)="onSubmit()">
-                    <table class="table table-hover table-center">
-                      <thead>
-                      <tr>
-                        <th style="min-width: 200px">Name</th>
-                        <th style="min-width: 80px;">Quantity</th>
-                        <th style="min-width: 80px">Days</th>
-                        <th style="min-width: 100px;">Time</th>
-                        <th style="min-width: 80px;"></th>
-                      </tr>
-                      </thead>
-                      <tbody>
-                      <tr>
-                        <td>
-                          <input class="form-control" type="text" formControlName="name">
-                        </td>
-                        <td>
-                          <input class="form-control" type="text" formControlName="quantite">
-                        </td>
-                        <td>
-                          <input class="form-control" type="text" formControlName="days">
-                        </td>
-                        <td>
-                          <div class="form-check form-check-inline">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" formControlName="mor"> Morning
-                            </label>
-                          </div>
-                          <div class="form-check form-check-inline">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" formControlName="af"> Afternoon
-                            </label>
-                          </div>
-                          <div class="form-check form-check-inline">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" formControlName="ev"> Evening
-                            </label>
-                          </div>
-                          <div class="form-check form-check-inline">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" formControlName="nght"> Night
-                            </label>
-                          </div>
-                        </td>
-                        <td>
-                          <a href="#" class="btn bg-danger-light trash"><i class="far fa-trash-alt"></i></a>
-                        </td>
-                      </tr>
-                      </tbody>
-                      <input type="submit">
-                    </table>
+                      <table class="table table-hover table-center">
+                        <thead>
+                        <tr>
+                          <th style="min-width: 200px">Name</th>
+                          <th style="min-width: 80px;">Quantity</th>
+                          <th style="min-width: 80px">Days</th>
+                          <th style="min-width: 100px;">Time</th>
+                          <th style="min-width: 80px;"></th>
+                        </tr>
+                        </thead>
+                        <tbody formArrayName="Prescription" *ngFor="let creds of form.controls.Prescription?.value; let i = index">
+                        <tr [formGroupName]="i">
+                          <td>
+                            <input class="form-control" type="text" formControlName="name">
+                          </td>
+                          <td>
+                            <input class="form-control" type="text" formControlName="quantite">
+                          </td>
+                          <td>
+                            <input class="form-control" type="text" formControlName="days">
+                          </td>
+                          <td>
+                            <div class="form-check form-check-inline">
+                              <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" formControlName="mor"> Morning
+                              </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                              <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" formControlName="af"> Afternoon
+                              </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                              <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" formControlName="ev"> Evening
+                              </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                              <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" formControlName="nght"> Night
+                              </label>
+                            </div>
+                          </td>
+                          <td>
+                            <a (click)="deleteCreds(i)" class="btn bg-danger-light trash"><i class="far fa-trash-alt"></i></a>
+                          </td>
+                        </tr>
+                        </tbody>
+                        <input type="submit">
+                      </table>
                     </form>
                   </div>
                 </div>
