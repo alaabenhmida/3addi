@@ -1,3 +1,5 @@
+import {Rates} from './rates.model';
+
 export interface Doctor {
   id: string;
   email: string;
@@ -10,4 +12,5 @@ export interface Doctor {
   birthday: string;
   price: string;
   phone: string;
+  rates: Rates[];
 }

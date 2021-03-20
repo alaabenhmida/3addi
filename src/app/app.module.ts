@@ -17,6 +17,7 @@ import { LogindrComponent } from './components/Doctor/logindr/logindr.component'
 import {AuthInterceptor} from './auth/auth-interceptor';
 import { MedRecordComponent } from './components/Patient/med-record/med-record.component';
 import { AddPrescComponent } from './components/Patient/add-presc/add-presc.component';
+import { ProfileDocComponent } from './components/Doctor/profile-doc/profile-doc.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { AddPrescComponent } from './components/Patient/add-presc/add-presc.comp
     SignupDrComponent,
     LogindrComponent,
     MedRecordComponent,
-    AddPrescComponent
+    AddPrescComponent,
+    ProfileDocComponent
   ],
   imports: [
     BrowserModule,

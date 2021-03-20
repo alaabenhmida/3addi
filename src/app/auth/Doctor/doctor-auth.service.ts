@@ -97,6 +97,7 @@ export class DoctorAuthService {
     const expiresIn = authInformation.expirationDate.getTime() - now.getTime();
     if (expiresIn > 0) {
       this.userid = authInformation.userid;
+      this.useridListener.next(authInformation.userid);
       this.username = authInformation.username;
       this.userimage = authInformation.userimage;
       this.token = authInformation.token;
