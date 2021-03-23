@@ -157,6 +157,10 @@ export class PatientAuthService {
     clearTimeout(this.tokenTimer);
     this.clearAuthData();
     this.router.navigate(['/']);
+    this.role = null;
+    this.userid = null;
+    this.username = null;
+    this.userimage = null;
   }
 
   private setAuthTimer(duration: number): void {

@@ -11,9 +11,11 @@ const doctorSchema = mongoose.Schema({
   birthday: { type: String, required: true},
   price: { type: Number, required: true },
   phone: { type: String, required: true },
-  rates : [{
+  reviews : [{
     patientId : { type : mongoose.Schema.Types.ObjectId, ref: 'Patient' },
-    rate : { type : Number }
+    rate : { type : Number },
+    title : {type : String},
+    review : {type : String}
   }]
 });
 

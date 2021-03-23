@@ -18,6 +18,9 @@ import {AuthInterceptor} from './auth/auth-interceptor';
 import { MedRecordComponent } from './components/Patient/med-record/med-record.component';
 import { AddPrescComponent } from './components/Patient/add-presc/add-presc.component';
 import { ProfileDocComponent } from './components/Doctor/profile-doc/profile-doc.component';
+import {BarRatingModule} from 'ngx-bar-rating';
+import {DlDateTimeDateModule, DlDateTimePickerModule} from 'angular-bootstrap-datetimepicker';
+import { AppointmentComponent } from './components/Doctor/appointment/appointment.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +34,8 @@ import { ProfileDocComponent } from './components/Doctor/profile-doc/profile-doc
     LogindrComponent,
     MedRecordComponent,
     AddPrescComponent,
-    ProfileDocComponent
+    ProfileDocComponent,
+    AppointmentComponent
   ],
   imports: [
     BrowserModule,
@@ -40,9 +44,15 @@ import { ProfileDocComponent } from './components/Doctor/profile-doc/profile-doc
     FormsModule,
     ReactiveFormsModule,
     PatientRoutingModule,
-    DoctorRoutingModule
+    DoctorRoutingModule,
+    BrowserModule,
+    FormsModule,
+    DlDateTimeDateModule,  // <--- Determines the data type of the model
+    DlDateTimePickerModule,
+    // BarRatingModule,
+    // // BarRatingModule
   ],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}, FormsModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

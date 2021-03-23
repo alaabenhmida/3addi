@@ -3,6 +3,8 @@ const express = require("express");
 const multer = require("multer");
 const Doctor = require("../models/Doctor");
 const jwt = require("jsonwebtoken");
+const Patient = require("../models/patient");
+const checkAuth = require("../middleware/check-auth");
 const bcrypt = require("bcrypt");
 const router = express.Router();
 
@@ -115,5 +117,22 @@ router.post("/login", (req, res, next) => {
       });
     });
 })
+
+router.post("/:id/addreview", checkAuth, (req, res, next) => {
+  Patient.findById(req.userData.userId).then(patient => {
+    Doctor.updateOne(
+      {_id: req.params.id},
+      { $push: { reviews:{ patientId:patient._id, rate: +req.body.rate, title: req.body.title, review: req.body.review} }}
+    ).then(result => {
+      res.status(201).json({
+        message: "reviewed successfully",
+        result: result
+      })
+    })
+      .catch(err => {
+        console.log(err);
+      });
+  });
+});
 
 module.exports = router;

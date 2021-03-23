@@ -3,6 +3,7 @@ import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angul
 import {DoctorAuthService} from '../../../auth/Doctor/doctor-auth.service';
 import {Subscription} from 'rxjs';
 import {DoctorServiceService} from '../../../services/doctor/doctor-service.service';
+import {PatientAuthService} from '../../../auth/Patient/patient-auth.service';
 
 @Component({
   selector: 'app-add-presc',
@@ -14,6 +15,7 @@ export class AddPrescComponent implements OnInit, OnDestroy {
   userid;
   userIdSub: Subscription;
   doctorob: any;
+
 
   constructor(private fb: FormBuilder, private doctor: DoctorAuthService, private doctorSevive: DoctorServiceService) {
     this.form = this.fb.group({
@@ -41,7 +43,6 @@ export class AddPrescComponent implements OnInit, OnDestroy {
       console.log(doc);
     });
 
-    // console.log(this.doctorob);
   }
   addCreds(): void {
     const creds = this.form.controls.Prescription as FormArray;

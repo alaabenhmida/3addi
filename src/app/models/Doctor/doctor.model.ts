@@ -12,5 +12,5 @@ export interface Doctor {
   birthday: string;
   price: string;
   phone: string;
-  rates: Rates[];
+  reviews: Rates[];
 }

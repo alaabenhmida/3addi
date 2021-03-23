@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from dreamguys.co.in/demo/doccure/template/blank-page.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 Apr 2020 08:29:07 GMT -->
+<head>
+  <meta charset="utf-8">
+  <title>Doccure</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+</head>
+<body>
+
+<!-- Main Wrapper -->
+<div class="main-wrapper">
+
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb-bar">
+    <div class="container-fluid">
+      <div class="row align-items-center">
+        <div class="col-md-12 col-12">
+          <nav aria-label="breadcrumb" class="page-breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Blank Page</li>
+            </ol>
+          </nav>
+          <h2 class="breadcrumb-title">Blank Page</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /Breadcrumb -->
+
+  <!-- Page Content -->
+  <div class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <dl-date-time-picker
+            startView="day"
+            maxView="year"
+            minView="hour"
+            minuteStep="60"
+            [(ngModel)]="selectedDate"
+          >
+          </dl-date-time-picker>
+          <div *ngIf="selectedDate" class="alert alert-primary alert-dismissible fade show" role="alert">
+            {{selectedDate}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- /Page Content -->
+
+
+</div>
+<!-- /Main Wrapper -->
+
+</body>
+
+<!-- Mirrored from dreamguys.co.in/demo/doccure/template/blank-page.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 Apr 2020 08:29:07 GMT -->
+</html>

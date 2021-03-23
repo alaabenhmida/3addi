@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {Doctor} from '../../../models/Doctor/doctor.model';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {DoctorServiceService} from '../../../services/doctor/doctor-service.service';
+import {NgForm} from '@angular/forms';
+
 
 @Component({
   selector: 'app-profile-doc',
@@ -11,6 +13,9 @@ import {DoctorServiceService} from '../../../services/doctor/doctor-service.serv
 export class ProfileDocComponent implements OnInit {
   id: string;
   doctorData: Doctor;
+  // rate: number;
+  // selectedDate: any;
+  rate: number;
 
   constructor(public route: ActivatedRoute, public doctorServive: DoctorServiceService) { }
 
@@ -32,11 +37,15 @@ export class ProfileDocComponent implements OnInit {
           birthday: data.birthday,
           price: data.price,
           phone: data.phone,
-          rates: data.rates
+          reviews: data.reviews
         };
       });
     });
     console.log(this.doctorData);
   }
 
+  onSubmit(loginForm: NgForm): void {
+    this.doctorServive.addReview(this.id, loginForm.value.rating, loginForm.value.title, loginForm.value.review);
+    // console.log(loginForm.value);
+  }
 }

@@ -47,7 +47,7 @@
               <div class="doc-info-cont">
                 <h4 class="doc-name">{{doctorData?.name}}</h4>
                 <p class="doc-speciality">BDS, MDS - Oral & Maxillofacial Surgery</p>
-                <p class="doc-department"><img src="assets/img/specialities/specialities-05.png" class="img-fluid" alt="Speciality">{{doctorData.speciality}}</p>
+                <p class="doc-department"><img src="assets/img/specialities/specialities-05.png" class="img-fluid" alt="Speciality">{{doctorData?.speciality}}</p>
                 <div class="rating">
                   <i class="fas fa-star filled"></i>
                   <i class="fas fa-star filled"></i>
@@ -56,8 +56,9 @@
                   <i class="fas fa-star"></i>
                   <span class="d-inline-block average-rating">(35)</span>
                 </div>
+<!--                <bar-rating [theme]="'fontawesome-o'" [showText] [(rate)]="rate" [max]="5"></bar-rating>-->
                 <div class="clinic-details">
-                  <p class="doc-location"><i class="fas fa-map-marker-alt"></i> {{doctorData.address}} - <a href="javascript:void(0);">Get Directions</a></p>
+                  <p class="doc-location"><i class="fas fa-map-marker-alt"></i> {{doctorData?.address}} - <a href="javascript:void(0);">Get Directions</a></p>
                   <ul class="clinic-gallery">
                     <li>
                       <a href="assets/img/features/feature-01.jpg" data-fancybox="gallery">
@@ -91,9 +92,9 @@
               <div class="clini-infos">
                 <ul>
                   <li><i class="far fa-thumbs-up"></i> 99%</li>
-                  <li><i class="far fa-comment"></i> {{doctorData.rates.length}} Feedback</li>
+                  <li><i class="far fa-comment"></i> {{doctorData?.reviews.length}} Feedback</li>
                   <li><i class="fas fa-map-marker-alt"></i> Newyork, USA</li>
-                  <li><i class="far fa-money-bill-alt"></i> ${{doctorData.price}} per hour </li>
+                  <li><i class="far fa-money-bill-alt"></i> ${{doctorData?.price}} per hour </li>
                 </ul>
               </div>
               <div class="doctor-action">
@@ -628,30 +629,30 @@
 
               <!-- Write Review -->
               <div class="write-review">
-                <h4>Write a review for <strong>Dr. Darren Elder</strong></h4>
+                <h4>Write a review for <strong>Dr. {{doctorData?.name}}</strong></h4>
 
                 <!-- Write Review Form -->
-                <form>
+                <form (submit)="onSubmit(loginForm)" #loginForm="ngForm">
                   <div class="form-group">
                     <label>Review</label>
                     <div class="star-rating">
-                      <input id="star-5" type="radio" name="rating" value="star-5">
+                      <input id="star-5" type="radio" name="rating" value="5" ngModel>
                       <label for="star-5" title="5 stars">
                         <i class="active fa fa-star"></i>
                       </label>
-                      <input id="star-4" type="radio" name="rating" value="star-4">
+                      <input id="star-4" type="radio" name="rating" value="4" ngModel>
                       <label for="star-4" title="4 stars">
                         <i class="active fa fa-star"></i>
                       </label>
-                      <input id="star-3" type="radio" name="rating" value="star-3">
+                      <input id="star-3" type="radio" name="rating" value="3" ngModel>
                       <label for="star-3" title="3 stars">
                         <i class="active fa fa-star"></i>
                       </label>
-                      <input id="star-2" type="radio" name="rating" value="star-2">
+                      <input id="star-2" type="radio" name="rating" value="2" ngModel>
                       <label for="star-2" title="2 stars">
                         <i class="active fa fa-star"></i>
                       </label>
-                      <input id="star-1" type="radio" name="rating" value="star-1">
+                      <input id="star-1" type="radio" name="rating" value="1" ngModel>
                       <label for="star-1" title="1 star">
                         <i class="active fa fa-star"></i>
                       </label>
@@ -659,11 +660,11 @@
                   </div>
                   <div class="form-group">
                     <label>Title of your review</label>
-                    <input class="form-control" type="text" placeholder="If you could say it in one sentence, what would you say?">
+                    <input ngModel name="title" class="form-control" type="text" placeholder="If you could say it in one sentence, what would you say?">
                   </div>
                   <div class="form-group">
                     <label>Your review</label>
-                    <textarea id="review_desc" maxlength="100" class="form-control"></textarea>
+                    <textarea ngModel name="review" id="review_desc" maxlength="100" class="form-control"></textarea>
 
                     <div class="d-flex justify-content-between mt-3"><small class="text-muted"><span id="chars">100</span> characters remaining</small></div>
                   </div>

@@ -84,7 +84,6 @@ router.get("", (req, res, next) => {
 })
 
 router.put("/:id", checkAuth, (req, res, next) => {
-
   Doctor.findById(req.userData.userId).then(doctor => {
     Patient.updateOne(
       {_id: req.params.id},
@@ -100,6 +99,25 @@ router.put("/:id", checkAuth, (req, res, next) => {
       console.log(err);
     });
   });
+});
+
+router.put("/:id/delpresc", checkAuth, (req, res, next) => {
+    console.log(req.body);
+    Patient.updateOne(
+      {_id: req.params.id},
+      { $pull: { medicalRecord:{_id:req.body.recId} }}
+    ).then(result => {
+      res.status(201).json({
+        message: "deleted successfully",
+        result: result
+      })
+    })
+      .catch(err => {
+        res.status(400).json({
+          message: "error",
+          error: err
+        })
+      });
 });
 
 router.post("/login", (req, res, next) => {

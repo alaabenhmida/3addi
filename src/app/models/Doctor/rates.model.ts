@@ -1,4 +1,7 @@
 export interface Rates {
   id: string;
-  clientId: number;
+  patientId: string;
+  rate: number;
+  title: string;
+  review: string;
 }
