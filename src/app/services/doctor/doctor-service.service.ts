@@ -26,7 +26,8 @@ export class DoctorServiceService {
     this.http.put('http://localhost:3000/patient/' + id, this.medrecord).subscribe(response => {console.log(response); });
   }
   deleteRecord(patientid: string, recId: string): void{
-    this.http.put('http://localhost:3000/patient/' + patientid + '/delpresc', recId).subscribe(response => {console.log(response); });
+    this.http.put('http://localhost:3000/patient/' + patientid + '/delpresc', {recId })
+      .subscribe(response => {console.log(response); });
   }
 
   addReview(id: string, rate: number, title: string, review: string): void{

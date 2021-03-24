@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {PatientAuthService} from '../../../auth/Patient/patient-auth.service';
 import {DoctorAuthService} from '../../../auth/Doctor/doctor-auth.service';
 import {NgForm} from '@angular/forms';
@@ -6,7 +6,8 @@ import {NgForm} from '@angular/forms';
 @Component({
   selector: 'app-logindr',
   templateUrl: './logindr.component.html',
-  styleUrls: ['./logindr.component.css']
+  styleUrls: ['./logindr.component.css'],
+  // encapsulation: ViewEncapsulation.None
 })
 export class LogindrComponent implements OnInit {
 

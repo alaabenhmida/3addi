@@ -15,7 +15,7 @@ export class ProfileDocComponent implements OnInit {
   doctorData: Doctor;
   // rate: number;
   // selectedDate: any;
-  rate: number;
+  rating = 0;
 
   constructor(public route: ActivatedRoute, public doctorServive: DoctorServiceService) { }
 
@@ -39,9 +39,13 @@ export class ProfileDocComponent implements OnInit {
           phone: data.phone,
           reviews: data.reviews
         };
+        for (const rev of this.doctorData.reviews) {
+          this.rating += rev.rate;
+        }
+        console.log(this.rating / data.reviews.length);
       });
     });
-    console.log(this.doctorData);
+    // console.log(this.doctorData);
   }
 
   onSubmit(loginForm: NgForm): void {

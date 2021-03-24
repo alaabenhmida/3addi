@@ -13,8 +13,9 @@ const patientSchema = mongoose.Schema({
     doctorId : { type : mongoose.Schema.Types.ObjectId},
     appDate : { type : String},
     rdvDate : { type : String},
-    amount : { type : Number },
-    status : { type : String, defaultValue: 'pending'}
+    status : { type : String, defaultValue: 'pending'},
+    doctorImage : { type : String },
+    doctorName : { type : String },
   }],
   prescription : [{
     date : { type : String },

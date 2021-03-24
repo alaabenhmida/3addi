@@ -102,7 +102,6 @@ router.put("/:id", checkAuth, (req, res, next) => {
 });
 
 router.put("/:id/delpresc", checkAuth, (req, res, next) => {
-    console.log(req.body);
     Patient.updateOne(
       {_id: req.params.id},
       { $pull: { medicalRecord:{_id:req.body.recId} }}
@@ -119,6 +118,26 @@ router.put("/:id/delpresc", checkAuth, (req, res, next) => {
         })
       });
 });
+
+
+router.post("/:id/rdv", checkAuth, (req, res, next) => {
+  Doctor.findById(req.params.id).then(doctor => {
+    Patient.updateOne(
+      {_id: req.userData.userId},
+      { $push: { rdv:{ doctorId:doctor._id, appDate: req.body.appDate, rdvDate: req.body.rdvDate, status: 'pending',
+            doctorImage: doctor.imagePath, doctorName: doctor.name} }}
+    ).then(result => {
+      res.status(201).json({
+        message: "appointment added successfully",
+        result: result
+      })
+    })
+      .catch(err => {
+        console.log(err);
+      });
+  });
+});
+
 
 router.post("/login", (req, res, next) => {
   let fetchedUser;

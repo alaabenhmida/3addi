@@ -1,3 +1,5 @@
+import {RDV} from './rdv.model';
+
 export interface Patient {
   id: string;
   email: string;
@@ -8,4 +10,5 @@ export interface Patient {
   birthday: string;
   bloodType: string;
   phone: string;
+  rdv: RDV[];
 }

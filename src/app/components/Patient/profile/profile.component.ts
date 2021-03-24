@@ -37,7 +37,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
             address : data.address,
             birthday : data.birthday,
             bloodType : data.bloodType,
-            phone : data.phone
+            phone : data.phone,
+            rdv : data.rdv
           };
           this.medicalRecord = data.medicalRecord;
           console.log(this.medicalRecord);
