@@ -38,6 +38,7 @@
               "src/assets/js/popper.min.js",
               "src/assets/js/bootstrap.min.js",
               "src/assets/js/moment.min.js",
+              "src/assets/js/circle-progress.min.js",
               "src/assets/js/bootstrap-datetimepicker.min.js",
               "src/assets/plugins/theia-sticky-sidebar/ResizeSensor.js",
               "src/assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js",

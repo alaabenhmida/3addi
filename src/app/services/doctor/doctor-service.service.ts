@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {MedicalRecord} from '../../models/Doctor/medicalRecord.model';
+import {Doctor} from '../../models/Doctor/doctor.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +14,26 @@ export class DoctorServiceService {
   constructor(private http: HttpClient) {
   }
 
+  acceptRDV(patientId: string, appDate: string): void{
+    this.http.post('http://localhost:3000/doctor/rdv/accept', {patientId, appDate})
+      .subscribe(result => {
+        console.log(result);
+      });
+  }
+
+  rejectRDV(patientId: string, appDate: string): void{
+    this.http.post('http://localhost:3000/doctor/rdv/cancel', {patientId, appDate})
+      .subscribe(result => {
+        console.log(result);
+      });
+  }
+
   getDoctor(id: string): Observable<any> {
     return this.http.get('http://localhost:3000/doctor/' + id);
+  }
+
+  getDcotorByKey(): Observable<any> {
+    return this.http.get('http://localhost:3000/doctor/getdocbykey');
   }
 
   addrecord(id: string, date: string, desc: string, file: string): void{

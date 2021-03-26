@@ -128,7 +128,7 @@ router.post("/:id/rdv", checkAuth, (req, res, next) => {
             doctorImage: doctor.imagePath, doctorName: doctor.name} }}
     ).then(result => {
       res.status(201).json({
-        message: "appointment added successfully",
+        message: "appointment added successfully to patient",
         result: result
       })
     })
@@ -136,6 +136,20 @@ router.post("/:id/rdv", checkAuth, (req, res, next) => {
         console.log(err);
       });
   });
+  Patient.findById(req.userData.userId).then(patient => {
+    Doctor.updateOne(
+      {_id: req.params.id},
+      { $push: { rdv:{ patientId:patient._id, patientname: patient.name,
+            patienimagePath: patient.imagePath, appDate: req.body.appDate} }}).then(result => {
+      res.status(201).json({
+        message: "appointment added successfully to Doctor queue too",
+        result: result
+      })
+    })
+      .catch(err => {
+        console.log(err);
+      });
+  })
 });
 
 

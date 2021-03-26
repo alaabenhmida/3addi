@@ -4,12 +4,14 @@ import {SignupDrComponent} from '../../components/Doctor/signup-dr/signup-dr.com
 import {LogindrComponent} from '../../components/Doctor/logindr/logindr.component';
 import {ProfileDocComponent} from '../../components/Doctor/profile-doc/profile-doc.component';
 import {AppointmentComponent} from '../../components/Doctor/appointment/appointment.component';
+import {DocDashboardComponent} from '../../components/Doctor/doc-dashboard/doc-dashboard.component';
 
 const appRoutes: Routes = [
   { path: 'doctor/signup', component: SignupDrComponent },
   { path: 'doctor/login', component: LogindrComponent },
   { path: 'doctor/:id', component: ProfileDocComponent },
-  { path: 'doctor/:id/app', component: AppointmentComponent }
+  { path: 'doctor/:id/app', component: AppointmentComponent },
+  { path: 'doctor/profile/dashboard', component: DocDashboardComponent }
   ];
 
 @NgModule({

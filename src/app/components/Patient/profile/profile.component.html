@@ -157,7 +157,9 @@
                             <td>12 Nov 2019</td>
                             <td>$160</td>
                             <td>16 Nov 2019</td>
-                            <td><span class="badge badge-pill bg-success-light">{{rdv.status}}</span></td>
+                            <td *ngIf="rdv.status == 'confirmed'"><span class="badge badge-pill bg-success-light">{{rdv.status}}</span></td>
+                            <td *ngIf="rdv.status == 'pending'"><span class="badge badge-pill bg-warning-light">{{rdv.status}}</span></td>
+                            <td *ngIf="rdv.status == 'canceled'"><span class="badge badge-pill bg-danger-light">{{rdv.status}}</span></td>
                             <td class="text-right">
                               <div class="table-action">
                                 <a href="javascript:void(0);" class="btn btn-sm bg-success-light">

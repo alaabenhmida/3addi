@@ -21,6 +21,7 @@ import { ProfileDocComponent } from './components/Doctor/profile-doc/profile-doc
 import {BarRatingModule} from 'ngx-bar-rating';
 import {DlDateTimeDateModule, DlDateTimePickerModule} from 'angular-bootstrap-datetimepicker';
 import { AppointmentComponent } from './components/Doctor/appointment/appointment.component';
+import { DocDashboardComponent } from './components/Doctor/doc-dashboard/doc-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { AppointmentComponent } from './components/Doctor/appointment/appointmen
     MedRecordComponent,
     AddPrescComponent,
     ProfileDocComponent,
-    AppointmentComponent
+    AppointmentComponent,
+    DocDashboardComponent
   ],
   imports: [
     BrowserModule,

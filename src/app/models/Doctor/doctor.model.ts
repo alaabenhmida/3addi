@@ -1,4 +1,5 @@
 import {Rates} from './rates.model';
+import {DocRdv} from './docRdv.model';
 
 export interface Doctor {
   id: string;
@@ -13,4 +14,5 @@ export interface Doctor {
   price: string;
   phone: string;
   reviews: Rates[];
+  rdv: DocRdv[];
 }

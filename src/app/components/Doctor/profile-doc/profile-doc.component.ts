@@ -37,7 +37,8 @@ export class ProfileDocComponent implements OnInit {
           birthday: data.birthday,
           price: data.price,
           phone: data.phone,
-          reviews: data.reviews
+          reviews: data.reviews,
+          rdv: data.rdv
         };
         for (const rev of this.doctorData.reviews) {
           this.rating += rev.rate;

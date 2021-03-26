@@ -16,6 +16,15 @@ const doctorSchema = mongoose.Schema({
     rate : { type : Number },
     title : {type : String},
     review : {type : String}
+  }],
+  rdv : [{
+    patientId : { type : mongoose.Schema.Types.ObjectId, ref: 'Patient' },
+    patientname : { type : String },
+    patienimagePath : {type : String},
+    appDate : {type : String}
+  }],
+  patients : [{
+    id: {type : mongoose.Schema.Types.ObjectId, ref: 'Patient'}
   }]
 });
 

@@ -32,6 +32,49 @@ const storage = multer.diskStorage({
   }
 });
 
+router.post("/rdv/accept", checkAuth, (req, res, next) => {
+  let docRes;
+  Doctor.updateOne({_id: req.userData.userId},
+    { $push: { patients:{ id: req.body.patientId} }}).then(result =>{
+      docRes = result
+  }).catch(error => {
+    docRes = error;
+  })
+
+  Patient.findOneAndUpdate({_id: req.body.patientId,
+      rdv: {$elemMatch: {doctorId: req.userData.userId, appDate: req.body.appDate}}},
+    {$set: {'rdv.$.status': 'confirmed'}},
+    {'new': true, 'safe': true, 'upsert': true}).then(result => {
+      res.status(200).json({
+        message: "success",
+        result: result
+      })
+  });
+})
+
+router.post("/rdv/cancel", checkAuth, (req, res, next) => {
+  Patient.findOneAndUpdate({_id: req.body.patientId,
+      rdv: {$elemMatch: {doctorId: req.userData.userId, appDate: req.body.appDate}}},
+    {$set: {'rdv.$.status': 'canceled'}},
+    {'new': true, 'safe': true, 'upsert': true}).then(result => {
+    res.status(200).json({
+      message: "success",
+      result: result
+    })
+  });
+})
+
+router.get("/getdocbykey", checkAuth, (req, res, next) => {
+  Doctor.findById(req.userData.userId).then(doctor => {
+    res.status(200).json(doctor)
+  }).catch(error => {
+    res.status(400).json({
+      message: "error was occurred",
+      error: error
+    })
+  })
+});
+
 router.post("/signup",
   multer({storage: storage}).single("image"),
   (req, res, next) => {
@@ -80,7 +123,8 @@ router.get("", (req, res, next) => {
       doctors: documents
     });
   });
-})
+});
+
 
 router.post("/login", (req, res, next) => {
   let fetchedUser;
@@ -134,6 +178,7 @@ router.post("/:id/addreview", checkAuth, (req, res, next) => {
       });
   });
 });
+
 
 
 
