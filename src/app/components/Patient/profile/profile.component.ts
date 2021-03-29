@@ -5,6 +5,7 @@ import {PatientServiceService} from '../../../services/Patient/patient-service.s
 import {PatientAuthService} from '../../../auth/Patient/patient-auth.service';
 import {Subscription} from 'rxjs';
 import {DoctorServiceService} from '../../../services/doctor/doctor-service.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-profile',
@@ -46,6 +47,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
         } else {
           console.log('not found!!');
         }
+        console.log(data.rdv[0].appDate);
       });
     });
     this.userId = this.authService.getUserid();
@@ -60,6 +62,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
   onDelete(patienttid: string, recid: string): void {
     this.doctorService.deleteRecord(patienttid, recid);
 }
+  getdate(date: string, format: string): string{
+    return (moment(date).format(format));
+  }
 
   ngOnDestroy(): void {
     this.authListenerSubs.unsubscribe();

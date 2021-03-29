@@ -21,7 +21,8 @@ const doctorSchema = mongoose.Schema({
     patientId : { type : mongoose.Schema.Types.ObjectId, ref: 'Patient' },
     patientname : { type : String },
     patienimagePath : {type : String},
-    appDate : {type : String}
+    appDate : {type : String},
+    status : {type : String}
   }],
   patients : [{
     id: {type : mongoose.Schema.Types.ObjectId, ref: 'Patient'}

@@ -153,8 +153,8 @@
                                 <a href="doctor-profile.html">Dr. {{rdv.doctorName}} <span>Dental</span></a>
                               </h2>
                             </td>
-                            <td>{{rdv.appDate}} <span class="d-block text-info">10.00 AM</span></td>
-                            <td>12 Nov 2019</td>
+                            <td>{{getdate(rdv.rdvDate, 'DD MMM YYYY')}} <span class="d-block text-info">{{getdate(rdv.rdvDate, 'HH')}}:00</span></td>
+                            <td>{{getdate(rdv.appDate, 'DD MMM YYYY')}}</td>
                             <td>$160</td>
                             <td>16 Nov 2019</td>
                             <td *ngIf="rdv.status == 'confirmed'"><span class="badge badge-pill bg-success-light">{{rdv.status}}</span></td>
@@ -162,7 +162,7 @@
                             <td *ngIf="rdv.status == 'canceled'"><span class="badge badge-pill bg-danger-light">{{rdv.status}}</span></td>
                             <td class="text-right">
                               <div class="table-action">
-                                <a href="javascript:void(0);" class="btn btn-sm bg-success-light">
+                                <a *ngIf="rdv.status == 'pending'" href="javascript:void(0);" class="btn btn-sm bg-success-light">
                                   <i class="far fa-edit"></i> Edit
                                 </a>
                               </div>

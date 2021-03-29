@@ -20,7 +20,7 @@ export class AppointmentComponent implements OnInit {
     });
   }
   onClick(): void{
-    this.patient.addRdv(this.id, this.selectedDate.toJSON());
+    this.patient.addRdv(this.id, this.selectedDate);
   }
 
 }

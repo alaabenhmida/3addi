@@ -232,10 +232,10 @@
                                   <a href="patient-profile.html">{{rdv.patientname}} <span>#PT0016</span></a>
                                 </h2>
                               </td>
-                              <td>11 Nov 2019 <span class="d-block text-info">10.00 AM</span></td>
+                              <td>{{getdate(rdv.appDate, 'DD MMM YYYY')}} <span class="d-block text-info">{{getdate(rdv.appDate, 'HH')}}:00</span></td>
                               <td>General</td>
                               <td>New Patient</td>
-                              <td class="text-center">$150</td>
+                              <td class="text-center">{{rdv.status}}</td>
                               <td class="text-right">
                                 <div class="table-action">
                                   <a href="javascript:void(0);" class="btn btn-sm bg-info-light">

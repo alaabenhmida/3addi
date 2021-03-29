@@ -33,6 +33,7 @@ const storage = multer.diskStorage({
 });
 
 router.post("/rdv/accept", checkAuth, (req, res, next) => {
+  console.log(req.body);
   let docRes;
   Doctor.updateOne({_id: req.userData.userId},
     { $push: { patients:{ id: req.body.patientId} }}).then(result =>{
@@ -48,6 +49,8 @@ router.post("/rdv/accept", checkAuth, (req, res, next) => {
       res.status(200).json({
         message: "success",
         result: result
+      }).catch(error => {
+        res.status(400).json(error);
       })
   });
 })
@@ -60,6 +63,8 @@ router.post("/rdv/cancel", checkAuth, (req, res, next) => {
     res.status(200).json({
       message: "success",
       result: result
+    }).catch(error => {
+      res.status(400).json(error);
     })
   });
 })

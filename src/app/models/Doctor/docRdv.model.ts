@@ -4,4 +4,5 @@ export interface DocRdv {
   patientname: string;
   patienimagePath: string;
   appDate: string;
+  status: string;
 }

@@ -11,8 +11,8 @@ export class PatientServiceService {
   getPatient(id: string): Observable<any>{
     return this.http.get('http://localhost:3000/patient/' + id);
   }
-  addRdv(id: string, rdvDate: string): void {
-    this.http.post('http://localhost:3000/patient/' + id + '/rdv', {appDate: new Date().toJSON(), rdvDate}).subscribe(result => {
+  addRdv(id: string, rdvDate: Date): void {
+    this.http.post('http://localhost:3000/patient/' + id + '/rdv', {appDate: new Date().toJSON(), rdvDate: rdvDate.toJSON()}).subscribe(result => {
       console.log(result);
     });
   }
