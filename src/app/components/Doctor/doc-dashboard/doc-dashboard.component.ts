@@ -10,6 +10,7 @@ import * as moment from 'moment';
 })
 export class DocDashboardComponent implements OnInit {
   doctorData: Doctor;
+  patientdata: any;
 
   constructor(private doctor: DoctorServiceService) { }
 
@@ -31,25 +32,8 @@ export class DocDashboardComponent implements OnInit {
         reviews: data.reviews,
         rdv: data.rdv
       };
+      console.log(data.patients);
     });
-    const x = {
-      nextSlot: 60,
-      breackTimes: [
-        ['11:00', '14:00'], ['16:00', '18:00']
-      ],
-      startTime: '8:00',
-      endTime: '20:00'
-    };
-    let slotTime = moment(x.startTime, 'HH:mm');
-    const endTime = moment(x.endTime, 'HH:mm');
-    const times = [];
-    while (slotTime < endTime) {
-      if (!this.isInbreack(slotTime, x.breackTimes)) {
-        times.push(slotTime.format('HH:mm'));
-      }
-      slotTime = slotTime.add(x.nextSlot, 'minutes');
-    }
-    console.log('time slots: ', times);
   }
 
   isInbreack(slotTime, breackTimes): string {

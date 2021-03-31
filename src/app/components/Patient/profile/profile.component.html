@@ -11,6 +11,10 @@
 </head>
 <body>
 
+<!--<div class="item">-->
+<!--  <ngx-skeleton-loader count="5" appearance="facebook"></ngx-skeleton-loader>-->
+<!--</div>-->
+
 <!-- Main Wrapper -->
 <div class="main-wrapper">
 
@@ -36,6 +40,7 @@
   <!-- Page Content -->
   <div class="content">
     <div class="container-fluid">
+
 
       <div class="row">
         <div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar dct-dashbd-lft">
@@ -131,6 +136,7 @@
                   <div class="card card-table mb-0">
                     <div class="card-body">
                       <div class="table-responsive">
+
                         <table class="table table-hover table-center mb-0">
                           <thead>
                           <tr>
@@ -144,13 +150,14 @@
                           </tr>
                           </thead>
                           <tbody>
+
                           <tr *ngFor="let rdv of patientdata?.rdv">
                             <td>
                               <h2 class="table-avatar">
-                                <a href="doctor-profile.html" class="avatar avatar-sm mr-2">
+                                <a [routerLink]="['/doctor', rdv.doctorId]" class="avatar avatar-sm mr-2">
                                   <img class="avatar-img rounded-circle" src="assets/img/doctors/doctor-thumb-02.jpg" alt="User Image">
                                 </a>
-                                <a href="doctor-profile.html">Dr. {{rdv.doctorName}} <span>Dental</span></a>
+                                <a [routerLink]="['/doctor', rdv.doctorId]">Dr. {{rdv.doctorName}} <span>Dental</span></a>
                               </h2>
                             </td>
                             <td>{{getdate(rdv.rdvDate, 'DD MMM YYYY')}} <span class="d-block text-info">{{getdate(rdv.rdvDate, 'HH')}}:00</span></td>

@@ -140,7 +140,7 @@ router.post("/:id/rdv", checkAuth, (req, res, next) => {
     Doctor.updateOne(
       {_id: req.params.id},
       { $push: { rdv:{ patientId:patient._id, patientname: patient.name,
-            patienimagePath: patient.imagePath, appDate: req.body.appDate, status: 'pending'} }}).then(result => {
+            patienimagePath: patient.imagePath, appDate: req.body.rdvDate, status: 'pending'} }}).then(result => {
       res.status(201).json({
         message: "appointment added successfully to Doctor queue too",
         result: result

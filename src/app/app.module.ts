@@ -22,6 +22,7 @@ import {BarRatingModule} from 'ngx-bar-rating';
 import {DlDateTimeDateModule, DlDateTimePickerModule} from 'angular-bootstrap-datetimepicker';
 import { AppointmentComponent } from './components/Doctor/appointment/appointment.component';
 import { DocDashboardComponent } from './components/Doctor/doc-dashboard/doc-dashboard.component';
+import {NgxSkeletonLoaderModule} from 'ngx-skeleton-loader';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { DocDashboardComponent } from './components/Doctor/doc-dashboard/doc-das
     FormsModule,
     DlDateTimeDateModule,  // <--- Determines the data type of the model
     DlDateTimePickerModule,
+    NgxSkeletonLoaderModule,
     // BarRatingModule,
     // // BarRatingModule
   ],

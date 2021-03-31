@@ -1,11 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Mirrored from dreamguys.co.in/demo/doccure/template/booking.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 Apr 2020 08:29:04 GMT -->
+<!-- Mirrored from dreamguys.co.in/demo/doccure/template/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 Apr 2020 08:28:28 GMT -->
 <head>
+
   <meta charset="utf-8">
-  <title>Doccure</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+  <title>Doccure</title>
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+  <script src="assets/js/html5shiv.min.js"></script>
+  <script src="assets/js/respond.min.js"></script>
+  <![endif]-->
 
 </head>
 <body>
@@ -14,154 +21,435 @@
 <div class="main-wrapper">
 
 
-  <!-- Breadcrumb -->
-  <div class="breadcrumb-bar">
+  <!-- Clinic and Specialities -->
+  <section class="section section-specialities">
     <div class="container-fluid">
-      <div class="row align-items-center">
-        <div class="col-md-12 col-12">
-          <nav aria-label="breadcrumb" class="page-breadcrumb">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Booking</li>
-            </ol>
-          </nav>
-          <h2 class="breadcrumb-title">Booking</h2>
+      <div class="section-header text-center">
+        <h2>Clinic and Specialities</h2>
+        <p class="sub-title">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-md-9">
         </div>
       </div>
     </div>
-  </div>
-  <!-- /Breadcrumb -->
+  </section>
+  <!-- Clinic and Specialities -->
 
-  <!-- Page Content -->
-  <div class="content">
-    <div class="container">
-
+  <!-- Popular Section -->
+  <section class="section section-doctor">
+    <div class="container-fluid">
       <div class="row">
-        <div class="col-12">
+        <div class="col-lg-4">
+          <div class="section-header ">
+            <h2>Book Our Doctor</h2>
+            <p>Lorem Ipsum is simply dummy text </p>
+          </div>
+          <div class="about-content">
+            <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum.</p>
+            <p>web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes</p>
+            <a href="javascript:;">Read More..</a>
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <div class="doctor-slider slider">
 
-          <div class="card">
-            <div class="card-body">
-              <div class="booking-doc-info">
-                <a href="doctor-profile.html" class="booking-doc-img">
-                  <img src="assets/img/doctors/doctor-thumb-02.jpg" alt="User Image">
+            <!-- Doctor Widget -->
+            <div class="profile-widget">
+              <div class="doc-img">
+                <a href="doctor-profile.html">
+                  <img class="img-fluid" alt="User Image" src="assets/img/doctors/doctor-01.jpg">
                 </a>
-                <div class="booking-info">
-                  <h4><a href="doctor-profile.html">Dr. Darren Elder</a></h4>
-                  <div class="rating">
-                    <i class="fas fa-star filled"></i>
-                    <i class="fas fa-star filled"></i>
-                    <i class="fas fa-star filled"></i>
-                    <i class="fas fa-star filled"></i>
-                    <i class="fas fa-star"></i>
-                    <span class="d-inline-block average-rating">35</span>
+                <a href="javascript:void(0)" class="fav-btn">
+                  <i class="far fa-bookmark"></i>
+                </a>
+              </div>
+              <div class="pro-content">
+                <h3 class="title">
+                  <a href="doctor-profile.html">Ruby Perrin</a>
+                  <i class="fas fa-check-circle verified"></i>
+                </h3>
+                <p class="speciality">MDS - Periodontology and Oral Implantology, BDS</p>
+                <div class="rating">
+                  <i class="fas fa-star filled"></i>
+                  <i class="fas fa-star filled"></i>
+                  <i class="fas fa-star filled"></i>
+                  <i class="fas fa-star filled"></i>
+                  <i class="fas fa-star filled"></i>
+                  <span class="d-inline-block average-rating">(17)</span>
+                </div>
+                <ul class="available-info">
+                  <li>
+                    <i class="fas fa-map-marker-alt"></i> Florida, USA
+                  </li>
+                  <li>
+                    <i class="far fa-clock"></i> Available on Fri, 22 Mar
+                  </li>
+                  <li>
+                    <i class="far fa-money-bill-alt"></i> $300 - $1000
+                    <i class="fas fa-info-circle" data-toggle="tooltip" title="Lorem Ipsum"></i>
+                  </li>
+                </ul>
+                <div class="row row-sm">
+                  <div class="col-6">
+                    <a href="doctor-profile.html" class="btn view-btn">View Profile</a>
                   </div>
-                  <p class="text-muted mb-0"><i class="fas fa-map-marker-alt"></i> Newyork, USA</p>
+                  <div class="col-6">
+                    <a href="booking.html" class="btn book-btn">Book Now</a>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-12 col-sm-4 col-md-6">
-              <h4 class="mb-1">{{getDay(day, 'DD MMM YYYY')}}</h4>
-              <p class="text-muted">{{getDay(day, 'dddd')}}</p>
-            </div>
-            <div class="col-12 col-sm-8 col-md-6 text-sm-right">
-              <div class="bookingrange btn btn-white btn-sm mb-3">
-                <i class="far fa-calendar-alt mr-2"></i>
-                <span></span>
-                <i class="fas fa-chevron-down ml-2"></i>
+            <!-- /Doctor Widget -->
+
+            <!-- Doctor Widget -->
+            <div class="profile-widget">
+              <div class="doc-img">
+                <a href="doctor-profile.html">
+                  <img class="img-fluid" alt="User Image" src="assets/img/doctors/doctor-02.jpg">
+                </a>
+                <a href="javascript:void(0)" class="fav-btn">
+                  <i class="far fa-bookmark"></i>
+                </a>
               </div>
-            </div>
-          </div>
-          <!-- Schedule Widget -->
-          <div class="card booking-schedule schedule-widget">
-
-            <!-- Schedule Header -->
-            <div class="schedule-header">
-              <div class="row">
-                <div class="col-md-12">
-
-                  <!-- Day Slot -->
-                  <div class="day-slot">
-                    <ul>
-                      <li class="left-arrow">
-                        <a href="#">
-                          <i class="fa fa-chevron-left"></i>
-                        </a>
-                      </li>
-                      <li *ngFor="let dayy of week">
-                        <span>{{getDay(dayy, 'ddd')}}</span>
-                        <span class="slot-date">{{getDay(dayy, 'DD MMM')}} <small class="slot-year">{{getDay(dayy, 'YYYY')}}</small></span>
-                      </li>
-                      <li class="right-arrow">
-                        <a href="#">
-                          <i class="fa fa-chevron-right"></i>
-                        </a>
-                      </li>
-                    </ul>
+              <div class="pro-content">
+                <h3 class="title">
+                  <a href="doctor-profile.html">Darren Elder</a>
+                  <i class="fas fa-check-circle verified"></i>
+                </h3>
+                <p class="speciality">BDS, MDS - Oral & Maxillofacial Surgery</p>
+                <div class="rating">
+                  <i class="fas fa-star filled"></i>
+                  <i class="fas fa-star filled"></i>
+                  <i class="fas fa-star filled"></i>
+                  <i class="fas fa-star filled"></i>
+                  <i class="fas fa-star"></i>
+                  <span class="d-inline-block average-rating">(35)</span>
+                </div>
+                <ul class="available-info">
+                  <li>
+                    <i class="fas fa-map-marker-alt"></i> Newyork, USA
+                  </li>
+                  <li>
+                    <i class="far fa-clock"></i> Available on Fri, 22 Mar
+                  </li>
+                  <li>
+                    <i class="far fa-money-bill-alt"></i> $50 - $300
+                    <i class="fas fa-info-circle" data-toggle="tooltip" title="Lorem Ipsum"></i>
+                  </li>
+                </ul>
+                <div class="row row-sm">
+                  <div class="col-6">
+                    <a href="doctor-profile.html" class="btn view-btn">View Profile</a>
                   </div>
-                  <!-- /Day Slot -->
-
+                  <div class="col-6">
+                    <a href="booking.html" class="btn book-btn">Book Now</a>
+                  </div>
                 </div>
               </div>
             </div>
-            <!-- /Schedule Header -->
+            <!-- /Doctor Widget -->
 
-            <!-- Schedule Content -->
-            <div class="schedule-cont">
-              <div class="row">
-                <div class="col-md-12">
-
-                  <!-- Time Slot -->
-                  <div class="time-slot">
-                    <ul class="clearfix">
-                      <li *ngFor="let day of week">
-                        <a *ngFor="let time of getSlots(day, x.nextSlot, x.breackTimes, x.startTime, x.endTime)" class="timing" (click)="onclick(time, day)" >
-                          <span>{{time}}</span > <span>AM</span>
-                        </a>
-
-                      </li>
-<!--                      <li>-->
-<!--                        <a class="timing" href="#">-->
-<!--                          <span>9:00</span> <span>AM</span>-->
-<!--                        </a>-->
-<!--                        <a class="timing" href="#">-->
-<!--                          <span>10:00</span> <span>AM</span>-->
-<!--                        </a>-->
-<!--                        <a class="timing" href="#">-->
-<!--                          <span>11:00</span> <span>AM</span>-->
-<!--                        </a>-->
-<!--                      </li>-->
-                    </ul>
+            <!-- Doctor Widget -->
+            <div class="profile-widget">
+              <div class="doc-img">
+                <a href="doctor-profile.html">
+                  <img class="img-fluid" alt="User Image" src="assets/img/doctors/doctor-03.jpg">
+                </a>
+                <a href="javascript:void(0)" class="fav-btn">
+                  <i class="far fa-bookmark"></i>
+                </a>
+              </div>
+              <div class="pro-content">
+                <h3 class="title">
+                  <a href="doctor-profile.html">Deborah Angel</a>
+                  <i class="fas fa-check-circle verified"></i>
+                </h3>
+                <p class="speciality">MBBS, MD - General Medicine, DNB - Cardiology</p>
+                <div class="rating">
+                  <i class="fas fa-star filled"></i>
+                  <i class="fas fa-star filled"></i>
+                  <i class="fas fa-star filled"></i>
+                  <i class="fas fa-star filled"></i>
+                  <i class="fas fa-star"></i>
+                  <span class="d-inline-block average-rating">(27)</span>
+                </div>
+                <ul class="available-info">
+                  <li>
+                    <i class="fas fa-map-marker-alt"></i> Georgia, USA
+                  </li>
+                  <li>
+                    <i class="far fa-clock"></i> Available on Fri, 22 Mar
+                  </li>
+                  <li>
+                    <i class="far fa-money-bill-alt"></i> $100 - $400
+                    <i class="fas fa-info-circle" data-toggle="tooltip" title="Lorem Ipsum"></i>
+                  </li>
+                </ul>
+                <div class="row row-sm">
+                  <div class="col-6">
+                    <a href="doctor-profile.html" class="btn view-btn">View Profile</a>
                   </div>
-                  <!-- /Time Slot -->
-
+                  <div class="col-6">
+                    <a href="booking.html" class="btn book-btn">Book Now</a>
+                  </div>
                 </div>
               </div>
             </div>
-            <!-- /Schedule Content -->
+            <!-- /Doctor Widget -->
+
+            <!-- Doctor Widget -->
+            <div class="profile-widget">
+              <div class="doc-img">
+                <a href="doctor-profile.html">
+                  <img class="img-fluid" alt="User Image" src="assets/img/doctors/doctor-04.jpg">
+                </a>
+                <a href="javascript:void(0)" class="fav-btn">
+                  <i class="far fa-bookmark"></i>
+                </a>
+              </div>
+              <div class="pro-content">
+                <h3 class="title">
+                  <a href="doctor-profile.html">Sofia Brient</a>
+                  <i class="fas fa-check-circle verified"></i>
+                </h3>
+                <p class="speciality">MBBS, MS - General Surgery, MCh - Urology</p>
+                <div class="rating">
+                  <i class="fas fa-star filled"></i>
+                  <i class="fas fa-star filled"></i>
+                  <i class="fas fa-star filled"></i>
+                  <i class="fas fa-star filled"></i>
+                  <i class="fas fa-star"></i>
+                  <span class="d-inline-block average-rating">(4)</span>
+                </div>
+                <ul class="available-info">
+                  <li>
+                    <i class="fas fa-map-marker-alt"></i> Louisiana, USA
+                  </li>
+                  <li>
+                    <i class="far fa-clock"></i> Available on Fri, 22 Mar
+                  </li>
+                  <li>
+                    <i class="far fa-money-bill-alt"></i> $150 - $250
+                    <i class="fas fa-info-circle" data-toggle="tooltip" title="Lorem Ipsum"></i>
+                  </li>
+                </ul>
+                <div class="row row-sm">
+                  <div class="col-6">
+                    <a href="doctor-profile.html" class="btn view-btn">View Profile</a>
+                  </div>
+                  <div class="col-6">
+                    <a href="booking.html" class="btn book-btn">Book Now</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /Doctor Widget -->
+
+            <!-- Doctor Widget -->
+            <div class="profile-widget">
+              <div class="doc-img">
+                <a href="doctor-profile.html">
+                  <img class="img-fluid" alt="User Image" src="assets/img/doctors/doctor-05.jpg">
+                </a>
+                <a href="javascript:void(0)" class="fav-btn">
+                  <i class="far fa-bookmark"></i>
+                </a>
+              </div>
+              <div class="pro-content">
+                <h3 class="title">
+                  <a href="doctor-profile.html">Marvin Campbell</a>
+                  <i class="fas fa-check-circle verified"></i>
+                </h3>
+                <p class="speciality">MBBS, MD - Ophthalmology, DNB - Ophthalmology</p>
+                <div class="rating">
+                  <i class="fas fa-star filled"></i>
+                  <i class="fas fa-star filled"></i>
+                  <i class="fas fa-star filled"></i>
+                  <i class="fas fa-star filled"></i>
+                  <i class="fas fa-star"></i>
+                  <span class="d-inline-block average-rating">(66)</span>
+                </div>
+                <ul class="available-info">
+                  <li>
+                    <i class="fas fa-map-marker-alt"></i> Michigan, USA
+                  </li>
+                  <li>
+                    <i class="far fa-clock"></i> Available on Fri, 22 Mar
+                  </li>
+                  <li>
+                    <i class="far fa-money-bill-alt"></i> $50 - $700
+                    <i class="fas fa-info-circle" data-toggle="tooltip" title="Lorem Ipsum"></i>
+                  </li>
+                </ul>
+                <div class="row row-sm">
+                  <div class="col-6">
+                    <a href="doctor-profile.html" class="btn view-btn">View Profile</a>
+                  </div>
+                  <div class="col-6">
+                    <a href="booking.html" class="btn book-btn">Book Now</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /Doctor Widget -->
+
+            <!-- Doctor Widget -->
+            <div class="profile-widget">
+              <div class="doc-img">
+                <a href="doctor-profile.html">
+                  <img class="img-fluid" alt="User Image" src="assets/img/doctors/doctor-06.jpg">
+                </a>
+                <a href="javascript:void(0)" class="fav-btn">
+                  <i class="far fa-bookmark"></i>
+                </a>
+              </div>
+              <div class="pro-content">
+                <h3 class="title">
+                  <a href="doctor-profile.html">Katharine Berthold</a>
+                  <i class="fas fa-check-circle verified"></i>
+                </h3>
+                <p class="speciality">MS - Orthopaedics, MBBS, M.Ch - Orthopaedics</p>
+                <div class="rating">
+                  <i class="fas fa-star filled"></i>
+                  <i class="fas fa-star filled"></i>
+                  <i class="fas fa-star filled"></i>
+                  <i class="fas fa-star filled"></i>
+                  <i class="fas fa-star"></i>
+                  <span class="d-inline-block average-rating">(52)</span>
+                </div>
+                <ul class="available-info">
+                  <li>
+                    <i class="fas fa-map-marker-alt"></i> Texas, USA
+                  </li>
+                  <li>
+                    <i class="far fa-clock"></i> Available on Fri, 22 Mar
+                  </li>
+                  <li>
+                    <i class="far fa-money-bill-alt"></i> $100 - $500
+                    <i class="fas fa-info-circle" data-toggle="tooltip" title="Lorem Ipsum"></i>
+                  </li>
+                </ul>
+                <div class="row row-sm">
+                  <div class="col-6">
+                    <a href="doctor-profile.html" class="btn view-btn">View Profile</a>
+                  </div>
+                  <div class="col-6">
+                    <a href="booking.html" class="btn book-btn">Book Now</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /Doctor Widget -->
+
+            <!-- Doctor Widget -->
+            <div class="profile-widget">
+              <div class="doc-img">
+                <a href="doctor-profile.html">
+                  <img class="img-fluid" alt="User Image" src="assets/img/doctors/doctor-07.jpg">
+                </a>
+                <a href="javascript:void(0)" class="fav-btn">
+                  <i class="far fa-bookmark"></i>
+                </a>
+              </div>
+              <div class="pro-content">
+                <h3 class="title">
+                  <a href="doctor-profile.html">Linda Tobin</a>
+                  <i class="fas fa-check-circle verified"></i>
+                </h3>
+                <p class="speciality">MBBS, MD - General Medicine, DM - Neurology</p>
+                <div class="rating">
+                  <i class="fas fa-star filled"></i>
+                  <i class="fas fa-star filled"></i>
+                  <i class="fas fa-star filled"></i>
+                  <i class="fas fa-star filled"></i>
+                  <i class="fas fa-star"></i>
+                  <span class="d-inline-block average-rating">(43)</span>
+                </div>
+                <ul class="available-info">
+                  <li>
+                    <i class="fas fa-map-marker-alt"></i> Kansas, USA
+                  </li>
+                  <li>
+                    <i class="far fa-clock"></i> Available on Fri, 22 Mar
+                  </li>
+                  <li>
+                    <i class="far fa-money-bill-alt"></i> $100 - $1000
+                    <i class="fas fa-info-circle" data-toggle="tooltip" title="Lorem Ipsum"></i>
+                  </li>
+                </ul>
+                <div class="row row-sm">
+                  <div class="col-6">
+                    <a href="doctor-profile.html" class="btn view-btn">View Profile</a>
+                  </div>
+                  <div class="col-6">
+                    <a href="booking.html" class="btn book-btn">Book Now</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /Doctor Widget -->
+
+            <!-- Doctor Widget -->
+            <div class="profile-widget">
+              <div class="doc-img">
+                <a href="doctor-profile.html">
+                  <img class="img-fluid" alt="User Image" src="assets/img/doctors/doctor-08.jpg">
+                </a>
+                <a href="javascript:void(0)" class="fav-btn">
+                  <i class="far fa-bookmark"></i>
+                </a>
+              </div>
+              <div class="pro-content">
+                <h3 class="title">
+                  <a href="doctor-profile.html">Paul Richard</a>
+                  <i class="fas fa-check-circle verified"></i>
+                </h3>
+                <p class="speciality">MBBS, MD - Dermatology , Venereology & Lepros</p>
+                <div class="rating">
+                  <i class="fas fa-star filled"></i>
+                  <i class="fas fa-star filled"></i>
+                  <i class="fas fa-star filled"></i>
+                  <i class="fas fa-star filled"></i>
+                  <i class="fas fa-star"></i>
+                  <span class="d-inline-block average-rating">(49)</span>
+                </div>
+                <ul class="available-info">
+                  <li>
+                    <i class="fas fa-map-marker-alt"></i> California, USA
+                  </li>
+                  <li>
+                    <i class="far fa-clock"></i> Available on Fri, 22 Mar
+                  </li>
+                  <li>
+                    <i class="far fa-money-bill-alt"></i> $100 - $400
+                    <i class="fas fa-info-circle" data-toggle="tooltip" title="Lorem Ipsum"></i>
+                  </li>
+                </ul>
+                <div class="row row-sm">
+                  <div class="col-6">
+                    <a href="doctor-profile.html" class="btn view-btn">View Profile</a>
+                  </div>
+                  <div class="col-6">
+                    <a href="booking.html" class="btn book-btn">Book Now</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Doctor Widget -->
 
           </div>
-          <!-- /Schedule Widget -->
-
-          <!-- Submit Section -->
-          <div class="submit-section proceed-btn text-right">
-            <a href="checkout.html" class="btn btn-primary submit-btn">Proceed to Pay</a>
-          </div>
-          <!-- /Submit Section -->
-
         </div>
       </div>
     </div>
+  </section>
+  <!-- /Popular Section -->
 
-  </div>
-  <!-- /Page Content -->
 
 </div>
 <!-- /Main Wrapper -->
 
-
 </body>
 
-<!-- Mirrored from dreamguys.co.in/demo/doccure/template/booking.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 Apr 2020 08:29:05 GMT -->
+<!-- Mirrored from dreamguys.co.in/demo/doccure/template/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 Apr 2020 08:28:45 GMT -->
 </html>

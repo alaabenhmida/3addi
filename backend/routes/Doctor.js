@@ -33,31 +33,41 @@ const storage = multer.diskStorage({
 });
 
 router.post("/rdv/accept", checkAuth, (req, res, next) => {
-  console.log(req.body);
   let docRes;
-  Doctor.updateOne({_id: req.userData.userId},
-    { $push: { patients:{ id: req.body.patientId} }}).then(result =>{
-      docRes = result
-  }).catch(error => {
-    docRes = error;
-  })
+  Doctor.findOne({patients: {$elemMatch: {id: req.body.patientId}}})
+    .then(result => {
+      if (!result) {
+        Doctor.updateOne({_id: req.userData.userId},
+          { $push: { patients:{ id: req.body.patientId} }}).then(result =>{
+          docRes = result
+        }).catch(error => {
+          docRes = error;
+        })
+      }
+    })
+
+  Doctor.findOneAndUpdate({_id: req.userData.userId,
+    rdv: {$elemMatch: {patientId: req.body.patientId, appDate: req.body.appDate}}},
+    {$set: {'rdv.$.status': 'confirmed'}},
+    {'new': true, 'safe': true, 'upsert': true}).then( res => {
+  });
 
   Patient.findOneAndUpdate({_id: req.body.patientId,
-      rdv: {$elemMatch: {doctorId: req.userData.userId, appDate: req.body.appDate}}},
+      rdv: {$elemMatch: {doctorId: req.userData.userId, rdvDate: req.body.appDate}}},
     {$set: {'rdv.$.status': 'confirmed'}},
     {'new': true, 'safe': true, 'upsert': true}).then(result => {
       res.status(200).json({
         message: "success",
         result: result
-      }).catch(error => {
-        res.status(400).json(error);
       })
+  }).catch(error => {
+    res.status(400).json(error);
   });
 })
 
 router.post("/rdv/cancel", checkAuth, (req, res, next) => {
   Patient.findOneAndUpdate({_id: req.body.patientId,
-      rdv: {$elemMatch: {doctorId: req.userData.userId, appDate: req.body.appDate}}},
+      rdv: {$elemMatch: {doctorId: req.userData.userId, rdvDate: req.body.appDate}}},
     {$set: {'rdv.$.status': 'canceled'}},
     {'new': true, 'safe': true, 'upsert': true}).then(result => {
     res.status(200).json({
@@ -66,6 +76,13 @@ router.post("/rdv/cancel", checkAuth, (req, res, next) => {
     }).catch(error => {
       res.status(400).json(error);
     })
+  });
+
+
+  Doctor.findOneAndUpdate({_id: req.userData.userId,
+      rdv: {$elemMatch: {patientId: req.body.patientId, appDate: req.body.appDate}}},
+    {$set: {'rdv.$.status': 'canceled'}},
+    {'new': true, 'safe': true, 'upsert': true}).then( res => {
   });
 })
 
@@ -122,7 +139,7 @@ router.get("/:id", (req, res, next) => {
 });
 
 router.get("", (req, res, next) => {
-  Doctor.find().then(documents => {
+  Doctor.find().populate('patients.id').then(documents => {
     res.status(200).json({
       message: "doctors fetched successfully!",
       doctors: documents

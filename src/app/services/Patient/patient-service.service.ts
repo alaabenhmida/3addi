@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
+import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +12,10 @@ export class PatientServiceService {
   getPatient(id: string): Observable<any>{
     return this.http.get('http://localhost:3000/patient/' + id);
   }
-  addRdv(id: string, rdvDate: Date): void {
-    this.http.post('http://localhost:3000/patient/' + id + '/rdv', {appDate: new Date().toJSON(), rdvDate: rdvDate.toJSON()}).subscribe(result => {
+  addRdv(id: string, rdvDate: string): void {
+    this.http.post('http://localhost:3000/patient/' + id + '/rdv',
+      {appDate: moment(Date.now()).format('YYYY-MM-DDTHH:mm:ss'),
+      rdvDate}).subscribe(result => {
       console.log(result);
     });
   }

@@ -228,24 +228,26 @@
                             <tr *ngFor="let rdv of doctorData?.rdv">
                               <td>
                                 <h2 class="table-avatar">
-                                  <a href="patient-profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient.jpg" alt="User Image"></a>
-                                  <a href="patient-profile.html">{{rdv.patientname}} <span>#PT0016</span></a>
+                                  <a [routerLink]="['/patient', rdv.patientId]" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient.jpg" alt="User Image"></a>
+                                  <a [routerLink]="['/patient', rdv.patientId]">{{rdv.patientname}} <span>#PT0016</span></a>
                                 </h2>
                               </td>
                               <td>{{getdate(rdv.appDate, 'DD MMM YYYY')}} <span class="d-block text-info">{{getdate(rdv.appDate, 'HH')}}:00</span></td>
                               <td>General</td>
                               <td>New Patient</td>
-                              <td class="text-center">{{rdv.status}}</td>
+                              <td *ngIf="rdv.status == 'confirmed'"><span class="badge badge-pill bg-success-light">{{rdv.status}}</span></td>
+                              <td *ngIf="rdv.status == 'pending'"><span class="badge badge-pill bg-warning-light">{{rdv.status}}</span></td>
+                              <td *ngIf="rdv.status == 'canceled'"><span class="badge badge-pill bg-danger-light">{{rdv.status}}</span></td>
                               <td class="text-right">
                                 <div class="table-action">
                                   <a href="javascript:void(0);" class="btn btn-sm bg-info-light">
                                     <i class="far fa-eye"></i> View
                                   </a>
 
-                                  <a (click)="onAccept(rdv.patientId, rdv.appDate)" class="btn btn-sm bg-success-light">
+                                  <a *ngIf="rdv.status == 'pending'" (click)="onAccept(rdv.patientId, rdv.appDate)" class="btn btn-sm bg-success-light">
                                     <i class="fas fa-check"></i> Accept
                                   </a>
-                                  <a (click)="onCancel(rdv.patientId, rdv.appDate)" class="btn btn-sm bg-danger-light">
+                                  <a *ngIf="rdv.status == 'pending'" (click)="onCancel(rdv.patientId, rdv.appDate)" class="btn btn-sm bg-danger-light">
                                     <i class="fas fa-times"></i> Cancel
                                   </a>
                                 </div>

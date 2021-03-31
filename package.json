@@ -35,6 +35,7 @@
     "multer": "^1.4.2",
     "ng-starrating": "^1.0.20",
     "ngx-bar-rating": "^2.0.0",
+    "ngx-skeleton-loader": "^2.9.1",
     "ngx-star-rating": "^2.0.2",
     "open-iconic": "^1.1.1",
     "rxjs": "~6.6.0",

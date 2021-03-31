@@ -19,6 +19,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   userIsAuthenticated = false;
   private authListenerSubs: Subscription;
   userId: string;
+  isLoading = true;
 
   constructor(public route: ActivatedRoute, public patient: PatientServiceService, private authService: PatientAuthService,
               private doctorService: DoctorServiceService) { }
