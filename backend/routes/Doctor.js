@@ -31,6 +31,15 @@ const storage = multer.diskStorage({
     cb(null, name + "-" + Date.now() + "." + ext);
   }
 });
+router.post("/patient/:id/addpresc", checkAuth, (req, res, next) => {
+  Patient.updateOne({_id: req.params.id},
+    { $push: { prescription: {presc: req.body.presc, date: req.body.date,
+          doctorId: req.userData.userId}} }).then(result => {
+      res.status(200).json(result);
+  }).catch(error => {
+    res.status(400).json(error);
+  })
+});
 
 router.post("/rdv/accept", checkAuth, (req, res, next) => {
   let docRes;
@@ -44,7 +53,7 @@ router.post("/rdv/accept", checkAuth, (req, res, next) => {
           docRes = error;
         })
       }
-    })
+    });
 
   Doctor.findOneAndUpdate({_id: req.userData.userId,
     rdv: {$elemMatch: {patientId: req.body.patientId, appDate: req.body.appDate}}},
@@ -87,7 +96,7 @@ router.post("/rdv/cancel", checkAuth, (req, res, next) => {
 })
 
 router.get("/getdocbykey", checkAuth, (req, res, next) => {
-  Doctor.findById(req.userData.userId).then(doctor => {
+  Doctor.findById(req.userData.userId).populate('patients.id').then(doctor => {
     res.status(200).json(doctor)
   }).catch(error => {
     res.status(400).json({
@@ -139,7 +148,7 @@ router.get("/:id", (req, res, next) => {
 });
 
 router.get("", (req, res, next) => {
-  Doctor.find().populate('patients.id').then(documents => {
+  Doctor.find().then(documents => {
     res.status(200).json({
       message: "doctors fetched successfully!",
       doctors: documents
@@ -182,7 +191,8 @@ router.post("/login", (req, res, next) => {
         message: "Auth failed"
       });
     });
-})
+});
+
 
 router.post("/:id/addreview", checkAuth, (req, res, next) => {
   Patient.findById(req.userData.userId).then(patient => {

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {MedicalRecord} from '../../models/Doctor/medicalRecord.model';
-import {Doctor} from '../../models/Doctor/doctor.model';
+import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +34,14 @@ export class DoctorServiceService {
 
   getDcotorByKey(): Observable<any> {
     return this.http.get('http://localhost:3000/doctor/getdocbykey');
+  }
+
+  addPrescription(presc: string[], patientId: string): void {
+    this.http.post('http://localhost:3000/doctor/patient/' + patientId + '/addpresc', {presc,
+    date: moment(Date.now()).format('YYYY-MM-DDTHH:mm:ss')})
+      .subscribe(data => {
+        console.log(data);
+      });
   }
 
   addrecord(id: string, date: string, desc: string, file: string): void{

@@ -18,9 +18,17 @@ const patientSchema = mongoose.Schema({
     doctorName : { type : String },
   }],
   prescription : [{
+    presc : [{
+      name: { type : String },
+      quantite: { type : String },
+      days: { type : String },
+      mor: { type : Boolean },
+      af:{ type : Boolean },
+      ev: { type : Boolean },
+      nght: { type : Boolean },
+    }],
     date : { type : String },
-    name : { type : String },
-    doctorId : { type : mongoose.Schema.Types.ObjectId}
+    doctorId : { type : mongoose.Schema.Types.ObjectId, ref:'Doctor'}
   }],
   medicalRecord : [{
     date : { type : String },

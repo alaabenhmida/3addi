@@ -23,6 +23,8 @@ import {DlDateTimeDateModule, DlDateTimePickerModule} from 'angular-bootstrap-da
 import { AppointmentComponent } from './components/Doctor/appointment/appointment.component';
 import { DocDashboardComponent } from './components/Doctor/doc-dashboard/doc-dashboard.component';
 import {NgxSkeletonLoaderModule} from 'ngx-skeleton-loader';
+import { MyPatientsComponent } from './components/Doctor/my-patients/my-patients.component';
+import {DocProfilSettingComponent} from './components/Doctor/doc-profil-setting/doc-profil-setting.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import {NgxSkeletonLoaderModule} from 'ngx-skeleton-loader';
     AddPrescComponent,
     ProfileDocComponent,
     AppointmentComponent,
-    DocDashboardComponent
+    DocDashboardComponent,
+    MyPatientsComponent,
+    DocProfilSettingComponent
   ],
   imports: [
     BrowserModule,

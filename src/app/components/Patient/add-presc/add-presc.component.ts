@@ -4,6 +4,7 @@ import {DoctorAuthService} from '../../../auth/Doctor/doctor-auth.service';
 import {Subscription} from 'rxjs';
 import {DoctorServiceService} from '../../../services/doctor/doctor-service.service';
 import {PatientAuthService} from '../../../auth/Patient/patient-auth.service';
+import {ActivatedRoute, ParamMap} from '@angular/router';
 
 @Component({
   selector: 'app-add-presc',
@@ -12,12 +13,20 @@ import {PatientAuthService} from '../../../auth/Patient/patient-auth.service';
 })
 export class AddPrescComponent implements OnInit, OnDestroy {
   form: FormGroup;
-  userid;
+  patientId: string;
   userIdSub: Subscription;
   doctorob: any;
 
 
-  constructor(private fb: FormBuilder, private doctor: DoctorAuthService, private doctorSevive: DoctorServiceService) {
+  constructor(public route: ActivatedRoute,
+              private fb: FormBuilder,
+              private doctor: DoctorAuthService,
+              private doctorSevive: DoctorServiceService) {}
+
+  ngOnInit(): void {
+    this.route.paramMap.subscribe((paramMap: ParamMap) => {
+      this.patientId = paramMap.get('id');
+    });
     this.form = this.fb.group({
       Prescription: this.fb.array([
         new FormGroup({
@@ -32,30 +41,20 @@ export class AddPrescComponent implements OnInit, OnDestroy {
       ])
     });
   }
-
-  ngOnInit(): void {
-    this.doctor.autoAuthUser();
-    this.userid = this.doctor.getUserid();
-    this.userIdSub = this.doctor.getuseridListener().subscribe(id => {
-      this.userid = id;
-    });
-    this.doctorSevive.getDoctor(this.userid).subscribe(doc => {
-      console.log(doc);
-    });
-
-  }
   addCreds(): void {
     const creds = this.form.controls.Prescription as FormArray;
+    // for (let i = 0; i < 2; i++) {
     creds.push(this.fb.group({
-      name: new FormControl(null, { validators: [Validators.required] }),
-      quantite: new FormControl(null, { validators: [Validators.required] }),
-      days: new FormControl(null, { validators: [Validators.required] }),
-      mor: new FormControl(null),
-      af: new FormControl(null),
-      ev: new FormControl(null),
-      nght: new FormControl(null)
-    }));
-  }
+        name: new FormControl(null, { validators: [Validators.required] }),
+        quantite: new FormControl(null, { validators: [Validators.required] }),
+        days: new FormControl(null, { validators: [Validators.required] }),
+        mor: new FormControl(null),
+        af: new FormControl(null),
+        ev: new FormControl(null),
+        nght: new FormControl(null)
+      }));
+    // }
+}
 
   deleteCreds(index): void{
     const creds = this.form.controls.Prescription as FormArray;
@@ -65,7 +64,8 @@ export class AddPrescComponent implements OnInit, OnDestroy {
     if (this.form.invalid){
       return;
     }
-    console.log(this.form.value.Prescription);
+    this.doctorSevive.addPrescription(this.form.value.Prescription, this.patientId);
+    // console.log(this.form.value.Prescription);
   }
 
   ngOnDestroy(): void {

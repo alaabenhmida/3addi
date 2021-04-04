@@ -1,22 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import {DoctorServiceService} from '../../../services/doctor/doctor-service.service';
 import {Doctor} from '../../../models/Doctor/doctor.model';
-import * as moment from 'moment';
 
 @Component({
-  selector: 'app-doc-dashboard',
-  templateUrl: './doc-dashboard.component.html',
-  styleUrls: ['./doc-dashboard.component.css']
+  selector: 'app-my-patients',
+  templateUrl: './my-patients.component.html',
+  styleUrls: ['./my-patients.component.css']
 })
-export class DocDashboardComponent implements OnInit {
+export class MyPatientsComponent implements OnInit {
   doctorData: Doctor;
-  patientdata: any;
   patients = [];
+  isLoading = false;
 
   constructor(private doctor: DoctorServiceService) { }
 
   ngOnInit(): void {
-
+    this.isLoading = true;
     this.doctor.getDcotorByKey().subscribe(data => {
       this.doctorData = {
         id: data._id,
@@ -34,24 +33,7 @@ export class DocDashboardComponent implements OnInit {
         rdv: data.rdv
       };
       this.patients = data.patients;
-      console.log(this.patients);
     });
-  }
-
-  isInbreack(slotTime, breackTimes): string {
-    return breackTimes.some((br) => {
-      return slotTime >= moment(br[0], 'HH:mm') && slotTime < moment(br[1], 'HH:mm');
-    });
-  }
-  getdate(date: string, format: string): string{
-    return (moment(date).format(format));
-  }
-
-  onAccept(patientId: string, appDate: string): void{
-    this.doctor.acceptRDV(patientId, appDate);
-  }
-
-  onCancel(patientId: string, appDate: string): void {
-    this.doctor.rejectRDV(patientId, appDate);
+    this.isLoading = false;
   }
 }

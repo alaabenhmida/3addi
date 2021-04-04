@@ -30,6 +30,9 @@
               "src/assets/plugins/fontawesome/css/all.min.css",
               "src/assets/plugins/fancybox/jquery.fancybox.min.css",
               "src/assets/css/bootstrap-datetimepicker.min.css",
+              "src/assets/plugins/select2/css/select2.min.css",
+              "src/assets/plugins/bootstrap-tagsinput/css/bootstrap-tagsinput.css",
+              "src/assets/plugins/dropzone/dropzone.min.css",
               "src/assets/css/style.css",
               "src/styles.css"
             ],
@@ -43,6 +46,10 @@
               "src/assets/plugins/theia-sticky-sidebar/ResizeSensor.js",
               "src/assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js",
               "src/assets/plugins/fancybox/jquery.fancybox.min.js",
+              "src/assets/plugins/select2/js/select2.min.js",
+              "src/assets/plugins/dropzone/dropzone.min.js",
+              "src/assets/plugins/bootstrap-tagsinput/js/bootstrap-tagsinput.js",
+              "src/assets/js/profile-settings.js",
               "src/assets/js/slick.js",
               "src/assets/js/script.js"
             ]
