@@ -36,6 +36,17 @@ export class DoctorServiceService {
     return this.http.get('http://localhost:3000/doctor/getdocbykey');
   }
 
+  updatePrescription(patientId: string, prescID: string, presc: any): void {
+    this.http.put('http://localhost:3000/patient/' + patientId + '/updatepresc', {prescID, presc})
+      .subscribe(result => {
+        console.log(result);
+      });
+  }
+
+  getPrescription(patiendId: string, prescID: string): Observable<any> {
+    return this.http.put('http://localhost:3000/patient/' + patiendId + '/getpresc', {prescID});
+  }
+
   addPrescription(presc: string[], patientId: string): void {
     this.http.post('http://localhost:3000/doctor/patient/' + patientId + '/addpresc', {presc,
     date: moment(Date.now()).format('YYYY-MM-DDTHH:mm:ss')})

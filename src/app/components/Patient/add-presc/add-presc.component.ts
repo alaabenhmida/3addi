@@ -16,6 +16,9 @@ export class AddPrescComponent implements OnInit, OnDestroy {
   patientId: string;
   userIdSub: Subscription;
   doctorob: any;
+  private mode = 'create';
+  prescId: string;
+  prescData: any;
 
 
   constructor(public route: ActivatedRoute,
@@ -24,22 +27,40 @@ export class AddPrescComponent implements OnInit, OnDestroy {
               private doctorSevive: DoctorServiceService) {}
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe((paramMap: ParamMap) => {
-      this.patientId = paramMap.get('id');
-    });
     this.form = this.fb.group({
-      Prescription: this.fb.array([
-        new FormGroup({
-          name: new FormControl(null, { validators: [Validators.required] }),
-          quantite: new FormControl(null, { validators: [Validators.required] }),
-          days: new FormControl(null, { validators: [Validators.required] }),
-          mor: new FormControl(null),
-          af: new FormControl(null),
-          ev: new FormControl(null),
-          nght: new FormControl(null),
-        })
-      ])
+      Prescription: this.fb.array([])
     });
+    this.route.paramMap.subscribe((paramMap: ParamMap) => {
+      if (paramMap.has('prescID')) {
+        this.mode = 'edit';
+        this.prescId = paramMap.get('prescID');
+        console.log(paramMap.get('id'));
+        this.patientId = paramMap.get('id');
+        this.doctorSevive.getPrescription(paramMap.get('id'), this.prescId).subscribe(data => {
+          this.prescData = data;
+          console.log(data.prescription[0].presc);
+          const creds = this.form.controls.Prescription as FormArray;
+          for (const pres of data.prescription[0].presc) {
+            creds.push(this.fb.group({
+              name: new FormControl(pres.name, { validators: [Validators.required] }),
+              quantite: new FormControl(pres.quantite, { validators: [Validators.required] }),
+              days: new FormControl(pres.days, { validators: [Validators.required] }),
+              mor: new FormControl(pres.mor),
+              af: new FormControl(pres.af),
+              ev: new FormControl(pres.ev),
+              nght: new FormControl(pres.nght)
+            }));
+          }
+        });
+      } else {
+        this.mode = 'create';
+        this.patientId = paramMap.get('id');
+        this.addCreds();
+
+      }
+
+    });
+
   }
   addCreds(): void {
     const creds = this.form.controls.Prescription as FormArray;
@@ -48,10 +69,10 @@ export class AddPrescComponent implements OnInit, OnDestroy {
         name: new FormControl(null, { validators: [Validators.required] }),
         quantite: new FormControl(null, { validators: [Validators.required] }),
         days: new FormControl(null, { validators: [Validators.required] }),
-        mor: new FormControl(null),
-        af: new FormControl(null),
-        ev: new FormControl(null),
-        nght: new FormControl(null)
+        mor: new FormControl(false),
+        af: new FormControl(false),
+        ev: new FormControl(false),
+        nght: new FormControl(false)
       }));
     // }
 }
@@ -64,8 +85,13 @@ export class AddPrescComponent implements OnInit, OnDestroy {
     if (this.form.invalid){
       return;
     }
-    this.doctorSevive.addPrescription(this.form.value.Prescription, this.patientId);
-    // console.log(this.form.value.Prescription);
+    if (this.mode === 'create') {
+      this.doctorSevive.addPrescription(this.form.value.Prescription, this.patientId);
+      // console.log(this.form.value.Prescription);
+    } else {
+      this.doctorSevive.updatePrescription(this.patientId, this.prescId,
+        this.form.value.Prescription);
+    }
   }
 
   ngOnDestroy(): void {

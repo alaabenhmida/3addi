@@ -15,7 +15,8 @@ const appRoutes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'patient/:id', component: ProfileComponent },
   { path: 'patient/:id/addrecord', component: MedRecordComponent },
-  { path: 'patient/:id/addpresc', component: AddPrescComponent }
+  { path: 'patient/:id/addpresc', component: AddPrescComponent },
+  { path: 'patient/:id/presc/:prescID', component: AddPrescComponent }
 ];
 
 @NgModule({

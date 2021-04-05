@@ -61,8 +61,23 @@ router.post("/signup",
       });
     });
 
-  })
+  });
 
+router.put("/:id/updatepresc", (req, res, next) => {
+  Patient.findOneAndUpdate({_id: req.params.id,
+      prescription: {$elemMatch: {_id: req.body.prescID}}},
+    {$set: {'prescription.$.presc': req.body.presc}},
+    {'new': true, 'safe': true, 'upsert': true}).then( result => {
+      res.status(200).json(result)
+  });
+})
+
+router.put("/:id/getpresc/", (req, res, next) => {
+  Patient.findOne({_id: req.params.id}).select({prescription: {$elemMatch: {_id: req.body.prescID}}})
+    .then(result => {
+      res.status(200).json(result)
+    })
+})
 
 router.get("/:id", (req, res, next) => {
   Patient.findById(req.params.id).then(patient => {
