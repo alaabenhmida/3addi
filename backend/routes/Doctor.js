@@ -41,6 +41,37 @@ router.post("/patient/:id/addpresc", checkAuth, (req, res, next) => {
   })
 });
 
+router.put("", multer({storage: storage}).single("image"), checkAuth,
+  (req, res, next) => {
+  let imagePath = req.body.image;
+  if (req.file) {
+    const url = req.protocol + "://" + req.get("host");
+    imagePath = url + "/images/" + req.file.filename;
+    Doctor.findOneAndUpdate({_id: req.userData.userId},
+      {$set: {name: req.body.firstName, lastName: req.body.lastName, phone: req.body.phone,
+          gender: req.body.gender, birthday: req.body.birthday, imagePath: imagePath,
+          education: JSON.parse(req.body.education), experience: JSON.parse(req.body.experience),
+          awards: JSON.parse(req.body.awards), memberships: JSON.parse(req.body.memberships),
+          registrations: JSON.parse(req.body.registrations)}}).then(result => {
+      res.status(201).json(result);
+    }).catch(error => {
+      res.status(400).json(error);
+    })
+  } else {
+    Doctor.findOneAndUpdate({_id: req.userData.userId},
+      {$set: {name: req.body.firstName, lastName: req.body.lastName, phone: req.body.phone,
+          gender: req.body.gender, birthday: req.body.birthday,
+          education: JSON.parse(req.body.education), experience: JSON.parse(req.body.experience),
+          awards: JSON.parse(req.body.awards), memberships: JSON.parse(req.body.memberships),
+          registrations: JSON.parse(req.body.registrations)}}).then(result => {
+      res.status(201).json(result);
+    }).catch(error => {
+      res.status(400).json(error);
+    })
+  }
+
+})
+
 router.post("/rdv/accept", checkAuth, (req, res, next) => {
   let docRes;
   Doctor.findOne({patients: {$elemMatch: {id: req.body.patientId}}})

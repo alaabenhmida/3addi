@@ -43,10 +43,10 @@
             <div class="widget-profile pro-widget-content">
               <div class="profile-info-widget">
                 <a href="#" class="booking-doc-img">
-                  <img src="assets/img/doctors/doctor-thumb-02.jpg" alt="User Image">
+                  <img src="{{doctorData?.imagePath}}" alt="User Image">
                 </a>
                 <div class="profile-det-info">
-                  <h3>Dr. Darren Elder</h3>
+                  <h3>Dr. {{doctorData?.name}} {{doctorData?.lastName}}</h3>
 
                   <div class="patient-details">
                     <h5 class="mb-0">BDS, MDS - Oral & Maxillofacial Surgery</h5>
@@ -134,6 +134,7 @@
         <div class="col-md-7 col-lg-8 col-xl-9">
 
           <!-- Basic Information -->
+          <form [formGroup]="form" (submit)="onSubmit()">
           <div class="card">
             <div class="card-body">
               <h4 class="card-title">Basic Information</h4>
@@ -142,12 +143,12 @@
                   <div class="form-group">
                     <div class="change-avatar">
                       <div class="profile-img">
-                        <img src="assets/img/doctors/doctor-thumb-02.jpg" alt="User Image">
+                        <img src="{{imagePreview}}" alt="User Image">
                       </div>
                       <div class="upload-img">
                         <div class="change-photo-btn">
                           <span><i class="fa fa-upload"></i> Upload Photo</span>
-                          <input type="file" class="upload">
+                          <input type="file" class="upload" (change)="onImagePicked($event)">
                         </div>
                         <small class="form-text text-muted">Allowed JPG, GIF or PNG. Max size of 2MB</small>
                       </div>
@@ -157,37 +158,38 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label>Username <span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" readonly>
+                    <input type="text" class="form-control" readonly formControlName="username">
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label>Email <span class="text-danger">*</span></label>
-                    <input type="email" class="form-control" readonly>
+                    <input type="email" class="form-control" readonly formControlName="email">
                   </div>
                 </div>
+
                 <div class="col-md-6">
                   <div class="form-group">
                     <label>First Name <span class="text-danger">*</span></label>
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" formControlName="firstName">
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label>Last Name <span class="text-danger">*</span></label>
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" formControlName="lastName">
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label>Phone Number</label>
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" formControlName="phone">
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label>Gender</label>
-                    <select class="form-control select">
+                    <select class="form-control select" formControlName="gender">
                       <option>Select</option>
                       <option>Male</option>
                       <option>Female</option>
@@ -197,7 +199,7 @@
                 <div class="col-md-6">
                   <div class="form-group mb-0">
                     <label>Date of Birth</label>
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" formControlName="birthday">
                   </div>
                 </div>
               </div>
@@ -351,7 +353,7 @@
           <!-- /Services and Specialization -->
 
           <!-- Education -->
-          <form [formGroup]="form" (submit)="onSubmit()">
+
           <div formArrayName="education" class="card">
             <div class="card-body">
               <h4 class="card-title">Education</h4>

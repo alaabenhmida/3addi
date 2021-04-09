@@ -17,7 +17,7 @@ export class PatientAuthService {
   private userimage: string;
   private userid: string;
   private username: string;
-  private userimageListener = new Subject<string>();
+  userimageListener = new Subject<string>();
   private useridListener = new Subject<string>();
   private usernameListener = new Subject<string>();
   private roleListener = new Subject<string>();

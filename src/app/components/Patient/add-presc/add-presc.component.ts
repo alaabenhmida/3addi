@@ -3,7 +3,6 @@ import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angul
 import {DoctorAuthService} from '../../../auth/Doctor/doctor-auth.service';
 import {Subscription} from 'rxjs';
 import {DoctorServiceService} from '../../../services/doctor/doctor-service.service';
-import {PatientAuthService} from '../../../auth/Patient/patient-auth.service';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 
 @Component({

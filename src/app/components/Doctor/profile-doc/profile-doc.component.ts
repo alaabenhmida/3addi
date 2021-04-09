@@ -16,6 +16,9 @@ export class ProfileDocComponent implements OnInit {
   // rate: number;
   // selectedDate: any;
   rating = 0;
+  education: any;
+  experience: any;
+  awards: any;
 
   constructor(public route: ActivatedRoute, public doctorServive: DoctorServiceService) { }
 
@@ -31,6 +34,8 @@ export class ProfileDocComponent implements OnInit {
           password: data.password,
           imagePath: data.imagePath,
           name: data.name,
+          lastName: data.lastName,
+          gender: data.gender,
           address: data.address,
           speciality: data.speciality,
           post: data.post,
@@ -40,6 +45,9 @@ export class ProfileDocComponent implements OnInit {
           reviews: data.reviews,
           rdv: data.rdv
         };
+        this.education = data.education;
+        this.experience = data.experience;
+        this.awards = data.awards;
         for (const rev of this.doctorData.reviews) {
           this.rating += rev.rate;
         }

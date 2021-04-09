@@ -80,7 +80,7 @@ router.put("/:id/getpresc/", (req, res, next) => {
 })
 
 router.get("/:id", (req, res, next) => {
-  Patient.findById(req.params.id).then(patient => {
+  Patient.findById(req.params.id).populate('prescription.doctorId').then(patient => {
     if (patient) {
       res.status(200).json(patient);
     } else {

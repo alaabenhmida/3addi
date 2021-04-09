@@ -23,6 +23,8 @@ export class MyPatientsComponent implements OnInit {
         password: data.password,
         imagePath: data.imagePath,
         name: data.name,
+        lastName: data.lastName,
+        gender: data.gender,
         address: data.address,
         speciality: data.speciality,
         post: data.post,

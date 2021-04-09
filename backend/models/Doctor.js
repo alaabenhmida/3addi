@@ -5,6 +5,8 @@ const doctorSchema = mongoose.Schema({
   password: { type: String, required: true },
   imagePath: { type: String, required: true },
   name: { type: String, required: true },
+  lastName: { type: String, required: true },
+  gender: { type: String, required: true },
   address: { type: String, required: true },
   speciality : { type: String, required: true },
   post : { type: String, required: true },
@@ -26,6 +28,28 @@ const doctorSchema = mongoose.Schema({
   }],
   patients : [{
     id: {type : mongoose.Schema.Types.ObjectId, ref: 'Patient'}
+  }],
+  education : [{
+    Degree: {type : String},
+    College: {type : String},
+    Year_of_Completion: {type : String}
+  }],
+  experience : [{
+    hospital_Name: {type : String},
+    from: {type : String},
+    to: {type : String},
+    designation: {type : String}
+  }],
+  awards : [{
+    awards: {type : String},
+    year: {type : String}
+  }],
+  memberships : [{
+    Membership: {type : String}
+  }],
+  registrations : [{
+    registrations: {type : String},
+    year: {type : String}
   }]
 });
 

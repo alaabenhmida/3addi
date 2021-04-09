@@ -7,6 +7,8 @@ export interface Doctor {
   password: string;
   imagePath: string;
   name: string;
+  lastName: string;
+  gender: string;
   address: string;
   speciality: string;
   post: string;

@@ -16,6 +16,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   id: string;
   patientdata: Patient;
   medicalRecord: string[];
+  prescription: any;
   userIsAuthenticated = false;
   private authListenerSubs: Subscription;
   userId: string;
@@ -43,7 +44,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
             rdv : data.rdv
           };
           this.medicalRecord = data.medicalRecord;
-          console.log(this.medicalRecord);
+          this.prescription = data.prescription;
 
         } else {
           console.log('not found!!');

@@ -3,6 +3,8 @@ import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {MedicalRecord} from '../../models/Doctor/medicalRecord.model';
 import * as moment from 'moment';
+import {PatientAuthService} from '../../auth/Patient/patient-auth.service';
+import {Doctor} from '../../models/Doctor/doctor.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +14,45 @@ export class DoctorServiceService {
   recid: string;
 
   constructor(private http: HttpClient) {
+  }
+
+  modify(firstName: string, lastName: string, phone: string, gender: string, birthday: string,
+         education, experience,
+         awards, memberships, registrations, images?: File): void {
+    if (images) {
+      const image = new FormData();
+      image.append('firstName', firstName);
+      image.append('lastName', lastName);
+      image.append('phone', phone);
+      image.append('gender', gender);
+      image.append('birthday', birthday);
+      image.append('education', JSON.stringify(education));
+      image.append('experience', JSON.stringify(experience));
+      image.append('awards', JSON.stringify(awards));
+      image.append('memberships', JSON.stringify(memberships));
+      image.append('registrations', JSON.stringify(registrations));
+      image.append('image', images, firstName);
+
+      this.http.put<Doctor>('http://localhost:3000/doctor', image).subscribe(result => {
+        console.log(result);
+      });
+    } else {
+      const image = new FormData();
+      image.append('firstName', firstName);
+      image.append('lastName', lastName);
+      image.append('phone', phone);
+      image.append('gender', gender);
+      image.append('birthday', birthday);
+      image.append('education', JSON.stringify(education));
+      image.append('experience', JSON.stringify(experience));
+      image.append('awards', JSON.stringify(awards));
+      image.append('memberships', JSON.stringify(memberships));
+      image.append('registrations', JSON.stringify(registrations));
+
+      this.http.put('http://localhost:3000/doctor', image).subscribe(result => {
+        console.log(result);
+      });
+    }
   }
 
   acceptRDV(patientId: string, appDate: string): void{
