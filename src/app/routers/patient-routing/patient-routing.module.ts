@@ -7,10 +7,12 @@ import {SignupComponent} from '../../components/Patient/signup/signup.component'
 import {ProfileComponent} from '../../components/Patient/profile/profile.component';
 import {MedRecordComponent} from '../../components/Patient/med-record/med-record.component';
 import {AddPrescComponent} from '../../components/Patient/add-presc/add-presc.component';
+import {MessagesComponent} from '../../shared/messages/messages.component';
 
 
 const appRoutes: Routes = [
   { path: '', component: IndexComponent },
+  { path: 'messages', component: MessagesComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'patient/:id', component: ProfileComponent },

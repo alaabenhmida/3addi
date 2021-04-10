@@ -48,6 +48,16 @@ const port = normalizePort(process.env.PORT || "3000");
 app.set("port", port);
 
 const server = http.createServer(app);
+/////////// socket///////////////
+const io = require('socket.io')(server, {
+  cors: {
+    origin: '*',
+  }
+});
+let messages = require('./backend/routes/messages')(io);
+
+////////////////////////////////////
+
 server.on("error", onError);
 server.on("listening", onListening);
 server.listen(port);

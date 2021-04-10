@@ -25,6 +25,9 @@ import { DocDashboardComponent } from './components/Doctor/doc-dashboard/doc-das
 import {NgxSkeletonLoaderModule} from 'ngx-skeleton-loader';
 import { MyPatientsComponent } from './components/Doctor/my-patients/my-patients.component';
 import {DocProfilSettingComponent} from './components/Doctor/doc-profil-setting/doc-profil-setting.component';
+import { MessagesComponent } from './shared/messages/messages.component';
+import {SocketIoConfig, SocketIoModule} from 'ngx-socket-io';
+const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
 @NgModule({
   declarations: [
@@ -42,7 +45,8 @@ import {DocProfilSettingComponent} from './components/Doctor/doc-profil-setting/
     AppointmentComponent,
     DocDashboardComponent,
     MyPatientsComponent,
-    DocProfilSettingComponent
+    DocProfilSettingComponent,
+    MessagesComponent
   ],
   imports: [
     BrowserModule,
@@ -57,6 +61,7 @@ import {DocProfilSettingComponent} from './components/Doctor/doc-profil-setting/
     DlDateTimeDateModule,  // <--- Determines the data type of the model
     DlDateTimePickerModule,
     NgxSkeletonLoaderModule,
+    SocketIoModule.forRoot(config)
     // BarRatingModule,
     // // BarRatingModule
   ],
