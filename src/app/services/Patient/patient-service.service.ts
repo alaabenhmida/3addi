@@ -12,6 +12,11 @@ export class PatientServiceService {
   getPatient(id: string): Observable<any>{
     return this.http.get('http://localhost:3000/patient/' + id);
   }
+
+  getPatientByKey(): Observable<any> {
+    return this.http.get('http://localhost:3000/patient/getPatbykey');
+  }
+
   addRdv(id: string, rdvDate: string): void {
     this.http.post('http://localhost:3000/patient/' + id + '/rdv',
       {appDate: moment(Date.now()).format('YYYY-MM-DDTHH:mm:ss'),

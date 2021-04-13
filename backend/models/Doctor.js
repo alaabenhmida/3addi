@@ -27,7 +27,7 @@ const doctorSchema = mongoose.Schema({
     status : {type : String}
   }],
   patients : [{
-    id: {type : mongoose.Schema.Types.ObjectId, ref: 'Patient'}
+    id: {type : mongoose.Schema.Types.ObjectId, ref: 'Patient' }
   }],
   education : [{
     Degree: {type : String},
@@ -50,6 +50,16 @@ const doctorSchema = mongoose.Schema({
   registrations : [{
     registrations: {type : String},
     year: {type : String}
+  }],
+  chatRoom: [{
+    name: {type: String},
+    with: { type : mongoose.Schema.Types.ObjectId, ref:'Patient' || 'Doctor'},
+    messages: [{
+      user: {type: String},
+      to: {type: String},
+      room: {type: String},
+      message: {type: String},
+    }]
   }]
 });
 

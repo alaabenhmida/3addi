@@ -72,6 +72,17 @@ router.put("/:id/updatepresc", (req, res, next) => {
   });
 })
 
+router.get("/getPatbykey", checkAuth, (req, res, next) => {
+  Patient.findById(req.userData.userId).populate('chatRoom.with').then(doctor => {
+    res.status(200).json(doctor)
+  }).catch(error => {
+    res.status(400).json({
+      message: "error was occurred",
+      error: error
+    })
+  })
+});
+
 router.put("/:id/getpresc/", (req, res, next) => {
   Patient.findOne({_id: req.params.id}).select({prescription: {$elemMatch: {_id: req.body.prescID}}})
     .then(result => {

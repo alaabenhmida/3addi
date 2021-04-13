@@ -37,6 +37,16 @@ const patientSchema = mongoose.Schema({
     doctorId : { type : mongoose.Schema.Types.ObjectId, ref: 'Doctor'},
     doctorImage : { type : String },
     doctorName : { type : String },
+  }],
+  chatRoom: [{
+    name: {type: String},
+    with: { type : mongoose.Schema.Types.ObjectId, ref:'Doctor' || 'Patient'},
+    messages: [{
+      user: {type: String},
+      to: {type: String},
+      room: {type: String},
+      message: {type: String},
+    }]
   }]
 });
 

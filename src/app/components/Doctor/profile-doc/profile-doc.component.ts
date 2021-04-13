@@ -1,8 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Doctor} from '../../../models/Doctor/doctor.model';
-import {ActivatedRoute, ParamMap} from '@angular/router';
+import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {DoctorServiceService} from '../../../services/doctor/doctor-service.service';
 import {NgForm} from '@angular/forms';
+import {Subscription} from 'rxjs';
+import {MessagesService} from '../../../shared/messages/messages.service';
+import {PatientAuthService} from '../../../auth/Patient/patient-auth.service';
+import {PatientServiceService} from '../../../services/Patient/patient-service.service';
 
 
 @Component({
@@ -10,7 +14,7 @@ import {NgForm} from '@angular/forms';
   templateUrl: './profile-doc.component.html',
   styleUrls: ['./profile-doc.component.css']
 })
-export class ProfileDocComponent implements OnInit {
+export class ProfileDocComponent implements OnInit, OnDestroy {
   id: string;
   doctorData: Doctor;
   // rate: number;
@@ -19,10 +23,28 @@ export class ProfileDocComponent implements OnInit {
   education: any;
   experience: any;
   awards: any;
+  private role: string;
+  private userid: string;
+  private roleSubs: Subscription;
+  private useridSub: Subscription;
 
-  constructor(public route: ActivatedRoute, public doctorServive: DoctorServiceService) { }
+  constructor(public route: ActivatedRoute, public doctorServive: DoctorServiceService,
+              private authService: PatientAuthService, private chatService: MessagesService,
+              private router: Router) { }
 
   ngOnInit(): void {
+    this.role = this.authService.getRole();
+    this.roleSubs = this.authService.getRoleListener().subscribe(role => {
+      this.role = role;
+    });
+    this.userid = this.authService.getUserid();
+    this.useridSub = this.authService.getuseridListener().subscribe(
+      isAuthenticated => {
+        this.userid = isAuthenticated;
+      }
+    );
+    console.log(this.userid);
+
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       this.id = paramMap.get('id');
       console.log(this.id);
@@ -60,5 +82,21 @@ export class ProfileDocComponent implements OnInit {
   onSubmit(loginForm: NgForm): void {
     this.doctorServive.addReview(this.id, loginForm.value.rating, loginForm.value.title, loginForm.value.review);
     // console.log(loginForm.value);
+  }
+
+  ngOnDestroy(): void {
+    this.roleSubs.unsubscribe();
+    this.useridSub.unsubscribe();
+  }
+
+  chat(): void {
+    let roomName = '';
+    if (this.userid < this.doctorData.id) {
+        roomName = this.userid.concat(this.doctorData.id);
+      } else {
+        roomName = this.doctorData.id.concat(this.userid);
+    }
+    this.chatService.createRoom(this.doctorData.id, this.userid, roomName);
+    this.router.navigate(['/messages']);
   }
 }

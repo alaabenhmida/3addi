@@ -127,7 +127,8 @@ router.post("/rdv/cancel", checkAuth, (req, res, next) => {
 })
 
 router.get("/getdocbykey", checkAuth, (req, res, next) => {
-  Doctor.findById(req.userData.userId).populate('patients.id').then(doctor => {
+  Doctor.findById(req.userData.userId).populate('patients.id')
+    .populate('chatRoom.with').then(doctor => {
     res.status(200).json(doctor)
   }).catch(error => {
     res.status(400).json({
@@ -179,7 +180,7 @@ router.get("/:id", (req, res, next) => {
 });
 
 router.get("", (req, res, next) => {
-  Doctor.find().then(documents => {
+  Doctor.find().populate('chatRoom.with').then(documents => {
     res.status(200).json({
       message: "doctors fetched successfully!",
       doctors: documents
