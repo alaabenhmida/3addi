@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from dreamguys.co.in/demo/doccure/template/appointments.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 Apr 2020 08:28:57 GMT -->
+<head>
+  <meta charset="utf-8">
+  <title>Doccure</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+  <script src="assets/js/html5shiv.min.js"></script>
+  <script src="assets/js/respond.min.js"></script>
+  <![endif]-->
+
+</head>
+<body>
+
+<!-- Main Wrapper -->
+<div class="main-wrapper">
+  <!-- Breadcrumb -->
+  <div class="breadcrumb-bar">
+    <div class="container-fluid">
+      <div class="row align-items-center">
+        <div class="col-md-12 col-12">
+          <nav aria-label="breadcrumb" class="page-breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Appointments</li>
+            </ol>
+          </nav>
+          <h2 class="breadcrumb-title">Appointments</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /Breadcrumb -->
+
+  <!-- Page Content -->
+  <div class="content">
+    <div class="container-fluid">
+
+      <div class="row">
+        <div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
+
+          <!-- Profile Sidebar -->
+          <div class="profile-sidebar">
+            <div class="widget-profile pro-widget-content">
+              <div class="profile-info-widget">
+                <a href="#" class="booking-doc-img">
+                  <img src="{{doctorData?.imagePath}}" alt="User Image">
+                </a>
+                <div class="profile-det-info">
+                  <h3>Dr. {{doctorData?.name}} {{doctorData?.lastName}}</h3>
+
+                  <div class="patient-details">
+                    <h5 class="mb-0">{{doctorData?.speciality}}</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="dashboard-widget">
+              <nav class="dashboard-menu">
+                <ul>
+                  <li>
+                    <a href="doctor-dashboard.html">
+                      <i class="fas fa-columns"></i>
+                      <span>Dashboard</span>
+                    </a>
+                  </li>
+                  <li class="active">
+                    <a href="appointments.html">
+                      <i class="fas fa-calendar-check"></i>
+                      <span>Appointments</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="my-patients.html">
+                      <i class="fas fa-user-injured"></i>
+                      <span>My Patients</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="schedule-timings.html">
+                      <i class="fas fa-hourglass-start"></i>
+                      <span>Schedule Timings</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="invoices.html">
+                      <i class="fas fa-file-invoice"></i>
+                      <span>Invoices</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="reviews.html">
+                      <i class="fas fa-star"></i>
+                      <span>Reviews</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="chat-doctor.html">
+                      <i class="fas fa-comments"></i>
+                      <span>Message</span>
+                      <small class="unread-msg">23</small>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="doctor-profile-settings.html">
+                      <i class="fas fa-user-cog"></i>
+                      <span>Profile Settings</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="social-media.html">
+                      <i class="fas fa-share-alt"></i>
+                      <span>Social Media</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="doctor-change-password.html">
+                      <i class="fas fa-lock"></i>
+                      <span>Change Password</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="index.html">
+                      <i class="fas fa-sign-out-alt"></i>
+                      <span>Logout</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+          <!-- /Profile Sidebar -->
+
+        </div>
+
+        <div class="col-md-7 col-lg-8 col-xl-9">
+          <div class="appointments">
+
+            <!-- Appointment List -->
+            <div *ngFor="let patient of doctorData?.rdv" class="appointment-list">
+              <div class="profile-info-widget">
+                <a [routerLink]="['/patient', patient?.patientId._id]" class="booking-doc-img">
+                  <img src="{{patient?.patientId.imagePath}}" alt="User Image">
+                </a>
+                <div class="profile-det-info">
+                  <h3><a href="patient-profile.html">{{patient?.patientId.name}} {{patient?.patientId.lastName}}</a></h3>
+                  <div class="patient-details">
+                    <h5><i class="far fa-clock"></i> {{getdate(patient?.appDate, 'DD MMM YYYY')}}, {{getdate(patient?.appDate, 'HH:mm')}}</h5>
+                    <h5><i class="fas fa-map-marker-alt"></i> {{patient?.patientId.state}}, {{patient?.patientId.country}}</h5>
+                    <h5><i class="fas fa-envelope"></i> {{patient?.patientId.email}}</h5>
+                    <h5 class="mb-0"><i class="fas fa-phone"></i> {{patient?.patientId.phone}}</h5>
+                  </div>
+                </div>
+              </div>
+              <div class="appointment-action">
+                <a [routerLink]="['/patient', patient?.patientId._id]" class="btn btn-sm bg-info-light" data-toggle="modal" data-target="#appt_details">
+                  <i class="far fa-eye"></i> View
+                </a>
+                <td *ngIf="patient.status == 'confirmed'"><span class="badge badge-pill bg-success-light">confirmed</span></td>
+                <td *ngIf="patient.status == 'canceled'"><span class="badge badge-pill bg-danger-light">canceled</span></td>
+                <a *ngIf="patient.status == 'pending'" (click)="onAccept(patient.patientId._id, patient.appDate)" class="btn btn-sm bg-success-light">
+                  <i class="fas fa-check"></i> Accept
+                </a>
+                <a *ngIf="patient.status == 'pending'" (click)="onCancel(patient.patientId._id, patient.appDate)" class="btn btn-sm bg-danger-light">
+                  <i class="fas fa-times"></i> Cancel
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <!-- /Page Content -->
+</div>
+<!-- /Main Wrapper -->
+
+<!-- Appointment Details Modal -->
+<div class="modal fade custom-modal" id="appt_details">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Appointment Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <ul class="info-details">
+          <li>
+            <div class="details-header">
+              <div class="row">
+                <div class="col-md-6">
+                  <span class="title">#APT0001</span>
+                  <span class="text">21 Oct 2019 10:00 AM</span>
+                </div>
+                <div class="col-md-6">
+                  <div class="text-right">
+                    <button type="button" class="btn bg-success-light btn-sm" id="topup_status">Completed</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <span class="title">Status:</span>
+            <span class="text">Completed</span>
+          </li>
+          <li>
+            <span class="title">Confirm Date:</span>
+            <span class="text">29 Jun 2019</span>
+          </li>
+          <li>
+            <span class="title">Paid Amount</span>
+            <span class="text">$450</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Appointment Details Modal -->
+</body>
+
+<!-- Mirrored from dreamguys.co.in/demo/doccure/template/appointments.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 Apr 2020 08:28:57 GMT -->
+</html>

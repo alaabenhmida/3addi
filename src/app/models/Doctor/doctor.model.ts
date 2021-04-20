@@ -15,6 +15,12 @@ export interface Doctor {
   birthday: string;
   price: string;
   phone: string;
+  address1: string;
+  address2: string;
+  city: string;
+  state: string;
+  country: string;
+  zip: string;
   reviews: Rates[];
   rdv: DocRdv[];
 }

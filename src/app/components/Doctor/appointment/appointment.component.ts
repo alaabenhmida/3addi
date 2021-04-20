@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {PatientServiceService} from '../../../services/Patient/patient-service.service';
-import {ActivatedRoute, ParamMap} from '@angular/router';
+import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import * as moment from 'moment';
 import {DoctorServiceService} from '../../../services/doctor/doctor-service.service';
+import {Doctor} from '../../../models/Doctor/doctor.model';
 
 @Component({
   selector: 'app-appointment',
@@ -12,6 +13,8 @@ import {DoctorServiceService} from '../../../services/doctor/doctor-service.serv
 export class AppointmentComponent implements OnInit {
   selectedDate: string;
   private id: string;
+  doctorData: Doctor;
+  private rating: number;
 
 
   app = ['2021-04-01T09:00:00',
@@ -29,9 +32,45 @@ export class AppointmentComponent implements OnInit {
 
   constructor(private patient: PatientServiceService,
               private doctor: DoctorServiceService,
-              public route: ActivatedRoute) { }
+              public route: ActivatedRoute,
+              private router: Router) { }
 
   ngOnInit(): void {
+    this.route.paramMap.subscribe((paramMap: ParamMap) => {
+      this.id = paramMap.get('id');
+      console.log(this.id);
+      this.doctor.getDoctor(this.id).subscribe(data => {
+        // console.log(data);
+        this.doctorData = {
+          id: data._id,
+          email: data.email,
+          password: data.password,
+          imagePath: data.imagePath,
+          name: data.name,
+          lastName: data.lastName,
+          gender: data.gender,
+          address: data.address,
+          speciality: data.speciality,
+          post: data.post,
+          birthday: data.birthday,
+          price: data.price,
+          phone: data.phone,
+          address1: data.address1,
+          address2: data.address2,
+          city: data.city,
+          state: data.state,
+          country: data.country,
+          zip: data.zip,
+          reviews: data.reviews,
+          rdv: data.rdv
+        };
+        for (const rev of this.doctorData.reviews) {
+          this.rating += rev.rate;
+        }
+        console.log(this.rating / data.reviews.length);
+      });
+    });
+
     const days = [];
     const today = moment(Date.now()).format('YYYY MM DD');
     for (let i = 0; i < 7; i++) {
@@ -99,6 +138,8 @@ export class AppointmentComponent implements OnInit {
     if (this.selectedDate == null) {
       return;
     }
-    this.patient.addRdv(this.id, this.selectedDate);
+    this.patient.addRdv(this.id, this.selectedDate).subscribe(result => {
+      this.router.navigate(['/ordre', result.rdvId]);
+    });
   }
 }

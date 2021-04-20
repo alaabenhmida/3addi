@@ -49,22 +49,30 @@ router.put("", multer({storage: storage}).single("image"), checkAuth,
     imagePath = url + "/images/" + req.file.filename;
     Doctor.findOneAndUpdate({_id: req.userData.userId},
       {$set: {name: req.body.firstName, lastName: req.body.lastName, phone: req.body.phone,
+          address1: req.body.address1, address2: req.body.address2, city: req.body.city,
+          state: req.body.state, country: req.body.country, zip: req.body.zip,
           gender: req.body.gender, birthday: req.body.birthday, imagePath: imagePath,
           education: JSON.parse(req.body.education), experience: JSON.parse(req.body.experience),
           awards: JSON.parse(req.body.awards), memberships: JSON.parse(req.body.memberships),
-          registrations: JSON.parse(req.body.registrations)}}).then(result => {
-      res.status(201).json(result);
+          registrations: JSON.parse(req.body.registrations)}},
+      {'new': true, 'safe': true, 'upsert': true}).then(result => {
+      res.status(201).json({result: result,
+        message: 'modified successfully'});
     }).catch(error => {
       res.status(400).json(error);
     })
   } else {
     Doctor.findOneAndUpdate({_id: req.userData.userId},
       {$set: {name: req.body.firstName, lastName: req.body.lastName, phone: req.body.phone,
+          address1: req.body.address1, address2: req.body.address2, city: req.body.city,
+          state: req.body.state, country: req.body.country, zip: req.body.zip,
           gender: req.body.gender, birthday: req.body.birthday,
           education: JSON.parse(req.body.education), experience: JSON.parse(req.body.experience),
           awards: JSON.parse(req.body.awards), memberships: JSON.parse(req.body.memberships),
-          registrations: JSON.parse(req.body.registrations)}}).then(result => {
-      res.status(201).json(result);
+          registrations: JSON.parse(req.body.registrations)}},
+      {'new': true, 'safe': true, 'upsert': true}).then(result => {
+      res.status(201).json({result: result,
+      message: 'modified successfully'});
     }).catch(error => {
       res.status(400).json(error);
     })
@@ -128,7 +136,8 @@ router.post("/rdv/cancel", checkAuth, (req, res, next) => {
 
 router.get("/getdocbykey", checkAuth, (req, res, next) => {
   Doctor.findById(req.userData.userId).populate('patients.id')
-    .populate('chatRoom.with').then(doctor => {
+    .populate('chatRoom.with')
+    .populate('rdv.patientId').then(doctor => {
     res.status(200).json(doctor)
   }).catch(error => {
     res.status(400).json({
@@ -180,12 +189,26 @@ router.get("/:id", (req, res, next) => {
 });
 
 router.get("", (req, res, next) => {
-  Doctor.find().populate('chatRoom.with').then(documents => {
-    res.status(200).json({
-      message: "doctors fetched successfully!",
-      doctors: documents
+  const pageSize = +req.query.pagesize;
+  const currentPage = +req.query.page;
+  const doctorQuery = Doctor.find();
+  let fetchedDoctors;
+  if (pageSize && currentPage) {
+    doctorQuery
+      .skip(pageSize * (currentPage - 1))
+      .limit(pageSize);
+  }
+  doctorQuery.then(documents => {
+    fetchedDoctors = documents;
+    return Doctor.count();
+  })
+    .then(count => {
+      res.status(200).json({
+        message: "doctors fetched successfully!",
+        doctors: fetchedDoctors,
+        maxDoctors: count
+      });
     });
-  });
 });
 
 

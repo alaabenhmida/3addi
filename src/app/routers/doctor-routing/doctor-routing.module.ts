@@ -7,13 +7,17 @@ import {AppointmentComponent} from '../../components/Doctor/appointment/appointm
 import {DocDashboardComponent} from '../../components/Doctor/doc-dashboard/doc-dashboard.component';
 import {MyPatientsComponent} from '../../components/Doctor/my-patients/my-patients.component';
 import {DocProfilSettingComponent} from '../../components/Doctor/doc-profil-setting/doc-profil-setting.component';
+import {MapGridComponent} from '../../components/Doctor/map-grid/map-grid.component';
+import {AppointementsComponent} from '../../components/Doctor/appointements/appointements.component';
 
 const appRoutes: Routes = [
+  { path: 'doctors', component: MapGridComponent },
   { path: 'doctor/signup', component: SignupDrComponent },
   { path: 'doctor/login', component: LogindrComponent },
   { path: 'doctor/:id', component: ProfileDocComponent },
   { path: 'doctor/:id/app', component: AppointmentComponent },
   { path: 'doctor/profile/dashboard', component: DocDashboardComponent },
+  { path: 'doctor/profile/myRDV', component: AppointementsComponent },
   { path: 'doctor/profile/myPatients', component: MyPatientsComponent },
   { path: 'doctor/profile/setting', component: DocProfilSettingComponent }
   ];

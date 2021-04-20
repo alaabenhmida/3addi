@@ -13,6 +13,12 @@ const doctorSchema = mongoose.Schema({
   birthday: { type: String, required: true},
   price: { type: Number, required: true },
   phone: { type: String, required: true },
+  address1: { type: String, required: true },
+  address2: { type: String, required: true },
+  city: { type: String, required: true },
+  state: { type: String, required: true },
+  country: { type: String, required: true },
+  zip: { type: String, required: true },
   reviews : [{
     patientId : { type : mongoose.Schema.Types.ObjectId, ref: 'Patient' },
     rate : { type : Number },

@@ -4,6 +4,7 @@ import {DoctorServiceService} from '../../../services/doctor/doctor-service.serv
 import {Doctor} from '../../../models/Doctor/doctor.model';
 import {mimeType} from '../../../shared/mime-type.validator';
 import {PatientAuthService} from '../../../auth/Patient/patient-auth.service';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-doc-profil-setting',
@@ -15,7 +16,8 @@ export class DocProfilSettingComponent implements OnInit {
   doctorData: Doctor;
   imagePreview: string;
 
-  constructor(private fb: FormBuilder, private doctorService: DoctorServiceService, private authService: PatientAuthService) { }
+  constructor(private fb: FormBuilder, private doctorService: DoctorServiceService, private authService: PatientAuthService,
+              private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -30,6 +32,12 @@ export class DocProfilSettingComponent implements OnInit {
       phone: new FormControl(null),
       gender: new FormControl(null, { validators: [Validators.required] }),
       birthday: new FormControl(null, { validators: [Validators.required] }),
+      address1: new FormControl(null),
+      address2: new FormControl(null),
+      city: new FormControl(null),
+      state: new FormControl(null),
+      country: new FormControl(null),
+      zip: new FormControl(null),
       education: this.fb.array([]),
       experience: this.fb.array([]),
       awards: this.fb.array([]),
@@ -90,7 +98,13 @@ export class DocProfilSettingComponent implements OnInit {
         lastName: doctor.lastName,
         phone: doctor.phone,
         gender: doctor.gender,
-        birthday: doctor.birthday
+        birthday: doctor.birthday,
+        address1: doctor.address1,
+        address2: doctor.address2,
+        city: doctor.city,
+        state: doctor.state,
+        country: doctor.country,
+        zip: doctor.zip
       });
     });
   }
@@ -172,7 +186,21 @@ export class DocProfilSettingComponent implements OnInit {
   onSubmit(): void {
     this.doctorService.modify(this.form.value.firstName, this.form.value.lastName,
       this.form.value.phone, this.form.value.gender, this.form.value.birthday,
+      this.form.value.address1, this.form.value.address2, this.form.value.city,
+      this.form.value.state, this.form.value.country, this.form.value.zip,
       this.form.value.education, this.form.value.experience, this.form.value.awards,
-      this.form.value.memberships, this.form.value.registrations, this.form.value.image);
+      this.form.value.memberships, this.form.value.registrations, this.form.value.image).subscribe(result => {
+
+          this.authService.userimageListener.next(result.result.imagePath);
+          localStorage.setItem('userimage', result.result.imagePath);
+          this.toastr.success(result.message, '', {
+            positionClass: 'toast-bottom-right'
+          });
+
+    }, error => {
+        this.toastr.error(error.name, '', {
+        positionClass: 'toast-bottom-right'
+      });
+    });
   }
 }

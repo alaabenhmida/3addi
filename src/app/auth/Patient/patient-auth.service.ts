@@ -91,7 +91,6 @@ export class PatientAuthService {
             this.roleListener.next('patient');
             const now = new Date();
             const expirationDate = new Date(now.getTime() + expiresInDuration * 1000);
-            console.log(this.user);
             console.log(expirationDate);
             this.saveAuthData(token, expirationDate, userid, username, userimage, role);
             this.router.navigate(['/']);
@@ -121,7 +120,6 @@ export class PatientAuthService {
             this.roleListener.next('doctor');
             const now = new Date();
             const expirationDate = new Date(now.getTime() + expiresInDuration * 1000);
-            console.log(this.user);
             console.log(expirationDate);
             this.saveAuthData(token, expirationDate, userid, username, userimage, role);
             this.router.navigate(['/']);

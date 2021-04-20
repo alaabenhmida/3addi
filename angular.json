@@ -34,12 +34,14 @@
               "src/assets/plugins/bootstrap-tagsinput/css/bootstrap-tagsinput.css",
               "src/assets/plugins/dropzone/dropzone.min.css",
               "src/assets/css/style.css",
+              "node_modules/ngx-toastr/toastr.css",
               "src/styles.css"
             ],
             "scripts": [
               "src/assets/js/jquery.min.js",
               "src/assets/js/popper.min.js",
               "src/assets/js/bootstrap.min.js",
+              "src/assets/js/slick.js",
               "src/assets/js/moment.min.js",
               "src/assets/js/circle-progress.min.js",
               "src/assets/js/bootstrap-datetimepicker.min.js",
@@ -50,7 +52,6 @@
               "src/assets/plugins/dropzone/dropzone.min.js",
               "src/assets/plugins/bootstrap-tagsinput/js/bootstrap-tagsinput.js",
               "src/assets/js/profile-settings.js",
-              "src/assets/js/slick.js",
               "src/assets/js/script.js"
             ]
           },

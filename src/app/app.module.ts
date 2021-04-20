@@ -27,6 +27,13 @@ import { MyPatientsComponent } from './components/Doctor/my-patients/my-patients
 import {DocProfilSettingComponent} from './components/Doctor/doc-profil-setting/doc-profil-setting.component';
 import { MessagesComponent } from './shared/messages/messages.component';
 import {SocketIoConfig, SocketIoModule} from 'ngx-socket-io';
+import {ToastrModule} from 'ngx-toastr';
+import { ProfileSettComponent } from './components/Patient/profile-sett/profile-sett.component';
+import { FavDocsComponent } from './components/Patient/fav-docs/fav-docs.component';
+import { MapGridComponent } from './components/Doctor/map-grid/map-grid.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { AppointementsComponent } from './components/Doctor/appointements/appointements.component';
+import { BookingSuccessComponent } from './components/Patient/booking-success/booking-success.component';
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
 @NgModule({
@@ -46,12 +53,18 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     DocDashboardComponent,
     MyPatientsComponent,
     DocProfilSettingComponent,
-    MessagesComponent
+    MessagesComponent,
+    ProfileSettComponent,
+    FavDocsComponent,
+    MapGridComponent,
+    AppointementsComponent,
+    BookingSuccessComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
     PatientRoutingModule,
@@ -61,6 +74,7 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     DlDateTimeDateModule,  // <--- Determines the data type of the model
     DlDateTimePickerModule,
     NgxSkeletonLoaderModule,
+    MatPaginatorModule,
     SocketIoModule.forRoot(config)
     // BarRatingModule,
     // // BarRatingModule

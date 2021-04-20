@@ -41,13 +41,13 @@
                   <a *ngFor="let rooms of chatRooms" (click)="switchRoom(rooms.name, rooms.with._id)" class="media">
                     <div class="media-img-wrap">
                       <div class="avatar avatar-away">
-                        <img src="{{rooms.with.imagePath}}" alt="User Image" class="avatar-img rounded-circle">
+                        <img src="{{rooms?.with.imagePath}}" alt="User Image" class="avatar-img rounded-circle">
                       </div>
                     </div>
                     <div class="media-body">
                       <div>
-                        <div class="user-name">Dr. {{rooms.with.name}} {{rooms.with.lastName}}</div>
-                        <div class="user-last-chat">{{rooms.messages[rooms.messages.length - 1].message}}</div>
+                        <div class="user-name">Dr. {{rooms?.with.name}} {{rooms?.with.lastName}}</div>
+<!--                        <div class="user-last-chat">{{rooms?.messages[rooms.messages.length - 1].message}}</div>-->
                       </div>
                       <div>
                         <div class="last-chat-time block">2 min</div>

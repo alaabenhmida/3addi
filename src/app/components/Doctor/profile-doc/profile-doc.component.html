@@ -42,11 +42,11 @@
           <div class="doctor-widget">
             <div class="doc-info-left">
               <div class="doctor-img">
-                <img src="assets/img/doctors/doctor-thumb-02.jpg" class="img-fluid" alt="User Image">
+                <img src="{{doctorData?.imagePath}}" class="img-fluid" alt="{{doctorData?.name}}">
               </div>
               <div class="doc-info-cont">
                 <h4 class="doc-name">{{doctorData?.name}} {{doctorData?.lastName}}</h4>
-                <p class="doc-speciality">BDS, MDS - Oral & Maxillofacial Surgery</p>
+                <p class="doc-speciality">{{doctorData?.speciality}}</p>
                 <p class="doc-department"><img src="assets/img/specialities/specialities-05.png" class="img-fluid" alt="Speciality">{{doctorData?.speciality}}</p>
                 <div class="rating">
                   <i class="fas fa-star filled"></i>
@@ -54,11 +54,11 @@
                   <i class="fas fa-star filled"></i>
                   <i class="fas fa-star filled"></i>
                   <i class="fas fa-star"></i>
-                  <span class="d-inline-block average-rating">(35)</span>
+                  <span class="d-inline-block average-rating">({{doctorData?.reviews.length}})</span>
                 </div>
 <!--                <bar-rating [theme]="'fontawesome-o'" [showText] [(rate)]="rate" [max]="5"></bar-rating>-->
                 <div class="clinic-details">
-                  <p class="doc-location"><i class="fas fa-map-marker-alt"></i> {{doctorData?.address}} - <a href="javascript:void(0);">Get Directions</a></p>
+                  <p class="doc-location"><i class="fas fa-map-marker-alt"></i> {{doctorData?.address1}} - <a href="javascript:void(0);">Get Directions</a></p>
                   <ul class="clinic-gallery">
                     <li>
                       <a href="assets/img/features/feature-01.jpg" data-fancybox="gallery">
@@ -93,7 +93,7 @@
                 <ul>
                   <li><i class="far fa-thumbs-up"></i> 99%</li>
                   <li><i class="far fa-comment"></i> {{doctorData?.reviews.length}} Feedback</li>
-                  <li><i class="fas fa-map-marker-alt"></i> Newyork, USA</li>
+                  <li><i class="fas fa-map-marker-alt"></i> {{doctorData?.state}}, {{doctorData?.country}}</li>
                   <li><i class="far fa-money-bill-alt"></i> ${{doctorData?.price}} per hour </li>
                 </ul>
               </div>
@@ -555,9 +555,10 @@
                     <div class="widget-content">
                       <div class="listing-hours">
                         <div class="listing-day current">
-                          <div class="day">Today <span>5 Nov 2019</span></div>
+                          <div class="day">Today <span>{{getDay(day, 'DD MMM YYYY')}}</span></div>
                           <div class="time-items">
-                            <span class="open-status"><span class="badge bg-success-light">Open Now</span></span>
+                            <span *ngIf="getDay(day, 'ddd') !== 'Sun'" class="open-status"><span class="badge bg-success-light">Open Now</span></span>
+                            <span *ngIf="getDay(day, 'ddd') === 'Sun'" class="time"><span class="badge bg-danger-light">Closed</span></span>
                             <span class="time">07:00 AM - 09:00 PM</span>
                           </div>
                         </div>

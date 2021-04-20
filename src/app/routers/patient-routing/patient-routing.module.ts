@@ -8,13 +8,19 @@ import {ProfileComponent} from '../../components/Patient/profile/profile.compone
 import {MedRecordComponent} from '../../components/Patient/med-record/med-record.component';
 import {AddPrescComponent} from '../../components/Patient/add-presc/add-presc.component';
 import {MessagesComponent} from '../../shared/messages/messages.component';
+import {ProfileSettComponent} from '../../components/Patient/profile-sett/profile-sett.component';
+import {FavDocsComponent} from '../../components/Patient/fav-docs/fav-docs.component';
+import {BookingSuccessComponent} from '../../components/Patient/booking-success/booking-success.component';
 
 
 const appRoutes: Routes = [
   { path: '', component: IndexComponent },
+  { path: 'ordre/:rdvid', component: BookingSuccessComponent },
   { path: 'messages', component: MessagesComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
+  { path: 'profile/setting', component: ProfileSettComponent },
+  { path: 'profile/favdocs', component: FavDocsComponent },
   { path: 'patient/:id', component: ProfileComponent },
   { path: 'patient/:id/addrecord', component: MedRecordComponent },
   { path: 'patient/:id/addpresc', component: AddPrescComponent },

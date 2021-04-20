@@ -232,7 +232,7 @@
                                   <a [routerLink]="['/patient', rdv.patientId]">{{rdv.patientname}} <span>#PT0016</span></a>
                                 </h2>
                               </td>
-                              <td>{{getdate(rdv.appDate, 'DD MMM YYYY')}} <span class="d-block text-info">{{getdate(rdv.appDate, 'HH')}}:00</span></td>
+                              <td>{{getdate(rdv.appDate, 'DD MMM YYYY')}} <span class="d-block text-info">{{getdate(rdv.appDate, 'HH:mm')}}</span></td>
                               <td>General</td>
                               <td>New Patient</td>
                               <td *ngIf="rdv.status == 'confirmed'"><span class="badge badge-pill bg-success-light">{{rdv.status}}</span></td>

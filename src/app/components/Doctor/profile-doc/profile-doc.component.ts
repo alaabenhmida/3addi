@@ -6,7 +6,7 @@ import {NgForm} from '@angular/forms';
 import {Subscription} from 'rxjs';
 import {MessagesService} from '../../../shared/messages/messages.service';
 import {PatientAuthService} from '../../../auth/Patient/patient-auth.service';
-import {PatientServiceService} from '../../../services/Patient/patient-service.service';
+import * as moment from 'moment';
 
 
 @Component({
@@ -27,12 +27,14 @@ export class ProfileDocComponent implements OnInit, OnDestroy {
   private userid: string;
   private roleSubs: Subscription;
   private useridSub: Subscription;
+  day = moment(Date.now()).toString();
 
   constructor(public route: ActivatedRoute, public doctorServive: DoctorServiceService,
               private authService: PatientAuthService, private chatService: MessagesService,
               private router: Router) { }
 
   ngOnInit(): void {
+    console.log(this.getDay(this.day, 'ddd'));
     this.role = this.authService.getRole();
     this.roleSubs = this.authService.getRoleListener().subscribe(role => {
       this.role = role;
@@ -43,7 +45,6 @@ export class ProfileDocComponent implements OnInit, OnDestroy {
         this.userid = isAuthenticated;
       }
     );
-    console.log(this.userid);
 
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       this.id = paramMap.get('id');
@@ -64,6 +65,12 @@ export class ProfileDocComponent implements OnInit, OnDestroy {
           birthday: data.birthday,
           price: data.price,
           phone: data.phone,
+          address1: data.address1,
+          address2: data.address2,
+          city: data.city,
+          state: data.state,
+          country: data.country,
+          zip: data.zip,
           reviews: data.reviews,
           rdv: data.rdv
         };
@@ -87,6 +94,10 @@ export class ProfileDocComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.roleSubs.unsubscribe();
     this.useridSub.unsubscribe();
+  }
+
+  getDay(day: string, format: string): string {
+    return moment(day).format(format);
   }
 
   chat(): void {

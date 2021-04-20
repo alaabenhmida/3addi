@@ -37,10 +37,15 @@ export class ProfileComponent implements OnInit, OnDestroy {
             password : data.password,
             imagePath : data.imagePath,
             name : data.name,
+            lastName: data.lastName,
             address : data.address,
             birthday : data.birthday,
             bloodType : data.bloodType,
             phone : data.phone,
+            city: data.city,
+            state: data.state,
+            zip: data.zip,
+            country: data.country,
             rdv : data.rdv
           };
           this.medicalRecord = data.medicalRecord;

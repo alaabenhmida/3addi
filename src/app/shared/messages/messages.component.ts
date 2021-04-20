@@ -64,6 +64,12 @@ export class MessagesComponent implements OnInit, OnDestroy {
           birthday: data.birthday,
           price: data.price,
           phone: data.phone,
+          address1: data.address1,
+          address2: data.address2,
+          city: data.city,
+          state: data.state,
+          country: data.country,
+          zip: data.zip,
           reviews: data.reviews,
           rdv: data.rdv
         };
@@ -82,10 +88,15 @@ export class MessagesComponent implements OnInit, OnDestroy {
           password : data.password,
           imagePath : data.imagePath,
           name : data.name,
+          lastName: data.lastName,
           address : data.address,
           birthday : data.birthday,
           bloodType : data.bloodType,
           phone : data.phone,
+          city: data.city,
+          state: data.state,
+          zip: data.zip,
+          country: data.country,
           rdv : data.rdv
         };
         this.chatRooms = data.chatRoom;

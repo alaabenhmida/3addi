@@ -5,12 +5,17 @@ const patientSchema = mongoose.Schema({
   password: { type: String, required: true },
   imagePath: { type: String, required: true },
   name: { type: String, required: true },
-  address: { type: String, required: true },
+  lastName: { type: String, required: true },
+  address: { type: String},
   birthday: { type: String, required: true},
   bloodType: { type: String, required: true },
   phone: { type: String, required: true },
+  city: { type: String},
+  state: { type: String},
+  zip: { type: String, required: true },
+  country: { type: String, required: true },
   rdv : [{
-    doctorId : { type : mongoose.Schema.Types.ObjectId},
+    doctorId : { type : mongoose.Schema.Types.ObjectId, ref:'Doctor'},
     appDate : { type : String},
     rdvDate : { type : String},
     status : { type : String, defaultValue: 'pending'},
@@ -47,6 +52,9 @@ const patientSchema = mongoose.Schema({
       room: {type: String},
       message: {type: String},
     }]
+  }],
+  favDocs: [{
+    doctor: { type : mongoose.Schema.Types.ObjectId, ref: 'Doctor'}
   }]
 });
 

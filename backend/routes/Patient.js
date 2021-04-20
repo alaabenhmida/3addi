@@ -34,6 +34,36 @@ const storage = multer.diskStorage({
 });
 
 
+router.put("", multer({storage: storage}).single("image"), checkAuth,
+  (req, res, next) => {
+    let imagePath = req.body.image;
+    if (req.file) {
+      const url = req.protocol + "://" + req.get("host");
+      imagePath = url + "/images/" + req.file.filename;
+      Patient.findOneAndUpdate({_id: req.userData.userId},
+        {$set: {email: req.body.email, imagePath: imagePath, name: req.body.name,
+            lastName: req.body.lastName, address: req.body.address, birthday: req.body.birthday,
+            bloodType: req.body.bloodType, phone: req.body.phone, city: req.body.city,
+            state: req.body.state, zip: req.body.zip, country: req.body.country}})
+        .then(result => {
+          res.status(201).json(result);
+        }).catch(error => {
+          res.json(error);
+      })
+    } else {
+      Patient.findOneAndUpdate({_id: req.userData.userId},
+        {$set: {email: req.body.email, name: req.body.name,
+            lastName: req.body.lastName, address: req.body.address, birthday: req.body.birthday,
+            bloodType: req.body.bloodType, phone: req.body.phone, city: req.body.city,
+            state: req.body.state, zip: req.body.zip, country: req.body.country}})
+        .then(result => {
+          res.status(201).json(result);
+        }).catch(error => {
+        res.json(error);
+      })
+    }
+  })
+
 router.post("/signup",
   multer({storage: storage}).single("image"),
   (req, res, next) => {
@@ -73,8 +103,9 @@ router.put("/:id/updatepresc", (req, res, next) => {
 })
 
 router.get("/getPatbykey", checkAuth, (req, res, next) => {
-  Patient.findById(req.userData.userId).populate('chatRoom.with').then(doctor => {
-    res.status(200).json(doctor)
+  Patient.findById(req.userData.userId).populate('chatRoom.with')
+    .populate('favDocs.doctor').then(patient => {
+    res.status(200).json(patient)
   }).catch(error => {
     res.status(400).json({
       message: "error was occurred",
@@ -87,17 +118,45 @@ router.put("/:id/getpresc/", (req, res, next) => {
   Patient.findOne({_id: req.params.id}).select({prescription: {$elemMatch: {_id: req.body.prescID}}})
     .then(result => {
       res.status(200).json(result)
-    })
+    }).catch(error => {
+    res.status(404).json(error);
+  });
+});
+
+router.get("/:id/getrdv/", checkAuth, (req, res, next) => {
+  Patient.findOne({_id: req.userData.userId}).select({rdv: {$elemMatch: {_id: req.params.id}}})
+    .populate('rdv.doctorId')
+    .then(result => {
+      res.status(200).json(result);
+    }).catch(error => {
+      res.status(404).json(error);
+  });
 })
 
 router.get("/:id", (req, res, next) => {
-  Patient.findById(req.params.id).populate('prescription.doctorId').then(patient => {
+  Patient.findById(req.params.id).populate('prescription.doctorId')
+    .populate('medicalRecord.doctorId').then(patient => {
     if (patient) {
       res.status(200).json(patient);
     } else {
       res.status(404).json({ message: "Patient not found!" });
     }
   });
+});
+
+router.put("/addfav", checkAuth, (req, res, next) => {
+  Patient.findOne({favDocs: {$elemMatch: {doctor: req.body.doctorId}}})
+    .then(result => {
+      if (!result) {
+        Patient.updateOne({_id: req.userData.userId},
+          {$push: {favDocs: {doctor: req.body.doctorId}}}).
+          then(result => {
+            res.status(200).json(result);
+        }).catch(error => {
+          res.status(401).json(error);
+        })
+      }
+    });
 });
 
 router.get("", (req, res, next) => {
@@ -147,16 +206,15 @@ router.put("/:id/delpresc", checkAuth, (req, res, next) => {
 
 
 router.post("/:id/rdv", checkAuth, (req, res, next) => {
+  let rdvId;
   Doctor.findById(req.params.id).then(doctor => {
-    Patient.updateOne(
+    Patient.findOneAndUpdate(
       {_id: req.userData.userId},
       { $push: { rdv:{ doctorId:doctor._id, appDate: req.body.appDate, rdvDate: req.body.rdvDate, status: 'pending',
-            doctorImage: doctor.imagePath, doctorName: doctor.name} }}
+            doctorImage: doctor.imagePath, doctorName: doctor.name}, }},
+      {'new': true}
     ).then(result => {
-      res.status(201).json({
-        message: "appointment added successfully to patient",
-        result: result
-      })
+      rdvId = result.rdv[result.rdv.length - 1]._id;
     })
       .catch(err => {
         console.log(err);
@@ -169,7 +227,8 @@ router.post("/:id/rdv", checkAuth, (req, res, next) => {
             patienimagePath: patient.imagePath, appDate: req.body.rdvDate, status: 'pending'} }}).then(result => {
       res.status(201).json({
         message: "appointment added successfully to Doctor queue too",
-        result: result
+        result: result,
+        rdvId: rdvId
       })
     })
       .catch(err => {

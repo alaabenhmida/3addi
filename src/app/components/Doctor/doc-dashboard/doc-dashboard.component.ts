@@ -32,6 +32,12 @@ export class DocDashboardComponent implements OnInit {
         birthday: data.birthday,
         price: data.price,
         phone: data.phone,
+        address1: data.address1,
+        address2: data.address2,
+        city: data.city,
+        state: data.state,
+        country: data.country,
+        zip: data.zip,
         reviews: data.reviews,
         rdv: data.rdv
       };

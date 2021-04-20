@@ -6,9 +6,14 @@ export interface Patient {
   password: string;
   imagePath: string;
   name: string;
+  lastName: string;
   address: string;
   birthday: string;
   bloodType: string;
   phone: string;
+  city: string;
+  state: string;
+  zip: string;
+  country: string;
   rdv: RDV[];
 }

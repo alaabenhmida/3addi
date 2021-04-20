@@ -3,8 +3,6 @@ import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {MedicalRecord} from '../../models/Doctor/medicalRecord.model';
 import * as moment from 'moment';
-import {PatientAuthService} from '../../auth/Patient/patient-auth.service';
-import {Doctor} from '../../models/Doctor/doctor.model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +15,10 @@ export class DoctorServiceService {
   }
 
   modify(firstName: string, lastName: string, phone: string, gender: string, birthday: string,
+         address1: string, address2: string, city: string, state: string,
+         country: string, zip: string,
          education, experience,
-         awards, memberships, registrations, images?: File): void {
+         awards, memberships, registrations, images?: File): Observable<any> {
     if (images) {
       const image = new FormData();
       image.append('firstName', firstName);
@@ -26,6 +26,12 @@ export class DoctorServiceService {
       image.append('phone', phone);
       image.append('gender', gender);
       image.append('birthday', birthday);
+      image.append('address1', address1);
+      image.append('address2', address2);
+      image.append('city', city);
+      image.append('state', state);
+      image.append('country', country);
+      image.append('zip', zip);
       image.append('education', JSON.stringify(education));
       image.append('experience', JSON.stringify(experience));
       image.append('awards', JSON.stringify(awards));
@@ -33,9 +39,7 @@ export class DoctorServiceService {
       image.append('registrations', JSON.stringify(registrations));
       image.append('image', images, firstName);
 
-      this.http.put<Doctor>('http://localhost:3000/doctor', image).subscribe(result => {
-        console.log(result);
-      });
+      return this.http.put('http://localhost:3000/doctor', image);
     } else {
       const image = new FormData();
       image.append('firstName', firstName);
@@ -43,15 +47,19 @@ export class DoctorServiceService {
       image.append('phone', phone);
       image.append('gender', gender);
       image.append('birthday', birthday);
+      image.append('address1', address1);
+      image.append('address2', address2);
+      image.append('city', city);
+      image.append('state', state);
+      image.append('country', country);
+      image.append('zip', zip);
       image.append('education', JSON.stringify(education));
       image.append('experience', JSON.stringify(experience));
       image.append('awards', JSON.stringify(awards));
       image.append('memberships', JSON.stringify(memberships));
       image.append('registrations', JSON.stringify(registrations));
 
-      this.http.put('http://localhost:3000/doctor', image).subscribe(result => {
-        console.log(result);
-      });
+      return this.http.put('http://localhost:3000/doctor', image);
     }
   }
 
@@ -75,6 +83,11 @@ export class DoctorServiceService {
 
   getDcotorByKey(): Observable<any> {
     return this.http.get('http://localhost:3000/doctor/getdocbykey');
+  }
+
+  getAllDoctors(postPerPage?: number, currentPage?: number): Observable<any> {
+    const queryParams = `?pagesize=${postPerPage}&page=${currentPage}`;
+    return this.http.get('http://localhost:3000/doctor' + queryParams);
   }
 
   updatePrescription(patientId: string, prescID: string, presc: any): void {
