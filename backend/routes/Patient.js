@@ -116,6 +116,7 @@ router.get("/getPatbykey", checkAuth, (req, res, next) => {
 
 router.put("/:id/getpresc/", (req, res, next) => {
   Patient.findOne({_id: req.params.id}).select({prescription: {$elemMatch: {_id: req.body.prescID}}})
+    .populate('prescription.doctorId')
     .then(result => {
       res.status(200).json(result)
     }).catch(error => {
@@ -135,7 +136,8 @@ router.get("/:id/getrdv/", checkAuth, (req, res, next) => {
 
 router.get("/:id", (req, res, next) => {
   Patient.findById(req.params.id).populate('prescription.doctorId')
-    .populate('medicalRecord.doctorId').then(patient => {
+    .populate('medicalRecord.doctorId')
+    .populate('rdv.doctorId').then(patient => {
     if (patient) {
       res.status(200).json(patient);
     } else {

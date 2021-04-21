@@ -67,7 +67,7 @@
                 <ul>
                   <li>Phone <span>{{patientdata?.phone}}</span></li>
                   <li>Age <span>{{patientdata?.birthday}}</span></li>
-                  <li>{{patientdata?.bloodType}} <span>AB+</span></li>
+                  <li>bloodGroup <span>{{patientdata?.bloodType}}</span></li>
                 </ul>
               </div>
             </div>
@@ -136,7 +136,10 @@
 
                         <table class="table table-hover table-center mb-0">
                           <thead>
-                          <tr>
+                          <tr *ngIf="patientdata?.rdv.length <= 0">
+                            <th class="text-center">pas de RDV</th>
+                          </tr>
+                          <tr *ngIf="patientdata?.rdv.length > 0">
                             <th>Doctor</th>
                             <th>Appt Date</th>
                             <th>Booking Date</th>
@@ -151,9 +154,9 @@
                             <td>
                               <h2 class="table-avatar">
                                 <a [routerLink]="['/doctor', rdv.doctorId]" class="avatar avatar-sm mr-2">
-                                  <img class="avatar-img rounded-circle" src="assets/img/doctors/doctor-thumb-02.jpg" alt="User Image">
+                                  <img class="avatar-img rounded-circle" src="{{rdv?.doctorId.imagePath}}" alt="User Image">
                                 </a>
-                                <a [routerLink]="['/doctor', rdv.doctorId]">Dr. {{rdv.doctorName}} <span>Dental</span></a>
+                                <a [routerLink]="['/doctor', rdv.doctorId]">Dr. {{rdv?.doctorId.name}} {{rdv?.doctorId.lastName}} <span>{{rdv?.doctorId.speciality}}</span></a>
                               </h2>
                             </td>
                             <td>{{getdate(rdv.rdvDate, 'DD MMM YYYY')}} <span class="d-block text-info">{{getdate(rdv.rdvDate, 'HH:mm')}}</span></td>
@@ -196,13 +199,13 @@
                           </thead>
                           <tbody>
                           <tr *ngFor="let presc of prescription">
-                            <td>{{getdate(presc.date, 'DD MMM YYYY')}}</td>
+                            <td>{{getdate(presc?.date, 'DD MMM YYYY')}}</td>
                             <td>
                               <h2 class="table-avatar">
                                 <a [routerLink]="['/doctor', presc.doctorId._id]" class="avatar avatar-sm mr-2">
-                                  <img class="avatar-img rounded-circle" src="assets/img/doctors/doctor-thumb-01.jpg" alt="User Image">
+                                  <img class="avatar-img rounded-circle" src="{{presc?.doctorId.imagePath}}" alt="User Image">
                                 </a>
-                                <a [routerLink]="['/doctor', presc.doctorId._id]">Dr. {{presc.doctorId.name}} <span>Dental</span></a>
+                                <a [routerLink]="['/doctor', presc.doctorId._id]">Dr. {{presc?.doctorId.name}} {{presc?.doctorId.lastName}} <span>{{presc?.doctorId.speciality}}</span></a>
                               </h2>
                             </td>
                             <td class="text-right">
@@ -246,15 +249,15 @@
                           <tbody>
                           <tr *ngFor="let med of medicalRecord">
                             <td><a href="javascript:void(0);">{{med._id}}</a></td>
-                            <td>{{getdate(med.date, 'DD MMM YYYY')}}</td>
-                            <td>{{med.description}}</td>
-                            <td><a href="#">dental-test.pdf</a></td>
+                            <td>{{getdate(med?.date, 'DD MMM YYYY')}}</td>
+                            <td>{{med?.description}}</td>
+                            <td><a href="#">{{med?.attachment}}</a></td>
                             <td>
                               <h2 class="table-avatar">
                                 <a href="doctor-profile.html" class="avatar avatar-sm mr-2">
-                                  <img class="avatar-img rounded-circle" src="{{med.doctorImage}}" alt="User Image">
+                                  <img class="avatar-img rounded-circle" src="{{med.doctorId.imagePath}}" alt="User Image">
                                 </a>
-                                <a href="doctor-profile.html">{{med.doctorName}} <span>Dental</span></a>
+                                <a href="doctor-profile.html">{{med.doctorId.name}} {{med.doctorId.lastName}}<span>{{med.doctorId.speciality}}</span></a>
                               </h2>
                             </td>
                             <td *ngIf="userIsAuthenticated" class="text-right">

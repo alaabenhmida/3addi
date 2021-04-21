@@ -4,6 +4,9 @@ import {DoctorAuthService} from '../../../auth/Doctor/doctor-auth.service';
 import {Subscription} from 'rxjs';
 import {DoctorServiceService} from '../../../services/doctor/doctor-service.service';
 import {ActivatedRoute, ParamMap} from '@angular/router';
+import {PatientServiceService} from '../../../services/Patient/patient-service.service';
+import * as moment from 'moment';
+import {Doctor} from '../../../models/Doctor/doctor.model';
 
 @Component({
   selector: 'app-add-presc',
@@ -12,32 +15,36 @@ import {ActivatedRoute, ParamMap} from '@angular/router';
 })
 export class AddPrescComponent implements OnInit, OnDestroy {
   form: FormGroup;
+  patientData: any;
   patientId: string;
   userIdSub: Subscription;
-  doctorob: any;
-  private mode = 'create';
+  doctorData: Doctor;
+  mode = 'create';
   prescId: string;
   prescData: any;
+  today = moment(new Date()).toString();
 
 
   constructor(public route: ActivatedRoute,
               private fb: FormBuilder,
               private doctor: DoctorAuthService,
-              private doctorSevive: DoctorServiceService) {}
+              private doctorSevive: DoctorServiceService,
+              private patientService: PatientServiceService) {}
 
   ngOnInit(): void {
     this.form = this.fb.group({
       Prescription: this.fb.array([])
     });
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
+      this.patientService.getPatient(paramMap.get('id')).subscribe(patient => {
+        this.patientData = patient;
+      });
       if (paramMap.has('prescID')) {
         this.mode = 'edit';
         this.prescId = paramMap.get('prescID');
-        console.log(paramMap.get('id'));
         this.patientId = paramMap.get('id');
         this.doctorSevive.getPrescription(paramMap.get('id'), this.prescId).subscribe(data => {
-          this.prescData = data;
-          console.log(data.prescription[0].presc);
+          this.prescData = data.prescription[0];
           const creds = this.form.controls.Prescription as FormArray;
           for (const pres of data.prescription[0].presc) {
             creds.push(this.fb.group({
@@ -52,6 +59,9 @@ export class AddPrescComponent implements OnInit, OnDestroy {
           }
         });
       } else {
+        this.doctorSevive.getDcotorByKey().subscribe(doctor => {
+          this.doctorData = doctor;
+        });
         this.mode = 'create';
         this.patientId = paramMap.get('id');
         this.addCreds();
@@ -91,6 +101,9 @@ export class AddPrescComponent implements OnInit, OnDestroy {
       this.doctorSevive.updatePrescription(this.patientId, this.prescId,
         this.form.value.Prescription);
     }
+  }
+  getdate(date: string, format: string): string{
+    return (moment(date).format(format));
   }
 
   ngOnDestroy(): void {

@@ -9,6 +9,7 @@ import {MyPatientsComponent} from '../../components/Doctor/my-patients/my-patien
 import {DocProfilSettingComponent} from '../../components/Doctor/doc-profil-setting/doc-profil-setting.component';
 import {MapGridComponent} from '../../components/Doctor/map-grid/map-grid.component';
 import {AppointementsComponent} from '../../components/Doctor/appointements/appointements.component';
+import {AuthGuard} from '../../auth/auth.gards';
 
 const appRoutes: Routes = [
   { path: 'doctors', component: MapGridComponent },
@@ -25,6 +26,7 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [],
   imports: [RouterModule.forRoot(appRoutes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [AuthGuard]
 })
 export class DoctorRoutingModule { }

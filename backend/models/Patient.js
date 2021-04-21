@@ -15,7 +15,7 @@ const patientSchema = mongoose.Schema({
   zip: { type: String, required: true },
   country: { type: String, required: true },
   rdv : [{
-    doctorId : { type : mongoose.Schema.Types.ObjectId, ref:'Doctor'},
+    doctorId : { type : mongoose.Schema.Types.ObjectId, ref: 'Doctor'},
     appDate : { type : String},
     rdvDate : { type : String},
     status : { type : String, defaultValue: 'pending'},

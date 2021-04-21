@@ -45,22 +45,22 @@
               <div class="pro-widget-content">
                 <div class="profile-info-widget">
                   <a href="#" class="booking-doc-img">
-                    <img src="assets/img/patients/patient.jpg" alt="User Image">
+                    <img src="{{patientData?.imagePath}}" alt="User Image">
                   </a>
                   <div class="profile-det-info">
-                    <h3><a href="patient-profile.html">Richard Wilson</a></h3>
+                    <h3><a href="patient-profile.html">{{patientData?.name}} {{patientData?.lastName}}</a></h3>
                     <div class="patient-details">
                       <h5><b>Patient ID :</b> PT0016</h5>
-                      <h5 class="mb-0"><i class="fas fa-map-marker-alt"></i> Newyork, USA</h5>
+                      <h5 class="mb-0"><i class="fas fa-map-marker-alt"></i> {{patientData?.state}}, {{patientData?.country}}</h5>
                     </div>
                   </div>
                 </div>
               </div>
               <div class="patient-info">
                 <ul>
-                  <li>Phone <span>+1 952 001 8563</span></li>
-                  <li>Age <span>38 Years, Male</span></li>
-                  <li>Blood Group <span>AB+</span></li>
+                  <li>Phone <span>{{patientData?.phone}}</span></li>
+                  <li>Age <span>38 Years, {{patientData?.gender}}</span></li>
+                  <li>Blood Group <span>{{patientData?.bloodType}}</span></li>
                 </ul>
               </div>
             </div>
@@ -78,14 +78,18 @@
               <div class="row">
                 <div class="col-sm-6">
                   <div class="biller-info">
-                    <h4 class="d-block">Dr. Darren Elder</h4>
-                    <span class="d-block text-sm text-muted">Dentist</span>
-                    <span class="d-block text-sm text-muted">Newyork, United States</span>
+                    <h4 *ngIf="mode ==='create'" class="d-block">Dr. {{doctorData?.name}} {{doctorData?.lastName}}</h4>
+                    <h4 *ngIf="mode ==='edit'" class="d-block">Dr. {{prescData?.doctorId.name}} {{prescData?.doctorId.lastName}}</h4>
+                    <span *ngIf="mode ==='create'" class="d-block text-sm text-muted">{{doctorData?.speciality}}</span>
+                    <span *ngIf="mode ==='edit'" class="d-block text-sm text-muted">{{prescData?.doctorId.speciality}}</span>
+                    <span *ngIf="mode ==='create'" class="d-block text-sm text-muted">{{doctorData?.state}}, {{doctorData?.country}}</span>
+                    <span *ngIf="mode ==='edit'" class="d-block text-sm text-muted">{{prescData?.doctorId.state}}, {{prescData?.doctorId.country}}</span>
                   </div>
                 </div>
                 <div class="col-sm-6 text-sm-right">
                   <div class="billing-info">
-                    <h4 class="d-block">1 November 2019</h4>
+                    <h4 *ngIf="mode ==='create'" class="d-block">{{getdate(today, 'DD MMMM YYYY')}}</h4>
+                    <h4 *ngIf="mode ==='edit'" class="d-block">{{getdate(prescData?.date, 'DD MMMM YYYY')}}</h4>
                     <span class="d-block text-muted">#INV0001</span>
                   </div>
                 </div>
@@ -166,7 +170,8 @@
                       Click here to sign
                     </div>
                     <div class="sign-name">
-                      <p class="mb-0">( Dr. Darren Elder )</p>
+                      <p *ngIf="mode ==='edit'" class="mb-0">( Dr. {{prescData?.doctorId.name}} {{prescData?.doctorId.lastName}} )</p>
+                      <p *ngIf="mode ==='create'" class="mb-0">( Dr. {{doctorData?.name}} {{doctorData?.lastName}} )</p>
                       <span class="text-muted">Signature</span>
                     </div>
                   </div>
