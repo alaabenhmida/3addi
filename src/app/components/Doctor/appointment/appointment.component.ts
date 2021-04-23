@@ -139,7 +139,8 @@ export class AppointmentComponent implements OnInit {
       return;
     }
     this.patient.addRdv(this.id, this.selectedDate).subscribe(result => {
-      this.router.navigate(['/ordre', result.rdvId]);
+      // this.router.navigate(['/ordre', result.rdvId]);
+      this.router.navigate(['/doctor', this.id, 'check', result.rdvId]);
     });
   }
 }

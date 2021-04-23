@@ -21,6 +21,8 @@ export class MapGridComponent implements OnInit {
   doctorsPerPage = 5;
   cuurentPage = 1;
   pageSizeOptions = [1, 2, 5, 10];
+  lat = 51.678418;
+  lng = 7.809007;
 
   constructor(private doctorService: DoctorServiceService,
               private patientService: PatientServiceService,

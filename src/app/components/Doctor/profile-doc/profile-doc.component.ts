@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit, TemplateRef} from '@angular/core';
 import {Doctor} from '../../../models/Doctor/doctor.model';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {DoctorServiceService} from '../../../services/doctor/doctor-service.service';
@@ -7,6 +7,7 @@ import {Subscription} from 'rxjs';
 import {MessagesService} from '../../../shared/messages/messages.service';
 import {PatientAuthService} from '../../../auth/Patient/patient-auth.service';
 import * as moment from 'moment';
+import { RatingModule } from 'ngx-bootstrap/rating';
 
 
 @Component({
@@ -27,14 +28,37 @@ export class ProfileDocComponent implements OnInit, OnDestroy {
   private userid: string;
   private roleSubs: Subscription;
   private useridSub: Subscription;
+  isauth: boolean;
+  isauthSub: Subscription;
   day = moment(Date.now()).toString();
 
-  constructor(public route: ActivatedRoute, public doctorServive: DoctorServiceService,
+  ///// rating/////
+  max = 5;
+  rate = 0;
+  isReadonly = true;
+
+  overStar: number | undefined;
+  percent: number;
+
+  hoveringOver(value: number): void {
+    this.overStar = value;
+    this.percent = (value / this.max) * 100;
+  }
+
+  resetStar(): void {
+    this.overStar = void 0;
+  }
+////////////////////////////
+
+    constructor(public route: ActivatedRoute, public doctorServive: DoctorServiceService,
               private authService: PatientAuthService, private chatService: MessagesService,
               private router: Router) { }
 
   ngOnInit(): void {
-    console.log(this.getDay(this.day, 'ddd'));
+    this.isauth = this.authService.getIsAuth();
+    this.isauthSub = this.authService.getAuthStatusListener().subscribe(auth => {
+      this.isauth = auth;
+    });
     this.role = this.authService.getRole();
     this.roleSubs = this.authService.getRoleListener().subscribe(role => {
       this.role = role;
@@ -80,7 +104,7 @@ export class ProfileDocComponent implements OnInit, OnDestroy {
         for (const rev of this.doctorData.reviews) {
           this.rating += rev.rate;
         }
-        console.log(this.rating / data.reviews.length);
+        this.rate = this.rating / data.reviews.length;
       });
     });
     // console.log(this.doctorData);

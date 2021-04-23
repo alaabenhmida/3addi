@@ -10,12 +10,14 @@ import {DocProfilSettingComponent} from '../../components/Doctor/doc-profil-sett
 import {MapGridComponent} from '../../components/Doctor/map-grid/map-grid.component';
 import {AppointementsComponent} from '../../components/Doctor/appointements/appointements.component';
 import {AuthGuard} from '../../auth/auth.gards';
+import {CheckoutComponent} from '../../components/Patient/checkout/checkout.component';
 
 const appRoutes: Routes = [
   { path: 'doctors', component: MapGridComponent },
   { path: 'doctor/signup', component: SignupDrComponent },
   { path: 'doctor/login', component: LogindrComponent },
   { path: 'doctor/:id', component: ProfileDocComponent },
+  { path: 'doctor/:id/check/:rdvID', component: CheckoutComponent },
   { path: 'doctor/:id/app', component: AppointmentComponent },
   { path: 'doctor/profile/dashboard', component: DocDashboardComponent },
   { path: 'doctor/profile/myRDV', component: AppointementsComponent },

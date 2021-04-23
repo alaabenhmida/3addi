@@ -18,7 +18,6 @@ import {AuthInterceptor} from './auth/auth-interceptor';
 import { MedRecordComponent } from './components/Patient/med-record/med-record.component';
 import { AddPrescComponent } from './components/Patient/add-presc/add-presc.component';
 import { ProfileDocComponent } from './components/Doctor/profile-doc/profile-doc.component';
-import {BarRatingModule} from 'ngx-bar-rating';
 import {DlDateTimeDateModule, DlDateTimePickerModule} from 'angular-bootstrap-datetimepicker';
 import { AppointmentComponent } from './components/Doctor/appointment/appointment.component';
 import { DocDashboardComponent } from './components/Doctor/doc-dashboard/doc-dashboard.component';
@@ -34,6 +33,11 @@ import { MapGridComponent } from './components/Doctor/map-grid/map-grid.componen
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { AppointementsComponent } from './components/Doctor/appointements/appointements.component';
 import { BookingSuccessComponent } from './components/Patient/booking-success/booking-success.component';
+import {TooltipModule} from 'ngx-bootstrap/tooltip';
+import {AgmCoreModule} from '@agm/core';
+import {RatingModule} from 'ngx-bootstrap/rating';
+import { InvoiceDetailComponent } from './components/Patient/invoice-detail/invoice-detail.component';
+import { CheckoutComponent } from './components/Patient/checkout/checkout.component';
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
 @NgModule({
@@ -58,7 +62,9 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     FavDocsComponent,
     MapGridComponent,
     AppointementsComponent,
-    BookingSuccessComponent
+    BookingSuccessComponent,
+    InvoiceDetailComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,
@@ -75,7 +81,12 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     DlDateTimePickerModule,
     NgxSkeletonLoaderModule,
     MatPaginatorModule,
-    SocketIoModule.forRoot(config)
+    SocketIoModule.forRoot(config),
+    TooltipModule.forRoot(),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAOhHjYUOLvSh3GG_H69tQTpYvQlJmT-Rc'
+    }),
+    RatingModule,
     // BarRatingModule,
     // // BarRatingModule
   ],

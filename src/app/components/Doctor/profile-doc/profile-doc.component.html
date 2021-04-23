@@ -49,11 +49,9 @@
                 <p class="doc-speciality">{{doctorData?.speciality}}</p>
                 <p class="doc-department"><img src="assets/img/specialities/specialities-05.png" class="img-fluid" alt="Speciality">{{doctorData?.speciality}}</p>
                 <div class="rating">
-                  <i class="fas fa-star filled"></i>
-                  <i class="fas fa-star filled"></i>
-                  <i class="fas fa-star filled"></i>
-                  <i class="fas fa-star filled"></i>
-                  <i class="fas fa-star"></i>
+                  <rating [(ngModel)]="rate" [max]="max" [readonly]="isReadonly"
+                          (onHover)="hoveringOver($event)" (onLeave)="resetStar()"
+                          [titles]="['one','two','three']"></rating>
                   <span class="d-inline-block average-rating">({{doctorData?.reviews.length}})</span>
                 </div>
 <!--                <bar-rating [theme]="'fontawesome-o'" [showText] [(rate)]="rate" [max]="5"></bar-rating>-->
@@ -484,7 +482,7 @@
               <!-- /Review Listing -->
 
               <!-- Write Review -->
-              <div class="write-review">
+              <div *ngIf="isauth" class="write-review">
                 <h4>Write a review for <strong>Dr. {{doctorData?.name}}</strong></h4>
 
                 <!-- Write Review Form -->
