@@ -21,7 +21,7 @@
         <div class="col-md-12 col-12">
           <nav aria-label="breadcrumb" class="page-breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+              <li class="breadcrumb-item"><a [routerLink]="['/']">Home</a></li>
               <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
             </ol>
           </nav>
@@ -47,10 +47,10 @@
                   <img src="{{doctorData?.imagePath}}" alt="User Image">
                 </a>
                 <div class="profile-det-info">
-                  <h3>Dr. {{doctorData?.name}}</h3>
+                  <h3>Dr. {{doctorData?.name}} {{doctorData?.lastName}}</h3>
 
                   <div class="patient-details">
-                    <h5 class="mb-0">BDS, MDS - Oral & Maxillofacial Surgery</h5>
+                    <h5 class="mb-0">{{doctorData?.speciality}}</h5>
                   </div>
                 </div>
               </div>
@@ -58,20 +58,20 @@
             <div class="dashboard-widget">
               <nav class="dashboard-menu">
                 <ul>
-                  <li class="active">
-                    <a href="doctor-dashboard.html">
+                  <li routerLinkActive="active">
+                    <a [routerLink]="['/doctor/profile/dashboard']">
                       <i class="fas fa-columns"></i>
                       <span>Dashboard</span>
                     </a>
                   </li>
                   <li>
-                    <a href="appointments.html">
+                    <a [routerLink]="['/doctor/profile/myRDV']">
                       <i class="fas fa-calendar-check"></i>
                       <span>Appointments</span>
                     </a>
                   </li>
                   <li>
-                    <a href="my-patients.html">
+                    <a [routerLink]="['/doctor/profile/myPatients']">
                       <i class="fas fa-user-injured"></i>
                       <span>My Patients</span>
                     </a>
@@ -95,14 +95,14 @@
                     </a>
                   </li>
                   <li>
-                    <a href="chat-doctor.html">
+                    <a [routerLink]="['/messages']">
                       <i class="fas fa-comments"></i>
                       <span>Message</span>
                       <small class="unread-msg">23</small>
                     </a>
                   </li>
                   <li>
-                    <a href="doctor-profile-settings.html">
+                    <a [routerLink]="['/doctor/profile/setting']">
                       <i class="fas fa-user-cog"></i>
                       <span>Profile Settings</span>
                     </a>
@@ -228,8 +228,8 @@
                             <tr *ngFor="let rdv of doctorData?.rdv">
                               <td>
                                 <h2 class="table-avatar">
-                                  <a [routerLink]="['/patient', rdv.patientId]" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient.jpg" alt="User Image"></a>
-                                  <a [routerLink]="['/patient', rdv.patientId]">{{rdv.patientname}} <span>#PT0016</span></a>
+                                  <a [routerLink]="['/patient', rdv.patientId._id]" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{rdv?.patientId.imagePath}}" alt="User Image"></a>
+                                  <a [routerLink]="['/patient', rdv.patientId]">{{rdv?.patientId.name}} {{rdv?.patientId.lastName}} <span>#PT0016</span></a>
                                 </h2>
                               </td>
                               <td>{{getdate(rdv.appDate, 'DD MMM YYYY')}} <span class="d-block text-info">{{getdate(rdv.appDate, 'HH:mm')}}</span></td>
@@ -240,7 +240,7 @@
                               <td *ngIf="rdv.status == 'canceled'"><span class="badge badge-pill bg-danger-light">{{rdv.status}}</span></td>
                               <td class="text-right">
                                 <div class="table-action">
-                                  <a href="javascript:void(0);" class="btn btn-sm bg-info-light">
+                                  <a [routerLink]="['/patient', rdv.patientId._id]" class="btn btn-sm bg-info-light">
                                     <i class="far fa-eye"></i> View
                                   </a>
 

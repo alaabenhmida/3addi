@@ -1,23 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Mirrored from dreamguys.co.in/demo/doccure/template/patient-profile.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 Apr 2020 08:28:57 GMT -->
+<!-- Mirrored from dreamguys.co.in/demo/doccure/template/patient-dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 Apr 2020 08:29:05 GMT -->
 <head>
   <meta charset="utf-8">
   <title>Doccure</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+  <script src="assets/js/html5shiv.min.js"></script>
+  <script src="assets/js/respond.min.js"></script>
+  <![endif]-->
 
 </head>
 <body>
 
-<!--<div class="item">-->
-<!--  <ngx-skeleton-loader count="5" appearance="facebook"></ngx-skeleton-loader>-->
-<!--</div>-->
-
 <!-- Main Wrapper -->
 <div class="main-wrapper">
-
 
   <!-- Breadcrumb -->
   <div class="breadcrumb-bar">
@@ -27,10 +26,10 @@
           <nav aria-label="breadcrumb" class="page-breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Profile</li>
+              <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
             </ol>
           </nav>
-          <h2 class="breadcrumb-title">Profile</h2>
+          <h2 class="breadcrumb-title">Dashboard</h2>
         </div>
       </div>
     </div>
@@ -41,105 +40,107 @@
   <div class="content">
     <div class="container-fluid">
 
-
       <div class="row">
-        <div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar dct-dashbd-lft">
 
-          <!-- Profile Widget -->
-          <div class="card widget-profile pat-widget-profile">
-            <div class="card-body">
-              <div class="pro-widget-content">
-                <div class="profile-info-widget">
-                  <a href="#" class="booking-doc-img">
-                    <img src="{{patientdata?.imagePath}}" alt="User Image">
-                  </a>
-                  <div class="profile-det-info">
-                    <h3>{{patientdata?.name}}</h3>
-
-                    <div class="patient-details">
-                      <h5><b>Patient ID :</b> PT0016</h5>
-                      <h5 class="mb-0"><i class="fas fa-map-marker-alt"></i> {{patientdata?.address}}</h5>
-                    </div>
+        <!-- Profile Sidebar -->
+        <div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
+          <div class="profile-sidebar">
+            <div class="widget-profile pro-widget-content">
+              <div class="profile-info-widget">
+                <a class="booking-doc-img">
+                  <img src="{{patientdata?.imagePath}}" alt="User Image">
+                </a>
+                <div class="profile-det-info">
+                  <h3>{{patientdata?.name}} {{patientdata?.lastName}}</h3>
+                  <div class="patient-details">
+                    <h5><i class="fas fa-birthday-cake"></i> 24 Jul 1983, 38 years</h5>
+                    <h5 class="mb-0"><i class="fas fa-map-marker-alt"></i> {{patientdata?.state}}, {{patientdata?.country}}</h5>
                   </div>
                 </div>
               </div>
-              <div class="patient-info">
+            </div>
+            <div class="dashboard-widget">
+              <nav class="dashboard-menu">
                 <ul>
-                  <li>Phone <span>{{patientdata?.phone}}</span></li>
-                  <li>Age <span>{{patientdata?.birthday}}</span></li>
-                  <li>bloodGroup <span>{{patientdata?.bloodType}}</span></li>
+                  <li routerLinkActive="active">
+                    <a [routerLink]="['/profile/dashboard']">
+                      <i class="fas fa-columns"></i>
+                      <span>Dashboard</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a [routerLink]="['/profile/favdocs']">
+                      <i class="fas fa-bookmark"></i>
+                      <span>Favourites</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a [routerLink]="['/messages']">
+                      <i class="fas fa-comments"></i>
+                      <span>Message</span>
+                      <small class="unread-msg">23</small>
+                    </a>
+                  </li>
+                  <li>
+                    <a [routerLink]="['/profile/setting']">
+                      <i class="fas fa-user-cog"></i>
+                      <span>Profile Settings</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a>
+                      <i class="fas fa-lock"></i>
+                      <span>Change Password</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="index.html">
+                      <i class="fas fa-sign-out-alt"></i>
+                      <span>Logout</span>
+                    </a>
+                  </li>
                 </ul>
-              </div>
+              </nav>
             </div>
-          </div>
-          <!-- /Profile Widget -->
 
-          <!-- Last Booking -->
-          <div class="card">
-            <div class="card-header">
-              <h4 class="card-title">Last Booking</h4>
-            </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">
-                <div class="media align-items-center">
-                  <div class="mr-3">
-                    <img alt="Image placeholder" src="assets/img/doctors/doctor-thumb-02.jpg" class="avatar  rounded-circle">
-                  </div>
-                  <div class="media-body">
-                    <h5 class="d-block mb-0">Dr. Darren Elder </h5>
-                    <span class="d-block text-sm text-muted">Dentist</span>
-                    <span class="d-block text-sm text-muted">14 Nov 2019 5.00 PM</span>
-                  </div>
-                </div>
-              </li>
-              <li class="list-group-item">
-                <div class="media align-items-center">
-                  <div class="mr-3">
-                    <img alt="Image placeholder" src="assets/img/doctors/doctor-thumb-02.jpg" class="avatar  rounded-circle">
-                  </div>
-                  <div class="media-body">
-                    <h5 class="d-block mb-0">Dr. Darren Elder </h5>
-                    <span class="d-block text-sm text-muted">Dentist</span>
-                    <span class="d-block text-sm text-muted">12 Nov 2019 11.00 AM</span>
-                  </div>
-                </div>
-              </li>
-            </ul>
           </div>
-          <!-- /Last Booking -->
-
         </div>
+        <!-- / Profile Sidebar -->
 
-        <div class="col-md-7 col-lg-8 col-xl-9 dct-appoinment">
+        <div class="col-md-7 col-lg-8 col-xl-9">
           <div class="card">
             <div class="card-body pt-0">
-              <div class="user-tabs">
-                <ul class="nav nav-tabs nav-tabs-bottom nav-justified flex-wrap">
+
+              <!-- Tab Menu -->
+              <nav class="user-tabs mb-4">
+                <ul class="nav nav-tabs nav-tabs-bottom nav-justified">
                   <li class="nav-item">
                     <a class="nav-link active" href="#pat_appointments" data-toggle="tab">Appointments</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#pres" data-toggle="tab"><span>Prescription</span></a>
+                    <a class="nav-link" href="#pat_prescriptions" data-toggle="tab">Prescriptions</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#medical" data-toggle="tab"><span class="med-records">Medical Records</span></a>
+                    <a class="nav-link" href="#pat_medical_records" data-toggle="tab"><span class="med-records">Medical Records</span></a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#pat_billing" data-toggle="tab">Billing</a>
                   </li>
                 </ul>
-              </div>
-              <div class="tab-content">
+              </nav>
+              <!-- /Tab Menu -->
+
+              <!-- Tab Content -->
+              <div class="tab-content pt-0">
 
                 <!-- Appointment Tab -->
                 <div id="pat_appointments" class="tab-pane fade show active">
                   <div class="card card-table mb-0">
                     <div class="card-body">
                       <div class="table-responsive">
-
                         <table class="table table-hover table-center mb-0">
                           <thead>
-                          <tr *ngIf="patientdata?.rdv.length <= 0">
-                            <th class="text-center">pas de RDV</th>
-                          </tr>
-                          <tr *ngIf="patientdata?.rdv.length > 0">
+                          <tr>
                             <th>Doctor</th>
                             <th>Appt Date</th>
                             <th>Booking Date</th>
@@ -149,7 +150,6 @@
                           </tr>
                           </thead>
                           <tbody>
-
                           <tr *ngFor="let rdv of patientdata?.rdv">
                             <td>
                               <h2 class="table-avatar">
@@ -182,10 +182,7 @@
                 <!-- /Appointment Tab -->
 
                 <!-- Prescription Tab -->
-                <div class="tab-pane fade" id="pres">
-                  <div class="text-right">
-                    <a href="add-prescription.html" class="add-new-btn">Add Prescription</a>
-                  </div>
+                <div class="tab-pane fade" id="pat_prescriptions">
                   <div class="card card-table mb-0">
                     <div class="card-body">
                       <div class="table-responsive">
@@ -228,10 +225,7 @@
                 <!-- /Prescription Tab -->
 
                 <!-- Medical Records Tab -->
-                <div class="tab-pane fade" id="medical">
-                  <div class="text-right">
-                    <a href="#" class="add-new-btn" data-toggle="modal" data-target="#add_medical_records">Add Medical Records</a>
-                  </div>
+                <div id="pat_medical_records" class="tab-pane fade">
                   <div class="card card-table mb-0">
                     <div class="card-body">
                       <div class="table-responsive">
@@ -507,7 +501,283 @@
                 </div>
                 <!-- /Medical Records Tab -->
 
+                <!-- Billing Tab -->
+                <div id="pat_billing" class="tab-pane fade">
+                  <div class="card card-table mb-0">
+                    <div class="card-body">
+                      <div class="table-responsive">
+                        <table class="table table-hover table-center mb-0">
+                          <thead>
+                          <tr>
+                            <th>Invoice No</th>
+                            <th>Doctor</th>
+                            <th>Amount</th>
+                            <th>Paid On</th>
+                            <th></th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          <tr>
+                            <td>
+                              <a href="invoice-view.html">#INV-0010</a>
+                            </td>
+                            <td>
+                              <h2 class="table-avatar">
+                                <a href="doctor-profile.html" class="avatar avatar-sm mr-2">
+                                  <img class="avatar-img rounded-circle" src="assets/img/doctors/doctor-thumb-01.jpg" alt="User Image">
+                                </a>
+                                <a href="doctor-profile.html">Ruby Perrin <span>Dental</span></a>
+                              </h2>
+                            </td>
+                            <td>$450</td>
+                            <td>14 Nov 2019</td>
+                            <td class="text-right">
+                              <div class="table-action">
+                                <a href="invoice-view.html" class="btn btn-sm bg-info-light">
+                                  <i class="far fa-eye"></i> View
+                                </a>
+                                <a href="javascript:void(0);" class="btn btn-sm bg-primary-light">
+                                  <i class="fas fa-print"></i> Print
+                                </a>
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <a href="invoice-view.html">#INV-0009</a>
+                            </td>
+                            <td>
+                              <h2 class="table-avatar">
+                                <a href="doctor-profile.html" class="avatar avatar-sm mr-2">
+                                  <img class="avatar-img rounded-circle" src="assets/img/doctors/doctor-thumb-02.jpg" alt="User Image">
+                                </a>
+                                <a href="doctor-profile.html">Dr. Darren Elder <span>Dental</span></a>
+                              </h2>
+                            </td>
+                            <td>$300</td>
+                            <td>13 Nov 2019</td>
+                            <td class="text-right">
+                              <div class="table-action">
+                                <a href="invoice-view.html" class="btn btn-sm bg-info-light">
+                                  <i class="far fa-eye"></i> View
+                                </a>
+                                <a href="javascript:void(0);" class="btn btn-sm bg-primary-light">
+                                  <i class="fas fa-print"></i> Print
+                                </a>
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <a href="invoice-view.html">#INV-0008</a>
+                            </td>
+                            <td>
+                              <h2 class="table-avatar">
+                                <a href="doctor-profile.html" class="avatar avatar-sm mr-2">
+                                  <img class="avatar-img rounded-circle" src="assets/img/doctors/doctor-thumb-03.jpg" alt="User Image">
+                                </a>
+                                <a href="doctor-profile.html">Dr. Deborah Angel <span>Cardiology</span></a>
+                              </h2>
+                            </td>
+                            <td>$150</td>
+                            <td>12 Nov 2019</td>
+                            <td class="text-right">
+                              <div class="table-action">
+                                <a href="invoice-view.html" class="btn btn-sm bg-info-light">
+                                  <i class="far fa-eye"></i> View
+                                </a>
+                                <a href="javascript:void(0);" class="btn btn-sm bg-primary-light">
+                                  <i class="fas fa-print"></i> Print
+                                </a>
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <a href="invoice-view.html">#INV-0007</a>
+                            </td>
+                            <td>
+                              <h2 class="table-avatar">
+                                <a href="doctor-profile.html" class="avatar avatar-sm mr-2">
+                                  <img class="avatar-img rounded-circle" src="assets/img/doctors/doctor-thumb-04.jpg" alt="User Image">
+                                </a>
+                                <a href="doctor-profile.html">Dr. Sofia Brient <span>Urology</span></a>
+                              </h2>
+                            </td>
+                            <td>$50</td>
+                            <td>11 Nov 2019</td>
+                            <td class="text-right">
+                              <div class="table-action">
+                                <a href="invoice-view.html" class="btn btn-sm bg-info-light">
+                                  <i class="far fa-eye"></i> View
+                                </a>
+                                <a href="javascript:void(0);" class="btn btn-sm bg-primary-light">
+                                  <i class="fas fa-print"></i> Print
+                                </a>
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <a href="invoice-view.html">#INV-0006</a>
+                            </td>
+                            <td>
+                              <h2 class="table-avatar">
+                                <a href="doctor-profile.html" class="avatar avatar-sm mr-2">
+                                  <img class="avatar-img rounded-circle" src="assets/img/doctors/doctor-thumb-05.jpg" alt="User Image">
+                                </a>
+                                <a href="doctor-profile.html">Dr. Marvin Campbell <span>Ophthalmology</span></a>
+                              </h2>
+                            </td>
+                            <td>$600</td>
+                            <td>10 Nov 2019</td>
+                            <td class="text-right">
+                              <div class="table-action">
+                                <a href="invoice-view.html" class="btn btn-sm bg-info-light">
+                                  <i class="far fa-eye"></i> View
+                                </a>
+                                <a href="javascript:void(0);" class="btn btn-sm bg-primary-light">
+                                  <i class="fas fa-print"></i> Print
+                                </a>
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <a href="invoice-view.html">#INV-0005</a>
+                            </td>
+                            <td>
+                              <h2 class="table-avatar">
+                                <a href="doctor-profile.html" class="avatar avatar-sm mr-2">
+                                  <img class="avatar-img rounded-circle" src="assets/img/doctors/doctor-thumb-06.jpg" alt="User Image">
+                                </a>
+                                <a href="doctor-profile.html">Dr. Katharine Berthold <span>Orthopaedics</span></a>
+                              </h2>
+                            </td>
+                            <td>$200</td>
+                            <td>9 Nov 2019</td>
+                            <td class="text-right">
+                              <div class="table-action">
+                                <a href="invoice-view.html" class="btn btn-sm bg-info-light">
+                                  <i class="far fa-eye"></i> View
+                                </a>
+                                <a href="javascript:void(0);" class="btn btn-sm bg-primary-light">
+                                  <i class="fas fa-print"></i> Print
+                                </a>
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <a href="invoice-view.html">#INV-0004</a>
+                            </td>
+                            <td>
+                              <h2 class="table-avatar">
+                                <a href="doctor-profile.html" class="avatar avatar-sm mr-2">
+                                  <img class="avatar-img rounded-circle" src="assets/img/doctors/doctor-thumb-07.jpg" alt="User Image">
+                                </a>
+                                <a href="doctor-profile.html">Dr. Linda Tobin <span>Neurology</span></a>
+                              </h2>
+                            </td>
+                            <td>$100</td>
+                            <td>8 Nov 2019</td>
+                            <td class="text-right">
+                              <div class="table-action">
+                                <a href="invoice-view.html" class="btn btn-sm bg-info-light">
+                                  <i class="far fa-eye"></i> View
+                                </a>
+                                <a href="javascript:void(0);" class="btn btn-sm bg-primary-light">
+                                  <i class="fas fa-print"></i> Print
+                                </a>
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <a href="invoice-view.html">#INV-0003</a>
+                            </td>
+                            <td>
+                              <h2 class="table-avatar">
+                                <a href="doctor-profile.html" class="avatar avatar-sm mr-2">
+                                  <img class="avatar-img rounded-circle" src="assets/img/doctors/doctor-thumb-08.jpg" alt="User Image">
+                                </a>
+                                <a href="doctor-profile.html">Dr. Paul Richard <span>Dermatology</span></a>
+                              </h2>
+                            </td>
+                            <td>$250</td>
+                            <td>7 Nov 2019</td>
+                            <td class="text-right">
+                              <div class="table-action">
+                                <a href="invoice-view.html" class="btn btn-sm bg-info-light">
+                                  <i class="far fa-eye"></i> View
+                                </a>
+                                <a href="javascript:void(0);" class="btn btn-sm bg-primary-light">
+                                  <i class="fas fa-print"></i> Print
+                                </a>
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <a href="invoice-view.html">#INV-0002</a>
+                            </td>
+                            <td>
+                              <h2 class="table-avatar">
+                                <a href="doctor-profile.html" class="avatar avatar-sm mr-2">
+                                  <img class="avatar-img rounded-circle" src="assets/img/doctors/doctor-thumb-09.jpg" alt="User Image">
+                                </a>
+                                <a href="doctor-profile.html">Dr. John Gibbs <span>Dental</span></a>
+                              </h2>
+                            </td>
+                            <td>$175</td>
+                            <td>6 Nov 2019</td>
+                            <td class="text-right">
+                              <div class="table-action">
+                                <a href="invoice-view.html" class="btn btn-sm bg-info-light">
+                                  <i class="far fa-eye"></i> View
+                                </a>
+                                <a href="javascript:void(0);" class="btn btn-sm bg-primary-light">
+                                  <i class="fas fa-print"></i> Print
+                                </a>
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <a href="invoice-view.html">#INV-0001</a>
+                            </td>
+                            <td>
+                              <h2 class="table-avatar">
+                                <a href="doctor-profile.html" class="avatar avatar-sm mr-2">
+                                  <img class="avatar-img rounded-circle" src="assets/img/doctors/doctor-thumb-10.jpg" alt="User Image">
+                                </a>
+                                <a href="doctor-profile.html">Dr. Olga Barlow <span>#0010</span></a>
+                              </h2>
+                            </td>
+                            <td>$550</td>
+                            <td>5 Nov 2019</td>
+                            <td class="text-right">
+                              <div class="table-action">
+                                <a href="invoice-view.html" class="btn btn-sm bg-info-light">
+                                  <i class="far fa-eye"></i> View
+                                </a>
+                                <a href="javascript:void(0);" class="btn btn-sm bg-primary-light">
+                                  <i class="fas fa-print"></i> Print
+                                </a>
+                              </div>
+                            </td>
+                          </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- /Billing Tab -->
+
               </div>
+              <!-- Tab Content -->
+
             </div>
           </div>
         </div>
@@ -518,44 +788,10 @@
   </div>
   <!-- /Page Content -->
 
-
 </div>
 <!-- /Main Wrapper -->
 
-<!-- Add Medical Records Modal -->
-<div class="modal fade custom-modal" id="add_medical_records">
-  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title">Medical Records</h3>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      </div>
-      <form>
-        <div class="modal-body">
-          <div class="form-group">
-            <label>Date</label>
-            <input type="text" class="form-control datetimepicker" value="31-10-2019">
-          </div>
-          <div class="form-group">
-            <label>Description ( Optional )</label>
-            <textarea class="form-control"></textarea>
-          </div>
-          <div class="form-group">
-            <label>Upload File</label>
-            <input type="file" class="form-control">
-          </div>
-          <div class="submit-section text-center">
-            <button type="submit" class="btn btn-primary submit-btn">Submit</button>
-            <button type="button" class="btn btn-secondary submit-btn" data-dismiss="modal">Cancel</button>
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-<!-- /Add Medical Records Modal -->
-
 </body>
 
-<!-- Mirrored from dreamguys.co.in/demo/doccure/template/patient-profile.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 Apr 2020 08:29:00 GMT -->
+<!-- Mirrored from dreamguys.co.in/demo/doccure/template/patient-dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 Apr 2020 08:29:05 GMT -->
 </html>

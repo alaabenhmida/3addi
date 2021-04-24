@@ -104,6 +104,9 @@ router.put("/:id/updatepresc", (req, res, next) => {
 
 router.get("/getPatbykey", checkAuth, (req, res, next) => {
   Patient.findById(req.userData.userId).populate('chatRoom.with')
+    .populate('rdv.doctorId')
+    .populate('prescription.doctorId')
+    .populate('medicalRecord.doctorId')
     .populate('favDocs.doctor').then(patient => {
     res.status(200).json(patient)
   }).catch(error => {

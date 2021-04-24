@@ -38,6 +38,7 @@ import {AgmCoreModule} from '@agm/core';
 import {RatingModule} from 'ngx-bootstrap/rating';
 import { InvoiceDetailComponent } from './components/Patient/invoice-detail/invoice-detail.component';
 import { CheckoutComponent } from './components/Patient/checkout/checkout.component';
+import { PatientDhashboardComponent } from './components/Patient/patient-dhashboard/patient-dhashboard.component';
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
 @NgModule({
@@ -64,7 +65,8 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     AppointementsComponent,
     BookingSuccessComponent,
     InvoiceDetailComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    PatientDhashboardComponent
   ],
   imports: [
     BrowserModule,

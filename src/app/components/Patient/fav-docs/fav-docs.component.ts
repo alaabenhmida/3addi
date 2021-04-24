@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {PatientServiceService} from '../../../services/Patient/patient-service.service';
 import {Doctor} from '../../../models/Doctor/doctor.model';
+import {Patient} from '../../../models/Patient/patient.model';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-fav-docs',
@@ -9,14 +11,18 @@ import {Doctor} from '../../../models/Doctor/doctor.model';
 })
 export class FavDocsComponent implements OnInit {
   favourits = [];
+  patientdata: Patient;
+  private today = moment(new Date()).toString();
 
   constructor(private patient: PatientServiceService) { }
 
   ngOnInit(): void {
     this.patient.getPatientByKey().subscribe(result => {
+      this.patientdata = result;
       this.favourits = result.favDocs;
-      console.log(this.favourits);
     });
   }
-
+  getDay(day: string, format: string): string {
+    return moment(day).format(format);
+  }
 }

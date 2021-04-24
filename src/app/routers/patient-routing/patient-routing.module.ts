@@ -12,6 +12,7 @@ import {ProfileSettComponent} from '../../components/Patient/profile-sett/profil
 import {FavDocsComponent} from '../../components/Patient/fav-docs/fav-docs.component';
 import {BookingSuccessComponent} from '../../components/Patient/booking-success/booking-success.component';
 import {InvoiceDetailComponent} from '../../components/Patient/invoice-detail/invoice-detail.component';
+import {PatientDhashboardComponent} from '../../components/Patient/patient-dhashboard/patient-dhashboard.component';
 
 
 const appRoutes: Routes = [
@@ -20,6 +21,7 @@ const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'profile/setting', component: ProfileSettComponent },
+  { path: 'profile/dashboard', component: PatientDhashboardComponent },
   { path: 'profile/favdocs', component: FavDocsComponent },
   { path: 'facture/:rdvid', component: InvoiceDetailComponent },
   { path: 'ordre/:rdvid', component: BookingSuccessComponent },
