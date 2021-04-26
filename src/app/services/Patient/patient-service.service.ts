@@ -13,6 +13,16 @@ export class PatientServiceService {
     return this.http.get('http://localhost:3000/patient/' + id);
   }
 
+  addInvoice(doctor: string, date: string, price: number, paymentMethod: string,
+             cardNumber: string, rdvDate: string): Observable<any> {
+    return this.http.put('http://localhost:3000/patient/addinvoice',
+      {doctor, date, price, paymentMethod, cardNumber, rdvDate});
+  }
+
+  getInvoice(id: string): Observable<any> {
+    return this.http.get('http://localhost:3000/patient/invoice/' + id);
+  }
+
   addFavourite(doctorId: string): Observable<any> {
     return this.http.put('http://localhost:3000/patient/addfav', {doctorId});
   }

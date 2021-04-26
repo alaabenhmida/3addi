@@ -90,6 +90,10 @@ export class DoctorServiceService {
     return this.http.get('http://localhost:3000/doctor' + queryParams);
   }
 
+  getInvoice(id: string): Observable<any> {
+    return this.http.get('http://localhost:3000/doctor/invoice/' + id);
+  }
+
   updatePrescription(patientId: string, prescID: string, presc: any): void {
     this.http.put('http://localhost:3000/patient/' + patientId + '/updatepresc', {prescID, presc})
       .subscribe(result => {

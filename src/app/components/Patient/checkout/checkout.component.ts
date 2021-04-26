@@ -3,6 +3,7 @@ import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {PatientServiceService} from '../../../services/Patient/patient-service.service';
 import {RDV} from '../../../models/Patient/rdv.model';
 import * as moment from 'moment';
+import {DoctorServiceService} from '../../../services/doctor/doctor-service.service';
 
 @Component({
   selector: 'app-checkout',
@@ -13,10 +14,13 @@ export class CheckoutComponent implements OnInit {
   rdv: RDV;
   bookingFees: number;
   private rdvId: string;
+  private today = moment(new Date()).toString();
+  private price: number;
 
   constructor(public route: ActivatedRoute,
               private router: Router,
-              private patientService: PatientServiceService) { }
+              private patientService: PatientServiceService,
+              private doctorService: DoctorServiceService) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
@@ -24,6 +28,9 @@ export class CheckoutComponent implements OnInit {
       this.patientService.getRdv(paramMap.get('rdvID')).subscribe(result => {
         this.rdv = result.rdv[0];
         this.bookingFees = result.rdv[0].doctorId.price * 10 / 100;
+        this.doctorService.getDoctor(result.rdv[0].doctorId._id).subscribe(result => {
+          this.price = result.price;
+        });
       });
     });
   }
@@ -31,7 +38,10 @@ export class CheckoutComponent implements OnInit {
     return moment(day).format(format);
   }
   onClick(): void {
-    this.router.navigate(['/ordre', this.rdvId]);
+    this.patientService.addInvoice(this.rdv.doctorId, this.today, this.price,
+      'master Card', '123456789', this.rdv.rdvDate)
+      .subscribe(result => {
+        this.router.navigate(['/ordre', result.invoiceID]);
+      });
   }
-
 }

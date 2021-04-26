@@ -66,6 +66,14 @@ const doctorSchema = mongoose.Schema({
       room: {type: String},
       message: {type: String},
     }]
+  }],
+  invoices: [{
+    patient: { type : mongoose.Schema.Types.ObjectId, ref: 'Patient'},
+    date: {type: String},
+    price: {type: Number},
+    paymentMethod: {type: String},
+    cardNumber: {type: String},
+    rdvDate: {type: String}
   }]
 });
 

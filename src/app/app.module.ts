@@ -39,6 +39,9 @@ import {RatingModule} from 'ngx-bootstrap/rating';
 import { InvoiceDetailComponent } from './components/Patient/invoice-detail/invoice-detail.component';
 import { CheckoutComponent } from './components/Patient/checkout/checkout.component';
 import { PatientDhashboardComponent } from './components/Patient/patient-dhashboard/patient-dhashboard.component';
+import {RouterModule} from '@angular/router';
+import { InvoicesComponent } from './components/Doctor/invoices/invoices.component';
+import { ReviewsComponent } from './components/Doctor/reviews/reviews.component';
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
 @NgModule({
@@ -66,7 +69,9 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     BookingSuccessComponent,
     InvoiceDetailComponent,
     CheckoutComponent,
-    PatientDhashboardComponent
+    PatientDhashboardComponent,
+    InvoicesComponent,
+    ReviewsComponent
   ],
   imports: [
     BrowserModule,
@@ -89,6 +94,7 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
       apiKey: 'AIzaSyAOhHjYUOLvSh3GG_H69tQTpYvQlJmT-Rc'
     }),
     RatingModule,
+    RouterModule
     // BarRatingModule,
     // // BarRatingModule
   ],

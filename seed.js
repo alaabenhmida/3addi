@@ -44,7 +44,6 @@ mongoose
       bcrypt.hash('ala', 10).then(hash => {
         data.password = hash;
         Doctor.create(data).then(result => {
-          console.log(result);
         });
       });
     });

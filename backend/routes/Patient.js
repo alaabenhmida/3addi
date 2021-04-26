@@ -103,10 +103,12 @@ router.put("/:id/updatepresc", (req, res, next) => {
 })
 
 router.get("/getPatbykey", checkAuth, (req, res, next) => {
-  Patient.findById(req.userData.userId).populate('chatRoom.with')
+  Patient.findById(req.userData.userId)
+    .populate('chatRoom.with')
     .populate('rdv.doctorId')
     .populate('prescription.doctorId')
     .populate('medicalRecord.doctorId')
+    .populate('invoices.doctor')
     .populate('favDocs.doctor').then(patient => {
     res.status(200).json(patient)
   }).catch(error => {
@@ -147,6 +149,37 @@ router.get("/:id", (req, res, next) => {
       res.status(404).json({ message: "Patient not found!" });
     }
   });
+});
+
+router.put("/addinvoice", checkAuth, (req, res, next) => {
+  let invoiceID;
+  Patient.findOneAndUpdate({_id: req.userData.userId},
+    {$push: {invoices: {doctor: req.body.doctor, date: req.body.date,
+          price: +req.body.price, paymentMethod: req.body.paymentMethod,
+          cardNumber: req.body.cardNumber, rdvDate: req.body.rdvDate}}},
+    {'new': true})
+    .then(result => {
+      invoiceID = result.invoices[result.invoices.length - 1]._id;
+      Doctor.findOneAndUpdate({_id: req.body.doctor},
+        {$push: {invoices: {patient: req.userData.userId, date: req.body.date,
+              price: +req.body.price, paymentMethod: req.body.paymentMethod,
+              cardNumber: req.body.cardNumber, rdvDate: req.body.rdvDate}}})
+        .then(result => {
+          res.json({
+            result: result,
+            invoiceID: invoiceID
+          } );
+        });
+  }).catch(error => {
+    res.json(error);
+  })
+});
+
+router.get("/invoice/:id", checkAuth, (req, res, next) => {
+  Patient.findById(req.userData.userId).select({invoices: {$elemMatch: {_id: req.params.id}}})
+    .populate('invoices.doctor').then(result => {
+      res.json(result);
+  })
 });
 
 router.put("/addfav", checkAuth, (req, res, next) => {

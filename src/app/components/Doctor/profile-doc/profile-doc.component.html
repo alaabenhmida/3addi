@@ -433,10 +433,10 @@
                   <!-- Comment List -->
                   <li *ngFor="let review of doctorData?.reviews">
                     <div class="comment" *ngIf="review.review.length > 0">
-                      <img class="avatar avatar-sm rounded-circle" alt="User Image" src="assets/img/patients/patient2.jpg">
+                      <img class="avatar avatar-sm rounded-circle" alt="User Image" src="{{review?.patientId.imagePath}}">
                       <div class="comment-body">
                         <div class="meta-data">
-                          <span class="comment-author">Travis Trimble</span>
+                          <span class="comment-author">{{review?.patientId.name}} {{review?.patientId.lastName}}</span>
                           <span class="comment-date">Reviewed 4 Days ago</span>
                           <div class="review-count rating">
                             <i class="fas fa-star filled"></i>
@@ -447,7 +447,7 @@
                           </div>
                         </div>
                         <p class="comment-content">
-                          {{review.review}}
+                          {{review?.review}}
                         </p>
                         <div class="comment-reply">
                           <a class="comment-btn" href="#">

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Doccure</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+  <script src="assets/js/html5shiv.min.js"></script>
+  <script src="assets/js/respond.min.js"></script>
+  <![endif]-->
+
+</head>
+<body>
+
+<!-- Main Wrapper -->
+<div class="main-wrapper">
+  <!-- Breadcrumb -->
+  <div class="breadcrumb-bar">
+    <div class="container-fluid">
+      <div class="row align-items-center">
+        <div class="col-md-12 col-12">
+          <nav aria-label="breadcrumb" class="page-breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Invoices</li>
+            </ol>
+          </nav>
+          <h2 class="breadcrumb-title">Invoices</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /Breadcrumb -->
+
+  <!-- Page Content -->
+  <div class="content">
+    <div class="container-fluid">
+
+      <div class="row">
+        <div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
+
+          <!-- Profile Sidebar -->
+          <div class="profile-sidebar">
+            <div class="widget-profile pro-widget-content">
+              <div class="profile-info-widget">
+                <a href="#" class="booking-doc-img">
+                  <img src="{{doctorData?.imagePath}}" alt="User Image">
+                </a>
+                <div class="profile-det-info">
+                  <h3>Dr. {{doctorData?.name}} {{doctorData?.lastName}}</h3>
+
+                  <div class="patient-details">
+                    <h5 class="mb-0">{{doctorData?.speciality}}</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="dashboard-widget">
+              <nav class="dashboard-menu">
+                <ul>
+                  <li>
+                    <a [routerLink]="['/doctor/profile/dashboard']">
+                      <i class="fas fa-columns"></i>
+                      <span>Dashboard</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a [routerLink]="['/doctor/profile/myRDV']">
+                      <i class="fas fa-calendar-check"></i>
+                      <span>Appointments</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a [routerLink]="['/doctor/profile/myPatients']">
+                      <i class="fas fa-user-injured"></i>
+                      <span>My Patients</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="schedule-timings.html">
+                      <i class="fas fa-hourglass-start"></i>
+                      <span>Schedule Timings</span>
+                    </a>
+                  </li>
+                  <li routerLinkActive="active">
+                    <a [routerLink]="['/doctor/factures']">
+                      <i class="fas fa-file-invoice"></i>
+                      <span>Invoices</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="reviews.html">
+                      <i class="fas fa-star"></i>
+                      <span>Reviews</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a [routerLink]="['/messages']">
+                      <i class="fas fa-comments"></i>
+                      <span>Message</span>
+                      <small class="unread-msg">23</small>
+                    </a>
+                  </li>
+                  <li>
+                    <a [routerLink]="['/doctor/profile/setting']">
+                      <i class="fas fa-user-cog"></i>
+                      <span>Profile Settings</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="social-media.html">
+                      <i class="fas fa-share-alt"></i>
+                      <span>Social Media</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="doctor-change-password.html">
+                      <i class="fas fa-lock"></i>
+                      <span>Change Password</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="index.html">
+                      <i class="fas fa-sign-out-alt"></i>
+                      <span>Logout</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+          <!-- /Profile Sidebar -->
+
+        </div>
+        <div class="col-md-7 col-lg-8 col-xl-9">
+          <div class="card card-table">
+            <div class="card-body">
+
+              <!-- Invoice Table -->
+              <div class="table-responsive">
+                <table class="table table-hover table-center mb-0">
+                  <thead>
+                  <tr *ngIf="invoices.length <= 0">
+                    pas de factures
+                  </tr>
+                  <tr *ngIf="invoices.length > 0">
+                    <th>Invoice No</th>
+                    <th>Patient</th>
+                    <th>Amount</th>
+                    <th>Paid On</th>
+                    <th></th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let invoice of invoices">
+                    <td>
+                      <a [routerLink]="['/facture', invoice._id]">#INV-{{invoice?._id}}</a>
+                    </td>
+                    <td>
+                      <h2 class="table-avatar">
+                        <a [routerLink]="['/patient', invoice.patient._id]" class="avatar avatar-sm mr-2">
+                          <img class="avatar-img rounded-circle" src="{{invoice?.patient.imagePath}}" alt="User Image">
+                        </a>
+                        <a [routerLink]="['/patient', invoice.patient._id]">{{invoice?.patient.name}} {{invoice?.patient.lastName}} <span>#{{invoice?.patient._id}}</span></a>
+                      </h2>
+                    </td>
+                    <td>${{invoice?.price}}</td>
+                    <td>{{getdate(invoice?.date, 'DD MMM YYYY')}}</td>
+                    <td class="text-right">
+                      <div class="table-action">
+                        <a [routerLink]="['/facture', invoice._id]" class="btn btn-sm bg-info-light">
+                          <i class="far fa-eye"></i> View
+                        </a>
+                        <a href="javascript:void(0);" class="btn btn-sm bg-primary-light">
+                          <i class="fas fa-print"></i> Print
+                        </a>
+                      </div>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+              <!-- /Invoice Table -->
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <!-- /Page Content -->
+
+</div>
+<!-- /Main Wrapper -->
+
+</body>
+</html>

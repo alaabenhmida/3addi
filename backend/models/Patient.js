@@ -55,6 +55,14 @@ const patientSchema = mongoose.Schema({
   }],
   favDocs: [{
     doctor: { type : mongoose.Schema.Types.ObjectId, ref: 'Doctor'}
+  }],
+  invoices: [{
+    doctor: { type : mongoose.Schema.Types.ObjectId, ref: 'Doctor'},
+    date: {type: String},
+    price: {type: Number},
+    paymentMethod: {type: String},
+    cardNumber: {type: String},
+    rdvDate: {type: String}
   }]
 });
 

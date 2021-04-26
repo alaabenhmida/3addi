@@ -31,6 +31,16 @@ const storage = multer.diskStorage({
     cb(null, name + "-" + Date.now() + "." + ext);
   }
 });
+
+router.get("/invoice/:id", checkAuth, (req, res, next) => {
+  Doctor.findById(req.userData.userId).select({invoices: {$elemMatch: {_id: req.params.id}}})
+    .populate('invoices.patient').then(result => {
+    res.json(result);
+  }).catch(error => {
+    res.json(error);
+  })
+});
+
 router.post("/patient/:id/addpresc", checkAuth, (req, res, next) => {
   Patient.updateOne({_id: req.params.id},
     { $push: { prescription: {presc: req.body.presc, date: req.body.date,
@@ -126,7 +136,6 @@ router.post("/rdv/cancel", checkAuth, (req, res, next) => {
     })
   });
 
-
   Doctor.findOneAndUpdate({_id: req.userData.userId,
       rdv: {$elemMatch: {patientId: req.body.patientId, appDate: req.body.appDate}}},
     {$set: {'rdv.$.status': 'canceled'}},
@@ -135,7 +144,10 @@ router.post("/rdv/cancel", checkAuth, (req, res, next) => {
 })
 
 router.get("/getdocbykey", checkAuth, (req, res, next) => {
-  Doctor.findById(req.userData.userId).populate('patients.id')
+  Doctor.findById(req.userData.userId)
+    .populate('invoices.patient')
+    .populate('reviews.patientId')
+    .populate('patients.id')
     .populate('chatRoom.with')
     .populate('rdv.patientId').then(doctor => {
     res.status(200).json(doctor)
@@ -179,7 +191,8 @@ router.post("/signup",
   })
 
 router.get("/:id", (req, res, next) => {
-  Doctor.findById(req.params.id).then(doctor => {
+  Doctor.findById(req.params.id)
+    .populate('reviews.patientId').then(doctor => {
     if (doctor) {
       res.status(200).json(doctor);
     } else {

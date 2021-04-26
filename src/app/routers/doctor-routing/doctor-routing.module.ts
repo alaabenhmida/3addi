@@ -11,11 +11,15 @@ import {MapGridComponent} from '../../components/Doctor/map-grid/map-grid.compon
 import {AppointementsComponent} from '../../components/Doctor/appointements/appointements.component';
 import {AuthGuard} from '../../auth/auth.gards';
 import {CheckoutComponent} from '../../components/Patient/checkout/checkout.component';
+import {InvoicesComponent} from '../../components/Doctor/invoices/invoices.component';
+import {ReviewsComponent} from '../../components/Doctor/reviews/reviews.component';
 
 const appRoutes: Routes = [
   { path: 'doctors', component: MapGridComponent },
   { path: 'doctor/signup', component: SignupDrComponent },
   { path: 'doctor/login', component: LogindrComponent },
+  { path: 'doctor/factures', component: InvoicesComponent },
+  { path: 'doctor/reviews', component: ReviewsComponent },
   { path: 'doctor/:id', component: ProfileDocComponent },
   { path: 'doctor/:id/check/:rdvID', component: CheckoutComponent },
   { path: 'doctor/:id/app', component: AppointmentComponent },

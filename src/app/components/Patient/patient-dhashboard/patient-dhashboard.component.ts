@@ -12,6 +12,7 @@ export class PatientDhashboardComponent implements OnInit {
   patientdata: Patient;
   medicalRecord: string[];
   prescription = [];
+  invoices = [];
 
   constructor(private patientService: PatientServiceService) { }
 
@@ -36,6 +37,7 @@ export class PatientDhashboardComponent implements OnInit {
       };
       this.medicalRecord = data.medicalRecord;
       this.prescription = data.prescription;
+      this.invoices = data.invoices;
     });
   }
   getdate(date: string, format: string): string{
