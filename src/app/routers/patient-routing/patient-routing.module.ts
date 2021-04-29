@@ -13,26 +13,32 @@ import {FavDocsComponent} from '../../components/Patient/fav-docs/fav-docs.compo
 import {BookingSuccessComponent} from '../../components/Patient/booking-success/booking-success.component';
 import {InvoiceDetailComponent} from '../../components/Patient/invoice-detail/invoice-detail.component';
 import {PatientDhashboardComponent} from '../../components/Patient/patient-dhashboard/patient-dhashboard.component';
+import {AuthGuard} from '../../auth/doctor-auth.gards';
+import {PatientAuthGuard} from '../../auth/patient-auth.gards';
+import {CheckoutComponent} from '../../components/Patient/checkout/checkout.component';
+import {AppointementsComponent} from '../../components/Doctor/appointements/appointements.component';
+import {LoginAuthGuard} from '../../auth/login-auth.gards';
 
 
 const appRoutes: Routes = [
   { path: '', component: IndexComponent },
   { path: 'messages', component: MessagesComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'signup', component: SignupComponent },
-  { path: 'profile/setting', component: ProfileSettComponent },
-  { path: 'profile/dashboard', component: PatientDhashboardComponent },
-  { path: 'profile/favdocs', component: FavDocsComponent },
+  { path: 'signup', component: SignupComponent},
+  { path: 'profile/setting', component: ProfileSettComponent, canActivate: [PatientAuthGuard] },
+  { path: 'profile/dashboard', component: PatientDhashboardComponent, canActivate: [PatientAuthGuard] },
+  { path: 'profile/favdocs', component: FavDocsComponent, canActivate: [PatientAuthGuard] },
   { path: 'facture/:rdvid', component: InvoiceDetailComponent },
-  { path: 'ordre/:rdvid', component: BookingSuccessComponent },
+  { path: 'ordre/:rdvid', component: BookingSuccessComponent, canActivate: [PatientAuthGuard] },
   { path: 'patient/:id', component: ProfileComponent },
-  { path: 'patient/:id/addrecord', component: MedRecordComponent },
-  { path: 'patient/:id/addpresc', component: AddPrescComponent },
+  { path: 'patient/:id/addrecord', component: MedRecordComponent, canActivate: [AuthGuard] },
+  { path: 'patient/:id/addpresc', component: AddPrescComponent, canActivate: [AuthGuard] },
   { path: 'patient/:id/presc/:prescID', component: AddPrescComponent }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(appRoutes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [AuthGuard, PatientAuthGuard, LoginAuthGuard]
 })
 export class PatientRoutingModule { }

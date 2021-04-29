@@ -70,6 +70,7 @@ export class MessagesComponent implements OnInit, OnDestroy {
           state: data.state,
           country: data.country,
           zip: data.zip,
+          aboutMe: data.aboutMe,
           reviews: data.reviews,
           rdv: data.rdv
         };

@@ -42,6 +42,9 @@ import { PatientDhashboardComponent } from './components/Patient/patient-dhashbo
 import {RouterModule} from '@angular/router';
 import { InvoicesComponent } from './components/Doctor/invoices/invoices.component';
 import { ReviewsComponent } from './components/Doctor/reviews/reviews.component';
+import { SearchComponent } from './components/Doctor/search/search.component';
+import {MatInputModule} from '@angular/material/input';
+import { ManageTimeComponent } from './components/Doctor/manage-time/manage-time.component';
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
 @NgModule({
@@ -71,7 +74,9 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     CheckoutComponent,
     PatientDhashboardComponent,
     InvoicesComponent,
-    ReviewsComponent
+    ReviewsComponent,
+    SearchComponent,
+    ManageTimeComponent
   ],
   imports: [
     BrowserModule,
@@ -88,6 +93,7 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     DlDateTimePickerModule,
     NgxSkeletonLoaderModule,
     MatPaginatorModule,
+    MatInputModule,
     SocketIoModule.forRoot(config),
     TooltipModule.forRoot(),
     AgmCoreModule.forRoot({

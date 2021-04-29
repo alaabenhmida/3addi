@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Observable} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {MedicalRecord} from '../../models/Doctor/medicalRecord.model';
 import * as moment from 'moment';
@@ -10,13 +10,19 @@ import * as moment from 'moment';
 export class DoctorServiceService {
   medrecord: MedicalRecord;
   recid: string;
+  dataUpdated = new Subject<any>();
 
   constructor(private http: HttpClient) {
   }
 
+
+   getDatalistener(): Observable<any> {
+     return this.dataUpdated as Observable<any>;
+   }
+
   modify(firstName: string, lastName: string, phone: string, gender: string, birthday: string,
          address1: string, address2: string, city: string, state: string,
-         country: string, zip: string,
+         country: string, zip: string, price: number, aboutMe: string,
          education, experience,
          awards, memberships, registrations, images?: File): Observable<any> {
     if (images) {
@@ -32,6 +38,8 @@ export class DoctorServiceService {
       image.append('state', state);
       image.append('country', country);
       image.append('zip', zip);
+      image.append('price', price.toString());
+      image.append('aboutMe', aboutMe);
       image.append('education', JSON.stringify(education));
       image.append('experience', JSON.stringify(experience));
       image.append('awards', JSON.stringify(awards));
@@ -53,6 +61,8 @@ export class DoctorServiceService {
       image.append('state', state);
       image.append('country', country);
       image.append('zip', zip);
+      image.append('price', price.toString());
+      image.append('aboutMe', aboutMe);
       image.append('education', JSON.stringify(education));
       image.append('experience', JSON.stringify(experience));
       image.append('awards', JSON.stringify(awards));
@@ -67,6 +77,9 @@ export class DoctorServiceService {
     this.http.post('http://localhost:3000/doctor/rdv/accept', {patientId, appDate})
       .subscribe(result => {
         console.log(result);
+        this.getDcotorByKey().subscribe(data => {
+          this.dataUpdated.next(data);
+        });
       });
   }
 
@@ -74,6 +87,9 @@ export class DoctorServiceService {
     this.http.post('http://localhost:3000/doctor/rdv/cancel', {patientId, appDate})
       .subscribe(result => {
         console.log(result);
+        this.getDcotorByKey().subscribe(data => {
+          this.dataUpdated.next(data);
+        });
       });
   }
 
@@ -99,6 +115,10 @@ export class DoctorServiceService {
       .subscribe(result => {
         console.log(result);
       });
+  }
+
+  workingTime(duration: number, from: string, to: string, breackTimes: any): Observable<any> {
+    return this.http.put('http://localhost:3000/doctor/workingtimes', {duration, from, to, breackTimes});
   }
 
   getPrescription(patiendId: string, prescID: string): Observable<any> {

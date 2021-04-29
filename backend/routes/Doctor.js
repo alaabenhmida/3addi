@@ -51,6 +51,18 @@ router.post("/patient/:id/addpresc", checkAuth, (req, res, next) => {
   })
 });
 
+
+router.put("/workingtimes", checkAuth, (req, res, next) => {
+  Doctor.findByIdAndUpdate(req.userData.userId,
+    {$set: {workingTime: req.body}},
+    {'new': true, 'safe': true, 'upsert': true})
+    .then(result => {
+      res.status(201).json(result);
+    }).catch(error => {
+     res.json(error);
+  });
+});
+
 router.put("", multer({storage: storage}).single("image"), checkAuth,
   (req, res, next) => {
   let imagePath = req.body.image;
@@ -60,7 +72,8 @@ router.put("", multer({storage: storage}).single("image"), checkAuth,
     Doctor.findOneAndUpdate({_id: req.userData.userId},
       {$set: {name: req.body.firstName, lastName: req.body.lastName, phone: req.body.phone,
           address1: req.body.address1, address2: req.body.address2, city: req.body.city,
-          state: req.body.state, country: req.body.country, zip: req.body.zip,
+          state: req.body.state, country: req.body.country, zip: req.body.zip, price: +req.body.price,
+          aboutMe: req.body.aboutMe,
           gender: req.body.gender, birthday: req.body.birthday, imagePath: imagePath,
           education: JSON.parse(req.body.education), experience: JSON.parse(req.body.experience),
           awards: JSON.parse(req.body.awards), memberships: JSON.parse(req.body.memberships),
@@ -75,7 +88,8 @@ router.put("", multer({storage: storage}).single("image"), checkAuth,
     Doctor.findOneAndUpdate({_id: req.userData.userId},
       {$set: {name: req.body.firstName, lastName: req.body.lastName, phone: req.body.phone,
           address1: req.body.address1, address2: req.body.address2, city: req.body.city,
-          state: req.body.state, country: req.body.country, zip: req.body.zip,
+          state: req.body.state, country: req.body.country, zip: req.body.zip, price: +req.body.price,
+          aboutMe: req.body.aboutMe,
           gender: req.body.gender, birthday: req.body.birthday,
           education: JSON.parse(req.body.education), experience: JSON.parse(req.body.experience),
           awards: JSON.parse(req.body.awards), memberships: JSON.parse(req.body.memberships),

@@ -19,6 +19,7 @@ const doctorSchema = mongoose.Schema({
   state: { type: String, required: true },
   country: { type: String, required: true },
   zip: { type: String, required: true },
+  aboutMe: { type: String},
   reviews : [{
     patientId : { type : mongoose.Schema.Types.ObjectId, ref: 'Patient' },
     rate : { type : Number },
@@ -74,7 +75,15 @@ const doctorSchema = mongoose.Schema({
     paymentMethod: {type: String},
     cardNumber: {type: String},
     rdvDate: {type: String}
-  }]
+  }],
+  workingTime: {
+    duration: {type: String},
+    from: {type: String},
+    to: {type: String},
+    breackTimes : [{
+      type: Array
+    }]
+  }
 });
 
 module.exports = mongoose.model('Doctor', doctorSchema);

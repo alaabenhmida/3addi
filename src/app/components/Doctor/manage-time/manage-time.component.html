@@ -1,11 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Mirrored from dreamguys.co.in/demo/doccure/template/my-patients.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 Apr 2020 08:28:57 GMT -->
+<!-- Mirrored from dreamguys.co.in/demo/doccure/template/schedule-timings.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 Apr 2020 08:28:57 GMT -->
 <head>
   <meta charset="utf-8">
   <title>Doccure</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+  <script src="assets/js/html5shiv.min.js"></script>
+  <script src="assets/js/respond.min.js"></script>
+  <![endif]-->
 
 </head>
 <body>
@@ -21,10 +27,10 @@
           <nav aria-label="breadcrumb" class="page-breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-              <li class="breadcrumb-item active" aria-current="page">My Patients</li>
+              <li class="breadcrumb-item active" aria-current="page">Schedule Timings</li>
             </ol>
           </nav>
-          <h2 class="breadcrumb-title">My Patients</h2>
+          <h2 class="breadcrumb-title">Schedule Timings</h2>
         </div>
       </div>
     </div>
@@ -37,25 +43,6 @@
 
       <div class="row">
         <div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
-
-          <div *ngIf="isLoading" class="profile-sidebar">
-            <div class="widget-profile pro-widget-content">
-              <div class="profile-info-widget">
-                <div class="booking-doc-img">
-                  <ngx-skeleton-loader appearance="circle"></ngx-skeleton-loader>
-                </div>
-                <div class="profile-det-info">
-                  <div><ngx-skeleton-loader></ngx-skeleton-loader></div>
-
-                  <div class="patient-details">
-                    <div class="mb-0"><ngx-skeleton-loader></ngx-skeleton-loader></div>
-
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
 
           <!-- Profile Sidebar -->
           <div class="profile-sidebar">
@@ -76,25 +63,25 @@
             <div class="dashboard-widget">
               <nav class="dashboard-menu">
                 <ul>
-                  <li routerLinkActive="active">
+                  <li>
                     <a [routerLink]="['/doctor/profile/dashboard']">
                       <i class="fas fa-columns"></i>
                       <span>Dashboard</span>
                     </a>
                   </li>
-                  <li>
+                  <li routerLinkActive="active">
                     <a [routerLink]="['/doctor/profile/myRDV']">
                       <i class="fas fa-calendar-check"></i>
                       <span>Appointments</span>
                     </a>
                   </li>
-                  <li routerLinkActive="active">
+                  <li>
                     <a [routerLink]="['/doctor/profile/myPatients']">
                       <i class="fas fa-user-injured"></i>
                       <span>My Patients</span>
                     </a>
                   </li>
-                  <li>
+                  <li routerLinkActive="active">
                     <a [routerLink]="['/doctor/gererTemps']">
                       <i class="fas fa-hourglass-start"></i>
                       <span>Schedule Timings</span>
@@ -150,35 +137,95 @@
           <!-- /Profile Sidebar -->
 
         </div>
+
         <div class="col-md-7 col-lg-8 col-xl-9">
 
-          <div class="row row-grid">
-
-
-            <div *ngFor="let patient of patients" class="col-md-6 col-lg-4 col-xl-3">
-              <div class="card widget-profile pat-widget-profile">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="card">
                 <div class="card-body">
-                  <div class="pro-widget-content">
-                    <div class="profile-info-widget">
-                      <a href="patient-profile.html" class="booking-doc-img">
-                        <img src="{{patient.id.imagePath}}" alt="User Image">
-                      </a>
-                      <div class="profile-det-info">
-                        <h3><a href="patient-profile.html">{{patient.id.name}} {{patient.id.lastName}}</a></h3>
+                  <h4 class="card-title">Schedule Timings</h4>
+                  <div class="profile-box">
 
-                        <div class="patient-details">
-                          <h5><b>Patient ID :</b> P0016</h5>
-                          <h5 class="mb-0"><i class="fas fa-map-marker-alt"></i> {{patient.id.state}}, {{patient.id.country}}</h5>
+
+                    <form [formGroup]="form" (submit)="onSubmit()">
+                      <div class="row">
+                        <div class="col-lg-4">
+                          <div class="form-group">
+                            <label>Timing Slot Duration</label>
+                            <select class="select form-control" formControlName="duration">
+                              <option>-</option>
+                              <option value="15">15 mins</option>
+                              <option value="30" selected="selected">30 mins</option>
+                              <option value="45">45 mins</option>
+                              <option value="60">1 Hour</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="col-lg-3">
+                          <div class="form-group">
+                            <label>From</label>
+                            <input type="text" placeholder="HH:mm" class="form-control" formControlName="from">
+                          </div>
+                        </div>
+                        <div class="col-lg-3">
+                          <div class="form-group">
+                            <label>To</label>
+                            <input type="text" placeholder="HH:mm" class="form-control" formControlName="to">
+                          </div>
+                        </div>
+                        <div class="col-lg-2">
+                          <div class="form-group">
+                            <label><br></label>
+                            <input (click)="onGenere()" type="button" value="genere" class="form-control btn-primary">
+                          </div>
+                        </div>
+                      </div>
+
+
+
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="card schedule-widget mb-0">
+
+
+
+                          <!-- Schedule Content -->
+                          <div class="tab-content schedule-cont">
+
+                            <!-- Monday Slot -->
+                            <div id="slot_monday" class="tab-pane fade show active">
+                              <h4 class="card-title d-flex justify-content-between">
+                                <span>Time Slots</span>
+                              </h4>
+
+                              <!-- Slot List -->
+                              <div class="doc-times">
+                                <div *ngFor="let time of tab, let i = index" class="doc-slot-list">
+                                  {{time}} - {{addTime(time)}}
+                                  <a (click)="onDelete(i)" href="javascript:void(0)" class="delete_schedule">
+                                    <i class="fa fa-times"></i>
+                                  </a>
+                                </div>
+                              </div>
+                              <!-- /Slot List -->
+
+                            </div>
+                            <!-- /Monday Slot -->
+
+                          </div>
+                          <!-- /Schedule Content -->
+
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="patient-info">
-                    <ul>
-                      <li>Phone <span>{{patient.id.phone}}</span></li>
-                      <li>Age <span>38 Years, Male</span></li>
-                      <li>Blood Group <span>{{patient.id.bloodType}}</span></li>
-                    </ul>
+
+
+                      <div class="submit-section submit-btn-bottom">
+                        <button type="submit" class="btn btn-primary submit-btn">Save Changes</button>
+                      </div>
+                    </form>
+
                   </div>
                 </div>
               </div>
@@ -190,26 +237,6 @@
 
     </div>
 
-<!--    <ng-template #elseTemplate>-->
-<!--      &lt;!&ndash; Loading Items &ndash;&gt;-->
-<!--      <li class="skeleton"">-->
-<!--        <div class="item-wrap">-->
-<!--          <div class="item-img">-->
-<!--            <ngx-skeleton-loader appearance="circle" [theme]="{ height: '100px',width: '100px'}"></ngx-skeleton-loader>-->
-<!--          </div>-->
-<!--          <div class="item-content">-->
-<!--            <div>-->
-<!--              <ngx-skeleton-loader></ngx-skeleton-loader>-->
-<!--            </div>-->
-<!--            <p>-->
-<!--              <ngx-skeleton-loader [theme]="{ height: '30px'}"></ngx-skeleton-loader>-->
-<!--            </p>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </li>-->
-
-<!--    </ng-template>-->
-
   </div>
   <!-- /Page Content -->
 
@@ -218,5 +245,5 @@
 
 </body>
 
-<!-- Mirrored from dreamguys.co.in/demo/doccure/template/my-patients.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 Apr 2020 08:28:57 GMT -->
+<!-- Mirrored from dreamguys.co.in/demo/doccure/template/schedule-timings.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 Apr 2020 08:28:57 GMT -->
 </html>

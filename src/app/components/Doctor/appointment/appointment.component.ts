@@ -38,7 +38,6 @@ export class AppointmentComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       this.id = paramMap.get('id');
-      console.log(this.id);
       this.doctor.getDoctor(this.id).subscribe(data => {
         // console.log(data);
         this.doctorData = {
@@ -61,9 +60,16 @@ export class AppointmentComponent implements OnInit {
           state: data.state,
           country: data.country,
           zip: data.zip,
+          aboutMe: data.aboutMe,
           reviews: data.reviews,
           rdv: data.rdv
         };
+        if (data.workingTime.breackTimes && data.workingTime.from && data.workingTime.to &&data.workingTime.duration) {
+          this.x.breackTimes = data.workingTime.breackTimes;
+          this.x.startTime = data.workingTime.from;
+          this.x.endTime = data.workingTime.to;
+          this.x.nextSlot = data.workingTime.duration;
+        }
         for (const rev of this.doctorData.reviews) {
           this.rating += rev.rate;
         }

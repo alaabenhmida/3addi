@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {DoctorServiceService} from '../../../services/doctor/doctor-service.service';
 import {Doctor} from '../../../models/Doctor/doctor.model';
+import {Patient} from '../../../models/Patient/patient.model';
 
 @Component({
   selector: 'app-my-patients',
@@ -9,7 +10,7 @@ import {Doctor} from '../../../models/Doctor/doctor.model';
 })
 export class MyPatientsComponent implements OnInit {
   doctorData: Doctor;
-  patients = [];
+  patients: Patient[] = [];
   isLoading = false;
 
   constructor(private doctor: DoctorServiceService) { }
@@ -37,6 +38,7 @@ export class MyPatientsComponent implements OnInit {
         state: data.state,
         country: data.country,
         zip: data.zip,
+        aboutMe: data.aboutMe,
         reviews: data.reviews,
         rdv: data.rdv
       };

@@ -21,6 +21,7 @@ export interface Doctor {
   state: string;
   country: string;
   zip: string;
+  aboutMe: string;
   reviews: Rates[];
   rdv: DocRdv[];
 }

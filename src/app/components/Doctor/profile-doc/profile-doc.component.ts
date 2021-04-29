@@ -51,8 +51,8 @@ export class ProfileDocComponent implements OnInit, OnDestroy {
 ////////////////////////////
 
     constructor(public route: ActivatedRoute, public doctorServive: DoctorServiceService,
-              private authService: PatientAuthService, private chatService: MessagesService,
-              private router: Router) { }
+                private authService: PatientAuthService, private chatService: MessagesService,
+                private router: Router) { }
 
   ngOnInit(): void {
     this.isauth = this.authService.getIsAuth();
@@ -72,7 +72,6 @@ export class ProfileDocComponent implements OnInit, OnDestroy {
 
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       this.id = paramMap.get('id');
-      console.log(this.id);
       this.doctorServive.getDoctor(this.id).subscribe(data => {
         // console.log(data);
         this.doctorData = {
@@ -95,6 +94,7 @@ export class ProfileDocComponent implements OnInit, OnDestroy {
           state: data.state,
           country: data.country,
           zip: data.zip,
+          aboutMe: data.aboutMe,
           reviews: data.reviews,
           rdv: data.rdv
         };

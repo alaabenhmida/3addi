@@ -38,6 +38,8 @@ export class DocProfilSettingComponent implements OnInit {
       state: new FormControl(null),
       country: new FormControl(null),
       zip: new FormControl(null),
+      price: new FormControl(null),
+      aboutMe: new FormControl(null),
       education: this.fb.array([]),
       experience: this.fb.array([]),
       awards: this.fb.array([]),
@@ -104,7 +106,9 @@ export class DocProfilSettingComponent implements OnInit {
         city: doctor.city,
         state: doctor.state,
         country: doctor.country,
-        zip: doctor.zip
+        zip: doctor.zip,
+        price: doctor.price,
+        aboutMe: doctor.aboutMe
       });
     });
   }
@@ -187,7 +191,8 @@ export class DocProfilSettingComponent implements OnInit {
     this.doctorService.modify(this.form.value.firstName, this.form.value.lastName,
       this.form.value.phone, this.form.value.gender, this.form.value.birthday,
       this.form.value.address1, this.form.value.address2, this.form.value.city,
-      this.form.value.state, this.form.value.country, this.form.value.zip,
+      this.form.value.state, this.form.value.country, this.form.value.zip, this.form.value.price,
+      this.form.value.aboutMe,
       this.form.value.education, this.form.value.experience, this.form.value.awards,
       this.form.value.memberships, this.form.value.registrations, this.form.value.image).subscribe(result => {
 

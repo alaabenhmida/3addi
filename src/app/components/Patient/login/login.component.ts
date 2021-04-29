@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {PatientAuthService} from '../../../auth/Patient/patient-auth.service';
 import {NgForm} from '@angular/forms';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,9 +10,12 @@ import {NgForm} from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(public authService: PatientAuthService) { }
+  constructor(public authService: PatientAuthService, public router: Router) { }
 
   ngOnInit(): void {
+    if (this.authService.getIsAuth()) {
+      this.router.navigate(['/']);
+    }
   }
 
   onLogin(form: NgForm): void {

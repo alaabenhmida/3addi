@@ -76,19 +76,19 @@
                     </a>
                   </li>
                   <li>
-                    <a href="schedule-timings.html">
+                    <a [routerLink]="['/doctor/gererTemps']">
                       <i class="fas fa-hourglass-start"></i>
                       <span>Schedule Timings</span>
                     </a>
                   </li>
                   <li>
-                    <a href="invoices.html">
+                    <a [routerLink]="['/doctor/factures']">
                       <i class="fas fa-file-invoice"></i>
                       <span>Invoices</span>
                     </a>
                   </li>
                   <li>
-                    <a href="reviews.html">
+                    <a [routerLink]="['/doctor/reviews']">
                       <i class="fas fa-star"></i>
                       <span>Reviews</span>
                     </a>
@@ -213,7 +213,7 @@
               <h4 class="card-title">About Me</h4>
               <div class="form-group mb-0">
                 <label>Biography</label>
-                <textarea class="form-control" rows="5"></textarea>
+                <textarea class="form-control" rows="5" formControlName="aboutMe"></textarea>
               </div>
             </div>
           </div>
@@ -311,13 +311,9 @@
 
               <div class="form-group mb-0">
                 <div id="pricing_select">
-                  <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="price_free" name="rating_option" class="custom-control-input" value="price_free" checked>
-                    <label class="custom-control-label" for="price_free">Free</label>
-                  </div>
-                  <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="price_custom" name="rating_option" value="custom_price" class="custom-control-input">
-                    <label class="custom-control-label" for="price_custom">Custom Price (per hour)</label>
+                  <div class="form-group custom-control-inline">
+                    <input type="text" id="price_custom" name="rating_option" class="form-control" formControlName="price">
+<!--                    <label class="custom-control-label" for="price_custom">Custom Price (per hour)</label>-->
                   </div>
                 </div>
 

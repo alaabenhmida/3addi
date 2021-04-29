@@ -36,6 +36,7 @@ export class InvoicesComponent implements OnInit {
         state: data.state,
         country: data.country,
         zip: data.zip,
+        aboutMe: data.aboutMe,
         reviews: data.reviews,
         rdv: data.rdv
       };
