@@ -47,13 +47,24 @@
               </div>
               <div class="sort-by d-sm-block d-none">
 									<span class="sortby-fliter">
-										<select class="select select2-hidden-accessible" data-select2-id="1" tabindex="-1" aria-hidden="true">
+										<select class="select select2-hidden-accessible" data-select2-id="1" tabindex="-1"
+                            aria-hidden="true">
 											<option data-select2-id="3">Sort by</option>
 											<option class="sorting">Rating</option>
 											<option class="sorting">Popular</option>
 											<option class="sorting">Latest</option>
 											<option class="sorting">Free</option>
-										</select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="2" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-vhle-container"><span class="select2-selection__rendered" id="select2-vhle-container" role="textbox" aria-readonly="true" title="Sort by">Sort by</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+										</select><span class="select2 select2-container select2-container--default" dir="ltr"
+                                   data-select2-id="2" style="width: 100%;"><span class="selection"><span
+                    class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true"
+                    aria-expanded="false" tabindex="0" aria-disabled="false"
+                    aria-labelledby="select2-vhle-container"><span class="select2-selection__rendered"
+                                                                   id="select2-vhle-container" role="textbox"
+                                                                   aria-readonly="true"
+                                                                   title="Sort by">Sort by</span><span
+                    class="select2-selection__arrow" role="presentation"><b
+                    role="presentation"></b></span></span></span><span class="dropdown-wrapper"
+                                                                       aria-hidden="true"></span></span>
 									</span>
               </div>
             </div>
@@ -89,10 +100,13 @@
                       <i class="fas fa-map-marker-alt"></i> {{doctor?.state}}, {{doctor?.country}}
                     </li>
                     <li>
-                      <i *ngIf="getDay(today, 'ddd') !== 'Sun'" class="far fa-clock"></i> Available on {{getDay(today, 'ddd, DD MMM')}}
+                      <i *ngIf="getDay(today, 'ddd') !== 'Sun'" class="far fa-clock"></i> Available
+                      on {{getDay(today, 'ddd, DD MMM')}}
                     </li>
                     <li>
-                      <i class="far fa-money-bill-alt"></i> ${{doctor?.price}} <i class="fas fa-info-circle" data-toggle="tooltip" title="" data-original-title="Lorem Ipsum"></i>
+                      <i class="far fa-money-bill-alt"></i> ${{doctor?.price}} <i class="fas fa-info-circle"
+                                                                                  data-toggle="tooltip" title=""
+                                                                                  data-original-title="Lorem Ipsum"></i>
                     </li>
                   </ul>
                   <div class="row row-sm">
@@ -111,15 +125,45 @@
           </div>
 
           <div class="load-more text-center">
-            <mat-paginator [length]="totalDoctors" [pageSize]="doctorsPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onChangedPage($event)"></mat-paginator>
+            <mat-paginator [length]="totalDoctors" [pageSize]="doctorsPerPage" [pageSizeOptions]="pageSizeOptions"
+                           (page)="onChangedPage($event)"></mat-paginator>
           </div>
+          <!--          <div class="row">-->
+          <!--            <div class="col-xs-12 col-12">-->
+          <!--              <pagination [totalItems]="totalDoctors" [(ngModel)]="cuurentPage" (pageChanged)="onChangedPage($event)"></pagination>-->
+          <!--            </div>-->
+          <!--          </div>-->
         </div>
         <!-- /content-left-->
         <div class="col-xl-6 col-lg-12 map-right">
-          <div id="map" class="map-listing"></div>
-          <agm-map [latitude]="lat" [longitude]="lng">
-            <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-          </agm-map>
+          <div id="map" class="map-listing">
+            <agm-map (mapClick)="placeMarker($event)" class="h-100" style="height: 300px" [latitude]="latitude"
+                     [longitude]="longitude">
+              <agm-marker *ngFor="let doctor of doctors" [latitude]="doctor?.location.latitude"
+                          [longitude]="doctor?.location.longitude">
+              <agm-snazzy-info-window [maxWidth]="300" [maxHeight]="400" [isOpen]="false" [closeWhenOthersOpen]="true">
+                <ng-template>
+                  <div class="profile-widget" style="width: 100%; display: inline-block;">
+                    <div class="doc-img"><a [routerLink]="['/doctor', doctor?._id]" tabindex="0" target="_blank"><img
+                      class="img-fluid" alt="Dr. John Gibbs" src="{{doctor?.imagePath}}"></a></div>
+                    <div class="pro-content"><h3 class="title"><a [routerLink]="['/doctor', doctor?._id]" tabindex="0">Dr. {{doctor?.name}}
+                      {{doctor?.lastName}}</a><i class="fas fa-check-circle verified"></i></h3>
+                      <p class="speciality">{{doctor?.speciality}}</p>
+                      <div class="rating"><i class="fas fa-star filled"></i><i class="fas fa-star filled"></i><i
+                        class="fas fa-star filled"></i><i class="fas fa-star filled"></i><i
+                        class="fas fa-star"></i><span class="d-inline-block average-rating"> (112)</span></div>
+                      <ul class="available-info">
+                        <li><i class="fas fa-map-marker-alt"></i> {{doctor?.state}}, {{doctor?.country}}</li>
+                        <li><i class="far fa-clock"></i> Available on Fri, 25 Mar</li>
+                        <li><i class="far fa-money-bill-alt"></i> ${{doctor?.price}}</li>
+                      </ul>
+                    </div>
+                  </div>
+                </ng-template>
+              </agm-snazzy-info-window>
+              </agm-marker>
+            </agm-map>
+          </div>
         </div>
         <!-- /map-right-->
       </div>

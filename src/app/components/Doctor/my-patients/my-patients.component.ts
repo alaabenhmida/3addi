@@ -39,6 +39,7 @@ export class MyPatientsComponent implements OnInit {
         country: data.country,
         zip: data.zip,
         aboutMe: data.aboutMe,
+        location: data.location,
         reviews: data.reviews,
         rdv: data.rdv
       };

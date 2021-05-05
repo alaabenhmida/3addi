@@ -26,6 +26,10 @@ for (let i = 0; i < 20; i++) {
       state: faker.address.state(),
       country: faker.address.country(),
       zip: faker.address.zipCode(),
+      location: {
+        latitude: faker.address.latitude(),
+        longitude: faker.address.longitude()
+      }
     }
   )
 }

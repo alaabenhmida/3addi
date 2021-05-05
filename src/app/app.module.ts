@@ -45,6 +45,13 @@ import { ReviewsComponent } from './components/Doctor/reviews/reviews.component'
 import { SearchComponent } from './components/Doctor/search/search.component';
 import {MatInputModule} from '@angular/material/input';
 import { ManageTimeComponent } from './components/Doctor/manage-time/manage-time.component';
+import {AgmSnazzyInfoWindowModule} from '@agm/snazzy-info-window';
+import { AlertModule } from 'ngx-bootstrap/alert';
+import {PaginationModule} from 'ngx-bootstrap/pagination';
+import {MatDialogModule} from '@angular/material/dialog';
+import {ErrorInterceptor} from './error-interceptor';
+import { ErrorComponent } from './error/error.component';
+import {MatButtonModule} from '@angular/material/button';
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
 @NgModule({
@@ -76,7 +83,8 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     InvoicesComponent,
     ReviewsComponent,
     SearchComponent,
-    ManageTimeComponent
+    ManageTimeComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,
@@ -94,17 +102,26 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     NgxSkeletonLoaderModule,
     MatPaginatorModule,
     MatInputModule,
+    MatDialogModule,
     SocketIoModule.forRoot(config),
     TooltipModule.forRoot(),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAOhHjYUOLvSh3GG_H69tQTpYvQlJmT-Rc'
     }),
+    AgmSnazzyInfoWindowModule,
     RatingModule,
-    RouterModule
+    AlertModule.forRoot(),
+    PaginationModule.forRoot(),
+    RouterModule,
+    MatButtonModule,
     // BarRatingModule,
     // // BarRatingModule
   ],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}, FormsModule],
-  bootstrap: [AppComponent]
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+    FormsModule,
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
+  ],
+  bootstrap: [AppComponent],
+  entryComponents: [ErrorComponent]
 })
 export class AppModule { }

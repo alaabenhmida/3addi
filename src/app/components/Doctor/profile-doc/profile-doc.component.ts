@@ -8,6 +8,7 @@ import {MessagesService} from '../../../shared/messages/messages.service';
 import {PatientAuthService} from '../../../auth/Patient/patient-auth.service';
 import * as moment from 'moment';
 import { RatingModule } from 'ngx-bootstrap/rating';
+import {PatientServiceService} from '../../../services/Patient/patient-service.service';
 
 
 @Component({
@@ -18,6 +19,7 @@ import { RatingModule } from 'ngx-bootstrap/rating';
 export class ProfileDocComponent implements OnInit, OnDestroy {
   id: string;
   doctorData: Doctor;
+  workingTime : any;
   // rate: number;
   // selectedDate: any;
   rating = 0;
@@ -52,7 +54,7 @@ export class ProfileDocComponent implements OnInit, OnDestroy {
 
     constructor(public route: ActivatedRoute, public doctorServive: DoctorServiceService,
                 private authService: PatientAuthService, private chatService: MessagesService,
-                private router: Router) { }
+                private router: Router, private patientService: PatientServiceService) { }
 
   ngOnInit(): void {
     this.isauth = this.authService.getIsAuth();
@@ -95,6 +97,7 @@ export class ProfileDocComponent implements OnInit, OnDestroy {
           country: data.country,
           zip: data.zip,
           aboutMe: data.aboutMe,
+          location: data.location,
           reviews: data.reviews,
           rdv: data.rdv
         };
@@ -104,6 +107,7 @@ export class ProfileDocComponent implements OnInit, OnDestroy {
         for (const rev of this.doctorData.reviews) {
           this.rating += rev.rate;
         }
+        this.workingTime = data.workingTime;
         this.rate = this.rating / data.reviews.length;
       });
     });
@@ -133,5 +137,10 @@ export class ProfileDocComponent implements OnInit, OnDestroy {
     }
     this.chatService.createRoom(this.doctorData.id, this.userid, roomName);
     this.router.navigate(['/messages']);
+  }
+  onAddFavDoc(doctorId: string): void {
+    this.patientService.addFavourite(doctorId).subscribe(result => {
+      console.log(result);
+    });
   }
 }

@@ -143,7 +143,12 @@
 
           </div>
           <!-- /Schedule Widget -->
-{{selectedDate}}
+          <div class="row">
+            <alert *ngIf="selectedDate" type="md-local">
+              voulez vous un rendez-vous au <strong>{{getDay(selectedDate, 'ddd DD MMM à HH:mm')}}</strong>
+            </alert>
+          </div>
+
           <!-- Submit Section -->
           <div class="submit-section proceed-btn text-right">
             <a (click)="onSubmit()" class="btn btn-primary submit-btn">Proceed to Pay</a>

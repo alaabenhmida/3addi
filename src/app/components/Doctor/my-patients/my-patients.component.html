@@ -153,14 +153,22 @@
         <div class="col-md-7 col-lg-8 col-xl-9">
 
           <div class="row row-grid">
-
+            <div *ngIf="patients.length === 0" class="m-auto col-md-6 col-lg-4 col-xl-3">
+              <div class="card widget-profile pat-widget-profile">
+                <div class="card-body">
+                  <div class="patient-details">
+                    <h3 class="h3 text-danger text-capitalize text-center">pas de patients</h3>
+                  </div>
+                </div>
+              </div>
+            </div>
 
             <div *ngFor="let patient of patients" class="col-md-6 col-lg-4 col-xl-3">
               <div class="card widget-profile pat-widget-profile">
                 <div class="card-body">
                   <div class="pro-widget-content">
                     <div class="profile-info-widget">
-                      <a href="patient-profile.html" class="booking-doc-img">
+                      <a [routerLink]="['/patient', patient?.id._id]" class="booking-doc-img">
                         <img src="{{patient.id.imagePath}}" alt="User Image">
                       </a>
                       <div class="profile-det-info">

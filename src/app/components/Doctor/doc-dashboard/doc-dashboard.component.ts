@@ -42,6 +42,7 @@ export class DocDashboardComponent implements OnInit, OnDestroy {
         country: data.country,
         zip: data.zip,
         aboutMe: data.aboutMe,
+        location: data.location,
         reviews: data.reviews,
         rdv: data.rdv
       };
@@ -69,6 +70,7 @@ export class DocDashboardComponent implements OnInit, OnDestroy {
         country: data.country,
         zip: data.zip,
         aboutMe: data.aboutMe,
+        location: data.location,
         reviews: data.reviews,
         rdv: data.rdv
       };

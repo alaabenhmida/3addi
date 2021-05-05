@@ -18,9 +18,11 @@ export class MapGridComponent implements OnInit {
   private isloggedIn = false;
   private isloggedInSub: Subscription;
   totalDoctors = 10;
-  doctorsPerPage = 5;
+  latitude = 51.673858;
+  longitude = 7.815982;
+  doctorsPerPage = 4;
   cuurentPage = 1;
-  pageSizeOptions = [1, 2, 5, 10];
+  pageSizeOptions = [2, 4, 8, 10];
   lat = 51.678418;
   lng = 7.809007;
 
@@ -29,6 +31,7 @@ export class MapGridComponent implements OnInit {
               private authService: PatientAuthService) { }
 
   ngOnInit(): void {
+    this.setCurrentLocation();
     this.doctorService.getAllDoctors(this.doctorsPerPage, this.cuurentPage).subscribe(doctors => {
       this.doctors = doctors.doctors;
       this.totalDoctors = doctors.maxDoctors;
@@ -41,6 +44,14 @@ export class MapGridComponent implements OnInit {
     );
   }
 
+  private setCurrentLocation(): void {
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.latitude = position.coords.latitude;
+        this.longitude = position.coords.longitude;
+      });
+    }
+  }
   getDay(day: string, format: string): string {
     return moment(day).format(format);
   }
@@ -57,5 +68,10 @@ export class MapGridComponent implements OnInit {
     this.doctorService.getAllDoctors(this.doctorsPerPage, this.cuurentPage).subscribe(doctors => {
       this.doctors = doctors.doctors;
     });
+  }
+
+  placeMarker($event): void{
+    console.log($event.coords.lat);
+    console.log($event.coords.lng);
   }
 }

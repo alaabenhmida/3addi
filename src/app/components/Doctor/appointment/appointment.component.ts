@@ -61,10 +61,11 @@ export class AppointmentComponent implements OnInit {
           country: data.country,
           zip: data.zip,
           aboutMe: data.aboutMe,
+          location: data.location,
           reviews: data.reviews,
           rdv: data.rdv
         };
-        if (data.workingTime.breackTimes && data.workingTime.from && data.workingTime.to &&data.workingTime.duration) {
+        if (data.workingTime.breackTimes && data.workingTime.from && data.workingTime.to && data.workingTime.duration) {
           this.x.breackTimes = data.workingTime.breackTimes;
           this.x.startTime = data.workingTime.from;
           this.x.endTime = data.workingTime.to;

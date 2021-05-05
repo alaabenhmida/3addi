@@ -83,6 +83,10 @@ const doctorSchema = mongoose.Schema({
     breackTimes : [{
       type: Array
     }]
+  },
+  location: {
+    latitude: {type: Number},
+    longitude: {type: Number}
   }
 });
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, NgZone, OnInit, ViewChild} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {DoctorServiceService} from '../../../services/doctor/doctor-service.service';
 import {Doctor} from '../../../models/Doctor/doctor.model';
@@ -15,11 +15,19 @@ export class DocProfilSettingComponent implements OnInit {
   form: FormGroup;
   doctorData: Doctor;
   imagePreview: string;
+  latitude = 51.673858;
+  longitude = 7.815982;
+  zoom = 15;
+  address: string;
+  private geoCoder;
+  @ViewChild('search')
+  public searchElementRef: ElementRef;
 
   constructor(private fb: FormBuilder, private doctorService: DoctorServiceService, private authService: PatientAuthService,
               private toastr: ToastrService) { }
 
   ngOnInit(): void {
+    this.setCurrentLocation();
     this.form = this.fb.group({
       image: new FormControl(null, {
         validators: [Validators.required],
@@ -113,12 +121,47 @@ export class DocProfilSettingComponent implements OnInit {
     });
   }
 
+  private setCurrentLocation(): void {
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.latitude = position.coords.latitude;
+        this.longitude = position.coords.longitude;
+        this.zoom = 8;
+      });
+    }
+  }
+
+  // markerDragEnd($event: any): void {
+  //   console.log($event);
+  //   this.latitude = $event.coords.lat;
+  //   this.longitude = $event.coords.lng;
+  //   this.getAddress(this.latitude, this.longitude);
+  // }
+
+  // getAddress(latitude, longitude): void {
+  //   this.geoCoder.geocode({ 'location': { lat: latitude, lng: longitude } }, (results, status) => {
+  //     console.log(results);
+  //     console.log(status);
+  //     if (status === 'OK') {
+  //       if (results[0]) {
+  //         this.zoom = 12;
+  //         this.address = results[0].formatted_address;
+  //       } else {
+  //         window.alert('No results found');
+  //       }
+  //     } else {
+  //       window.alert('Geocoder failed due to: ' + status);
+  //     }
+  //
+  //   });
+  // }
+
   addRegistrations(): void {
     const award = this.form.controls.registrations as FormArray;
     award.push(this.fb.group({
-      registrations: new FormControl(null),
-      year: new FormControl(null),
-      to: new FormControl(null)
+      registrations: new FormControl(null, { validators: [Validators.required] }),
+      year: new FormControl(null, { validators: [Validators.required] }),
+      to: new FormControl(null, { validators: [Validators.required] })
     }));
   }
   deleteRegistrations(index): void{
@@ -129,7 +172,7 @@ export class DocProfilSettingComponent implements OnInit {
   addMembership(): void {
     const award = this.form.controls.memberships as FormArray;
     award.push(this.fb.group({
-      Membership: new FormControl(null)
+      Membership: new FormControl(null, { validators: [Validators.required] })
     }));
   }
   deleteMembership(index): void{
@@ -140,8 +183,8 @@ export class DocProfilSettingComponent implements OnInit {
   addAward(): void {
     const award = this.form.controls.awards as FormArray;
     award.push(this.fb.group({
-      awards: new FormControl(null),
-      year: new FormControl(null)
+      awards: new FormControl(null, { validators: [Validators.required] }),
+      year: new FormControl(null, { validators: [Validators.required] })
     }));
   }
   deleteAward(index): void{
@@ -152,10 +195,10 @@ export class DocProfilSettingComponent implements OnInit {
   addExperience(): void {
     const ex = this.form.controls.experience as FormArray;
     ex.push(this.fb.group({
-      hospital_Name: new FormControl(null),
-      from: new FormControl(null),
-      to: new FormControl(null),
-      designation: new FormControl(null)
+      hospital_Name: new FormControl(null, { validators: [Validators.required] }),
+      from: new FormControl(null, { validators: [Validators.required] }),
+      to: new FormControl(null, { validators: [Validators.required] }),
+      designation: new FormControl(null, { validators: [Validators.required] })
     }));
   }
   deleteExperience(index): void{
@@ -187,12 +230,31 @@ export class DocProfilSettingComponent implements OnInit {
     reader.readAsDataURL(file);
   }
 
+  get registrations(): any { // a getter!
+    return (this.form.get('registrations') as FormArray).controls;
+  }
+  get education(): any { // a getter!
+    return (this.form.get('education') as FormArray).controls;
+  }
+  get memberships(): any { // a getter!
+    return (this.form.get('memberships') as FormArray).controls;
+  }
+  get awards(): any { // a getter!
+    return (this.form.get('awards') as FormArray).controls;
+  }
+  get experience(): any { // a getter!
+    return (this.form.get('experience') as FormArray).controls;
+  }
+
   onSubmit(): void {
+    if (this.form.invalid) {
+      return;
+    }
     this.doctorService.modify(this.form.value.firstName, this.form.value.lastName,
       this.form.value.phone, this.form.value.gender, this.form.value.birthday,
       this.form.value.address1, this.form.value.address2, this.form.value.city,
       this.form.value.state, this.form.value.country, this.form.value.zip, this.form.value.price,
-      this.form.value.aboutMe,
+      this.form.value.aboutMe, this.latitude, this.longitude,
       this.form.value.education, this.form.value.experience, this.form.value.awards,
       this.form.value.memberships, this.form.value.registrations, this.form.value.image).subscribe(result => {
 
@@ -207,5 +269,10 @@ export class DocProfilSettingComponent implements OnInit {
         positionClass: 'toast-bottom-right'
       });
     });
+  }
+
+  markerDragEnd($event: any): void {
+    this.latitude = $event.coords.lat;
+    this.longitude = $event.coords.lng;
   }
 }

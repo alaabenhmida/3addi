@@ -3,10 +3,11 @@ import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angul
 import {DoctorAuthService} from '../../../auth/Doctor/doctor-auth.service';
 import {Subscription} from 'rxjs';
 import {DoctorServiceService} from '../../../services/doctor/doctor-service.service';
-import {ActivatedRoute, ParamMap} from '@angular/router';
+import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {PatientServiceService} from '../../../services/Patient/patient-service.service';
 import * as moment from 'moment';
 import {Doctor} from '../../../models/Doctor/doctor.model';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-presc',
@@ -26,10 +27,12 @@ export class AddPrescComponent implements OnInit, OnDestroy {
 
 
   constructor(public route: ActivatedRoute,
+              private router: Router,
               private fb: FormBuilder,
               private doctor: DoctorAuthService,
               private doctorSevive: DoctorServiceService,
-              private patientService: PatientServiceService) {}
+              private patientService: PatientServiceService,
+              private toastr: ToastrService) {}
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -71,6 +74,9 @@ export class AddPrescComponent implements OnInit, OnDestroy {
     });
 
   }
+  get controls(): any { // a getter!
+    return (this.form.get('Prescription') as FormArray).controls;
+  }
   addCreds(): void {
     const creds = this.form.controls.Prescription as FormArray;
     // for (let i = 0; i < 2; i++) {
@@ -92,18 +98,34 @@ export class AddPrescComponent implements OnInit, OnDestroy {
   }
   onSubmit(): void{
     if (this.form.invalid){
+      console.log(this.form.controls.Prescription.get('name'));
       return;
     }
     if (this.mode === 'create') {
-      this.doctorSevive.addPrescription(this.form.value.Prescription, this.patientId);
+      this.doctorSevive.addPrescription(this.form.value.Prescription, this.patientId)
+        .subscribe(data => {
+          this.toastr.success('Ordonnance ajoutée', '', {
+            positionClass: 'toast-bottom-right'
+          });
+          this.router.navigate(['/patient', this.patientData._id]);
+        });
       // console.log(this.form.value.Prescription);
     } else {
       this.doctorSevive.updatePrescription(this.patientId, this.prescId,
-        this.form.value.Prescription);
+        this.form.value.Prescription)
+        .subscribe(result => {
+          this.toastr.success('Ordonnance enregistrée', '', {
+            positionClass: 'toast-bottom-right'
+          });
+        });;
     }
   }
   getdate(date: string, format: string): string{
     return (moment(date).format(format));
+  }
+
+  clearForm(): void {
+    this.form.reset();
   }
 
   ngOnDestroy(): void {

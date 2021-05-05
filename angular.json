@@ -35,6 +35,7 @@
               "src/assets/plugins/dropzone/dropzone.min.css",
               "src/assets/css/style.css",
               "node_modules/ngx-toastr/toastr.css",
+              "node_modules/snazzy-info-window/dist/snazzy-info-window.css",
               "src/styles.css"
             ],
             "scripts": [

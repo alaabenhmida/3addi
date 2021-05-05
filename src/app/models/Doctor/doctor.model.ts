@@ -1,5 +1,6 @@
 import {Rates} from './rates.model';
 import {DocRdv} from './docRdv.model';
+import {LocationModel} from './location.model';
 
 export interface Doctor {
   id: string;
@@ -22,6 +23,7 @@ export interface Doctor {
   country: string;
   zip: string;
   aboutMe: string;
+  location: LocationModel;
   reviews: Rates[];
   rdv: DocRdv[];
 }

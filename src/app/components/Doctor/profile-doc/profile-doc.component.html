@@ -42,7 +42,7 @@
           <div class="doctor-widget">
             <div class="doc-info-left">
               <div class="doctor-img">
-                <img src="{{doctorData?.imagePath}}" class="img-fluid" alt="{{doctorData?.name}}">
+                <img src="{{doctorData?.imagePath}}" class="img-fluid h-50" alt="{{doctorData?.name}}">
               </div>
               <div class="doc-info-cont">
                 <h4 class="doc-name">{{doctorData?.name}} {{doctorData?.lastName}}</h4>
@@ -95,19 +95,19 @@
                   <li><i class="far fa-money-bill-alt"></i> ${{doctorData?.price}} per hour </li>
                 </ul>
               </div>
-              <div class="doctor-action">
-                <a href="javascript:void(0)" class="btn btn-white fav-btn">
+              <div class="pl-5 doctor-action">
+                <a *ngIf="isauth" (click)="onAddFavDoc(doctorData?.id)" href="javascript:void(0)" class="btn btn-white fav-btn">
                   <i class="far fa-bookmark"></i>
                 </a>
                 <a (click)="chat()" class="btn btn-white msg-btn">
                   <i class="far fa-comment-alt"></i>
                 </a>
-                <a href="javascript:void(0)" class="btn btn-white call-btn" data-toggle="modal" data-target="#voice_call">
-                  <i class="fas fa-phone"></i>
-                </a>
-                <a href="javascript:void(0)" class="btn btn-white call-btn" data-toggle="modal" data-target="#video_call">
-                  <i class="fas fa-video"></i>
-                </a>
+<!--                <a href="javascript:void(0)" class="btn btn-white call-btn" data-toggle="modal" data-target="#voice_call">-->
+<!--                  <i class="fas fa-phone"></i>-->
+<!--                </a>-->
+<!--                <a href="javascript:void(0)" class="btn btn-white call-btn" data-toggle="modal" data-target="#video_call">-->
+<!--                  <i class="fas fa-video"></i>-->
+<!--                </a>-->
               </div>
               <div class="clinic-booking">
                 <a class="apt-btn" [routerLink]="['/doctor', doctorData?.id, 'app']">Book Appointment</a>
@@ -451,7 +451,12 @@
                         </div>
                         <p class="comment-content">
                           {{review?.review}}
+                          <br>
+                          <br>
+                          <br>
+                          <br>
                         </p>
+                        <hr>
                         <div class="comment-reply">
                           <a class="comment-btn" href="#">
                             <i class="fas fa-reply"></i> Reply
@@ -560,43 +565,43 @@
                           <div class="time-items">
                             <span *ngIf="getDay(day, 'ddd') !== 'Sun'" class="open-status"><span class="badge bg-success-light">Open Now</span></span>
                             <span *ngIf="getDay(day, 'ddd') === 'Sun'" class="time"><span class="badge bg-danger-light">Closed</span></span>
-                            <span class="time">07:00 AM - 09:00 PM</span>
+                            <span class="time">{{workingTime?.from}} - {{workingTime?.to}}</span>
                           </div>
                         </div>
                         <div class="listing-day">
                           <div class="day">Monday</div>
                           <div class="time-items">
-                            <span class="time">07:00 AM - 09:00 PM</span>
+                            <span class="time">{{workingTime?.from}} - {{workingTime?.to}}</span>
                           </div>
                         </div>
                         <div class="listing-day">
                           <div class="day">Tuesday</div>
                           <div class="time-items">
-                            <span class="time">07:00 AM - 09:00 PM</span>
+                            <span class="time">{{workingTime?.from}} - {{workingTime?.to}}</span>
                           </div>
                         </div>
                         <div class="listing-day">
                           <div class="day">Wednesday</div>
                           <div class="time-items">
-                            <span class="time">07:00 AM - 09:00 PM</span>
+                            <span class="time">{{workingTime?.from}} - {{workingTime?.to}}</span>
                           </div>
                         </div>
                         <div class="listing-day">
                           <div class="day">Thursday</div>
                           <div class="time-items">
-                            <span class="time">07:00 AM - 09:00 PM</span>
+                            <span class="time">{{workingTime?.from}} - {{workingTime?.to}}</span>
                           </div>
                         </div>
                         <div class="listing-day">
                           <div class="day">Friday</div>
                           <div class="time-items">
-                            <span class="time">07:00 AM - 09:00 PM</span>
+                            <span class="time">{{workingTime?.from}} - {{workingTime?.to}}</span>
                           </div>
                         </div>
                         <div class="listing-day">
                           <div class="day">Saturday</div>
                           <div class="time-items">
-                            <span class="time">07:00 AM - 09:00 PM</span>
+                            <span class="time">{{workingTime?.from}} - {{workingTime?.to}}</span>
                           </div>
                         </div>
                         <div class="listing-day closed">

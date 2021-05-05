@@ -71,15 +71,16 @@ export class MessagesComponent implements OnInit, OnDestroy {
           country: data.country,
           zip: data.zip,
           aboutMe: data.aboutMe,
+          location: data.location,
           reviews: data.reviews,
           rdv: data.rdv
         };
+        this.chatRooms = data.chatRoom;
         this.chatService.joinRoom({user: data._id, room: data.chatRoom[0].name});
         this.chatService.getRoom(data._id, data.chatRoom[0].name, this.role).subscribe(res => {
           this.messageArray = res.chatRoom[0].messages;
           this.withData = res.chatRoom[0].with;
         });
-        this.chatRooms = data.chatRoom;
       });
     } else {
       this.patientService.getPatientByKey().subscribe(data => {

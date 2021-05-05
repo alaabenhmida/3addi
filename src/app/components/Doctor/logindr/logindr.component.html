@@ -42,11 +42,11 @@
                 </div>
                 <form (submit)="onLogin(loginForm)" #loginForm="ngForm">
                   <div class="form-group form-focus">
-                    <input type="email" class="form-control floating" name="email" ngModel type="email" #emailInput="ngModel" required email>
+                    <input [ngClass]="{'is-invalid': emailInput.invalid && emailInput.touched}" type="email" class="form-control floating" name="email" ngModel type="email" #emailInput="ngModel" required email>
                     <label class="focus-label">Email</label>
                   </div>
                   <div class="form-group form-focus">
-                    <input type="password" class="form-control floating" type="password" name="password" ngModel matInput #passwordInput="ngModel" required>
+                    <input [ngClass]="{'is-invalid': passwordInput.invalid && passwordInput.touched}" type="password" class="form-control floating" type="password" name="password" ngModel matInput #passwordInput="ngModel" required>
                     <label class="focus-label">Password</label>
                   </div>
                   <div class="text-right">

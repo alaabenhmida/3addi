@@ -107,7 +107,13 @@
         <div class="col-md-7 col-lg-8 col-xl-9">
           <div class="row row-grid">
 
-              <p class="text-center text-danger">pas de favoris</p>
+            <div *ngIf="favourits.length === 0" class="col-md-6 col-lg-4 col-xl-3 p-auto m-auto">
+              <div class="profile-widget bg-danger-light">
+                <p class="text-center text-danger">pas de favoris</p>
+              </div>
+
+            </div>
+
 
             <div *ngFor="let doctor of favourits" class="col-md-6 col-lg-4 col-xl-3">
               <div class="profile-widget">
@@ -121,7 +127,7 @@
                 </div>
                 <div class="pro-content">
                   <h3 class="title">
-                    <a [routerLink]="['/doctor', doctor._id]">{{doctor?.doctor.name}} {{doctor?.doctor.lastName}}</a>
+                    <a [routerLink]="['/doctor', doctor.doctor._id]">{{doctor?.doctor.name}} {{doctor?.doctor.lastName}}</a>
                     <i class="fas fa-check-circle verified"></i>
                   </h3>
                   <p class="speciality">{{doctor?.doctor.speciality}}</p>

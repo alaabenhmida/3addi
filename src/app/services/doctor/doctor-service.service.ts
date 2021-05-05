@@ -22,7 +22,7 @@ export class DoctorServiceService {
 
   modify(firstName: string, lastName: string, phone: string, gender: string, birthday: string,
          address1: string, address2: string, city: string, state: string,
-         country: string, zip: string, price: number, aboutMe: string,
+         country: string, zip: string, price: number, aboutMe: string, latitude: number, longitude: number,
          education, experience,
          awards, memberships, registrations, images?: File): Observable<any> {
     if (images) {
@@ -40,6 +40,8 @@ export class DoctorServiceService {
       image.append('zip', zip);
       image.append('price', price.toString());
       image.append('aboutMe', aboutMe);
+      image.append('latitude', latitude.toString());
+      image.append('longitude', longitude.toString());
       image.append('education', JSON.stringify(education));
       image.append('experience', JSON.stringify(experience));
       image.append('awards', JSON.stringify(awards));
@@ -63,6 +65,8 @@ export class DoctorServiceService {
       image.append('zip', zip);
       image.append('price', price.toString());
       image.append('aboutMe', aboutMe);
+      image.append('latitude', latitude.toString());
+      image.append('longitude', longitude.toString());
       image.append('education', JSON.stringify(education));
       image.append('experience', JSON.stringify(experience));
       image.append('awards', JSON.stringify(awards));
@@ -110,11 +114,8 @@ export class DoctorServiceService {
     return this.http.get('http://localhost:3000/doctor/invoice/' + id);
   }
 
-  updatePrescription(patientId: string, prescID: string, presc: any): void {
-    this.http.put('http://localhost:3000/patient/' + patientId + '/updatepresc', {prescID, presc})
-      .subscribe(result => {
-        console.log(result);
-      });
+  updatePrescription(patientId: string, prescID: string, presc: any): Observable<any> {
+    return  this.http.put('http://localhost:3000/patient/' + patientId + '/updatepresc', {prescID, presc});
   }
 
   workingTime(duration: number, from: string, to: string, breackTimes: any): Observable<any> {
@@ -125,12 +126,9 @@ export class DoctorServiceService {
     return this.http.put('http://localhost:3000/patient/' + patiendId + '/getpresc', {prescID});
   }
 
-  addPrescription(presc: string[], patientId: string): void {
-    this.http.post('http://localhost:3000/doctor/patient/' + patientId + '/addpresc', {presc,
-    date: moment(Date.now()).format('YYYY-MM-DDTHH:mm:ss')})
-      .subscribe(data => {
-        console.log(data);
-      });
+  addPrescription(presc: string[], patientId: string): Observable<any> {
+    return  this.http.post('http://localhost:3000/doctor/patient/' + patientId + '/addpresc', {presc,
+    date: moment(Date.now()).format('YYYY-MM-DDTHH:mm:ss')});
   }
 
   addrecord(id: string, date: string, desc: string, file: string): void{

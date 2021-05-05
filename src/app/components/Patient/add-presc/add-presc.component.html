@@ -44,7 +44,7 @@
             <div class="card-body">
               <div class="pro-widget-content">
                 <div class="profile-info-widget">
-                  <a href="#" class="booking-doc-img">
+                  <a [routerLink]="['/patient', patientData?._id]" class="booking-doc-img">
                     <img src="{{patientData?.imagePath}}" alt="User Image">
                   </a>
                   <div class="profile-det-info">
@@ -117,15 +117,15 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr *ngFor="let creds of form.controls.Prescription?.value; let i = index" [formGroupName]="i">
+                        <tr *ngFor="let creds of controls; let i = index" [formGroupName]="i">
                           <td>
-                            <input class="form-control" type="text" formControlName="name">
+                            <input class="form-control" [ngClass]="{'is-invalid': creds.controls.name.invalid && creds.controls.name.touched}" type="text" formControlName="name">
                           </td>
                           <td>
-                            <input class="form-control" type="text" formControlName="quantite">
+                            <input class="form-control" [ngClass]="{'is-invalid': creds.controls.quantite.invalid && creds.controls.quantite.touched}" type="text" formControlName="quantite">
                           </td>
                           <td>
-                            <input class="form-control" type="text" formControlName="days">
+                            <input class="form-control" [ngClass]="{'is-invalid': creds.controls.days.invalid && creds.controls.days.touched}" type="text" formControlName="days">
                           </td>
                           <td>
                             <div class="form-check form-check-inline">
@@ -154,7 +154,7 @@
                           </td>
                         </tr>
                         </tbody>
-                        <input type="submit">
+                        <input hidden #sendForm type="submit">
                       </table>
                     </form>
                   </div>
@@ -183,8 +183,8 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="submit-section">
-                    <button type="submit" class="btn btn-primary submit-btn">Save</button>
-                    <button type="reset" class="btn btn-secondary submit-btn">Clear</button>
+                    <button (click)="sendForm.click()" [disabled]="form.invalid" type="submit" class="btn btn-primary submit-btn">Save</button>
+                    <button (click)="clearForm()" type="reset" class="btn btn-secondary submit-btn">Clear</button>
                   </div>
                 </div>
               </div>

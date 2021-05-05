@@ -171,13 +171,19 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label>First Name <span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" formControlName="firstName">
+                    <input [ngClass]="{'is-invalid': form.get('firstName').invalid && form.get('firstName').touched}" type="text" class="form-control" formControlName="firstName">
+                    <div class="invalid-feedback">
+                      first name required.
+                    </div>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label>Last Name <span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" formControlName="lastName">
+                    <input [ngClass]="{'is-invalid': form.get('lastName').invalid && form.get('lastName').touched}" type="text" class="form-control" formControlName="lastName">
+                    <div class="invalid-feedback">
+                      last name required.
+                    </div>
                   </div>
                 </div>
                 <div class="col-md-6">
@@ -199,13 +205,45 @@
                 <div class="col-md-6">
                   <div class="form-group mb-0">
                     <label>Date of Birth</label>
-                    <input type="date" class="form-control" formControlName="birthday">
+                    <input [ngClass]="{'is-invalid': form.get('birthday').invalid && form.get('birthday').touched}" type="date" class="form-control" formControlName="birthday">
+                    <div class="invalid-feedback">
+                      birthday required.
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <!-- /Basic Information -->
+
+            <!-- Map -->
+            <div class="card">
+              <div class="form-check m-4">
+                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                <label class="form-check-label" for="defaultCheck1">
+                  Add my Location
+                </label>
+              </div>
+              <div class="card-body">
+                <h4 class="card-title">Ma Localisation</h4>
+                <div class="form-group mb-0">
+                  <input type="text" class="form-control" (keydown.enter)="$event.preventDefault()" placeholder="Search Nearest Location" autocorrect="on" autocapitalize="on" spellcheck="on" type="text" #search>
+                  <agm-map style="height: 300px"
+                    [latitude]="doctorData?.location.latitude"
+                    [longitude]="doctorData?.location.longitude"
+                    [zoom]="zoom">
+                    <agm-marker
+                      [latitude]="doctorData?.location.latitude"
+                      [longitude]="doctorData?.location.longitude"
+                      [markerDraggable]="true"
+                      (dragEnd)="markerDragEnd($event)"></agm-marker>
+                  </agm-map>
+                  <div>Latitude: {{latitude}}</div>
+                  <div>Longitude: {{longitude}}</div>
+                </div>
+              </div>
+            </div>
+            <!-- /Map -->
 
           <!-- About Me -->
           <div class="card">
@@ -355,24 +393,36 @@
               <h4 class="card-title">Education</h4>
               <div class="education-info">
                 <div class="row form-row education-cont">
-                  <div *ngFor="let edu of form.controls.education?.value; let i = index" class="col-12 col-md-10 col-lg-11">
+                  <div *ngFor="let edu of education; let i = index" class="col-12 col-md-10 col-lg-11">
                     <div [formGroupName]="i" class="row form-row">
                       <div class="col-12 col-md-6 col-lg-4">
                         <div class="form-group">
                           <label>Degree</label>
-                          <input type="text" class="form-control" formControlName="Degree">
+                          <input [ngClass]="{'is-invalid': edu.controls.Degree.invalid && edu.controls.Degree.touched}"
+                            type="text" class="form-control" formControlName="Degree">
+                          <div class="invalid-feedback">
+                            Degree required.
+                          </div>
                         </div>
                       </div>
                       <div class="col-12 col-md-6 col-lg-4">
                         <div class="form-group">
                           <label>College/Institute</label>
-                          <input type="text" class="form-control" formControlName="College">
+                          <input [ngClass]="{'is-invalid': edu.controls.College.invalid && edu.controls.College.touched}"
+                            type="text" class="form-control" formControlName="College">
+                          <div class="invalid-feedback">
+                            College required.
+                          </div>
                         </div>
                       </div>
                       <div class="col-12 col-md-6 col-lg-4">
                         <div class="form-group">
                           <label>Year of Completion</label>
-                          <input type="text" class="form-control" formControlName="Year_of_Completion">
+                          <input [ngClass]="{'is-invalid': edu.controls.Year_of_Completion.invalid && edu.controls.Year_of_Completion.touched}"
+                            type="text" class="form-control" formControlName="Year_of_Completion">
+                          <div class="invalid-feedback">
+                            Year of Completion required.
+                          </div>
                         </div>
                       </div>
                       <a (click)="deleteEducation(i)" class="btn bg-danger-light trash"><i class="far fa-trash-alt"></i></a>
@@ -393,30 +443,46 @@
               <h4 class="card-title">Experience</h4>
               <div class="experience-info">
                 <div class="row form-row experience-cont">
-                  <div *ngFor="let ex of form.controls.experience?.value; let i = index" class="col-12 col-md-10 col-lg-11">
+                  <div *ngFor="let ex of experience; let i = index" class="col-12 col-md-10 col-lg-11">
                     <div [formGroupName]="i" class="row form-row">
                       <div class="col-12 col-md-6 col-lg-4">
                         <div class="form-group">
                           <label>Hospital Name</label>
-                          <input type="text" class="form-control" formControlName="hospital_Name">
+                          <input [ngClass]="{'is-invalid': ex.controls.hospital_Name.invalid && ex.controls.hospital_Name.touched}"
+                            type="text" class="form-control" formControlName="hospital_Name">
+                          <div class="invalid-feedback">
+                            hospital Name required.
+                          </div>
                         </div>
                       </div>
                       <div class="col-12 col-md-6 col-lg-4">
                         <div class="form-group">
                           <label>From</label>
-                          <input type="text" class="form-control" formControlName="from">
+                          <input [ngClass]="{'is-invalid': ex.controls.from.invalid && ex.controls.from.touched}"
+                            type="text" class="form-control" formControlName="from">
+                          <div class="invalid-feedback">
+                            required.
+                          </div>
                         </div>
                       </div>
                       <div class="col-12 col-md-6 col-lg-4">
                         <div class="form-group">
                           <label>To</label>
-                          <input type="text" class="form-control" formControlName="to">
+                          <input [ngClass]="{'is-invalid': ex.controls.to.invalid && ex.controls.to.touched}"
+                            type="text" class="form-control" formControlName="to">
+                          <div class="invalid-feedback">
+                            required.
+                          </div>
                         </div>
                       </div>
                       <div class="col-12 col-md-6 col-lg-4">
                         <div class="form-group">
                           <label>Designation</label>
-                          <input type="text" class="form-control" formControlName="designation">
+                          <input [ngClass]="{'is-invalid': ex.controls.designation.invalid && ex.controls.designation.touched}"
+                            type="text" class="form-control" formControlName="designation">
+                          <div class="invalid-feedback">
+                            designation required.
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -435,18 +501,26 @@
           <div class="card">
             <div formArrayName="awards" class="card-body">
               <h4 class="card-title">Awards</h4>
-              <div *ngFor="let award of form.controls.awards?.value; let i = index" class="awards-info">
+              <div *ngFor="let award of awards; let i = index" class="awards-info">
                 <div [formGroupName]="i" class="row form-row awards-cont">
                   <div class="col-12 col-md-5">
                     <div class="form-group">
                       <label>Awards</label>
-                      <input type="text" class="form-control" formControlName="awards">
+                      <input [ngClass]="{'is-invalid': award.controls.awards.invalid && award.controls.awards.touched}"
+                        type="text" class="form-control" formControlName="awards">
+                      <div class="invalid-feedback">
+                        awards required.
+                      </div>
                     </div>
                   </div>
                   <div class="col-12 col-md-5">
                     <div class="form-group">
                       <label>Year</label>
-                      <input type="text" class="form-control" formControlName="year">
+                      <input [ngClass]="{'is-invalid': award.controls.year.invalid && award.controls.year.touched}"
+                        type="text" class="form-control" formControlName="year">
+                      <div class="invalid-feedback">
+                        year required.
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -463,12 +537,16 @@
           <div class="card">
             <div formArrayName="memberships" class="card-body">
               <h4 class="card-title">Memberships</h4>
-              <div *ngFor="let mem of form.controls.memberships?.value; let i = index" class="membership-info">
+              <div *ngFor="let mem of memberships; let i = index" class="membership-info">
                 <div [formGroupName]="i" class="row form-row membership-cont">
                   <div class="col-12 col-md-10 col-lg-5">
                     <div class="form-group">
                       <label>Memberships</label>
-                      <input type="text" class="form-control" formControlName="Membership">
+                      <input [ngClass]="{'is-invalid': mem.controls.Membership.invalid && mem.controls.Membership.touched}"
+                        type="text" class="form-control" formControlName="Membership">
+                      <div class="invalid-feedback">
+                        Membership required.
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -485,18 +563,26 @@
           <div formArrayName="registrations" class="card">
             <div class="card-body">
               <h4 class="card-title">Registrations</h4>
-              <div *ngFor="let mem of form.controls.registrations?.value; let i = index" class="registrations-info">
+              <div *ngFor="let mem of registrations; let i = index" class="registrations-info">
                 <div [formGroupName]="i" class="row form-row reg-cont">
                   <div class="col-12 col-md-5">
                     <div class="form-group">
                       <label>Registrations</label>
-                      <input type="text" class="form-control" formControlName="registrations">
+                      <input [ngClass]="{'is-invalid': mem.controls.registrations.invalid && mem.controls.registrations.touched}"
+                        type="text" class="form-control" formControlName="registrations">
+                      <div class="invalid-feedback">
+                        registrations required.
+                      </div>
                     </div>
                   </div>
                   <div class="col-12 col-md-5">
                     <div class="form-group">
                       <label>Year</label>
-                      <input type="text" class="form-control" formControlName="year">
+                      <input [ngClass]="{'is-invalid': mem.controls.year.invalid && mem.controls.year.touched}"
+                        type="text" class="form-control" formControlName="year">
+                      <div class="invalid-feedback">
+                        year required.
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -508,7 +594,7 @@
             </div>
           </div>
             <div class="submit-section submit-btn-bottom">
-              <button type="submit" class="btn btn-primary submit-btn">Save Changes</button>
+              <button [disabled]="form.invalid" type="submit" class="btn btn-primary submit-btn">Save Changes</button>
             </div>
           </form>
           <!-- /Registrations -->

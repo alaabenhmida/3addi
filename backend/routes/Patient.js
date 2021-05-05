@@ -125,7 +125,9 @@ router.put("/:id/getpresc/", (req, res, next) => {
     .then(result => {
       res.status(200).json(result)
     }).catch(error => {
-    res.status(404).json(error);
+    res.status(404).json({
+      message: "error was occurred"
+    });
   });
 });
 
@@ -135,7 +137,9 @@ router.get("/:id/getrdv/", checkAuth, (req, res, next) => {
     .then(result => {
       res.status(200).json(result);
     }).catch(error => {
-      res.status(404).json(error);
+      res.status(404).json({
+        message: "error was occurred"
+      });
   });
 })
 
@@ -171,7 +175,9 @@ router.put("/addinvoice", checkAuth, (req, res, next) => {
           } );
         });
   }).catch(error => {
-    res.json(error);
+    res.status(404).json({
+      message: "error was occurred"
+    });
   })
 });
 
@@ -179,6 +185,10 @@ router.get("/invoice/:id", checkAuth, (req, res, next) => {
   Patient.findById(req.userData.userId).select({invoices: {$elemMatch: {_id: req.params.id}}})
     .populate('invoices.doctor').then(result => {
       res.json(result);
+  }).catch(error => {
+    res.status(404).json({
+      message: "error was occurred"
+    });
   })
 });
 
@@ -191,7 +201,9 @@ router.put("/addfav", checkAuth, (req, res, next) => {
           then(result => {
             res.status(200).json(result);
         }).catch(error => {
-          res.status(401).json(error);
+          res.status(401).json({
+            message: "error was occurred"
+          });
         })
       }
     });
@@ -202,6 +214,10 @@ router.get("", (req, res, next) => {
     res.status(200).json({
       message: "Patients fetched successfully!",
       posts: documents
+    }).catch(error => {
+      res.status(401).json({
+        message: "error was occurred"
+      });
     });
   });
 })
@@ -218,9 +234,11 @@ router.put("/:id", checkAuth, (req, res, next) => {
         result: result
       })
     })
-      .catch(err => {
-      console.log(err);
-    });
+      .catch(error => {
+        res.status(401).json({
+          message: "error was occurred"
+        });
+      })
   });
 });
 
@@ -254,9 +272,11 @@ router.post("/:id/rdv", checkAuth, (req, res, next) => {
     ).then(result => {
       rdvId = result.rdv[result.rdv.length - 1]._id;
     })
-      .catch(err => {
-        console.log(err);
-      });
+      .catch(error => {
+        res.status(401).json({
+          message: "error was occurred"
+        });
+      })
   });
   Patient.findById(req.userData.userId).then(patient => {
     Doctor.updateOne(
@@ -282,7 +302,7 @@ router.post("/login", (req, res, next) => {
     .then(user => {
       if (!user) {
         return res.status(401).json({
-          message: "Auth failed"
+          message: "email not exist"
         });
       }
       fetchedUser = user;
@@ -291,7 +311,7 @@ router.post("/login", (req, res, next) => {
     .then(result => {
       if (!result) {
         return res.status(401).json({
-          message: "Auth failed"
+          message: "password incorrect"
         });
       }
       const token = jwt.sign(
@@ -307,7 +327,8 @@ router.post("/login", (req, res, next) => {
     })
     .catch(err => {
       return res.status(401).json({
-        message: "Auth failed"
+        message: "error occurred",
+        error: err
       });
     });
 })

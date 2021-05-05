@@ -31,8 +31,8 @@ const appRoutes: Routes = [
   { path: 'facture/:rdvid', component: InvoiceDetailComponent },
   { path: 'ordre/:rdvid', component: BookingSuccessComponent, canActivate: [PatientAuthGuard] },
   { path: 'patient/:id', component: ProfileComponent },
-  { path: 'patient/:id/addrecord', component: MedRecordComponent, canActivate: [AuthGuard] },
-  { path: 'patient/:id/addpresc', component: AddPrescComponent, canActivate: [AuthGuard] },
+  { path: 'patient/:id/ajoutDossier', component: MedRecordComponent, canActivate: [AuthGuard] },
+  { path: 'patient/:id/ajoutOrd', component: AddPrescComponent, canActivate: [AuthGuard] },
   { path: 'patient/:id/presc/:prescID', component: AddPrescComponent }
 ];
 

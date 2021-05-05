@@ -12,14 +12,23 @@ router.post("/addroom", (req, res, next) => {
         {$push: {chatRoom: {name: req.body.roomName, with: req.body.doctorId, messages: []}}})
         .then(result => {
           patientres = result
-        });
-
-      Doctor.updateOne({_id: req.body.doctorId},
-        {$push: {chatRoom: {name: req.body.roomName, with: req.body.patientId, messages: []}}})
-        .then(result => {
-          res.status(200).json({result, patientres});
+          Doctor.updateOne({_id: req.body.doctorId},
+            {$push: {chatRoom: {name: req.body.roomName, with: req.body.patientId, messages: []}}})
+            .then(result => {
+              res.status(200).json(result);
+            }).catch(error => {
+            res.status(500).json({
+              message: 'something wrong in messages',
+              error: error
+            })
+          });
         });
     }
+  }).catch(error => {
+    res.status(500).json({
+      message: 'something wrong in messages',
+      error: error
+    })
   })
 
 });

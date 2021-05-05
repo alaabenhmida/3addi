@@ -5,6 +5,7 @@ import {DoctorServiceService} from '../../services/doctor/doctor-service.service
 import {PatientServiceService} from '../../services/Patient/patient-service.service';
 import {Subscription} from 'rxjs';
 import {PatientAuthService} from '../../auth/Patient/patient-auth.service';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-index',
@@ -19,7 +20,8 @@ export class IndexComponent implements OnInit, OnDestroy {
 
   constructor(private doctorService: DoctorServiceService,
               private patientService: PatientServiceService,
-              private authService: PatientAuthService) {
+              private authService: PatientAuthService,
+              private toastr: ToastrService) {
   }
 
   ngOnInit(): void {
@@ -37,6 +39,9 @@ export class IndexComponent implements OnInit, OnDestroy {
   onAddFavDoc(doctorId: string): void {
     this.patientService.addFavourite(doctorId).subscribe(result => {
       console.log(result);
+      this.toastr.success('ajouter aux favoris', '', {
+        positionClass: 'toast-bottom-right'
+      });
     });
   }
 
