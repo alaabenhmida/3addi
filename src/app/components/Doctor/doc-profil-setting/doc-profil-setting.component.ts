@@ -100,7 +100,11 @@ export class DocProfilSettingComponent implements OnInit {
         }));
       }
 
-
+      if (doctor.aboutMe !== 'undefined' && doctor.aboutMe) {
+        this.form.patchValue({
+          aboutMe: doctor.aboutMe
+        });
+      }
       this.form.patchValue({
         username: doctor.name + ' ' + doctor.lastName,
         email: doctor.email,
@@ -115,8 +119,7 @@ export class DocProfilSettingComponent implements OnInit {
         state: doctor.state,
         country: doctor.country,
         zip: doctor.zip,
-        price: doctor.price,
-        aboutMe: doctor.aboutMe
+        price: doctor.price
       });
     });
   }

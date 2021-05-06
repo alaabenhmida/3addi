@@ -3,12 +3,13 @@ import {Doctor} from '../../../models/Doctor/doctor.model';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {DoctorServiceService} from '../../../services/doctor/doctor-service.service';
 import {NgForm} from '@angular/forms';
-import {Subscription} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import {MessagesService} from '../../../shared/messages/messages.service';
 import {PatientAuthService} from '../../../auth/Patient/patient-auth.service';
 import * as moment from 'moment';
 import { RatingModule } from 'ngx-bootstrap/rating';
 import {PatientServiceService} from '../../../services/Patient/patient-service.service';
+import {ToastrService} from 'ngx-toastr';
 
 
 @Component({
@@ -19,7 +20,8 @@ import {PatientServiceService} from '../../../services/Patient/patient-service.s
 export class ProfileDocComponent implements OnInit, OnDestroy {
   id: string;
   doctorData: Doctor;
-  workingTime : any;
+  doctorSub: Subscription;
+  workingTime: any;
   // rate: number;
   // selectedDate: any;
   rating = 0;
@@ -54,7 +56,8 @@ export class ProfileDocComponent implements OnInit, OnDestroy {
 
     constructor(public route: ActivatedRoute, public doctorServive: DoctorServiceService,
                 private authService: PatientAuthService, private chatService: MessagesService,
-                private router: Router, private patientService: PatientServiceService) { }
+                private router: Router, private patientService: PatientServiceService,
+                private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.isauth = this.authService.getIsAuth();
@@ -71,6 +74,34 @@ export class ProfileDocComponent implements OnInit, OnDestroy {
         this.userid = isAuthenticated;
       }
     );
+
+    this.doctorSub = this.doctorServive.getDatalistener().subscribe(data => {
+      this.doctorData = {
+        id: data._id,
+        email: data.email,
+        password: data.password,
+        imagePath: data.imagePath,
+        name: data.name,
+        lastName: data.lastName,
+        gender: data.gender,
+        address: data.address,
+        speciality: data.speciality,
+        post: data.post,
+        birthday: data.birthday,
+        price: data.price,
+        phone: data.phone,
+        address1: data.address1,
+        address2: data.address2,
+        city: data.city,
+        state: data.state,
+        country: data.country,
+        zip: data.zip,
+        aboutMe: data.aboutMe,
+        location: data.location,
+        reviews: data.reviews,
+        rdv: data.rdv
+      };
+    });
 
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       this.id = paramMap.get('id');
@@ -109,19 +140,32 @@ export class ProfileDocComponent implements OnInit, OnDestroy {
         }
         this.workingTime = data.workingTime;
         this.rate = this.rating / data.reviews.length;
+        console.log(this.rating / data.reviews.length);
       });
     });
     // console.log(this.doctorData);
   }
 
   onSubmit(loginForm: NgForm): void {
-    this.doctorServive.addReview(this.id, loginForm.value.rating, loginForm.value.title, loginForm.value.review);
+    this.doctorServive.addReview(this.id, loginForm.value.rating, loginForm.value.title, loginForm.value.review)
+      .subscribe(
+        response => {
+          loginForm.resetForm();
+          this.toastr.success('commentaire ajouter', '', {
+            positionClass: 'toast-bottom-right'
+          });
+          this.doctorServive.getDoctor(this.id).subscribe(doctor => {
+            this.doctorServive.dataUpdated.next(doctor);
+          });
+        }
+      );
     // console.log(loginForm.value);
   }
 
   ngOnDestroy(): void {
     this.roleSubs.unsubscribe();
     this.useridSub.unsubscribe();
+    this.doctorSub.unsubscribe();
   }
 
   getDay(day: string, format: string): string {

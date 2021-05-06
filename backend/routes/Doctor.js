@@ -50,7 +50,20 @@ router.post("/patient/:id/addpresc", checkAuth, (req, res, next) => {
     res.status(400).json(error);
   })
 });
-
+router.put("/find", (req, res, next) => {
+  let genders;
+  if (req.body.genders === []) {
+    genders = ["Male, Female"]
+  } else {
+    genders = req.body.genders
+  }
+  Doctor.find({"name": new RegExp(req.body.name, 'i'),
+    gender: {$in: genders}}).then(result => {
+    res.json(result)
+  }).catch(error => {
+    res.json(error);
+  })
+});
 
 router.put("/workingtimes", checkAuth, (req, res, next) => {
   Doctor.findByIdAndUpdate(req.userData.userId,

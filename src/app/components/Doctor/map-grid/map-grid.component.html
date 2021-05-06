@@ -145,13 +145,13 @@
                 <ng-template>
                   <div class="profile-widget" style="width: 100%; display: inline-block;">
                     <div class="doc-img"><a [routerLink]="['/doctor', doctor?._id]" tabindex="0" target="_blank"><img
-                      class="img-fluid" alt="Dr. John Gibbs" src="{{doctor?.imagePath}}"></a></div>
+                      class="img-fluid" alt="Dr." src="{{doctor?.imagePath}}"></a></div>
                     <div class="pro-content"><h3 class="title"><a [routerLink]="['/doctor', doctor?._id]" tabindex="0">Dr. {{doctor?.name}}
                       {{doctor?.lastName}}</a><i class="fas fa-check-circle verified"></i></h3>
                       <p class="speciality">{{doctor?.speciality}}</p>
                       <div class="rating"><i class="fas fa-star filled"></i><i class="fas fa-star filled"></i><i
                         class="fas fa-star filled"></i><i class="fas fa-star filled"></i><i
-                        class="fas fa-star"></i><span class="d-inline-block average-rating"> (112)</span></div>
+                        class="fas fa-star"></i><span class="d-inline-block average-rating"> ({{doctor?.reviews.length}})</span></div>
                       <ul class="available-info">
                         <li><i class="fas fa-map-marker-alt"></i> {{doctor?.state}}, {{doctor?.country}}</li>
                         <li><i class="far fa-clock"></i> Available on Fri, 25 Mar</li>

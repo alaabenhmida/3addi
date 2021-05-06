@@ -5,6 +5,7 @@ const bcrypt = require("bcrypt");
 const faker = require('faker');
 
 let data = []
+let genders = ["Male", "Female"];
 for (let i = 0; i < 20; i++) {
   data.push(
     {
@@ -13,7 +14,7 @@ for (let i = 0; i < 20; i++) {
       imagePath: 'http://localhost:3000/images/ala-1618588732868.jpg',
       name: faker.name.firstName(),
       lastName: faker.name.lastName(),
-      gender: 'Male',
+      gender: faker.random.arrayElement(genders),
       address: faker.address.streetAddress(),
       speciality: faker.name.jobType(),
       post: faker.name.jobTitle(),

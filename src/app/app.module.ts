@@ -52,6 +52,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {ErrorInterceptor} from './error-interceptor';
 import { ErrorComponent } from './error/error.component';
 import {MatButtonModule} from '@angular/material/button';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
 @NgModule({

@@ -118,6 +118,10 @@ export class DoctorServiceService {
     return  this.http.put('http://localhost:3000/patient/' + patientId + '/updatepresc', {prescID, presc});
   }
 
+  search(name: string, genders?: string[]): Observable<any> {
+    return this.http.put('http://localhost:3000/doctor/find', {name, genders});
+  }
+
   workingTime(duration: number, from: string, to: string, breackTimes: any): Observable<any> {
     return this.http.put('http://localhost:3000/doctor/workingtimes', {duration, from, to, breackTimes});
   }
@@ -144,11 +148,7 @@ export class DoctorServiceService {
       .subscribe(response => {console.log(response); });
   }
 
-  addReview(id: string, rate: number, title: string, review: string): void{
-    this.http.post('http://localhost:3000/doctor/' + id + '/addreview', {rate, title, review}).subscribe(
-      response => {
-        console.log(response);
-      }
-    );
+  addReview(id: string, rate: number, title: string, review: string): Observable<any>{
+    return this.http.post('http://localhost:3000/doctor/' + id + '/addreview', {rate, title, review});
   }
 }
