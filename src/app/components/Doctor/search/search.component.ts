@@ -52,6 +52,6 @@ export class SearchComponent implements OnInit {
   }
 
   onFilter(target: any): void {
-    this.doctors.sort((a, b) => (a.price > b.price) ? 1 : ((a.price > b.price) ? -1 : 0));
+    this.doctors.sort((a, b) => (a.price > b.price) ? 1 : ((b.price > a.price) ? -1 : 0));
   }
 }

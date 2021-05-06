@@ -128,7 +128,7 @@ export class AppointmentComponent implements OnInit {
   }
 
   getDay(day: string, format: string): string {
-    return moment(day).format(format);
+    return moment(day).locale('fr').format(format);
   }
   onclick(time: any, date: any): void {
     const datenow = moment(date).format('YYYY-MM-DD');
