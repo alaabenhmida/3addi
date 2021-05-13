@@ -31,13 +31,14 @@
 
         <!-- Search -->
         <div class="search-box">
-          <form action="https://dreamguys.co.in/demo/doccure/template/search.html">
+          <form [formGroup]="form" (submit)="onSearch()">
             <div class="form-group search-location">
-              <input type="text" class="form-control" placeholder="Search Location">
+              <input type="text" class="form-control" placeholder="Search Location" formControlName="city">
               <span class="form-text">Based on your Location</span>
             </div>
             <div class="form-group search-info">
-              <input type="text" class="form-control" placeholder="Search Doctors, Clinics, Hospitals, Diseases Etc">
+              <input type="text" class="form-control" placeholder="Search Doctors, Clinics, Hospitals, Diseases Etc"
+              formControlName="name">
               <span class="form-text">Ex : Dental or Sugar Check up etc</span>
             </div>
             <button type="submit" class="btn btn-primary search-btn"><i class="fas fa-search"></i> <span>Search</span>

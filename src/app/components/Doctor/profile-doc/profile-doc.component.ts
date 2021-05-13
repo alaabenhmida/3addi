@@ -7,7 +7,6 @@ import {Observable, Subscription} from 'rxjs';
 import {MessagesService} from '../../../shared/messages/messages.service';
 import {PatientAuthService} from '../../../auth/Patient/patient-auth.service';
 import * as moment from 'moment';
-import { RatingModule } from 'ngx-bootstrap/rating';
 import {PatientServiceService} from '../../../services/Patient/patient-service.service';
 import {ToastrService} from 'ngx-toastr';
 
@@ -140,7 +139,6 @@ export class ProfileDocComponent implements OnInit, OnDestroy {
         }
         this.workingTime = data.workingTime;
         this.rate = this.rating / data.reviews.length;
-        console.log(this.rating / data.reviews.length);
       });
     });
     // console.log(this.doctorData);

@@ -40,51 +40,47 @@
                 <div class="login-header">
                   <h3>Login <span>Doccure</span></h3>
                 </div>
-                <form [formGroup]="form" (submit)="onSubmit()">
-                  <div class="form-group form-focus">
-                    <input type="file" (change)="onImagePicked($event)" class="custom-file-input" id="customFile">
-                    <label class="custom-file-label" for="customFile">Choose image</label>
-                  </div>
-                  <div class="upload-images form-group" *ngIf="imagePreview !== '' && imagePreview && form.get('image').valid">
-                    <img [src]="imagePreview" [alt]="form.value.email">
-                  </div>
-                  <div class="form-group form-focus">
-                    <input type="email" class="form-control floating" formControlName="email">
-                    <label class="focus-label">Email</label>
-                  </div>
-                  <div class="form-group form-focus">
-                    <input type="password" class="form-control floating" formControlName="password">
-                    <label class="focus-label">Password</label>
-                  </div>
-                  <div class="form-group form-focus">
-                    <input type="text" class="form-control floating" formControlName="name">
-                    <label class="focus-label">name</label>
-                  </div>
-                  <div class="form-group form-focus">
-                    <input type="text" class="form-control floating" formControlName="address">
-                    <label class="focus-label">Address</label>
-                  </div>
-                  <div class="form-group form-focus">
-                    <input type="text" class="form-control floating" formControlName="speciality">
-                    <label class="focus-label">speciality</label>
-                  </div>
-                  <div class="form-group form-focus">
-                    <input type="text" class="form-control floating" formControlName="post">
-                    <label class="focus-label">post</label>
-                  </div>
-                  <div class="form-group form-focus">
-                    <input type="date" class="form-control floating" formControlName="birthday">
-                    <label class="focus-label">Birthday</label>
-                  </div>
-                  <div class="form-group form-focus">
-                    <input type="text" class="form-control floating" formControlName="price">
-                    <label class="focus-label">price</label>
-                  </div>
-                  <div class="form-group form-focus">
-                    <input type="text" class="form-control floating" formControlName="phone">
-                    <label class="focus-label">Phone</label>
-                  </div>
-                  <div class="text-right">
+                <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
+                  {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
+                </button>
+                <mat-vertical-stepper [linear]="isLinear" #stepper>
+                  <mat-step [stepControl]="firstFormGroup">
+                    <form [formGroup]="firstFormGroup">
+                      <ng-template matStepLabel>Fill out your name</ng-template>
+                      <mat-form-field>
+                        <mat-label>Name</mat-label>
+                        <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+                      </mat-form-field>
+                      <div>
+                        <button mat-button matStepperNext>Next</button>
+                      </div>
+                    </form>
+                  </mat-step>
+                  <mat-step [stepControl]="secondFormGroup">
+                    <form [formGroup]="secondFormGroup">
+                      <ng-template matStepLabel>Fill out your address</ng-template>
+                      <mat-form-field appearance="outline">
+                        <mat-label>Address</mat-label>
+                        <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
+                               required>
+                      </mat-form-field>
+                      <div>
+                        <button mat-button matStepperPrevious>Back</button>
+                        <button mat-button matStepperNext>Next</button>
+                      </div>
+                    </form>
+                  </mat-step>
+                  <mat-step>
+                    <ng-template matStepLabel>Done</ng-template>
+                    <p>You are now done.</p>
+                    <div>
+                      <button mat-button matStepperPrevious>Back</button>
+                      <button mat-button (click)="stepper.reset()">Reset</button>
+                    </div>
+                  </mat-step>
+                </mat-vertical-stepper>
+
+                <div class="text-right">
                     <a class="forgot-link" href="forgot-password.html">Forgot Password ?</a>
                   </div>
                   <button class="btn btn-primary btn-block btn-lg login-btn" type="submit">Create account</button>
@@ -101,7 +97,7 @@
                     </div>
                   </div>
                   <div class="text-center dont-have">Don’t have an account? <a href="register.html">Register</a></div>
-                </form>
+
               </div>
             </div>
           </div>

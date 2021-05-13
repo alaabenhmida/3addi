@@ -53,6 +53,18 @@ import {ErrorInterceptor} from './error-interceptor';
 import { ErrorComponent } from './error/error.component';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { ProductPageGridComponent } from './components/Pharmacie/product-page-grid/product-page-grid.component';
+import {PharmacieRoutingModule} from './routers/pharmacie-routing/pharmacie-routing.module';
+import { ProductDetailsComponent } from './components/Pharmacie/product-details/product-details.component';
+import { CartComponent } from './components/Pharmacie/cart/cart.component';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatIconModule} from '@angular/material/icon';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { PharmacieProfileComponent } from './components/Pharmacie/pharmacie-profile/pharmacie-profile.component';
+import { PharmacieSearchComponent } from './components/Pharmacie/pharmacie-search/pharmacie-search.component';
+import { PharLoginComponent } from './components/Pharmacie/phar-login/phar-login.component';
+import { PharDashboardComponent } from './components/Pharmacie/phar-dashboard/phar-dashboard.component';
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
 @NgModule({
@@ -85,7 +97,14 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     ReviewsComponent,
     SearchComponent,
     ManageTimeComponent,
-    ErrorComponent
+    ErrorComponent,
+    ProductPageGridComponent,
+    ProductDetailsComponent,
+    CartComponent,
+    PharmacieProfileComponent,
+    PharmacieSearchComponent,
+    PharLoginComponent,
+    PharDashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -94,8 +113,10 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     ToastrModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
+    RouterModule,
     PatientRoutingModule,
     DoctorRoutingModule,
+    PharmacieRoutingModule,
     BrowserModule,
     FormsModule,
     DlDateTimeDateModule,  // <--- Determines the data type of the model
@@ -104,6 +125,10 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     MatPaginatorModule,
     MatInputModule,
     MatDialogModule,
+    MatChipsModule,
+    MatIconModule,
+    MatStepperModule,
+    MatSnackBarModule,
     SocketIoModule.forRoot(config),
     TooltipModule.forRoot(),
     AgmCoreModule.forRoot({
@@ -113,7 +138,6 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     RatingModule,
     AlertModule.forRoot(),
     PaginationModule.forRoot(),
-    RouterModule,
     MatButtonModule,
     // BarRatingModule,
     // // BarRatingModule

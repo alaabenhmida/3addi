@@ -18,9 +18,9 @@ var locations =[{
 	"lat":53.470692,
 	"lng":-2.220328,
 	"icons":"default",
-	"profile_link":"doctor-profile.html",
+	"profile_link":"profile.html",
 	"total_review":"17",
-	"image":'assets/img/doctors/doctor-01.jpg'
+	"image":'assets/img/user/patient.jpg'
 	}, {
 		
 	"id":02,
@@ -32,9 +32,9 @@ var locations =[{
 	"lat":53.469189,
 	"lng":-2.199262,
 	"icons":"default",
-	"profile_link":"doctor-profile.html",
+	"profile_link":"profile.html",
 	"total_review":"35",
-	"image":'assets/img/doctors/doctor-02.jpg'
+	"image":'assets/img/user/patient1.jpg'
 	}, {
 	"id":03,
 	"doc_name":"Dr. Deborah Angel",
@@ -45,9 +45,9 @@ var locations =[{
 	"lat":53.468665,
 	"lng":-2.189269,
 	"icons":"default",
-	"profile_link":"doctor-profile.html",
+	"profile_link":"profile.html",
 	"total_review":"27",
-	"image":'assets/img/doctors/doctor-03.jpg'
+	"image":'assets/img/user/patient2.jpg'
 	}, {
 	"id":04,
 	"doc_name":"Dr. Sofia Brient",
@@ -58,9 +58,9 @@ var locations =[{
 	"lat":53.463894,
 	"lng":-2.177880,
 	"icons":"default",
-	"profile_link":"doctor-profile.html",
+	"profile_link":"profile.html",
 	"total_review":"4",
-	"image":'assets/img/doctors/doctor-04.jpg'
+	"image":'assets/img/user/patient3.jpg'
 	}, {
 	"id":05,
 	"doc_name":"Dr. Marvin Campbell",
@@ -71,9 +71,9 @@ var locations =[{
 	"lat":53.466359,
 	"lng":-2.213314,
 	"icons":"default",
-	"profile_link":"doctor-profile.html",
+	"profile_link":"profile.html",
 	"total_review":"66",
-	"image":'assets/img/doctors/doctor-05.jpg'
+	"image":'assets/img/user/patient4.jpg'
 	}, {
 	"id":06,
 	"doc_name":"Dr. Katharine Berthold",
@@ -84,9 +84,9 @@ var locations =[{
 	"lat":53.463906,
 	"lng":-2.213271,
 	"icons":"default",
-	"profile_link":"doctor-profile.html",
+	"profile_link":"profile.html",
 	"total_review":"52",
-	"image":'assets/img/doctors/doctor-06.jpg'
+	"image":'assets/img/user/patient5.jpg'
 	}, {
 	"id":07,
 	"doc_name":"Dr. Linda Tobin",
@@ -97,9 +97,9 @@ var locations =[{
 	"lat":53.461974,
 	"lng":-2.210661,
 	"icons":"default",
-	"profile_link":"doctor-profile.html",
+	"profile_link":"profile.html",
 	"total_review":"43",
-	"image":'assets/img/doctors/doctor-07.jpg'
+	"image":'assets/img/user/patient6.jpg'
 	}, {
 	"id":08,
 	"doc_name":"Dr. Paul Richard",
@@ -110,9 +110,9 @@ var locations =[{
 	"lat":53.458785,
 	"lng":-2.188532,
 	"icons":"default",
-	"profile_link":"doctor-profile.html",
+	"profile_link":"profile.html",
 	"total_review":"49",
-	"image":'assets/img/doctors/doctor-08.jpg'
+	"image":'assets/img/user/patient7.jpg'
 	}, {
 	"id":09,
 	"doc_name":"Dr. John Gibbs",
@@ -123,9 +123,9 @@ var locations =[{
 	"lat":53.4558571,
 	"lng":-2.1950372,
 	"icons":"default",
-	"profile_link":"doctor-profile.html",
+	"profile_link":"profile.html",
 	"total_review":"112",
-	"image":'assets/img/doctors/doctor-09.jpg'
+	"image":'assets/img/user/patient8.jpg'
 	}, {
 	"id":10,
 	"doc_name":"Dr. Olga Barlow",
@@ -136,9 +136,9 @@ var locations =[{
 	"lat":53.458850,
 	"lng":-2.194549,
 	"icons":"default",
-	"profile_link":"doctor-profile.html",
+	"profile_link":"profile.html",
 	"total_review":"65",
-	"image":'assets/img/doctors/doctor-10.jpg'
+	"image":'assets/img/user/patient9.jpg'
 	}, {
 	"id":11,
 	"doc_name":"Dr. Julia Washington",
@@ -149,9 +149,9 @@ var locations =[{
 	"lat":53.461733,
 	"lng":-2.194502,
 	"icons":"default",
-	"profile_link":"doctor-profile.html",
+	"profile_link":"profile.html",
 	"total_review":"5",
-	"image":'assets/img/doctors/doctor-11.jpg'
+	"image":'assets/img/user/patient10.jpg'
 	}, {
 	"id":12,
 	"doc_name":"Dr. Shaun Aponte",
@@ -162,9 +162,9 @@ var locations =[{
 	"lat":53.460548,
 	"lng":-2.190956,
 	"icons":"default",
-	"profile_link":"doctor-profile.html",
+	"profile_link":"profile.html",
 	"total_review":"5",
-	"image":'assets/img/doctors/doctor-12.jpg'
+	"image":'assets/img/user/patient11.jpg'
 	}
 	];
 

@@ -63,6 +63,20 @@ const patientSchema = mongoose.Schema({
     paymentMethod: {type: String},
     cardNumber: {type: String},
     rdvDate: {type: String}
+  }],
+  cart: [{
+    pharmacie: { type : mongoose.Schema.Types.ObjectId, ref: 'Pharmacie'},
+    products: [{
+      product: {
+        id: {type: mongoose.Schema.Types.ObjectId},
+        name: {type: String},
+        description: {type: String},
+        price: {type: Number},
+        image: {type: String},
+        stock: {type: Number}
+      },
+      quantity: {type: Number},
+    }]
   }]
 });
 

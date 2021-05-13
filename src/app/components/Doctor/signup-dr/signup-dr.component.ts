@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {DoctorAuthService} from '../../../auth/Doctor/doctor-auth.service';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {mimeType} from '../../../shared/mime-type.validator';
 
 @Component({
@@ -11,10 +11,19 @@ import {mimeType} from '../../../shared/mime-type.validator';
 export class SignupDrComponent implements OnInit {
   form: FormGroup;
   imagePreview: string;
+  isLinear = false;
+  firstFormGroup: FormGroup;
+  secondFormGroup: FormGroup;
 
-  constructor(public doctorService: DoctorAuthService) { }
+  constructor(public doctorService: DoctorAuthService, private _formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
+    this.firstFormGroup = this._formBuilder.group({
+      firstCtrl: ['', Validators.required]
+    });
+    this.secondFormGroup = this._formBuilder.group({
+      secondCtrl: ['', Validators.required]
+    });
     this.form = new FormGroup({
       email: new FormControl(null, {
         validators: [Validators.required, Validators.minLength(3)]

@@ -372,11 +372,23 @@
           <div class="card services-card">
             <div class="card-body">
               <h4 class="card-title">Services and Specialization</h4>
-              <div class="form-group">
-                <label>Services</label>
-                <input type="text" data-role="tagsinput" class="input-tags form-control" placeholder="Enter Services" name="services" value="Tooth cleaning " id="services">
-                <small class="form-text text-muted">Note : Type & Press enter to add new services</small>
-              </div>
+
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>Services</mat-label>
+                  <mat-chip-list #chipList aria-label="Fruit selection">
+                    <mat-chip *ngFor="let fruit of fruits" [selectable]="selectable"
+                              [removable]="removable" (removed)="remove(fruit)">
+                      {{fruit.name}}
+                      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                    </mat-chip>
+                    <input placeholder="New service..."
+                           [matChipInputFor]="chipList"
+                           [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                           [matChipInputAddOnBlur]="addOnBlur"
+                           (matChipInputTokenEnd)="add($event)">
+                  </mat-chip-list>
+                </mat-form-field>
+
               <div class="form-group mb-0">
                 <label>Specialization </label>
                 <input class="input-tags form-control" type="text" data-role="tagsinput" placeholder="Enter Specialization" name="specialist" value="Children Care,Dental Care" id="specialist">

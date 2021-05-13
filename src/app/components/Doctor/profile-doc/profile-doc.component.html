@@ -25,7 +25,7 @@
               <li aria-current="page" class="breadcrumb-item active">Doctor Profile</li>
             </ol>
           </nav>
-          <h2 class="breadcrumb-title">Doctor Profile</h2>
+          <h2 class="breadcrumb-title">{{doctorData?.name}} {{doctorData?.lastName}}</h2>
         </div>
       </div>
     </div>
@@ -284,14 +284,14 @@
               <!-- Review Listing -->
               <div class="widget review-listing">
                 <h4
-                  *ngIf="(doctorData.reviews.length <= 0)"
+                  *ngIf="(doctorData?.reviews.length <= 0)"
                   class="widget-title text-center text-info">Pas de reviews</h4>
                 <ul class="comments-list">
 
 
                   <!-- Comment List -->
                   <li *ngFor="let review of doctorData?.reviews">
-                    <div *ngIf="review.review.length > 0" class="comment">
+                    <div *ngIf="review?.review.length > 0" class="comment">
                       <img alt="User Image" class="avatar avatar-sm rounded-circle"
                            src="{{review?.patientId.imagePath}}">
                       <div class="comment-body">

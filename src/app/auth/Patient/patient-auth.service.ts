@@ -96,7 +96,7 @@ export class PatientAuthService {
             this.router.navigate(['/']);
           }
         });
-    } else {
+    } else if (role === 'doctor') {
       this.http
         .post<{ token: string; expiresIn: number, user: any }>(
           'http://localhost:3000/doctor/login',
@@ -118,6 +118,35 @@ export class PatientAuthService {
             this.usernameListener.next(username);
             this.userimageListener.next(userimage);
             this.roleListener.next('doctor');
+            const now = new Date();
+            const expirationDate = new Date(now.getTime() + expiresInDuration * 1000);
+            console.log(expirationDate);
+            this.saveAuthData(token, expirationDate, userid, username, userimage, role);
+            this.router.navigate(['/']);
+          }
+        });
+    } else {
+      this.http
+        .post<{ token: string; expiresIn: number, user: any }>(
+          'http://localhost:3000/pharmacies/login',
+          authData
+        )
+        .subscribe(response => {
+          const token = response.token;
+          this.token = token;
+          if (token) {
+            const expiresInDuration = response.expiresIn;
+            this.setAuthTimer(expiresInDuration);
+            this.isAuthenticated = true;
+            const userid = response.user._id;
+            const username = response.user.name;
+            const userimage = response.user.imagePath;
+            this.user = response.user;
+            this.authStatusListener.next(true);
+            this.useridListener.next(userid);
+            this.usernameListener.next(username);
+            this.userimageListener.next(userimage);
+            this.roleListener.next('pharmacien');
             const now = new Date();
             const expirationDate = new Date(now.getTime() + expiresInDuration * 1000);
             console.log(expirationDate);

@@ -5,6 +5,12 @@ import {Doctor} from '../../../models/Doctor/doctor.model';
 import {mimeType} from '../../../shared/mime-type.validator';
 import {PatientAuthService} from '../../../auth/Patient/patient-auth.service';
 import {ToastrService} from 'ngx-toastr';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import {MatChipInputEvent} from '@angular/material/chips';
+
+export interface Fruit {
+  name: string;
+}
 
 @Component({
   selector: 'app-doc-profil-setting',
@@ -22,6 +28,13 @@ export class DocProfilSettingComponent implements OnInit {
   private geoCoder;
   @ViewChild('search')
   public searchElementRef: ElementRef;
+
+  visible = true;
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+  fruits: Fruit[] = [];
 
   constructor(private fb: FormBuilder, private doctorService: DoctorServiceService, private authService: PatientAuthService,
               private toastr: ToastrService) { }
@@ -134,30 +147,32 @@ export class DocProfilSettingComponent implements OnInit {
     }
   }
 
-  // markerDragEnd($event: any): void {
-  //   console.log($event);
-  //   this.latitude = $event.coords.lat;
-  //   this.longitude = $event.coords.lng;
-  //   this.getAddress(this.latitude, this.longitude);
-  // }
+  //////////// angular chips /////////////
 
-  // getAddress(latitude, longitude): void {
-  //   this.geoCoder.geocode({ 'location': { lat: latitude, lng: longitude } }, (results, status) => {
-  //     console.log(results);
-  //     console.log(status);
-  //     if (status === 'OK') {
-  //       if (results[0]) {
-  //         this.zoom = 12;
-  //         this.address = results[0].formatted_address;
-  //       } else {
-  //         window.alert('No results found');
-  //       }
-  //     } else {
-  //       window.alert('Geocoder failed due to: ' + status);
-  //     }
-  //
-  //   });
-  // }
+  add(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    // Add our fruit
+    if ((value || '').trim()) {
+      this.fruits.push({name: value.trim()});
+    }
+
+    // Reset the input value
+    if (input) {
+      input.value = '';
+    }
+  }
+
+  remove(fruit: Fruit): void {
+    const index = this.fruits.indexOf(fruit);
+
+    if (index >= 0) {
+      this.fruits.splice(index, 1);
+    }
+  }
+
+  /////////// angular chips/////////////
 
   addRegistrations(): void {
     const award = this.form.controls.registrations as FormArray;

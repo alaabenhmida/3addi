@@ -6,6 +6,8 @@ import {PatientServiceService} from '../../services/Patient/patient-service.serv
 import {Subscription} from 'rxjs';
 import {PatientAuthService} from '../../auth/Patient/patient-auth.service';
 import {ToastrService} from 'ngx-toastr';
+import {Router} from '@angular/router';
+import {FormControl, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-index',
@@ -13,6 +15,7 @@ import {ToastrService} from 'ngx-toastr';
   styleUrls: ['./index.component.css']
 })
 export class IndexComponent implements OnInit, OnDestroy {
+  form: FormGroup;
   doctorsData: Doctor[];
   private isloggedIn = false;
   private isloggedInSub: Subscription;
@@ -21,7 +24,8 @@ export class IndexComponent implements OnInit, OnDestroy {
   constructor(private doctorService: DoctorServiceService,
               private patientService: PatientServiceService,
               private authService: PatientAuthService,
-              private toastr: ToastrService) {
+              private toastr: ToastrService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -33,6 +37,10 @@ export class IndexComponent implements OnInit, OnDestroy {
     );
     this.doctorService.getAllDoctors(3, 1).subscribe(result => {
       this.doctorsData = result.doctors;
+    });
+    this.form = new FormGroup({
+      city: new FormControl(null),
+      name: new FormControl(null)
     });
   }
 
@@ -51,5 +59,10 @@ export class IndexComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.isloggedInSub.unsubscribe();
+  }
+
+  onSearch(): void {
+    this.router.navigate(['doctor/search'], {queryParams: {name: this.form.value.name,
+      city: this.form.value.city}});
   }
 }

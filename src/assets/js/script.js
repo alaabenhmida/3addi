@@ -221,6 +221,49 @@ Version      : 1.3
 			}]
 		});
 	}
+
+
+	// Slick Slider
+	if($('.features-slider1').length == 1) {
+		$('.features-slider1').slick({
+			dots: false,
+			infinite: true,
+			centerMode: false,
+			slidesToShow: 1,
+			speed: 500,
+			variableWidth: true,
+			arrows: true,
+			autoplay:false,
+			responsive: [{
+				  breakpoint: 992,
+				  settings: {
+					slidesToShow: 1
+				  }
+
+			}]
+		});
+	}
+	if($('.slider-1').length > 0) {
+	    $('.slider-1').slick();
+	}
+
+	//Home pharmacy slider
+	if($('.pharmacy-home-slider .swiper-container').length > 0) {
+		 	var swiper = new Swiper('.pharmacy-home-slider .swiper-container', {
+		 	loop: true,
+		 	speed: 1000,
+	      	pagination: {
+	        	el: '.pharmacy-home-slider .swiper-pagination',
+	        	dynamicBullets: true,
+	        	clickable: true,
+	      	},
+	      	navigation: {
+        		nextEl: '.pharmacy-home-slider .swiper-button-next',
+        		prevEl: '.pharmacy-home-slider .swiper-button-prev',
+      		},
+	    });
+	}
+
 	
 	// Date Range Picker
 	if($('.bookingrange').length > 0) {
@@ -266,6 +309,29 @@ Version      : 1.3
 			return false;
 		});
 	})();
+
+	//Increment Decrement Numberes
+	var quantitiy=0;
+   $('.quantity-right-plus').click(function(e){
+        e.preventDefault();
+        var quantity = parseInt($('#quantity').val());        
+            $('#quantity').val(quantity + 1);
+    });
+
+     $('.quantity-left-minus').click(function(e){
+        e.preventDefault();
+        var quantity = parseInt($('#quantity').val());
+            if(quantity>0){
+            	$('#quantity').val(quantity - 1);
+            }
+    });
+
+     //Cart Click
+     $("#cart").on("click", function(o) {
+     	o.preventDefault();
+    	$(".shopping-cart").fadeToggle();
+    	$(".shopping-cart").toggleClass('show-cart');
+ 	 });
 	
 	// Circle Progress Bar
 	

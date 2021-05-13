@@ -60,9 +60,55 @@ router.put("", multer({storage: storage}).single("image"), checkAuth,
           res.status(201).json(result);
         }).catch(error => {
         res.json(error);
-      })
+      });
     }
-  })
+  });
+
+router.put("/addtocart", checkAuth, (req, res, next) => {
+
+  Patient.findOne({_id: req.userData.userId,
+    cart : {$elemMatch: {pharmacie: req.body.pharmacie}}}).then(result => {
+      if (result) {
+        Patient.findOneAndUpdate({_id: req.userData.userId,
+            cart : {$elemMatch: {pharmacie: req.body.pharmacie}}},
+          {$set :{'cart.$.products': req.body.products}},
+          {'new': true, 'safe': true, 'upsert': true})
+          .then( () => {
+            Patient.findOne({_id: req.userData.userId}).select({cart: {$elemMatch: {pharmacie: req.body.pharmacie}}})
+              .then(result => {
+                res.status(200).json(result);
+              }).catch(error => {
+              res.status(400).json(error);
+            });
+        }).catch(error => {
+          res.status(400).json(error);
+        });
+      } else {
+        Patient.updateOne({_id: req.userData.userId},
+          {$push: {cart: {products: req.body.products,
+                pharmacie: req.body.pharmacie}}}).then(() => {
+          // invoiceID = result.cart[result.cart.length - 1]._id;
+          Patient.findOne({_id: req.userData.userId}).select({cart: {$elemMatch: {pharmacie: req.body.pharmacie}}})
+            .then(result => {
+              res.status(200).json(result);
+            }).catch(error => {
+            res.status(400).json(error);
+          });
+        }).catch(error => {
+          res.status(400).json(error);
+        });
+      }
+  });
+});
+
+router.put("/getcart", checkAuth, (req, res, next) => {
+  Patient.findOne({_id: req.userData.userId}).select({cart: {$elemMatch: {pharmacie: req.body.pharmacie}}})
+    .then(result => {
+      res.status(200).json(result);
+    }).catch(error => {
+      res.status(400).json(error);
+  });
+});
 
 router.post("/signup",
   multer({storage: storage}).single("image"),

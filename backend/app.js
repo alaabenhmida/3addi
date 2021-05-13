@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 
 const patient = require("./routes/patient");
 const doctor = require("./routes/Doctor");
+const pharmacie = require("./routes/Pharmacie");
 const messages = require("./routes/messagesRoutes");
 
 const app = express();
@@ -38,6 +39,7 @@ app.use((req, res, next) => {
 app.use("/patient", patient);
 app.use("/doctor", doctor);
 app.use("/messages", messages);
+app.use("/pharmacies", pharmacie);
 
 
 module.exports = app;
