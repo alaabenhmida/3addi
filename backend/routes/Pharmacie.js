@@ -14,6 +14,14 @@ router.put("/getProduct", (req, res, next) => {
   });
 });
 
+router.get("/getbykey", checkAuth, (req, res, next) => {
+  Pharmacie.findOne({_id: req.userData.userId}).then(pharmacie => {
+    res.status(200).json(pharmacie);
+  }).catch(error => {
+    res.status(404).json(error);
+  });
+});
+
 router.post("/:id/addreview", checkAuth, (req, res, next) => {
     Pharmacie.updateOne(
       {_id: req.params.id},
@@ -76,13 +84,6 @@ router.get("", (req, res, next) => {
     });
 });
 
-router.get("/getbykey", checkAuth, (req, res, next) => {
-  Pharmacie.findOne({_id: req.userData.userId}).then(pharmacie => {
-    res.status(200).json(pharmacie);
-  }).catch(error => {
-    res.status(400).json(error);
-  });
-});
 
 router.post("/login", (req, res, next) => {
   let fetchedUser;

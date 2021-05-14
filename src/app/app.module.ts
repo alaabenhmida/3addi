@@ -65,6 +65,8 @@ import { PharmacieProfileComponent } from './components/Pharmacie/pharmacie-prof
 import { PharmacieSearchComponent } from './components/Pharmacie/pharmacie-search/pharmacie-search.component';
 import { PharLoginComponent } from './components/Pharmacie/phar-login/phar-login.component';
 import { PharDashboardComponent } from './components/Pharmacie/phar-dashboard/phar-dashboard.component';
+import { ProduitsComponent } from './components/Pharmacie/produits/produits.component';
+import { AddProductComponent } from './components/Pharmacie/add-product/add-product.component';
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
 @NgModule({
@@ -104,7 +106,9 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     PharmacieProfileComponent,
     PharmacieSearchComponent,
     PharLoginComponent,
-    PharDashboardComponent
+    PharDashboardComponent,
+    ProduitsComponent,
+    AddProductComponent
   ],
   imports: [
     BrowserModule,

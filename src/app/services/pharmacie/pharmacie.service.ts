@@ -13,6 +13,10 @@ export class PharmacieService {
     return this.dataUpdated as Observable<any>;
   }
 
+  getDataByKey(): Observable<any> {
+    return this.http.get('http://localhost:3000/pharmacies/getbykey');
+  }
+
   search(city: string): Observable<any> {
     return this.http.put('http://localhost:3000/pharmacies/find', {city});
   }

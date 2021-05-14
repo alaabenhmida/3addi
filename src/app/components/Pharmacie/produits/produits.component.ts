@@ -3,11 +3,11 @@ import {Pharmacie} from '../../../models/Pharmacie/pharmacie.model';
 import {PharmacieService} from '../../../services/pharmacie/pharmacie.service';
 
 @Component({
-  selector: 'app-phar-dashboard',
-  templateUrl: './phar-dashboard.component.html',
-  styleUrls: ['./phar-dashboard.component.css']
+  selector: 'app-produits',
+  templateUrl: './produits.component.html',
+  styleUrls: ['./produits.component.css']
 })
-export class PharDashboardComponent implements OnInit {
+export class ProduitsComponent implements OnInit {
   pharmacieData: Pharmacie;
 
   constructor(private pharmacieService: PharmacieService) { }

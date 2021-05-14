@@ -9,10 +9,14 @@ import {PharmacieProfileComponent} from '../../components/Pharmacie/pharmacie-pr
 import {PharmacieSearchComponent} from '../../components/Pharmacie/pharmacie-search/pharmacie-search.component';
 import {PharLoginComponent} from '../../components/Pharmacie/phar-login/phar-login.component';
 import {PharDashboardComponent} from '../../components/Pharmacie/phar-dashboard/phar-dashboard.component';
+import {ProduitsComponent} from '../../components/Pharmacie/produits/produits.component';
+import {AddProductComponent} from '../../components/Pharmacie/add-product/add-product.component';
 
 const appRoutes: Routes = [
   { path: 'pharmacie/login', component: PharLoginComponent},
   { path: 'pharmacie/dashboard', component: PharDashboardComponent},
+  { path: 'pharmacie/dashboard/produits', component: ProduitsComponent},
+  { path: 'pharmacie/dashboard/addproduits', component: AddProductComponent},
   { path: 'pharmacie/search', component: PharmacieSearchComponent},
   { path: 'pharmacie/:id/about', component: PharmacieProfileComponent},
   { path: 'pharmacie/:id', component: ProductPageGridComponent, canActivate: [PatientAuthGuard] },
