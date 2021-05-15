@@ -116,7 +116,7 @@
                   <div class="time-slot">
                     <ul class="clearfix">
                       <li *ngFor="let day of week">
-                        <a *ngFor="let time of getSlots(day, x.nextSlot, x.breackTimes, x.startTime, x.endTime)" class="timing" (click)="onclick(time, day)" >
+                        <a id="timi" *ngFor="let time of getSlots(day, x.nextSlot, x.breackTimes, x.startTime, x.endTime)" class="timing" (click)="onclick(time, day)" >
                           <span>{{time}}</span > <span>AM</span>
                         </a>
 

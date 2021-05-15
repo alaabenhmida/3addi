@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import {RouterModule, Routes} from '@angular/router';
 import {IndexComponent} from '../../shared/index/index.component';
 import {LoginComponent} from '../../components/Patient/login/login.component';
@@ -15,8 +14,6 @@ import {InvoiceDetailComponent} from '../../components/Patient/invoice-detail/in
 import {PatientDhashboardComponent} from '../../components/Patient/patient-dhashboard/patient-dhashboard.component';
 import {AuthGuard} from '../../auth/doctor-auth.gards';
 import {PatientAuthGuard} from '../../auth/patient-auth.gards';
-import {CheckoutComponent} from '../../components/Patient/checkout/checkout.component';
-import {AppointementsComponent} from '../../components/Doctor/appointements/appointements.component';
 import {LoginAuthGuard} from '../../auth/login-auth.gards';
 
 

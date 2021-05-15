@@ -17,6 +17,7 @@ const appRoutes: Routes = [
   { path: 'pharmacie/dashboard', component: PharDashboardComponent},
   { path: 'pharmacie/dashboard/produits', component: ProduitsComponent},
   { path: 'pharmacie/dashboard/addproduits', component: AddProductComponent},
+  { path: 'pharmacie/dashboard/produits/:id/editer', component: AddProductComponent},
   { path: 'pharmacie/search', component: PharmacieSearchComponent},
   { path: 'pharmacie/:id/about', component: PharmacieProfileComponent},
   { path: 'pharmacie/:id', component: ProductPageGridComponent, canActivate: [PatientAuthGuard] },

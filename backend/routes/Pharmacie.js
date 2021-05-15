@@ -4,6 +4,41 @@ const router = express.Router();
 const Pharmacie = require("../models/Pharmacie");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const multer = require("multer");
+
+const MIME_TYPE_MAP = {
+  "image/png": "png",
+  "image/jpeg": "jpg",
+  "image/jpg": "jpg"
+};
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    const isValid = MIME_TYPE_MAP[file.mimetype];
+    let error = new Error("Invalid mime type");
+    if (isValid) {
+      error = null;
+    }
+    cb(error, "backend/images");
+  },
+  filename: (req, file, cb) => {
+    const name = file.originalname
+      .toLowerCase()
+      .split(" ")
+      .join("-");
+    const ext = MIME_TYPE_MAP[file.mimetype];
+    cb(null, name + "-" + Date.now() + "." + ext);
+  }
+});
+
+router.put("/getProductbyid",checkAuth, (req, res, next) => {
+  Pharmacie.findById(req.userData.userId).select({products: {$elemMatch: {_id: req.body.productID}}})
+    .then(result => {
+      res.status(200).json(result);
+    }).catch(error => {
+    res.status(400).json(error);
+  });
+});
 
 router.put("/getProduct", (req, res, next) => {
   Pharmacie.findById(req.body.pharmacieID).select({products: {$elemMatch: {_id: req.body.productID}}})
@@ -11,6 +46,59 @@ router.put("/getProduct", (req, res, next) => {
       res.status(200).json(result);
     }).catch(error => {
       res.status(400).json(error);
+  });
+});
+
+router.delete("/product/:id",checkAuth, (req, res, next) => {
+  Pharmacie.findOneAndUpdate({_id: req.userData.userId},
+    {$pull: {products: {_id: req.params.id}}},
+    {'new': true, 'safe': true, 'upsert': true}).then(result => {
+     res.status(201).json(result);
+  }).catch(error => {
+    res.status(400).json(error);
+  });
+});
+
+router.put("/editproduct/:id",
+  multer({storage: storage}).single("image"), checkAuth,
+  (req, res, next) => {
+    let imagePath = req.body.image;
+    // if (req.file) {
+      const url = req.protocol + "://" + req.get("host");
+      imagePath = url + "/images/" + req.file.filename;
+      Pharmacie.findOneAndUpdate({_id: req.userData.userId,
+        products: {$elemMatch: {_id: req.params.id}}},
+        {$set: {'products.$.name': req.body.name, 'products.$.description': req.body.description,
+          'products.$.price': +req.body.price, 'products.$.image:': imagePath,
+          'products.$.stock': +req.body.stock}},
+        {'new': true, 'safe': true, 'upsert': true}).then(result => {
+         res.status(201).json(result);
+      }).catch(error => {
+        res.status(401).json({
+          message: "error occurred",
+          error: error
+        });
+      });
+    // }
+});
+
+router.put("/addproduct",
+  multer({storage: storage}).single("image"), checkAuth, (req, res, next) => {
+    let imagePath = req.body.image;
+    const url = req.protocol + "://" + req.get("host");
+    imagePath = url + "/images/" + req.file.filename;
+  Pharmacie.findOneAndUpdate({_id: req.userData.userId},
+    {$push: {products: {name: req.body.name, description: req.body.description,
+          price: +req.body.price, image: imagePath, stock: +req.body.stock}}},
+    {'new': true, 'safe': true, 'upsert': true})
+    .then(result => {
+      res.status(201).json(result);
+    }).catch(error => {
+      console.log(error);
+     res.status(400).json({
+       message: "error occurred",
+       error: error
+     });
   });
 });
 
