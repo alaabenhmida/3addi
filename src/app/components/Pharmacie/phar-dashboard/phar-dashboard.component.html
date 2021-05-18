@@ -43,19 +43,17 @@
 
       <div class="row">
         <div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
-
-          <!-- Profile Sidebar -->
           <div class="profile-sidebar">
             <div class="widget-profile pro-widget-content">
               <div class="profile-info-widget">
-                <a href="#" class="booking-doc-img">
-                  <img src="assets/img/doctors/doctor-thumb-02.jpg" alt="User Image">
+                <a class="booking-doc-img">
+                  <img src="{{pharmacieData?.imagePath}}" alt="User Image">
                 </a>
                 <div class="profile-det-info">
                   <h3>{{pharmacieData?.name}}</h3>
-
                   <div class="patient-details">
-                    <h5 class="mb-0">{{pharmacieData?.name}}</h5>
+                    <h5><i class="fas fa-birthday-cake"></i> 24 Jul 1983, 38 years</h5>
+                    <h5 class="mb-0"><i class="fas fa-map-marker-alt"></i> {{pharmacieData?.state}}, {{pharmacieData?.country}}</h5>
                   </div>
                 </div>
               </div>
@@ -63,18 +61,47 @@
             <div class="dashboard-widget">
               <nav class="dashboard-menu">
                 <ul>
-                  <li class="active">
-                    <a href="doctor-dashboard.html">
+                  <li routerLinkActive="active">
+                    <a [routerLink]="['/pharmacie/dashboard']">
                       <i class="fas fa-columns"></i>
                       <span>Dashboard</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a [routerLink]="['/pharmacie/dashboard/produits']">	<i class="fas fa-cheese"></i>
+                      <span>Produits</span>
+                    </a>
+                  </li>
+                  <li>
+                    <!--                    <a [routerLink]="['/messages']">-->
+                    <!--                      <i class="fas fa-comments"></i>-->
+                    <!--                      <span>Message</span>-->
+                    <!--                      <small class="unread-msg">23</small>-->
+                    <!--                    </a>-->
+                  </li>
+                  <li routerLinkActive="active">
+                    <a [routerLink]="['/pharmacie/parametre']">
+                      <i class="fas fa-user-cog"></i>
+                      <span>Paramétres</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a>
+                      <i class="fas fa-lock"></i>
+                      <span>Change Password</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a>
+                      <i class="fas fa-sign-out-alt"></i>
+                      <span>Logout</span>
                     </a>
                   </li>
                 </ul>
               </nav>
             </div>
-          </div>
-          <!-- /Profile Sidebar -->
 
+          </div>
         </div>
 
         <div class="col-md-7 col-lg-8 col-xl-9">

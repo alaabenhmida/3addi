@@ -27,10 +27,10 @@
           <nav aria-label="breadcrumb" class="page-breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Profile</li>
+              <li class="breadcrumb-item active" aria-current="page">Patient</li>
             </ol>
           </nav>
-          <h2 class="breadcrumb-title">Profile</h2>
+          <h2 class="breadcrumb-title">{{patientdata?.name}} {{patientdata?.lastName}}</h2>
         </div>
       </div>
     </div>
@@ -57,7 +57,7 @@
                     <h3>{{patientdata?.name}}</h3>
 
                     <div class="patient-details">
-                      <h5><b>Patient ID :</b> PT0016</h5>
+                      <h5><b>ID :</b> {{patientdata?.id}}</h5>
                       <h5 class="mb-0"><i class="fas fa-map-marker-alt"></i> {{patientdata?.address}}</h5>
                     </div>
                   </div>
@@ -65,9 +65,9 @@
               </div>
               <div class="patient-info">
                 <ul>
-                  <li>Phone <span>{{patientdata?.phone}}</span></li>
-                  <li>Age <span>{{patientdata?.birthday}}</span></li>
-                  <li>bloodGroup <span>{{patientdata?.bloodType}}</span></li>
+                  <li>Téléphoner <span>{{patientdata?.phone}}</span></li>
+                  <li>Âge <span>{{patientdata?.birthday}}</span></li>
+                  <li>groupe sanguin <span>{{patientdata?.bloodType}}</span></li>
                 </ul>
               </div>
             </div>
@@ -75,32 +75,32 @@
           <!-- /Profile Widget -->
 
           <!-- Last Booking -->
-          <div class="card">
+          <div *ngIf="patientdata?.rdv.length >= 2" class="card">
             <div class="card-header">
-              <h4 class="card-title">Last Booking</h4>
+              <h4 class="card-title">Dernière réservation</h4>
             </div>
             <ul class="list-group list-group-flush">
               <li class="list-group-item">
                 <div class="media align-items-center">
                   <div class="mr-3">
-                    <img alt="Image placeholder" src="assets/img/doctors/doctor-thumb-02.jpg" class="avatar  rounded-circle">
+                    <img alt="Image placeholder" src="{{patientdata?.rdv[patientdata?.rdv.length-1].doctorId.imagePath}}" class="avatar  rounded-circle">
                   </div>
                   <div class="media-body">
-                    <h5 class="d-block mb-0">Dr. Darren Elder </h5>
-                    <span class="d-block text-sm text-muted">Dentist</span>
-                    <span class="d-block text-sm text-muted">14 Nov 2019 5.00 PM</span>
+                    <h5 class="d-block mb-0">Dr. {{patientdata?.rdv[patientdata?.rdv.length-1].doctorId.name}} {{patientdata?.rdv[patientdata?.rdv.length-1].doctorId.lastName}} </h5>
+                    <span class="d-block text-sm text-muted">{{patientdata?.rdv[patientdata?.rdv.length-1].doctorId.speciality}}</span>
+                    <span class="d-block text-sm text-muted">{{getdate(patientdata?.rdv[patientdata?.rdv.length-1].rdvDate, 'DD MMM YYYY HH:mm')}}</span>
                   </div>
                 </div>
               </li>
               <li class="list-group-item">
                 <div class="media align-items-center">
                   <div class="mr-3">
-                    <img alt="Image placeholder" src="assets/img/doctors/doctor-thumb-02.jpg" class="avatar  rounded-circle">
+                    <img alt="Image placeholder" src="{{patientdata?.rdv[patientdata?.rdv.length-2].doctorId.imagePath}}" class="avatar  rounded-circle">
                   </div>
                   <div class="media-body">
-                    <h5 class="d-block mb-0">Dr. Darren Elder </h5>
-                    <span class="d-block text-sm text-muted">Dentist</span>
-                    <span class="d-block text-sm text-muted">12 Nov 2019 11.00 AM</span>
+                    <h5 class="d-block mb-0">Dr. {{patientdata?.rdv[patientdata?.rdv.length-2].doctorId.name}} {{patientdata?.rdv[patientdata?.rdv.length-2].doctorId.lastName}} </h5>
+                    <span class="d-block text-sm text-muted">{{patientdata?.rdv[patientdata?.rdv.length-2].doctorId.speciality}}</span>
+                    <span class="d-block text-sm text-muted">{{getdate(patientdata?.rdv[patientdata?.rdv.length-2].rdvDate, 'DD MMM YYYY HH:mm')}}</span>
                   </div>
                 </div>
               </li>

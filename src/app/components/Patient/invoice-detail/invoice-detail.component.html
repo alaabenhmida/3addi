@@ -25,10 +25,10 @@
           <nav aria-label="breadcrumb" class="page-breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Invoice View</li>
+              <li class="breadcrumb-item active" aria-current="page">Facture</li>
             </ol>
           </nav>
-          <h2 class="breadcrumb-title">Invoice View</h2>
+          <h2 class="breadcrumb-title">Facture</h2>
         </div>
       </div>
     </div>
@@ -46,13 +46,13 @@
               <div class="row">
                 <div class="col-md-6">
                   <div class="invoice-logo">
-                    <img src="assets/img/logo.png" alt="logo">
+                    <img src="assets/img/Untitled.png" alt="logo">
                   </div>
                 </div>
                 <div class="col-md-6">
                   <p class="invoice-details">
-                    <strong>Order:</strong> #{{facture?._id}} <br>
-                    <strong>Issued:</strong> {{getDay(facture?.date, 'DD/MM/YYYY')}}
+                    <strong>ID:</strong> #{{facture?._id}} <br>
+                    <strong>Publié:</strong> {{getDay(facture?.date, 'DD/MM/YYYY')}}
                   </p>
                 </div>
               </div>
@@ -63,7 +63,7 @@
               <div class="row">
                 <div class="col-md-6">
                   <div class="invoice-info">
-                    <strong class="customer-text">Invoice From</strong>
+                    <strong class="customer-text">Facture de</strong>
                     <p class="invoice-details invoice-details-two">
                       Dr. {{doctor?.name}} {{doctor?.lastName}} <br>
                       {{doctor?.zip}}  {{doctor?.address}}, {{doctor?.city}},<br>
@@ -73,7 +73,7 @@
                 </div>
                 <div class="col-md-6">
                   <div class="invoice-info invoice-info2">
-                    <strong class="customer-text">Invoice To</strong>
+                    <strong class="customer-text">Facture à</strong>
                     <p class="invoice-details">
                       {{patient?.name}} {{patient?.lastName}} <br>
                       {{patient?.address}}, {{patient?.city}}, <br>
@@ -90,7 +90,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="invoice-info">
-                    <strong class="customer-text">Payment Method</strong>
+                    <strong class="customer-text">Mode de paiement</strong>
                     <p class="invoice-details invoice-details-two">
                       {{facture?.paymentMethod}} <br>
                       {{facture?.cardNumber}} <br>
@@ -118,7 +118,7 @@
                       </thead>
                       <tbody>
                       <tr>
-                        <td>General Consultation</td>
+                        <td>Consultation générale</td>
                         <td class="text-center">1</td>
                         <td class="text-center">$0</td>
                         <td class="text-right">${{facture?.price}}</td>
@@ -131,16 +131,9 @@
                   <div class="table-responsive">
                     <table class="invoice-table-two table">
                       <tbody>
+
                       <tr>
-                        <th>Subtotal:</th>
-                        <td><span>${{facture?.price}}</span></td>
-                      </tr>
-                      <tr>
-                        <th>Discount:</th>
-                        <td><span>-0%</span></td>
-                      </tr>
-                      <tr>
-                        <th>Total Amount:</th>
+                        <th>Total:</th>
                         <td><span>${{facture?.price}}</span></td>
                       </tr>
                       </tbody>

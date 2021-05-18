@@ -12,6 +12,7 @@ const pharmacieSchema = mongoose.Schema({
   phone: {type: String},
   imagePath: {type: String},
   type: {type: String},
+  aboutMe: {type: String},
   products: [{
     name: {type: String},
     description: {type: String},
@@ -25,6 +26,10 @@ const pharmacieSchema = mongoose.Schema({
     title : {type : String},
     review : {type : String}
   }],
+  awards: [{
+    awards: {type: String},
+    year: {type: String}
+  }]
 })
 
 module.exports = mongoose.model('Pharmacie', pharmacieSchema);

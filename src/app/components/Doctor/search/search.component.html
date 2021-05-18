@@ -25,22 +25,19 @@
           <nav aria-label="breadcrumb" class="page-breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Search</li>
+              <li class="breadcrumb-item active" aria-current="page">Rechercher</li>
             </ol>
           </nav>
-          <h2 class="breadcrumb-title">{{doctors?.length}} matches found for : {{form.value.name}}</h2>
+          <h2 class="breadcrumb-title">{{doctors?.length}} correspondances trouvées pour : {{form.value.name}}</h2>
         </div>
         <div class="col-md-4 col-12 d-md-block d-none">
           <form [formGroup]="filtergroupe" (change)="onFilter($event.target)">
           <div class="sort-by">
-            <span class="sort-title">Sort by</span>
+            <span class="sort-title">Trier par</span>
             <span class="sortby-fliter">
 									<select class="select" formControlName="filter">
 										<option>Select</option>
-										<option class="sorting">Rating</option>
-										<option class="sorting">Popular</option>
-										<option class="sorting">Latest</option>
-										<option value="price" class="sorting">Price</option>
+										<option value="price" class="sorting">Prix</option>
 									</select>
 								</span>
           </div>
@@ -62,64 +59,64 @@
           <div class="card search-filter">
             <form [formGroup]="form" (submit)="onSubmit()">
             <div class="card-header">
-              <h4 class="card-title mb-0">Search Filter</h4>
+              <h4 class="card-title mb-0">Filtre de recherche</h4>
             </div>
             <div class="card-body">
               <div class="filter-widget">
                 <div>
                   <mat-form-field appearance="outline" class="w-100">
                     <mat-label>
-                      recherche
+                      rechercher
                     </mat-label>
                     <input formControlName="name" matInput>
                   </mat-form-field>
                 </div>
               </div>
               <div class="filter-widget">
-                <h4>Gender</h4>
+                <h4>sexe</h4>
                 <div>
                   <label class="custom_check">
                     <input type="checkbox" name="gender_type" (change)="onChange('Male', $event.target)" formControlName="male">
-                    <span class="checkmark"></span> Male Doctor
+                    <span class="checkmark"></span> Homme
                   </label>
                 </div>
                 <div>
                   <label class="custom_check">
                     <input type="checkbox" name="gender_type" (change)="onChange('Female', $event.target)" formControlName="female">
-                    <span class="checkmark"></span> Female Doctor
+                    <span class="checkmark"></span> Femme
                   </label>
                 </div>
               </div>
               <div class="filter-widget">
-                <h4>Select Specialist</h4>
+                <h4>Sélectionnez un spécialiste</h4>
                 <div>
                   <label class="custom_check">
                     <input type="checkbox" name="select_specialist" checked>
-                    <span class="checkmark"></span> Urology
+                    <span class="checkmark"></span> Urologie
                   </label>
                 </div>
                 <div>
                   <label class="custom_check">
                     <input type="checkbox" name="select_specialist" checked>
-                    <span class="checkmark"></span> Neurology
+                    <span class="checkmark"></span> Neurologie
                   </label>
                 </div>
                 <div>
                   <label class="custom_check">
                     <input type="checkbox" name="select_specialist">
-                    <span class="checkmark"></span> Dentist
+                    <span class="checkmark"></span> Dentiste
                   </label>
                 </div>
                 <div>
                   <label class="custom_check">
                     <input type="checkbox" name="select_specialist">
-                    <span class="checkmark"></span> Orthopedic
+                    <span class="checkmark"></span> Orthopédique
                   </label>
                 </div>
                 <div>
                   <label class="custom_check">
                     <input type="checkbox" name="select_specialist">
-                    <span class="checkmark"></span> Cardiologist
+                    <span class="checkmark"></span> Cardiologue
                   </label>
                 </div>
                 <div>
@@ -130,7 +127,7 @@
                 </div>
               </div>
               <div class="btn-search">
-                <input type="submit" class="btn btn-block" value="Search">
+                <input type="submit" class="btn btn-block" value="Rechercher">
               </div>
             </div>
             </form>
@@ -204,8 +201,8 @@
                     </ul>
                   </div>
                   <div class="clinic-booking">
-                    <a class="view-pro-btn" [routerLink]="['/doctor', doctor?._id]">View Profile</a>
-                    <a class="apt-btn" [routerLink]="['/doctor', doctor?._id, 'app']">Book Appointment</a>
+                    <a class="view-pro-btn" [routerLink]="['/doctor', doctor?._id]">Voir le profil</a>
+                    <a class="apt-btn" [routerLink]="['/doctor', doctor?._id, 'app']">Prendre rendez-vous</a>
                   </div>
                 </div>
               </div>

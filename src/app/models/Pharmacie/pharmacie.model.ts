@@ -1,5 +1,6 @@
 import {Product} from './product.model';
 import {Rates} from '../Doctor/rates.model';
+import {Award} from './award.model';
 
 export interface Pharmacie {
   id: string;
@@ -14,6 +15,8 @@ export interface Pharmacie {
   imagePath: string;
   type: string;
   phone: number;
+  aboutMe: string;
   products: Product[];
   reviews: Rates [];
+  awards: Award [];
 }

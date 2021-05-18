@@ -43,5 +43,9 @@ export class PatientDhashboardComponent implements OnInit {
   getdate(date: string, format: string): string{
     return (moment(date).format(format));
   }
+  calculateAge(birthday): number { // birthday is a date
+    const age = moment.duration(moment().diff(moment(birthday)));
+    return  Math.floor(age.asYears());
+  }
 
 }

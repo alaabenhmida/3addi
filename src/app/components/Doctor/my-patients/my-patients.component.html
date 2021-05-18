@@ -21,10 +21,10 @@
           <nav aria-label="breadcrumb" class="page-breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-              <li class="breadcrumb-item active" aria-current="page">My Patients</li>
+              <li class="breadcrumb-item active" aria-current="page">Mes Patients</li>
             </ol>
           </nav>
-          <h2 class="breadcrumb-title">My Patients</h2>
+          <h2 class="breadcrumb-title">{{doctorData?.name}} {{doctorData?.lastName}}</h2>
         </div>
       </div>
     </div>
@@ -76,7 +76,7 @@
             <div class="dashboard-widget">
               <nav class="dashboard-menu">
                 <ul>
-                  <li routerLinkActive="active">
+                  <li>
                     <a [routerLink]="['/doctor/profile/dashboard']">
                       <i class="fas fa-columns"></i>
                       <span>Dashboard</span>
@@ -85,25 +85,25 @@
                   <li>
                     <a [routerLink]="['/doctor/profile/myRDV']">
                       <i class="fas fa-calendar-check"></i>
-                      <span>Appointments</span>
+                      <span>Rendez-vous</span>
                     </a>
                   </li>
                   <li routerLinkActive="active">
                     <a [routerLink]="['/doctor/profile/myPatients']">
                       <i class="fas fa-user-injured"></i>
-                      <span>My Patients</span>
+                      <span>Mes Patients</span>
                     </a>
                   </li>
                   <li>
                     <a [routerLink]="['/doctor/gererTemps']">
                       <i class="fas fa-hourglass-start"></i>
-                      <span>Schedule Timings</span>
+                      <span>Calendrier des horaires</span>
                     </a>
                   </li>
                   <li>
                     <a [routerLink]="['/doctor/factures']">
                       <i class="fas fa-file-invoice"></i>
-                      <span>Invoices</span>
+                      <span>factures</span>
                     </a>
                   </li>
                   <li>
@@ -122,25 +122,19 @@
                   <li>
                     <a [routerLink]="['/doctor/profile/setting']">
                       <i class="fas fa-user-cog"></i>
-                      <span>Profile Settings</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="social-media.html">
-                      <i class="fas fa-share-alt"></i>
-                      <span>Social Media</span>
+                      <span>Paramètres de profil</span>
                     </a>
                   </li>
                   <li>
                     <a href="doctor-change-password.html">
                       <i class="fas fa-lock"></i>
-                      <span>Change Password</span>
+                      <span>Changer le mot de passe</span>
                     </a>
                   </li>
                   <li>
                     <a href="index.html">
                       <i class="fas fa-sign-out-alt"></i>
-                      <span>Logout</span>
+                      <span>déconnecter</span>
                     </a>
                   </li>
                 </ul>
@@ -175,7 +169,7 @@
                         <h3><a href="patient-profile.html">{{patient.id.name}} {{patient.id.lastName}}</a></h3>
 
                         <div class="patient-details">
-                          <h5><b>Patient ID :</b> P0016</h5>
+                          <h5><b>ID :</b> {{patient?.id._id}}</h5>
                           <h5 class="mb-0"><i class="fas fa-map-marker-alt"></i> {{patient.id.state}}, {{patient.id.country}}</h5>
                         </div>
                       </div>
@@ -183,9 +177,9 @@
                   </div>
                   <div class="patient-info">
                     <ul>
-                      <li>Phone <span>{{patient.id.phone}}</span></li>
-                      <li>Age <span>38 Years, Male</span></li>
-                      <li>Blood Group <span>{{patient.id.bloodType}}</span></li>
+                      <li>téléphone <span>{{patient.id.phone}}</span></li>
+                      <li>Age <span>{{calculateAge(patient?.id.birthday)}}</span></li>
+                      <li>groupe sanguin <span>{{patient.id.bloodType}}</span></li>
                     </ul>
                   </div>
                 </div>

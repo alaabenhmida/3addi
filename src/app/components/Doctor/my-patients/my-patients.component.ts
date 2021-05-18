@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {DoctorServiceService} from '../../../services/doctor/doctor-service.service';
 import {Doctor} from '../../../models/Doctor/doctor.model';
 import {Patient} from '../../../models/Patient/patient.model';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-my-patients',
@@ -46,5 +47,9 @@ export class MyPatientsComponent implements OnInit {
       this.patients = data.patients;
     });
     this.isLoading = false;
+  }
+  calculateAge(birthday): number { // birthday is a date
+    const age = moment.duration(moment().diff(moment(birthday)));
+    return  Math.floor(age.asYears());
   }
 }

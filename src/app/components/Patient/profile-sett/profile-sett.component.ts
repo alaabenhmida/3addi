@@ -3,6 +3,7 @@ import {PatientServiceService} from '../../../services/Patient/patient-service.s
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Patient} from '../../../models/Patient/patient.model';
 import {mimeType} from '../../../shared/mime-type.validator';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-profile-sett',
@@ -72,5 +73,12 @@ export class ProfileSettComponent implements OnInit {
       .subscribe(result => {
         console.log(result);
       });
+  }
+  calculateAge(birthday): number { // birthday is a date
+    const age = moment.duration(moment().diff(moment(birthday)));
+    return  Math.floor(age.asYears());
+  }
+  getDay(day: string, format: string): string {
+    return moment(day).format(format);
   }
 }

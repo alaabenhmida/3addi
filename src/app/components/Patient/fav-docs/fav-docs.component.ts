@@ -25,4 +25,8 @@ export class FavDocsComponent implements OnInit {
   getDay(day: string, format: string): string {
     return moment(day).format(format);
   }
+  calculateAge(birthday): number { // birthday is a date
+    const age = moment.duration(moment().diff(moment(birthday)));
+    return  Math.floor(age.asYears());
+  }
 }

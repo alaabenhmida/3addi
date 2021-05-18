@@ -29,7 +29,7 @@
               <li class="breadcrumb-item active" aria-current="page">Favourites</li>
             </ol>
           </nav>
-          <h2 class="breadcrumb-title">Favourites</h2>
+          <h2 class="breadcrumb-title">{{patientdata?.name}} {{patientdata?.lastName}}</h2>
         </div>
       </div>
     </div>
@@ -51,7 +51,7 @@
                 <div class="profile-det-info">
                   <h3>{{patientdata?.name}} {{patientdata?.lastName}}</h3>
                   <div class="patient-details">
-                    <h5><i class="fas fa-birthday-cake"></i> 24 Jul 1983, 38 years</h5>
+                    <h5><i class="fas fa-birthday-cake"></i> {{getDay(patientdata?.birthday, 'DD MMM YYYY')}}, {{calculateAge(patientdata?.birthday)}} ans</h5>
                     <h5 class="mb-0"><i class="fas fa-map-marker-alt"></i> {{patientdata?.state}}, {{patientdata?.country}}</h5>
                   </div>
                 </div>
@@ -69,7 +69,7 @@
                   <li routerLinkActive="active">
                     <a [routerLink]="['/profile/favdocs']">
                       <i class="fas fa-bookmark"></i>
-                      <span>Favourites</span>
+                      <span>Favoris</span>
                     </a>
                   </li>
                   <li>
@@ -82,19 +82,19 @@
                   <li>
                     <a [routerLink]="['/profile/setting']">
                       <i class="fas fa-user-cog"></i>
-                      <span>Profile Settings</span>
+                      <span>Paramètres de profil</span>
                     </a>
                   </li>
                   <li>
                     <a>
                       <i class="fas fa-lock"></i>
-                      <span>Change Password</span>
+                      <span>Changer le mot de passe</span>
                     </a>
                   </li>
                   <li>
                     <a href="index.html">
                       <i class="fas fa-sign-out-alt"></i>
-                      <span>Logout</span>
+                      <span>déconnecter</span>
                     </a>
                   </li>
                 </ul>
@@ -152,10 +152,10 @@
                   </ul>
                   <div class="row row-sm">
                     <div class="col-6">
-                      <a [routerLink]="['/doctor', doctor.doctor._id]" class="btn view-btn">View Profile</a>
+                      <a [routerLink]="['/doctor', doctor.doctor._id]" class="btn view-btn">Voir le profil</a>
                     </div>
                     <div class="col-6">
-                      <a [routerLink]="['/doctor', doctor.doctor._id, 'app']" class="btn book-btn">Book Now</a>
+                      <a [routerLink]="['/doctor', doctor.doctor._id, 'app']" class="btn book-btn">Reserver</a>
                     </div>
                   </div>
                 </div>

@@ -134,7 +134,7 @@
                 <div class="doc-info-left">
                   <div class="doctor-img1">
                     <a [routerLink]="['/pharmacie', pharmacie._id, 'about']">
-                      <img src="assets/img/medical-img1.jpg" class="img-fluid" alt="User Image">
+                      <img src="{{pharmacie?.imagePath}}" id="imagephar" class="img-fluid" alt="User Image">
                     </a>
                   </div>
                   <div class="doc-info-cont">

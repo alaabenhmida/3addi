@@ -57,7 +57,7 @@
             <div class="dashboard-widget">
               <nav class="dashboard-menu">
                 <ul>
-                  <li routerLinkActive="active">
+                  <li>
                     <a [routerLink]="['/doctor/profile/dashboard']">
                       <i class="fas fa-columns"></i>
                       <span>Dashboard</span>
@@ -66,25 +66,25 @@
                   <li>
                     <a [routerLink]="['/doctor/profile/myRDV']">
                       <i class="fas fa-calendar-check"></i>
-                      <span>Appointments</span>
+                      <span>Rendez-vous</span>
                     </a>
                   </li>
                   <li>
                     <a [routerLink]="['/doctor/profile/myPatients']">
                       <i class="fas fa-user-injured"></i>
-                      <span>My Patients</span>
+                      <span>Mes Patients</span>
                     </a>
                   </li>
                   <li>
                     <a [routerLink]="['/doctor/gererTemps']">
                       <i class="fas fa-hourglass-start"></i>
-                      <span>Schedule Timings</span>
+                      <span>Calendrier des horaires</span>
                     </a>
                   </li>
                   <li>
                     <a [routerLink]="['/doctor/factures']">
                       <i class="fas fa-file-invoice"></i>
-                      <span>Invoices</span>
+                      <span>factures</span>
                     </a>
                   </li>
                   <li>
@@ -103,25 +103,19 @@
                   <li routerLinkActive="active">
                     <a [routerLink]="['/doctor/profile/setting']">
                       <i class="fas fa-user-cog"></i>
-                      <span>Profile Settings</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a>
-                      <i class="fas fa-share-alt"></i>
-                      <span>Social Media</span>
+                      <span>Paramètres de profil</span>
                     </a>
                   </li>
                   <li>
                     <a href="doctor-change-password.html">
                       <i class="fas fa-lock"></i>
-                      <span>Change Password</span>
+                      <span>Changer le mot de passe</span>
                     </a>
                   </li>
                   <li>
                     <a href="index.html">
                       <i class="fas fa-sign-out-alt"></i>
-                      <span>Logout</span>
+                      <span>déconnecter</span>
                     </a>
                   </li>
                 </ul>
@@ -137,7 +131,7 @@
           <form [formGroup]="form" (submit)="onSubmit()">
           <div class="card">
             <div class="card-body">
-              <h4 class="card-title">Basic Information</h4>
+              <h4 class="card-title">Informations de base</h4>
               <div class="row form-row">
                 <div class="col-md-12">
                   <div class="form-group">
@@ -147,17 +141,17 @@
                       </div>
                       <div class="upload-img">
                         <div class="change-photo-btn">
-                          <span><i class="fa fa-upload"></i> Upload Photo</span>
+                          <span><i class="fa fa-upload"></i> télécharger photo</span>
                           <input type="file" class="upload" (change)="onImagePicked($event)">
                         </div>
-                        <small class="form-text text-muted">Allowed JPG, GIF or PNG. Max size of 2MB</small>
+                        <small class="form-text text-muted">Formats autorisés JPG, GIF ou PNG. Max Taille de 2MB</small>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label>Username <span class="text-danger">*</span></label>
+                    <label>Nom d'utilisateur <span class="text-danger">*</span></label>
                     <input type="text" class="form-control" readonly formControlName="username">
                   </div>
                 </div>
@@ -170,44 +164,44 @@
 
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label>First Name <span class="text-danger">*</span></label>
+                    <label>Prénom <span class="text-danger">*</span></label>
                     <input [ngClass]="{'is-invalid': form.get('firstName').invalid && form.get('firstName').touched}" type="text" class="form-control" formControlName="firstName">
                     <div class="invalid-feedback">
-                      first name required.
+                      Prénom obligatoire.
                     </div>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label>Last Name <span class="text-danger">*</span></label>
+                    <label>Nom de famille <span class="text-danger">*</span></label>
                     <input [ngClass]="{'is-invalid': form.get('lastName').invalid && form.get('lastName').touched}" type="text" class="form-control" formControlName="lastName">
                     <div class="invalid-feedback">
-                      last name required.
+                      nom obligatoire.
                     </div>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label>Phone Number</label>
+                    <label>Numéro de téléphone</label>
                     <input type="text" class="form-control" formControlName="phone">
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label>Gender</label>
+                    <label>sexe</label>
                     <select class="form-control select" formControlName="gender">
                       <option>Select</option>
-                      <option>Male</option>
-                      <option>Female</option>
+                      <option>Homme</option>
+                      <option>Femme</option>
                     </select>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group mb-0">
-                    <label>Date of Birth</label>
+                    <label>Date de naissance</label>
                     <input [ngClass]="{'is-invalid': form.get('birthday').invalid && form.get('birthday').touched}" type="date" class="form-control" formControlName="birthday">
                     <div class="invalid-feedback">
-                      birthday required.
+                      Date de naissance obligatoire.
                     </div>
                   </div>
                 </div>
@@ -218,16 +212,11 @@
 
             <!-- Map -->
             <div class="card">
-              <div class="form-check m-4">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                <label class="form-check-label" for="defaultCheck1">
-                  Add my Location
-                </label>
-              </div>
+
               <div class="card-body">
                 <h4 class="card-title">Ma Localisation</h4>
                 <div class="form-group mb-0">
-                  <input type="text" class="form-control" (keydown.enter)="$event.preventDefault()" placeholder="Search Nearest Location" autocorrect="on" autocapitalize="on" spellcheck="on" type="text" #search>
+
                   <agm-map style="height: 300px"
                     [latitude]="doctorData?.location.latitude"
                     [longitude]="doctorData?.location.longitude"
@@ -238,8 +227,7 @@
                       [markerDraggable]="true"
                       (dragEnd)="markerDragEnd($event)"></agm-marker>
                   </agm-map>
-                  <div>Latitude: {{latitude}}</div>
-                  <div>Longitude: {{longitude}}</div>
+
                 </div>
               </div>
             </div>
@@ -248,92 +236,56 @@
           <!-- About Me -->
           <div class="card">
             <div class="card-body">
-              <h4 class="card-title">About Me</h4>
+              <h4 class="card-title">à propos</h4>
               <div class="form-group mb-0">
-                <label>Biography</label>
+                <label>Biographie</label>
                 <textarea class="form-control" rows="5" formControlName="aboutMe"></textarea>
               </div>
             </div>
           </div>
           <!-- /About Me -->
 
-          <!-- Clinic Info -->
-          <div class="card">
-            <div class="card-body">
-              <h4 class="card-title">Clinic Info</h4>
-              <div class="row form-row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label>Clinic Name</label>
-                    <input type="text" class="form-control">
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label>Clinic Address</label>
-                    <input type="text" class="form-control">
-                  </div>
-                </div>
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <label>Clinic Images</label>
-<!--                    <form action="#" class="dropzone"></form>-->
-                  </div>
-                  <div class="upload-wrap">
-                    <div class="upload-images">
-                      <img src="assets/img/features/feature-01.jpg" alt="Upload Image">
-                      <a href="javascript:void(0);" class="btn btn-icon btn-danger btn-sm"><i class="far fa-trash-alt"></i></a>
-                    </div>
-                    <div class="upload-images">
-                      <img src="assets/img/features/feature-02.jpg" alt="Upload Image">
-                      <a href="javascript:void(0);" class="btn btn-icon btn-danger btn-sm"><i class="far fa-trash-alt"></i></a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- /Clinic Info -->
+
 
           <!-- Contact Details -->
           <div class="card contact-card">
             <div class="card-body">
-              <h4 class="card-title">Contact Details</h4>
+              <h4 class="card-title">Contacts</h4>
               <div class="row form-row">
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label>Address Line 1</label>
+                    <label>Adresse 1</label>
                     <input type="text" class="form-control" formControlName="address1">
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label class="control-label">Address Line 2</label>
+                    <label class="control-label">Adresse 2</label>
                     <input type="text" class="form-control" formControlName="address2">
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label class="control-label">City</label>
+                    <label class="control-label">Ville</label>
                     <input type="text" class="form-control" formControlName="city">
                   </div>
                 </div>
 
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label class="control-label">State / Province</label>
+                    <label class="control-label">État / Province</label>
                     <input type="text" class="form-control" formControlName="state">
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label class="control-label">Country</label>
+                    <label class="control-label">Pays</label>
                     <input type="text" class="form-control" formControlName="country">
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label class="control-label">Postal Code</label>
+                    <label class="control-label">code postal</label>
                     <input type="text" class="form-control" formControlName="zip">
                   </div>
                 </div>
@@ -345,7 +297,7 @@
           <!-- Pricing -->
           <div class="card">
             <div class="card-body">
-              <h4 class="card-title">Pricing</h4>
+              <h4 class="card-title">Tarification</h4>
 
               <div class="form-group mb-0">
                 <div id="pricing_select">
@@ -357,12 +309,6 @@
 
               </div>
 
-              <div class="row custom_price_cont" id="custom_price_cont" style="display: none;">
-                <div class="col-md-4">
-                  <input type="text" class="form-control" id="custom_rating_input" name="custom_rating_count" value="" placeholder="20">
-                  <small class="form-text text-muted">Custom price you can add</small>
-                </div>
-              </div>
 
             </div>
           </div>
@@ -389,11 +335,6 @@
                   </mat-chip-list>
                 </mat-form-field>
 
-              <div class="form-group mb-0">
-                <label>Specialization </label>
-                <input class="input-tags form-control" type="text" data-role="tagsinput" placeholder="Enter Specialization" name="specialist" value="Children Care,Dental Care" id="specialist">
-                <small class="form-text text-muted">Note : Type & Press  enter to add new specialization</small>
-              </div>
             </div>
           </div>
           <!-- /Services and Specialization -->
@@ -402,38 +343,38 @@
 
           <div formArrayName="education" class="card">
             <div class="card-body">
-              <h4 class="card-title">Education</h4>
+              <h4 class="card-title">Éducation</h4>
               <div class="education-info">
                 <div class="row form-row education-cont">
                   <div *ngFor="let edu of education; let i = index" class="col-12 col-md-10 col-lg-11">
                     <div [formGroupName]="i" class="row form-row">
                       <div class="col-12 col-md-6 col-lg-4">
                         <div class="form-group">
-                          <label>Degree</label>
+                          <label>diplôme</label>
                           <input [ngClass]="{'is-invalid': edu.controls.Degree.invalid && edu.controls.Degree.touched}"
                             type="text" class="form-control" formControlName="Degree">
                           <div class="invalid-feedback">
-                            Degree required.
+                            Diplôme requis.
                           </div>
                         </div>
                       </div>
                       <div class="col-12 col-md-6 col-lg-4">
                         <div class="form-group">
-                          <label>College/Institute</label>
+                          <label>Institut</label>
                           <input [ngClass]="{'is-invalid': edu.controls.College.invalid && edu.controls.College.touched}"
                             type="text" class="form-control" formControlName="College">
                           <div class="invalid-feedback">
-                            College required.
+                            Institut requis.
                           </div>
                         </div>
                       </div>
                       <div class="col-12 col-md-6 col-lg-4">
                         <div class="form-group">
-                          <label>Year of Completion</label>
+                          <label>année d'obtention du diplôme</label>
                           <input [ngClass]="{'is-invalid': edu.controls.Year_of_Completion.invalid && edu.controls.Year_of_Completion.touched}"
                             type="text" class="form-control" formControlName="Year_of_Completion">
                           <div class="invalid-feedback">
-                            Year of Completion required.
+                            année d'obtention du diplôme requis.
                           </div>
                         </div>
                       </div>
@@ -443,7 +384,7 @@
                 </div>
               </div>
               <div class="add-more">
-                <a (click)="addEducation()" class="add-education"><i class="fa fa-plus-circle"></i> Add More</a>
+                <a (click)="addEducation()" class="add-education"><i class="fa fa-plus-circle"></i> Ajouter </a>
               </div>
             </div>
           </div>
@@ -459,41 +400,41 @@
                     <div [formGroupName]="i" class="row form-row">
                       <div class="col-12 col-md-6 col-lg-4">
                         <div class="form-group">
-                          <label>Hospital Name</label>
+                          <label>Nom de l'hôpital</label>
                           <input [ngClass]="{'is-invalid': ex.controls.hospital_Name.invalid && ex.controls.hospital_Name.touched}"
                             type="text" class="form-control" formControlName="hospital_Name">
                           <div class="invalid-feedback">
-                            hospital Name required.
+                            Nom de l'hôpital requis.
                           </div>
                         </div>
                       </div>
                       <div class="col-12 col-md-6 col-lg-4">
                         <div class="form-group">
-                          <label>From</label>
+                          <label>De</label>
                           <input [ngClass]="{'is-invalid': ex.controls.from.invalid && ex.controls.from.touched}"
                             type="text" class="form-control" formControlName="from">
                           <div class="invalid-feedback">
-                            required.
+                            requis.
                           </div>
                         </div>
                       </div>
                       <div class="col-12 col-md-6 col-lg-4">
                         <div class="form-group">
-                          <label>To</label>
+                          <label>à</label>
                           <input [ngClass]="{'is-invalid': ex.controls.to.invalid && ex.controls.to.touched}"
                             type="text" class="form-control" formControlName="to">
                           <div class="invalid-feedback">
-                            required.
+                            requis.
                           </div>
                         </div>
                       </div>
                       <div class="col-12 col-md-6 col-lg-4">
                         <div class="form-group">
-                          <label>Designation</label>
+                          <label>désignation</label>
                           <input [ngClass]="{'is-invalid': ex.controls.designation.invalid && ex.controls.designation.touched}"
                             type="text" class="form-control" formControlName="designation">
                           <div class="invalid-feedback">
-                            designation required.
+                            designation requis.
                           </div>
                         </div>
                       </div>
@@ -503,7 +444,7 @@
                 </div>
               </div>
               <div class="add-more">
-                <a (click)="addExperience()" class="add-experience"><i class="fa fa-plus-circle"></i> Add More</a>
+                <a (click)="addExperience()" class="add-experience"><i class="fa fa-plus-circle"></i> Ajouter</a>
               </div>
             </div>
           </div>
@@ -512,26 +453,26 @@
           <!-- Awards -->
           <div class="card">
             <div formArrayName="awards" class="card-body">
-              <h4 class="card-title">Awards</h4>
+              <h4 class="card-title">récompenses reçues</h4>
               <div *ngFor="let award of awards; let i = index" class="awards-info">
                 <div [formGroupName]="i" class="row form-row awards-cont">
                   <div class="col-12 col-md-5">
                     <div class="form-group">
-                      <label>Awards</label>
+                      <label>récompenses</label>
                       <input [ngClass]="{'is-invalid': award.controls.awards.invalid && award.controls.awards.touched}"
                         type="text" class="form-control" formControlName="awards">
                       <div class="invalid-feedback">
-                        awards required.
+                        récompenses requis.
                       </div>
                     </div>
                   </div>
                   <div class="col-12 col-md-5">
                     <div class="form-group">
-                      <label>Year</label>
+                      <label>année</label>
                       <input [ngClass]="{'is-invalid': award.controls.year.invalid && award.controls.year.touched}"
                         type="text" class="form-control" formControlName="year">
                       <div class="invalid-feedback">
-                        year required.
+                        année requis.
                       </div>
                     </div>
                   </div>
@@ -539,7 +480,7 @@
                 <a (click)="deleteAward(i)" class="btn bg-danger-light trash"><i class="far fa-trash-alt"></i></a>
               </div>
               <div class="add-more">
-                <a (click)="addAward()" href="javascript:void(0);" class="add-award"><i class="fa fa-plus-circle"></i> Add More</a>
+                <a (click)="addAward()" href="javascript:void(0);" class="add-award"><i class="fa fa-plus-circle"></i> Ajouter</a>
               </div>
             </div>
           </div>
@@ -548,16 +489,16 @@
           <!-- Memberships -->
           <div class="card">
             <div formArrayName="memberships" class="card-body">
-              <h4 class="card-title">Memberships</h4>
+              <h4 class="card-title">Adhésions</h4>
               <div *ngFor="let mem of memberships; let i = index" class="membership-info">
                 <div [formGroupName]="i" class="row form-row membership-cont">
                   <div class="col-12 col-md-10 col-lg-5">
                     <div class="form-group">
-                      <label>Memberships</label>
+                      <label>Adhésions</label>
                       <input [ngClass]="{'is-invalid': mem.controls.Membership.invalid && mem.controls.Membership.touched}"
                         type="text" class="form-control" formControlName="Membership">
                       <div class="invalid-feedback">
-                        Membership required.
+                        Adhésions requis.
                       </div>
                     </div>
                   </div>
@@ -565,7 +506,7 @@
                 <a (click)="deleteMembership(i)" class="btn bg-danger-light trash"><i class="far fa-trash-alt"></i></a>
               </div>
               <div class="add-more">
-                <a (click)="addMembership()" href="javascript:void(0);" class="add-membership"><i class="fa fa-plus-circle"></i> Add More</a>
+                <a (click)="addMembership()" href="javascript:void(0);" class="add-membership"><i class="fa fa-plus-circle"></i> Ajouter</a>
               </div>
             </div>
           </div>
@@ -574,26 +515,26 @@
           <!-- Registrations -->
           <div formArrayName="registrations" class="card">
             <div class="card-body">
-              <h4 class="card-title">Registrations</h4>
+              <h4 class="card-title">Inscriptions</h4>
               <div *ngFor="let mem of registrations; let i = index" class="registrations-info">
                 <div [formGroupName]="i" class="row form-row reg-cont">
                   <div class="col-12 col-md-5">
                     <div class="form-group">
-                      <label>Registrations</label>
+                      <label>Inscriptions</label>
                       <input [ngClass]="{'is-invalid': mem.controls.registrations.invalid && mem.controls.registrations.touched}"
                         type="text" class="form-control" formControlName="registrations">
                       <div class="invalid-feedback">
-                        registrations required.
+                        Inscriptions requis.
                       </div>
                     </div>
                   </div>
                   <div class="col-12 col-md-5">
                     <div class="form-group">
-                      <label>Year</label>
+                      <label>année</label>
                       <input [ngClass]="{'is-invalid': mem.controls.year.invalid && mem.controls.year.touched}"
                         type="text" class="form-control" formControlName="year">
                       <div class="invalid-feedback">
-                        year required.
+                        année requis.
                       </div>
                     </div>
                   </div>
@@ -601,7 +542,7 @@
                 <a (click)="deleteRegistrations(i)" class="btn bg-danger-light trash"><i class="far fa-trash-alt"></i></a>
               </div>
               <div class="add-more">
-                <a (click)="addRegistrations()" href="javascript:void(0);" class="add-reg"><i class="fa fa-plus-circle"></i> Add More</a>
+                <a (click)="addRegistrations()" href="javascript:void(0);" class="add-reg"><i class="fa fa-plus-circle"></i> Ajouter</a>
               </div>
             </div>
           </div>

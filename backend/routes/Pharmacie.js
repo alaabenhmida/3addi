@@ -31,6 +31,37 @@ const storage = multer.diskStorage({
   }
 });
 
+router.put("/edit", multer({storage: storage}).single("image"), checkAuth,
+  (req, res, next) => {
+    let imagePath = req.body.image;
+    if (req.file) {
+      const url = req.protocol + "://" + req.get("host");
+      imagePath = url + "/images/" + req.file.filename;
+      Pharmacie.findOneAndUpdate({_id: req.userData.userId},
+        {$set: {name: req.body.name, email: req.body.email, address: req.body.address,
+            city: req.body.city, state: req.body.state, country: req.body.country,
+            zip: req.body.zip, phone: req.body.phone, imagePath: imagePath, type: req.body.type,
+            aboutMe: req.body.aboutMe,
+          awards: JSON.parse(req.body.awards)}})
+        .then(result => {
+          res.status(201).json(result);
+        }).catch(error => {
+          res.status(400).json(error);
+      });
+    } else {
+      Pharmacie.findOneAndUpdate({_id: req.userData.userId},
+        {$set: {name: req.body.name, email: req.body.email, address: req.body.address,
+            city: req.body.city, state: req.body.state, country: req.body.country,
+            zip: req.body.zip, phone: req.body.phone, type: req.body.type, aboutMe: req.body.aboutMe,
+            awards: JSON.parse(req.body.awards)}})
+        .then(result => {
+          res.status(201).json(result);
+        }).catch(error => {
+        res.status(400).json(error);
+      });
+    }
+  });
+
 router.put("/getProductbyid",checkAuth, (req, res, next) => {
   Pharmacie.findById(req.userData.userId).select({products: {$elemMatch: {_id: req.body.productID}}})
     .then(result => {

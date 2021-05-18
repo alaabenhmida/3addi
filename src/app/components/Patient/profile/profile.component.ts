@@ -53,7 +53,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
         } else {
           console.log('not found!!');
         }
-        console.log(data.prescription[0]._id);
       });
     });
     this.userId = this.authService.getUserid();

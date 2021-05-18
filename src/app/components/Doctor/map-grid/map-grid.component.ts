@@ -6,6 +6,8 @@ import {PatientServiceService} from '../../../services/Patient/patient-service.s
 import {Subscription} from 'rxjs';
 import {PatientAuthService} from '../../../auth/Patient/patient-auth.service';
 import {PageEvent} from '@angular/material/paginator';
+import { get } from 'scriptjs';
+declare var klokantech;
 
 @Component({
   selector: 'app-map-grid',
@@ -25,6 +27,7 @@ export class MapGridComponent implements OnInit {
   pageSizeOptions = [2, 4, 8, 10];
   lat = 51.678418;
   lng = 7.809007;
+  zoom = 4;
 
   constructor(private doctorService: DoctorServiceService,
               private patientService: PatientServiceService,
@@ -43,6 +46,7 @@ export class MapGridComponent implements OnInit {
       }
     );
   }
+
 
   private setCurrentLocation(): void {
     if ('geolocation' in navigator) {

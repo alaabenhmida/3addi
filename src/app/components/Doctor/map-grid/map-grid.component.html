@@ -16,14 +16,14 @@
 </head>
 <body class="map-page" style="overflow: visible;">
 
-<!-- Loader -->
-<div id="loader">
-  <div class="loader">
-    <span></span>
-    <span></span>
-  </div>
-</div>
-<!-- /Loader  -->
+<!--&lt;!&ndash; Loader &ndash;&gt;-->
+<!--<div id="loader">-->
+<!--  <div class="loader">-->
+<!--    <span></span>-->
+<!--    <span></span>-->
+<!--  </div>-->
+<!--</div>-->
+<!--&lt;!&ndash; /Loader  &ndash;&gt;-->
 
 <!-- Main Wrapper -->
 <div class="main-wrapper">
@@ -139,6 +139,9 @@
           <div id="map" class="map-listing">
             <agm-map (mapClick)="placeMarker($event)" class="h-100" style="height: 300px" [latitude]="latitude"
                      [longitude]="longitude">
+              <agm-marker [latitude]="latitude"
+                          [longitude]="longitude"
+              color="blue"></agm-marker>
               <agm-marker *ngFor="let doctor of doctors" [latitude]="doctor?.location.latitude"
                           [longitude]="doctor?.location.longitude">
               <agm-snazzy-info-window [maxWidth]="300" [maxHeight]="400" [isOpen]="false" [closeWhenOthersOpen]="true">

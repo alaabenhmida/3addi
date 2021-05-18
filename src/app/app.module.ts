@@ -67,6 +67,8 @@ import { PharLoginComponent } from './components/Pharmacie/phar-login/phar-login
 import { PharDashboardComponent } from './components/Pharmacie/phar-dashboard/phar-dashboard.component';
 import { ProduitsComponent } from './components/Pharmacie/produits/produits.component';
 import { AddProductComponent } from './components/Pharmacie/add-product/add-product.component';
+import { PharmacieSettingComponent } from './components/Pharmacie/pharmacie-setting/pharmacie-setting.component';
+import {NgxIntlTelInputModule} from 'ngx-intl-tel-input';
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
 @NgModule({
@@ -108,7 +110,8 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     PharLoginComponent,
     PharDashboardComponent,
     ProduitsComponent,
-    AddProductComponent
+    AddProductComponent,
+    PharmacieSettingComponent
   ],
   imports: [
     BrowserModule,
@@ -142,7 +145,7 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     RatingModule,
     AlertModule.forRoot(),
     PaginationModule.forRoot(),
-    MatButtonModule,
+    MatButtonModule
     // BarRatingModule,
     // // BarRatingModule
   ],

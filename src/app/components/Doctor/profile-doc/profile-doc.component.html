@@ -22,7 +22,7 @@
           <nav aria-label="breadcrumb" class="page-breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-              <li aria-current="page" class="breadcrumb-item active">Doctor Profile</li>
+              <li aria-current="page" class="breadcrumb-item active">Profil de médecin</li>
             </ol>
           </nav>
           <h2 class="breadcrumb-title">{{doctorData?.name}} {{doctorData?.lastName}}</h2>
@@ -71,43 +71,42 @@
                 <!--                <bar-rating [theme]="'fontawesome-o'" [showText] [(rate)]="rate" [max]="5"></bar-rating>-->
                 <div class="clinic-details">
                   <p class="doc-location"><i class="fas fa-map-marker-alt"></i> {{doctorData?.address1}} - <a
-                    href="javascript:void(0);">Get Directions</a></p>
-                  <ul class="clinic-gallery">
-                    <li>
-                      <a data-fancybox="gallery" href="assets/img/features/feature-01.jpg">
-                        <img alt="Feature" src="assets/img/features/feature-01.jpg">
-                      </a>
-                    </li>
-                    <li>
-                      <a data-fancybox="gallery" href="assets/img/features/feature-02.jpg">
-                        <img alt="Feature Image" src="assets/img/features/feature-02.jpg">
-                      </a>
-                    </li>
-                    <li>
-                      <a data-fancybox="gallery" href="assets/img/features/feature-03.jpg">
-                        <img alt="Feature" src="assets/img/features/feature-03.jpg">
-                      </a>
-                    </li>
-                    <li>
-                      <a data-fancybox="gallery" href="assets/img/features/feature-04.jpg">
-                        <img alt="Feature" src="assets/img/features/feature-04.jpg">
-                      </a>
-                    </li>
-                  </ul>
+                    href="javascript:void(0);">Obtenir des directions</a></p>
+<!--                  <ul class="clinic-gallery">-->
+<!--                    <li>-->
+<!--                      <a data-fancybox="gallery" href="assets/img/features/feature-01.jpg">-->
+<!--                        <img alt="Feature" src="assets/img/features/feature-01.jpg">-->
+<!--                      </a>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                      <a data-fancybox="gallery" href="assets/img/features/feature-02.jpg">-->
+<!--                        <img alt="Feature Image" src="assets/img/features/feature-02.jpg">-->
+<!--                      </a>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                      <a data-fancybox="gallery" href="assets/img/features/feature-03.jpg">-->
+<!--                        <img alt="Feature" src="assets/img/features/feature-03.jpg">-->
+<!--                      </a>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                      <a data-fancybox="gallery" href="assets/img/features/feature-04.jpg">-->
+<!--                        <img alt="Feature" src="assets/img/features/feature-04.jpg">-->
+<!--                      </a>-->
+<!--                    </li>-->
+<!--                  </ul>-->
                 </div>
-                <div class="clinic-services">
-                  <span>Dental Fillings</span>
-                  <span>Teeth Whitneing</span>
-                </div>
+<!--                <div class="clinic-services">-->
+<!--                  <span>Dental Fillings</span>-->
+<!--                  <span>Teeth Whitneing</span>-->
+<!--                </div>-->
               </div>
             </div>
             <div class="doc-info-right">
               <div class="clini-infos">
                 <ul>
-                  <li><i class="far fa-thumbs-up"></i> 99%</li>
                   <li><i class="far fa-comment"></i> {{doctorData?.reviews.length}} Feedback</li>
                   <li><i class="fas fa-map-marker-alt"></i> {{doctorData?.state}}, {{doctorData?.country}}</li>
-                  <li><i class="far fa-money-bill-alt"></i> ${{doctorData?.price}} per hour</li>
+                  <li><i class="far fa-money-bill-alt"></i> ${{doctorData?.price}} par vésite</li>
                 </ul>
               </div>
               <div class="pl-5 doctor-action">
@@ -126,7 +125,7 @@
                 <!--                </a>-->
               </div>
               <div class="clinic-booking">
-                <a [routerLink]="['/doctor', doctorData?.id, 'app']" class="apt-btn">Book Appointment</a>
+                <a [routerLink]="['/doctor', doctorData?.id, 'app']" class="apt-btn">rendez-vous</a>
               </div>
             </div>
           </div>
@@ -142,13 +141,13 @@
           <nav class="user-tabs mb-4">
             <ul class="nav nav-tabs nav-tabs-bottom nav-justified">
               <li class="nav-item">
-                <a class="nav-link active" data-toggle="tab" href="#doc_overview">Overview</a>
+                <a class="nav-link active" data-toggle="tab" href="#doc_overview">à propos</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#doc_reviews">Reviews</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#doc_business_hours">Business Hours</a>
+                <a class="nav-link" data-toggle="tab" href="#doc_business_hours">Heure de travails</a>
               </li>
             </ul>
           </nav>
@@ -171,7 +170,7 @@
 
                   <!-- About Details -->
                   <div class="widget about-widget">
-                    <h4 class="widget-title">About Me</h4>
+                    <h4 class="widget-title">à propos</h4>
                     <p>{{doctorData?.aboutMe}}</p>
                   </div>
                   <!-- /About Details -->
@@ -200,7 +199,7 @@
 
                   <!-- Experience Details -->
                   <div *ngIf="experience?.length > 0" class="widget experience-widget">
-                    <h4 class="widget-title">Work & Experience</h4>
+                    <h4 class="widget-title">expérience</h4>
                     <div class="experience-box">
                       <ul class="experience-list">
                         <li *ngFor="let ex of experience">
@@ -222,7 +221,7 @@
 
                   <!-- Awards Details -->
                   <div *ngIf="awards?.length > 0" class="widget awards-widget">
-                    <h4 class="widget-title">Awards</h4>
+                    <h4 class="widget-title">récompenses</h4>
                     <div class="experience-box">
                       <ul class="experience-list">
                         <li *ngFor="let award of awards">
@@ -297,7 +296,7 @@
                       <div class="comment-body">
                         <div class="meta-data">
                           <span class="comment-author">{{review?.patientId.name}} {{review?.patientId.lastName}}</span>
-                          <span class="comment-date">Reviewed 4 Days ago</span>
+                          <span class="comment-date"></span>
                           <!--                          <div class="review-count rating">-->
                           <!--                            <i class="fas fa-star filled"></i>-->
                           <!--                            <i class="fas fa-star filled"></i>-->
@@ -334,12 +333,12 @@
                             <i></i>
                           </a>
                           <p class="recommend-btn">
-                            <span>Recommend?</span>
+                            <span>Recommendé?</span>
                             <a class="like-btn" href="#">
-                              <i class="far fa-thumbs-up"></i> Yes
+                              <i class="far fa-thumbs-up"></i> Oui
                             </a>
                             <a class="dislike-btn" href="#">
-                              <i class="far fa-thumbs-down"></i> No
+                              <i class="far fa-thumbs-down"></i> Non
                             </a>
                           </p>
                         </div>
@@ -363,7 +362,7 @@
 
               <!-- Write Review -->
               <div *ngIf="isauth" class="write-review">
-                <h4>Write a review for <strong>Dr. {{doctorData?.name}}</strong></h4>
+                <h4>Ecrire un avis pour <strong>Dr. {{doctorData?.name}}</strong></h4>
 
                 <!-- Write Review Form -->
                 <form #loginForm="ngForm" (submit)="onSubmit(loginForm)">
@@ -393,28 +392,27 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <label>Title of your review</label>
-                    <input class="form-control" name="title" ngModel placeholder="If you could say it in one sentence, what would you say?"
+                    <label>Titr</label>
+                    <input class="form-control" name="title" ngModel placeholder="Si vous pouviez le dire en une phrase, que diriez-vous?"
                            type="text">
                   </div>
                   <div class="form-group">
-                    <label>Your review</label>
+                    <label>Votre avis</label>
                     <textarea class="form-control" id="review_desc" maxlength="100" name="review" ngModel></textarea>
 
-                    <div class="d-flex justify-content-between mt-3"><small class="text-muted"><span
-                      id="chars">100</span> characters remaining</small></div>
+
                   </div>
                   <hr>
                   <div class="form-group">
                     <div class="terms-accept">
                       <div class="custom-checkbox">
                         <input id="terms_accept" type="checkbox">
-                        <label for="terms_accept">I have read and accept <a href="#">Terms &amp; Conditions</a></label>
+                        <label for="terms_accept">J'ai lu et j'accepte <a href="#">les termes et conditions</a></label>
                       </div>
                     </div>
                   </div>
                   <div class="submit-section">
-                    <button class="btn btn-primary submit-btn" type="submit">Add Review</button>
+                    <button class="btn btn-primary submit-btn" type="submit">Ajouter un commentaire</button>
                   </div>
                 </form>
                 <!-- /Write Review Form -->
@@ -435,54 +433,54 @@
                     <div class="widget-content">
                       <div class="listing-hours">
                         <div class="listing-day current">
-                          <div class="day">Today <span>{{getDay(day, 'DD MMM YYYY')}}</span></div>
+                          <div class="day">Aujourd'hui <span>{{getDay(day, 'DD MMM YYYY')}}</span></div>
                           <div class="time-items">
                             <span *ngIf="getDay(day, 'ddd') !== 'Sun'" class="open-status"><span
-                              class="badge bg-success-light">Open Now</span></span>
-                            <span *ngIf="getDay(day, 'ddd') === 'Sun'" class="time"><span class="badge bg-danger-light">Closed</span></span>
+                              class="badge bg-success-light">Ouvrez maintenant</span></span>
+                            <span *ngIf="getDay(day, 'ddd') === 'Sun'" class="time"><span class="badge bg-danger-light">Fermé</span></span>
                             <span class="time">{{workingTime?.from}} - {{workingTime?.to}}</span>
                           </div>
                         </div>
                         <div class="listing-day">
-                          <div class="day">Monday</div>
+                          <div class="day">lundi</div>
                           <div class="time-items">
                             <span class="time">{{workingTime?.from}} - {{workingTime?.to}}</span>
                           </div>
                         </div>
                         <div class="listing-day">
-                          <div class="day">Tuesday</div>
+                          <div class="day">Mardi</div>
                           <div class="time-items">
                             <span class="time">{{workingTime?.from}} - {{workingTime?.to}}</span>
                           </div>
                         </div>
                         <div class="listing-day">
-                          <div class="day">Wednesday</div>
+                          <div class="day">Mercredi</div>
                           <div class="time-items">
                             <span class="time">{{workingTime?.from}} - {{workingTime?.to}}</span>
                           </div>
                         </div>
                         <div class="listing-day">
-                          <div class="day">Thursday</div>
+                          <div class="day">jeudi</div>
                           <div class="time-items">
                             <span class="time">{{workingTime?.from}} - {{workingTime?.to}}</span>
                           </div>
                         </div>
                         <div class="listing-day">
-                          <div class="day">Friday</div>
+                          <div class="day">Vendredi</div>
                           <div class="time-items">
                             <span class="time">{{workingTime?.from}} - {{workingTime?.to}}</span>
                           </div>
                         </div>
                         <div class="listing-day">
-                          <div class="day">Saturday</div>
+                          <div class="day">samedi</div>
                           <div class="time-items">
                             <span class="time">{{workingTime?.from}} - {{workingTime?.to}}</span>
                           </div>
                         </div>
                         <div class="listing-day closed">
-                          <div class="day">Sunday</div>
+                          <div class="day">dimanche</div>
                           <div class="time-items">
-                            <span class="time"><span class="badge bg-danger-light">Closed</span></span>
+                            <span class="time"><span class="badge bg-danger-light">Fermé</span></span>
                           </div>
                         </div>
                       </div>

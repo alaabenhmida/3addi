@@ -11,10 +11,12 @@ import {PharLoginComponent} from '../../components/Pharmacie/phar-login/phar-log
 import {PharDashboardComponent} from '../../components/Pharmacie/phar-dashboard/phar-dashboard.component';
 import {ProduitsComponent} from '../../components/Pharmacie/produits/produits.component';
 import {AddProductComponent} from '../../components/Pharmacie/add-product/add-product.component';
+import {PharmacieSettingComponent} from '../../components/Pharmacie/pharmacie-setting/pharmacie-setting.component';
 
 const appRoutes: Routes = [
   { path: 'pharmacie/login', component: PharLoginComponent},
   { path: 'pharmacie/dashboard', component: PharDashboardComponent},
+  { path: 'pharmacie/parametre', component: PharmacieSettingComponent},
   { path: 'pharmacie/dashboard/produits', component: ProduitsComponent},
   { path: 'pharmacie/dashboard/addproduits', component: AddProductComponent},
   { path: 'pharmacie/dashboard/produits/:id/editer', component: AddProductComponent},

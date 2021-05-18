@@ -39,11 +39,13 @@ export class PharmacieProfileComponent implements OnInit, OnDestroy {
         state: data.state,
         country: data.state,
         zip: data.zip,
-        imagePath: data.image,
+        imagePath: data.imagePath,
         type: data.type,
         phone: data.phone,
+        aboutMe: data.aboutMe,
         products: data.products,
-        reviews: data.reviews
+        reviews: data.reviews,
+        awards: data.awards
       };
     });
     this.isauth = this.authService.getIsAuth();
@@ -63,11 +65,13 @@ export class PharmacieProfileComponent implements OnInit, OnDestroy {
           state: data.state,
           country: data.state,
           zip: data.zip,
-          imagePath: data.image,
+          imagePath: data.imagePath,
           type: data.type,
           phone: data.phone,
+          aboutMe: data.aboutMe,
           products: data.products,
-          reviews: data.reviews
+          reviews: data.reviews,
+          awards: data.awards
         };
         for (const rev of data.reviews) {
           this.rating += rev.rate;
