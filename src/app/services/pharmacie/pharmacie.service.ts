@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable, Subject} from 'rxjs';
 import {Product} from '../../models/Pharmacie/product.model';
 import {FormGroup} from '@angular/forms';
+import {CartItem} from '../../models/Pharmacie/cartItem.model';
 
 @Injectable({
   providedIn: 'root'
@@ -48,6 +49,14 @@ export class PharmacieService {
     }
   }
 
+  updatequantity(product: Product, quantity: number, date: string, pharmacieId: string): void {
+
+    this.http.put('http://localhost:3000/pharmacies/decreasequantite', {product, quantity, date, pharmacieId})
+      .subscribe(data => {
+        console.log(data);
+      });
+  }
+
   addProduct(name, description, price, image: File, stock): Observable<any> {
     const product = new FormData();
     product.append('name', name);
@@ -58,7 +67,7 @@ export class PharmacieService {
     return this.http.put('http://localhost:3000/pharmacies/addproduct', product);
   }
 
-  updateProduct(id, name, description, price, stock, image?: File): Observable<any> {
+  updateProduct(id, name, description, price, stock, image?: File): void {
     if (image) {
       const product = new FormData();
       product.append('name', name);
@@ -66,7 +75,18 @@ export class PharmacieService {
       product.append('price', price.toString());
       product.append('stock', stock.toString());
       product.append('image', image, name);
-      return this.http.put('http://localhost:3000/pharmacies/editproduct/' + id, product);
+      this.http.put('http://localhost:3000/pharmacies/editproduct/' + id, product).subscribe(data => {
+        console.log('with image');
+      });
+    } else {
+      const product = new FormData();
+      product.append('name', name);
+      product.append('description', description);
+      product.append('price', price.toString());
+      product.append('stock', stock.toString());
+      this.http.put('http://localhost:3000/pharmacies/editproduct/' + id, product).subscribe(data => {
+        console.log('without image!!!!!!!');
+      });
     }
   }
 

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {PharmacieService} from '../../../services/pharmacie/pharmacie.service';
 import {ActivatedRoute, ParamMap, Route} from '@angular/router';
+import {Product} from '../../../models/Pharmacie/product.model';
+import {CartService} from '../../../services/pharmacie/cart.service';
 
 @Component({
   selector: 'app-product-page-grid',
@@ -39,7 +41,8 @@ export class ProductPageGridComponent implements OnInit {
   ];
 
   constructor(private pharmacieService: PharmacieService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private cartService: CartService) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
@@ -52,4 +55,7 @@ export class ProductPageGridComponent implements OnInit {
     });
   }
 
+  addTocart(product: Product): void {
+    this.cartService.addToCart(product, 1, this.pharmacieId);
+  }
 }

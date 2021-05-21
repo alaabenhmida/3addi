@@ -6,7 +6,7 @@
         <nav aria-label="breadcrumb" class="page-breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">¨Pharmacie</li>
+            <li class="breadcrumb-item active" aria-current="page">{{pharmacie?.name}}</li>
           </ol>
         </nav>
         <h2 class="breadcrumb-title">Produits</h2>
@@ -204,9 +204,9 @@
           <div *ngFor="let product of pharmacie?.products" class="col-md-4">
             <figure class="card card-product-grid">
               <div class="img-wrap">
-                <span class="badge badge-danger"> NEW </span>
+                <span class="badge badge-danger"> NOUVEAU </span>
                 <img src="{{product?.image}}">
-                <a class="btn-overlay" [routerLink]="['product', product._id]"><i class="fa fa-search-plus"></i> Quick view</a>
+                <a class="btn-overlay" [routerLink]="['product', product._id]"><i class="fa fa-search-plus"></i> Voir</a>
               </div> <!-- img-wrap.// -->
               <figcaption class="info-wrap">
                 <div class="fix-height">
@@ -215,7 +215,7 @@
                     <span class="price">${{product.price}}</span>
                   </div> <!-- price-wrap.// -->
                 </div>
-                <a href="#" class="btn btn-block btn-primary">Add to cart </a>
+                <a (click)="addTocart(product)" class="btn btn-block btn-primary">Ajouter au panier </a>
               </figcaption>
             </figure>
           </div> <!-- col.// -->

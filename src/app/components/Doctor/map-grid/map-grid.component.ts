@@ -28,12 +28,15 @@ export class MapGridComponent implements OnInit {
   lat = 51.678418;
   lng = 7.809007;
   zoom = 4;
+  public origin: any;
+  public destination: any;
 
   constructor(private doctorService: DoctorServiceService,
               private patientService: PatientServiceService,
               private authService: PatientAuthService) { }
 
   ngOnInit(): void {
+    this.getDirection();
     this.setCurrentLocation();
     this.doctorService.getAllDoctors(this.doctorsPerPage, this.cuurentPage).subscribe(doctors => {
       this.doctors = doctors.doctors;
@@ -47,6 +50,14 @@ export class MapGridComponent implements OnInit {
     );
   }
 
+  getDirection(): void {
+    this.origin = { lat: 24.799448, lng: 120.979021 };
+    this.destination = { lat: 24.799524, lng: 120.975017 };
+
+    // Location within a string
+    // this.origin = 'Taipei Main Station';
+    // this.destination = 'Taiwan Presidential Office';
+  }
 
   private setCurrentLocation(): void {
     if ('geolocation' in navigator) {

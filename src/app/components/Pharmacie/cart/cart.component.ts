@@ -12,8 +12,8 @@ import {Observable, of, Subscription} from 'rxjs';
 export class CartComponent implements OnInit, OnDestroy {
   products: CartItem[] = [];
   productsSub: Subscription;
-  private pharmacieId: string;
-  public currency : string = 'USD';
+  pharmacieId: string;
+  public currency = 'USD';
 
   constructor(private cartService: CartService,
               private route: ActivatedRoute) { }

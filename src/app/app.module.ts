@@ -69,6 +69,8 @@ import { ProduitsComponent } from './components/Pharmacie/produits/produits.comp
 import { AddProductComponent } from './components/Pharmacie/add-product/add-product.component';
 import { PharmacieSettingComponent } from './components/Pharmacie/pharmacie-setting/pharmacie-setting.component';
 import {NgxIntlTelInputModule} from 'ngx-intl-tel-input';
+import {AgmDirectionModule} from 'agm-direction';
+import { PharmacieCheckoutComponent } from './components/Pharmacie/pharmacie-checkout/pharmacie-checkout.component';
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
 @NgModule({
@@ -111,7 +113,8 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     PharDashboardComponent,
     ProduitsComponent,
     AddProductComponent,
-    PharmacieSettingComponent
+    PharmacieSettingComponent,
+    PharmacieCheckoutComponent
   ],
   imports: [
     BrowserModule,
@@ -141,6 +144,7 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAOhHjYUOLvSh3GG_H69tQTpYvQlJmT-Rc'
     }),
+    AgmDirectionModule,
     AgmSnazzyInfoWindowModule,
     RatingModule,
     AlertModule.forRoot(),

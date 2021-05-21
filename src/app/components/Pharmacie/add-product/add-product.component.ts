@@ -23,15 +23,15 @@ export class AddProductComponent implements OnInit {
   ngOnInit(): void {
     this.form = new FormGroup({
       name: new FormControl(null, { validators: [Validators.required] }),
+      image: new FormControl(null, {
+        validators: [Validators.required],
+        asyncValidators: [mimeType]
+      }),
       price: new FormControl(null, { validators: [Validators.required,
           Validators.pattern(/^-?(0|[1-9]\d*)?$/)] }),
       stock: new FormControl(null, { validators: [Validators.required,
           Validators.pattern(/^-?(0|[1-9]\d*)?$/)] }),
       description: new FormControl(null, { validators: [Validators.required] }),
-      image: new FormControl(null, {
-        validators: [Validators.required],
-        asyncValidators: [mimeType]
-      }),
     });
     this.pharmacieService.getDataByKey().subscribe(data => {
       this.pharmacieData = data;
@@ -78,9 +78,7 @@ export class AddProductComponent implements OnInit {
     } else {
       this.pharmacieService.updateProduct(this.productID, this.form.value.name,
         this.form.value.description, this.form.value.price,
-        this.form.value.stock, this.form.value.image).subscribe(result => {
-         console.log(this.form.value.image);
-      });
+        this.form.value.stock, this.form.value.image)
     }
   }
 }

@@ -29,6 +29,8 @@ export class CartService {
       .subscribe(items => {
         let products: CartItem[] = [];
         for (let product of items.cart[0].products) {
+          // console.log(product);
+          // product.id = product._id;
           products.push({product: product.product, quantity: product.quantity});
         }
         // this.products = items.cart[0].products;
@@ -47,7 +49,7 @@ export class CartService {
         const stock = this.calculateStockCounts(this.products[index], quantity);
         if (qty !== 0 && stock) {
           this.products[index].quantity = qty;
-          message = 'The product ' + product.name + ' has been added to cart.';
+          message = 'Le produit ' + product.name + ' a été ajouté au panier.';
           status = 'success';
           this.snackBar.open(message, '×', {panelClass: [status], verticalPosition: 'top', duration: 3000});
         }
@@ -59,7 +61,7 @@ export class CartService {
     if (!hasItem) {
       item = {product, quantity};
       this.products.push(item);
-      message = 'The product ' + product.name + ' has been added to cart.';
+      message = 'Le produit ' + product.name + ' a été ajouté au panier.';
       status = 'success';
       this.snackBar.open(message, '×', {panelClass: [status], verticalPosition: 'top', duration: 3000});
     }
@@ -129,7 +131,7 @@ export class CartService {
     if (stock < qty) {
       // this.toastrService.error('You can not add more items than available. In stock '+ stock +' items.');
       // tslint:disable-next-line:max-line-length
-      this.snackBar.open('You can not choose more items than available. In stock ' + stock + ' items.', '×', {
+      this.snackBar.open('Vous ne pouvez pas choisir plus d\'articles que disponibles. En stock ' + stock + ' articles.', '×', {
         panelClass: 'error',
         verticalPosition: 'top',
         duration: 3000

@@ -90,11 +90,27 @@ router.delete("/product/:id",checkAuth, (req, res, next) => {
   });
 });
 
+router.put("/decreasequantite", (req, res, next) => {
+  Pharmacie.findOneAndUpdate({_id: req.body.pharmacieId,
+      products: {$elemMatch: {name: req.body.product.name}}},
+    {$set: {
+       'products.$.stock': +req.body.product.stock - +req.body.quantity}},
+    {'new': true, 'safe': true, 'upsert': true}).then(result => {
+    res.status(201).json(result);
+  }).catch(error => {
+    console.log(error);
+    res.status(401).json({
+      message: "error occurred",
+      error: error
+    });
+  });
+});
+
 router.put("/editproduct/:id",
   multer({storage: storage}).single("image"), checkAuth,
   (req, res, next) => {
-    let imagePath = req.body.image;
-    // if (req.file) {
+     if (req.file) {
+      let imagePath = req.body.image;
       const url = req.protocol + "://" + req.get("host");
       imagePath = url + "/images/" + req.file.filename;
       Pharmacie.findOneAndUpdate({_id: req.userData.userId,
@@ -110,7 +126,21 @@ router.put("/editproduct/:id",
           error: error
         });
       });
-    // }
+    } else {
+      Pharmacie.findOneAndUpdate({_id: req.userData.userId,
+          products: {$elemMatch: {_id: req.params.id}}},
+        {$set: {'products.$.name': req.body.name, 'products.$.description': req.body.description,
+            'products.$.price': +req.body.price,
+            'products.$.stock': +req.body.stock}},
+        {'new': true, 'safe': true, 'upsert': true}).then(result => {
+        res.status(201).json(result);
+      }).catch(error => {
+        res.status(401).json({
+          message: "error occurred",
+          error: error
+        });
+      });
+    }
 });
 
 router.put("/addproduct",

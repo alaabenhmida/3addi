@@ -28,7 +28,7 @@
           <nav aria-label="breadcrumb" class="page-breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Pharmacy Details</li>
+              <li class="breadcrumb-item active" aria-current="page">Pharmacies</li>
             </ol>
           </nav>
           <h2 class="breadcrumb-title">{{pharmacieData?.name}}</h2>
@@ -70,17 +70,13 @@
                     <p class="doc-location mb-2 text-ellipse"><i class="fas fa-map-marker-alt mr-1"></i> {{pharmacieData?.address}} </p>
                     <p class="doc-location mb-2"><i class="fas fa-chevron-right mr-1"></i> {{pharmacieData?.type}}</p>
 
-                    <p class="doc-location mb-2"><i class="fas fa-chevron-right mr-1"></i> Opens at 08.00 AM</p>
-
                   </div>
                 </div>
               </div>
             </div>
             <div class="doc-info-right d-flex align-items-center justify-content-center">
               <div class="clinic-booking">
-                <a class="view-pro-btn" href="chat.html">Send Message</a>
-                <a class="apt-btn" href="#" data-toggle="modal" data-target="#voice_call">Call Now</a>
-                <a [routerLink]="['/pharmacie', pharmacieID]" class="view-pro-btn">Browse Products</a>
+                <a [routerLink]="['/pharmacie', pharmacieID]" class="view-pro-btn">Parcourir les produits</a>
               </div>
             </div>
           </div>
@@ -97,13 +93,13 @@
           <nav class="user-tabs mb-4">
             <ul class="nav nav-tabs nav-tabs-bottom nav-justified">
               <li class="nav-item">
-                <a class="nav-link active" href="#doc_overview" data-toggle="tab">Overview</a>
+                <a class="nav-link active" href="#doc_overview" data-toggle="tab">à propos</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#doc_reviews" data-toggle="tab">Reviews</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#doc_business_hours" data-toggle="tab">Business Hours</a>
+                <a class="nav-link" href="#doc_business_hours" data-toggle="tab">Heures de travail</a>
               </li>
             </ul>
           </nav>
@@ -122,7 +118,7 @@
                     <h4
                       *ngIf="!((pharmacieData?.aboutMe && pharmacieData?.aboutMe !== 'undefined') || pharmacieData?.awards.length > 0)"
                       class="widget-title text-center text-info">Pas D'information</h4>
-                    <h4 *ngIf="pharmacieData?.aboutMe" class="widget-title">About Me</h4>
+                    <h4 *ngIf="pharmacieData?.aboutMe" class="widget-title">à propos</h4>
                     <p>{{pharmacieData?.aboutMe}}</p>
                   </div>
                   <!-- /About Details -->
@@ -174,7 +170,6 @@
                       <div class="comment-body">
                         <div class="meta-data">
                           <span class="comment-author">{{review?.patientId.name}} {{review?.patientId.lastName}}</span>
-                          <span class="comment-date">Reviewed 4 Days ago</span>
                           <!--                          <div class="review-count rating">-->
                           <!--                            <i class="fas fa-star filled"></i>-->
                           <!--                            <i class="fas fa-star filled"></i>-->

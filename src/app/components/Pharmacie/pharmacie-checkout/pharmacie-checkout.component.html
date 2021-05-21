@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from doccure-html.dreamguystech.com/template/product-checkout.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 22 Mar 2021 19:28:40 GMT -->
+<head>
+  <meta charset="utf-8">
+  <title>Doccure</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+  <script src="assets/js/html5shiv.min.js"></script>
+  <script src="assets/js/respond.min.js"></script>
+  <![endif]-->
+
+</head>
+<body>
+
+<!-- Main Wrapper -->
+<div class="main-wrapper">
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb-bar">
+    <div class="container-fluid">
+      <div class="row align-items-center">
+        <div class="col-md-12 col-12">
+          <nav aria-label="breadcrumb" class="page-breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Payer</li>
+            </ol>
+          </nav>
+          <h2 class="breadcrumb-title">{{pharmacieData?.name}}</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /Breadcrumb -->
+
+  <!-- Page Content -->
+  <div class="content">
+    <div class="container">
+
+      <div class="row">
+        <div class="col-md-6 col-lg-7">
+          <div class="card">
+            <div class="card-body">
+
+              <!-- Checkout Form -->
+              <form action="https://doccure-html.dreamguystech.com/template/payment-success.html">
+
+                <!-- Personal Information -->
+                <div class="info-widget">
+                  <h4 class="card-title">informations personnelles</h4>
+                  <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                      <div class="form-group card-label">
+                        <label>Nom</label>
+                        <input class="form-control" type="text">
+                      </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                      <div class="form-group card-label">
+                        <label>Nom de famille</label>
+                        <input class="form-control" type="text">
+                      </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                      <div class="form-group card-label">
+                        <label>Email</label>
+                        <input class="form-control" type="email">
+                      </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                      <div class="form-group card-label">
+                        <label>Téléphone</label>
+                        <input class="form-control" type="text">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- /Personal Information -->
+
+                <!-- Shipping Details -->
+<!--                <div class="info-widget">-->
+<!--                  <h4 class="card-title">Shipping Details</h4>-->
+<!--                  <div class="terms-accept">-->
+<!--                    <div class="custom-checkbox">-->
+<!--                      <input type="checkbox" id="terms_accept">-->
+<!--                      <label for="terms_accept">Ship to a different address?</label>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                  <div class="form-group card-label">-->
+<!--                    <label class="pl-0 ml-0 mb-2">Order notes (Optional)</label>-->
+<!--                    <textarea rows="5" class="form-control" name="shipping"></textarea>-->
+<!--                  </div>-->
+<!--                </div>-->
+                <!-- /Shipping Details -->
+
+                <div class="payment-widget">
+                  <h4 class="card-title">Mode de paiement</h4>
+
+                  <!-- Credit Card Payment -->
+                  <div class="payment-list">
+                    <label class="payment-radio credit-card-option">
+                      <input type="radio" name="radio" checked>
+                      <span class="checkmark"></span>
+                      Carte de crédit
+                    </label>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group card-label">
+                          <label for="card_name">Nom sur la carte</label>
+                          <input class="form-control" id="card_name" type="text">
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group card-label">
+                          <label for="card_number">Numéro de carte</label>
+                          <input class="form-control" id="card_number" placeholder="1234  5678  9876  5432" type="text">
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group card-label">
+                          <label for="expiry_month">Mois d'expiration</label>
+                          <input class="form-control" id="expiry_month" placeholder="MM" type="text">
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group card-label">
+                          <label for="expiry_year">Année d'expiration</label>
+                          <input class="form-control" id="expiry_year" placeholder="YY" type="text">
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group card-label">
+                          <label for="cvv">CVV</label>
+                          <input class="form-control" id="cvv" type="text">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- /Credit Card Payment -->
+
+                  <!-- Paypal Payment -->
+                  <div class="payment-list">
+                    <label class="payment-radio paypal-option">
+                      <input type="radio" name="radio">
+                      <span class="checkmark"></span>
+                      Paypal
+                    </label>
+                  </div>
+                  <!-- /Paypal Payment -->
+
+                  <!-- Terms Accept -->
+                  <div class="terms-accept">
+                    <div class="custom-checkbox">
+                      <input type="checkbox" id="terms_accept1">
+                      <label for="terms_accept1">J'ai lu et j'accepte <a href="#">les termes et conditions</a></label>
+                    </div>
+                  </div>
+                  <!-- /Terms Accept -->
+
+                  <!-- Submit Section -->
+                  <div class="submit-section mt-4">
+                    <button (click)="onclick()" class="btn btn-primary submit-btn">Confirmer et payer</button>
+                  </div>
+                  <!-- /Submit Section -->
+
+                </div>
+              </form>
+              <!-- /Checkout Form -->
+
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-md-6 col-lg-5 theiaStickySidebar">
+
+          <!-- Booking Summary -->
+          <div class="card booking-card">
+            <div class="card-header">
+              <h3 class="card-title">Votre Ordre</h3>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-center mb-0">
+                  <tr>
+                    <th>Produit</th>
+                    <th class="text-center">quantité</th>
+                    <th class="text-right">Total</th>
+                  </tr>
+                  <tbody>
+                  <tr *ngFor="let product of products">
+                    <td>{{product?.product.name}}</td>
+                    <td class="text-center">{{product?.quantity}}</td>
+                    <td class="text-right">${{product?.product.price * product?.quantity}}</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="booking-summary pt-5">
+                <div class="booking-item-wrap">
+                  <div class="booking-total">
+                    <ul class="booking-total-list">
+                      <li>
+                        <span>Total</span>
+                        <span class="total-cost">${{getTotal()}}</span>
+                      </li>
+                      <li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /Booking Summary -->
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <!-- /Page Content -->
+
+</div>
+<!-- /Main Wrapper -->
+
+</body>
+
+<!-- Mirrored from doccure-html.dreamguystech.com/template/product-checkout.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 22 Mar 2021 19:28:40 GMT -->
+</html>

@@ -139,6 +139,11 @@
           <div id="map" class="map-listing">
             <agm-map (mapClick)="placeMarker($event)" class="h-100" style="height: 300px" [latitude]="latitude"
                      [longitude]="longitude">
+              <agm-direction
+                [origin]="origin"
+                [destination]="destination"
+              >
+              </agm-direction>
               <agm-marker [latitude]="latitude"
                           [longitude]="longitude"
               color="blue"></agm-marker>
