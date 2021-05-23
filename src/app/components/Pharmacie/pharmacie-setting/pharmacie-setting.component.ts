@@ -16,6 +16,8 @@ export class PharmacieSettingComponent implements OnInit {
   pharmacieData: Pharmacie;
   form: FormGroup;
   imagePreview: string;
+  latitude = 51.673858;
+  longitude = 7.815982;
 
   constructor(private pharmacieService: PharmacieService,
               public authService: PatientAuthService,
@@ -104,6 +106,10 @@ export class PharmacieSettingComponent implements OnInit {
   }
   get awards(): any { // a getter!
     return (this.form.get('awards') as FormArray).controls;
+  }
+  markerDragEnd($event: any): void {
+    this.latitude = $event.coords.lat;
+    this.longitude = $event.coords.lng;
   }
 
 }

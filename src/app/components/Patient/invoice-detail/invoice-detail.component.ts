@@ -26,7 +26,7 @@ export class InvoiceDetailComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.role = this.auth.getRole();
-    this.auth.getRoleListener().subscribe(res => {
+    this.roleSub = this.auth.getRoleListener().subscribe(res => {
       this.role = res;
     });
     this.route.paramMap.subscribe((paramMap: ParamMap) => {

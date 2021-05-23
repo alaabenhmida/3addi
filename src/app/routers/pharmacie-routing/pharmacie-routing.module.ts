@@ -13,13 +13,19 @@ import {ProduitsComponent} from '../../components/Pharmacie/produits/produits.co
 import {AddProductComponent} from '../../components/Pharmacie/add-product/add-product.component';
 import {PharmacieSettingComponent} from '../../components/Pharmacie/pharmacie-setting/pharmacie-setting.component';
 import {PharmacieCheckoutComponent} from '../../components/Pharmacie/pharmacie-checkout/pharmacie-checkout.component';
+import {MapListComponent} from '../../components/Pharmacie/map-list/map-list.component';
+import {OrdersComponent} from '../../components/Pharmacie/orders/orders.component';
+import {OrderDetailComponent} from '../../components/Pharmacie/order-detail/order-detail.component';
 
 const appRoutes: Routes = [
+  { path: 'pharmacies', component: MapListComponent},
   { path: 'pharmacie/login', component: PharLoginComponent},
   { path: 'pharmacie/dashboard', component: PharDashboardComponent},
   { path: 'pharmacie/parametre', component: PharmacieSettingComponent},
   { path: 'pharmacie/dashboard/produits', component: ProduitsComponent},
   { path: 'pharmacie/dashboard/addproduits', component: AddProductComponent},
+  { path: 'pharmacie/dashboard/orders', component: OrdersComponent},
+  { path: 'pharmacie/dashboard/orders/:id', component: OrderDetailComponent},
   { path: 'pharmacie/dashboard/produits/:id/editer', component: AddProductComponent},
   { path: 'pharmacie/search', component: PharmacieSearchComponent},
   { path: 'pharmacie/:id/about', component: PharmacieProfileComponent},

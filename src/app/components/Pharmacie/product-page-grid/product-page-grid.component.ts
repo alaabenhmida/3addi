@@ -3,6 +3,7 @@ import {PharmacieService} from '../../../services/pharmacie/pharmacie.service';
 import {ActivatedRoute, ParamMap, Route} from '@angular/router';
 import {Product} from '../../../models/Pharmacie/product.model';
 import {CartService} from '../../../services/pharmacie/cart.service';
+import {CartItem} from '../../../models/Pharmacie/cartItem.model';
 
 @Component({
   selector: 'app-product-page-grid',
@@ -12,33 +13,8 @@ import {CartService} from '../../../services/pharmacie/cart.service';
 export class ProductPageGridComponent implements OnInit {
   pharmacieId: string;
   pharmacie: any;
-  products = [
-    {
-      name: 'dedede',
-      price: 55,
-      img: 'assets/images/items/1.jpg'
-    },
-    {
-      name: 'dedede',
-      price: 55,
-      img: 'assets/images/items/1.jpg'
-    },
-    {
-      name: 'dedede',
-      price: 55,
-      img: 'assets/images/items/1.jpg'
-    },
-    {
-      name: 'dedede',
-      price: 55,
-      img: 'assets/images/items/1.jpg'
-    },
-    {
-      name: 'dedede',
-      price: 55,
-      img: 'assets/images/items/1.jpg'
-    },
-  ];
+  products: CartItem[] = [];
+  pharmacieProducts: Product[] = [];
 
   constructor(private pharmacieService: PharmacieService,
               private route: ActivatedRoute,
@@ -47,8 +23,21 @@ export class ProductPageGridComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       this.pharmacieId = paramMap.get('id');
+      this.cartService.getcart(paramMap.get('id'));
+      this.products = this.cartService.products;
       this.pharmacieService.getPharmacie(paramMap.get('id')).subscribe(data => {
         this.pharmacie = data;
+        for (let product of data.products) {
+          this.pharmacieProducts.push({
+            id: product._id,
+            name: product.name,
+            description: product.description,
+            price: product.price,
+            image: product.image,
+            stock: product.stock
+          });
+        }
+        this.products = this.cartService.products;
       }, error => {
         console.log(error);
       });

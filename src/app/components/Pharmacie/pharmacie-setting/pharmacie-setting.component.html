@@ -226,10 +226,28 @@
                       </div>
                     </div>
                   </div>
+                  <div class="col-12 mb-4">
+                    <p class="card-label">Location</p>
+                    <div class="form-group mt-2 card">
+
+                      <agm-map style="height: 300px"
+                               [latitude]="latitude"
+                               [longitude]="longitude"
+                               [zoom]="15">
+                        <agm-marker
+                          [latitude]="latitude"
+                          [longitude]="longitude"
+                          [markerDraggable]="true"
+                          (dragEnd)="markerDragEnd($event)"></agm-marker>
+                      </agm-map>
+
+                    </div>
+                  </div>
+
 
                 </div>
                 <div class="submit-section">
-                  <button type="submit" class="btn btn-primary submit-btn">Save Changes</button>
+                  <button type="submit" class="btn btn-primary submit-btn">Sauvergarder</button>
                 </div>
               </form>
               <!-- /Profile Settings Form -->

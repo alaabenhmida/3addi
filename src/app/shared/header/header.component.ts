@@ -1,6 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {PatientAuthService} from '../../auth/Patient/patient-auth.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -20,7 +21,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private userimage: string;
   private role: string;
 
-  constructor(private authService: PatientAuthService) { }
+  constructor(private authService: PatientAuthService,
+              public router: Router) { }
 
   ngOnInit(): void {
     this.role = this.authService.getRole();

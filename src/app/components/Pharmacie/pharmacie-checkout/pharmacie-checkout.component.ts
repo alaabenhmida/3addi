@@ -4,7 +4,7 @@ import {CartService} from '../../../services/pharmacie/cart.service';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {Pharmacie} from '../../../models/Pharmacie/pharmacie.model';
 import {PharmacieService} from '../../../services/pharmacie/pharmacie.service';
-import {Subscription} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import * as moment from 'moment';
 
 @Component({
@@ -35,8 +35,6 @@ export class PharmacieCheckoutComponent implements OnInit, OnDestroy {
     });
     this.productsSub = this.cartService.productsSub().subscribe(products => {
       this.products = products;
-      console.log(products);
-      // console.log(products);
     });
   }
 
@@ -45,10 +43,19 @@ export class PharmacieCheckoutComponent implements OnInit, OnDestroy {
   }
 
   onclick(): void {
-    this.products.forEach(product => {
-      this.pharmacieService.updatequantity(product.product, product.quantity, this.day,
-        this.pharmacieId);
+    // let observableArray: any = [];
+    // this.products.forEach(product => {
+    //   this.pharmacieService.updatequantity(product.product, product.quantity, this.day,
+    //     this.pharmacieId);
+    //   // observableArray.push();
+    // });
+    this.pharmacieService.addOrder(this.products, this.pharmacieId).subscribe(data => {
+      console.log(data);
     });
+    // Observable.forkJoin(observableArray);
+    // this.pharmacieService.deleteCart(this.pharmacieId).subscribe(result => {
+    //   console.log(result);
+    // });
   }
 
   ngOnDestroy(): void {

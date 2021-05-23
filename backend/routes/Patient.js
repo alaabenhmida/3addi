@@ -33,6 +33,17 @@ const storage = multer.diskStorage({
   }
 });
 
+router.put("/deletecart", checkAuth, (req, res, next) => {
+  console.log(req.body);
+  Patient.updateOne(
+    {_id: req.userData.userId},
+    {$pull: {cart: {pharmacie: req.body.pharmacieID}}}
+  ).then(result => {
+    res.status(201).json(result);
+  }).catch(error => {
+    res.json(error);
+  });
+});
 
 router.put("", multer({storage: storage}).single("image"), checkAuth,
   (req, res, next) => {
@@ -63,6 +74,8 @@ router.put("", multer({storage: storage}).single("image"), checkAuth,
       });
     }
   });
+
+
 
 router.put("/addtocart", checkAuth, (req, res, next) => {
 
@@ -260,12 +273,12 @@ router.get("", (req, res, next) => {
     res.status(200).json({
       message: "Patients fetched successfully!",
       posts: documents
-    }).catch(error => {
-      res.status(401).json({
-        message: "error was occurred"
-      });
     });
-  });
+  }).catch(error => {
+    res.status(401).json({
+      message: "error was occurred"
+    });
+  });;
 })
 
 router.put("/:id", checkAuth, (req, res, next) => {
@@ -287,6 +300,7 @@ router.put("/:id", checkAuth, (req, res, next) => {
       })
   });
 });
+
 
 router.put("/:id/delpresc", checkAuth, (req, res, next) => {
     Patient.updateOne(

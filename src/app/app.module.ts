@@ -71,6 +71,9 @@ import { PharmacieSettingComponent } from './components/Pharmacie/pharmacie-sett
 import {NgxIntlTelInputModule} from 'ngx-intl-tel-input';
 import {AgmDirectionModule} from 'agm-direction';
 import { PharmacieCheckoutComponent } from './components/Pharmacie/pharmacie-checkout/pharmacie-checkout.component';
+import { MapListComponent } from './components/Pharmacie/map-list/map-list.component';
+import { OrdersComponent } from './components/Pharmacie/orders/orders.component';
+import { OrderDetailComponent } from './components/Pharmacie/order-detail/order-detail.component';
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
 @NgModule({
@@ -114,7 +117,10 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     ProduitsComponent,
     AddProductComponent,
     PharmacieSettingComponent,
-    PharmacieCheckoutComponent
+    PharmacieCheckoutComponent,
+    MapListComponent,
+    OrdersComponent,
+    OrderDetailComponent
   ],
   imports: [
     BrowserModule,

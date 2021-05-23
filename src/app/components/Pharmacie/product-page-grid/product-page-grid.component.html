@@ -201,12 +201,12 @@
         </header><!-- sect-heading -->
 
         <div class="row">
-          <div *ngFor="let product of pharmacie?.products" class="col-md-4">
+          <div *ngFor="let product of pharmacieProducts" class="col-md-4">
             <figure class="card card-product-grid">
               <div class="img-wrap">
                 <span class="badge badge-danger"> NOUVEAU </span>
                 <img src="{{product?.image}}">
-                <a class="btn-overlay" [routerLink]="['product', product._id]"><i class="fa fa-search-plus"></i> Voir</a>
+                <a class="btn-overlay" [routerLink]="['product', product.id]"><i class="fa fa-search-plus"></i> Voir</a>
               </div> <!-- img-wrap.// -->
               <figcaption class="info-wrap">
                 <div class="fix-height">

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from doccure-html.dreamguystech.com/template/map-list.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 22 Mar 2021 19:28:34 GMT -->
+<head>
+  <meta charset="utf-8">
+  <title>Doccure</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+  <script src="assets/js/html5shiv.min.js"></script>
+  <script src="assets/js/respond.min.js"></script>
+  <![endif]-->
+
+</head>
+<body class="map-page">
+
+<!-- Main Wrapper -->
+<div class="main-wrapper">
+
+  <!-- Page Content -->
+  <div class="content">
+    <div class="container-fluid">
+
+      <div class="row">
+        <div class="col-xl-7 col-lg-12 order-md-last order-sm-last order-last map-left">
+
+          <div class="row align-items-center mb-4">
+            <div class="col-md-6 col">
+              <h4>2245 Doctors found</h4>
+            </div>
+
+            <div class="col-md-6 col-auto">
+              <div class="view-icons">
+                <a href="map-grid.html" class="grid-view"><i class="fas fa-th-large"></i></a>
+                <a href="map-list.html" class="list-view active"><i class="fas fa-bars"></i></a>
+              </div>
+              <div class="sort-by d-sm-block d-none">
+									<span class="sortby-fliter">
+										<select class="select">
+											<option>Sort by</option>
+											<option class="sorting">Rating</option>
+											<option class="sorting">Popular</option>
+											<option class="sorting">Latest</option>
+											<option class="sorting">Free</option>
+										</select>
+									</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Doctor Widget -->
+          <div *ngFor="let pharmacie of pharmacieData" class="card">
+            <div class="card-body">
+              <div class="doctor-widget">
+                <div class="doc-info-left">
+                  <div class="doctor-img1">
+                    <a [routerLink]="['/pharmacie', pharmacie._id, 'about']">
+                      <img src="{{pharmacie?.imagePath}}" id="imagephar" class="img-fluid" alt="User Image">
+                    </a>
+                  </div>
+                  <div class="doc-info-cont">
+                    <h4 class="doc-name mb-2"><a [routerLink]="['/pharmacie', pharmacie._id, 'about']">{{pharmacie?.name}}</a></h4>
+                    <div class="rating mb-2">
+                      <span class="badge badge-primary">4.0</span>
+                      <i class="fas fa-star filled"></i>
+                      <i class="fas fa-star filled"></i>
+                      <i class="fas fa-star filled"></i>
+                      <i class="fas fa-star filled"></i>
+                      <i class="fas fa-star"></i>
+                      <span class="d-inline-block average-rating">({{pharmacie?.reviews.length}})</span>
+                    </div>
+                    <div class="clinic-details">
+                      <div class="clini-infos pt-3">
+
+                        <p class="doc-location mb-2"><i class="fas fa-phone-volume mr-1"></i> {{pharmacie?.phone}}</p>
+                        <p class="doc-location mb-2 text-ellipse"><i class="fas fa-map-marker-alt mr-1"></i> {{pharmacie?.address}} {{pharmacie?.city}}</p>
+                        <p class="doc-location mb-2"><i class="fas fa-chevron-right mr-1"></i> {{pharmacie?.type}}</p>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="doc-info-right">
+                  <div class="clinic-booking">
+                    <a class="view-pro-btn" [routerLink]="['/pharmacie', pharmacie._id, 'about']">Voir les détails</a>
+                    <a class="apt-btn" [routerLink]="['/pharmacie', pharmacie._id]">Parcourir les produits</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /Doctor Widget -->
+
+
+          <div class="load-more text-center">
+            <a class="btn btn-primary btn-sm" href="javascript:void(0);">Load More</a>
+          </div>
+        </div>
+        <!-- /content-left-->
+        <div class="col-xl-5 col-lg-12 map-right">
+          <div id="map" class="map-listing"></div>
+          <!-- map-->
+        </div>
+        <!-- /map-right-->
+      </div>
+      <!-- /row-->
+
+    </div>
+
+  </div>
+  <!-- /Page Content -->
+
+
+</div>
+<!-- /Main Wrapper -->
+
+</body>
+
+<!-- Mirrored from doccure-html.dreamguystech.com/template/map-list.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 22 Mar 2021 19:28:34 GMT -->
+</html>

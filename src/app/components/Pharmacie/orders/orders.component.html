@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Mirrored from doccure-html.dreamguystech.com/template/dependent.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 22 Mar 2021 19:29:05 GMT -->
+<head>
+  <meta charset="utf-8">
+  <title>Doccure</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+  <script src="assets/js/html5shiv.min.js"></script>
+  <script src="assets/js/respond.min.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+<!-- Main Wrapper -->
+<div class="main-wrapper">
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb-bar">
+    <div class="container-fluid">
+      <div class="row align-items-center">
+        <div class="col-md-12 col-12">
+          <nav aria-label="breadcrumb" class="page-breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="index.html">Home</a>
+              </li>
+              <li class="breadcrumb-item active" aria-current="page">Produits</li>
+            </ol>
+          </nav>
+          <h2 class="breadcrumb-title">{{pharmacieData?.name}}</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /Breadcrumb -->
+  <!-- Page Content -->
+  <div class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- Profile Sidebar -->
+        <div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
+          <div class="profile-sidebar">
+            <div class="widget-profile pro-widget-content">
+              <div class="profile-info-widget">
+                <a class="booking-doc-img">
+                  <img src="{{pharmacieData?.imagePath}}" alt="User Image">
+                </a>
+                <div class="profile-det-info">
+                  <h3>{{pharmacieData?.name}}</h3>
+                  <div class="patient-details">
+                    <h5 class="mb-0"><i class="fas fa-map-marker-alt"></i> {{pharmacieData?.state}}
+                      , {{pharmacieData?.country}}</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="dashboard-widget">
+              <nav class="dashboard-menu">
+                <ul>
+                  <li>
+                    <a [routerLink]="['/pharmacie/dashboard']">
+                      <i class="fas fa-columns"></i>
+                      <span>Dashboard</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a [routerLink]="['/pharmacie/dashboard/produits']"> <i class="fas fa-cheese"></i>
+                      <span>Produits</span>
+                    </a>
+                  </li>
+                  <li routerLinkActive="active">
+                    <a [routerLink]="['/pharmacie/dashboard/orders']"> <i class="fas fa-file-invoice"></i>
+                      <span>Ordres</span>
+                    </a>
+                  </li>
+                  <!--                  <li>-->
+                  <!--                    <a [routerLink]="['/messages']">-->
+                  <!--                      <i class="fas fa-comments"></i>-->
+                  <!--                      <span>Message</span>-->
+                  <!--                      <small class="unread-msg">23</small>-->
+                  <!--                    </a>-->
+                  <!--                  </li>-->
+                  <li routerLinkActive="active">
+                    <a [routerLink]="['/pharmacie/parametre']">
+                      <i class="fas fa-user-cog"></i>
+                      <span>Paramétres</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a>
+                      <i class="fas fa-lock"></i>
+                      <span>Change Password</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a>
+                      <i class="fas fa-sign-out-alt"></i>
+                      <span>Logout</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+
+          </div>
+        </div>
+        <!-- / Profile Sidebar -->
+        <div class="col-md-7 col-lg-8 col-xl-9">
+          <div class="card">
+            <div class="card-body ">
+              <!-- Dependent Tab -->
+              <div class="mt-4">
+                <div class="card card-table mb-0">
+                  <div class="card-body">
+                    <div class="table-responsive">
+                      <table class="table table-hover table-center mb-0">
+                        <thead>
+                        <tr>
+                          <th>Patient</th>
+                          <th>Date</th>
+                          <th>Total</th>
+                          <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let order of orders">
+                          <td>
+                            <h2 class="table-avatar">
+                              <a class="avatar avatar-sm mr-2">
+                                <img class="avatar-img rounded-circle" src="{{order?.order.patient.imagePath}}">
+                              </a>
+                              <a
+                                [routerLink]="['/patient', order?.order.patient._id]">{{order?.order.patient.name}} {{order?.order.patient.lastName}}
+                                <span>{{order?.order.patient._id}}</span></a>
+                            </h2>
+                          </td>
+                          <td>{{getDate(order?.order.date, 'DD MMMM YYYY')}}</td>
+                          <td>${{order?.total}}</td>
+                          <td>
+                            <div class="actions">
+                              <a class="btn btn-sm bg-default-light" href="invoice.html">
+                                <i class="fas fa-file-alt"></i> Detail
+                              </a>
+                            </div>
+                          </td>
+                          <!--                          <td>-->
+                          <!--                            <div class="table-action">-->
+                          <!--                              <a [routerLink]="[product?._id, 'editer']" class="btn btn-sm bg-info-light">	<i class="fas fa-edit"></i> Editer</a>-->
+                          <!--                              <a (click)="onDelete(product?._id)" class="btn btn-sm bg-danger-light">	<i class="fas fa-times"></i> supprimer</a>-->
+                          <!--                            </div>-->
+                          <!--                          </td>-->
+                        </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- /Dependent Tab -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /Page Content -->
+
+</div>
+<!-- /Main Wrapper -->
+
+</body>
+
+
+<!-- Mirrored from doccure-html.dreamguystech.com/template/dependent.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 22 Mar 2021 19:29:05 GMT -->
+</html>
