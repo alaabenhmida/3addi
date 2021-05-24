@@ -29,7 +29,7 @@ export class ErrorInterceptor implements HttpInterceptor {
           // this.toaster.error(error.statusText, '', {
           //   positionClass: 'toast-bottom-right'
           // });
-          this.dialog.open(ErrorComponent, {data: {message: error.statusText}});
+          this.dialog.open(ErrorComponent, {data: {message: error.statusText, minWidth: 300}});
         }
         return throwError(error);
       })

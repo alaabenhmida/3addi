@@ -49,6 +49,18 @@ export class PharmacieService {
     }
   }
 
+  deleteCart(pharmacieID: string): Observable<any> {
+    return this.http.put('http://localhost:3000/patient/deletecart', {pharmacieID});
+  }
+
+  addOrder(cart: any, pharmacie: string): Observable<any> {
+    return this.http.put('http://localhost:3000/pharmacies/addorder', {cart, pharmacie});
+  }
+
+  getOrder(id: string): Observable<any> {
+    return this.http.get('http://localhost:3000/pharmacies/order/' + id);
+  }
+
   updatequantity(product: Product, quantity: number, date: string, pharmacieId: string): void {
 
     this.http.put('http://localhost:3000/pharmacies/decreasequantite', {product, quantity, date, pharmacieId})

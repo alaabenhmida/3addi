@@ -52,7 +52,6 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {ErrorInterceptor} from './error-interceptor';
 import { ErrorComponent } from './error/error.component';
 import {MatButtonModule} from '@angular/material/button';
-import {MatCheckboxModule} from '@angular/material/checkbox';
 import { ProductPageGridComponent } from './components/Pharmacie/product-page-grid/product-page-grid.component';
 import {PharmacieRoutingModule} from './routers/pharmacie-routing/pharmacie-routing.module';
 import { ProductDetailsComponent } from './components/Pharmacie/product-details/product-details.component';
@@ -74,6 +73,7 @@ import { PharmacieCheckoutComponent } from './components/Pharmacie/pharmacie-che
 import { MapListComponent } from './components/Pharmacie/map-list/map-list.component';
 import { OrdersComponent } from './components/Pharmacie/orders/orders.component';
 import { OrderDetailComponent } from './components/Pharmacie/order-detail/order-detail.component';
+import { LoginDialogComponent } from './shared/login-dialog/login-dialog.component';
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
 @NgModule({
@@ -120,7 +120,8 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     PharmacieCheckoutComponent,
     MapListComponent,
     OrdersComponent,
-    OrderDetailComponent
+    OrderDetailComponent,
+    LoginDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -164,6 +165,6 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
   ],
   bootstrap: [AppComponent],
-  entryComponents: [ErrorComponent]
+  entryComponents: [ErrorComponent, LoginDialogComponent]
 })
 export class AppModule { }

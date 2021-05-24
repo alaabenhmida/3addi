@@ -2,6 +2,8 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {PatientAuthService} from '../../auth/Patient/patient-auth.service';
 import {Router} from '@angular/router';
+import {MatDialog} from '@angular/material/dialog';
+import {LoginDialogComponent} from '../login-dialog/login-dialog.component';
 
 @Component({
   selector: 'app-header',
@@ -22,7 +24,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private role: string;
 
   constructor(private authService: PatientAuthService,
-              public router: Router) { }
+              public router: Router,
+              private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.role = this.authService.getRole();
@@ -74,4 +77,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.roleSubs.unsubscribe();
   }
 
+  onclick(): void {
+    this.dialog.open(LoginDialogComponent, {minWidth: 300});
+  }
 }

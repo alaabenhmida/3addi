@@ -26,6 +26,7 @@ export class PharDashboardComponent implements OnInit {
       data.sales.forEach(sale => {
         this.totalSalesAMount += sale.price;
         if (moment(sale.date).format('DD MM') === moment(this.today).format('DD MM')) {
+          // console.log(sale);
           this.todaySales.push(sale);
           this.todaySalesAmount += sale.price;
           this.todaySAlesQuantite += sale.quantity;

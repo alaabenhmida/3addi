@@ -51,7 +51,7 @@
         </div>
       </li>
       <li *ngIf="!userIsAuthenticated" class="nav-item">
-        <a class="nav-link header-login" routerLink="/login">login / Signup </a>
+        <a (click)="onclick()" class="nav-link header-login" [routerLink]="router.url">login / Signup </a>
       </li>
       <!-- User Menu -->
       <li *ngIf="userIsAuthenticated" class="nav-item dropdown has-arrow logged-item">

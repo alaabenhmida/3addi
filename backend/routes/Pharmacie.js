@@ -5,6 +5,7 @@ const Pharmacie = require("../models/Pharmacie");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const multer = require("multer");
+const moment = require("moment");
 
 const MIME_TYPE_MAP = {
   "image/png": "png",
@@ -90,13 +91,49 @@ router.delete("/product/:id",checkAuth, (req, res, next) => {
   });
 });
 
-router.put("/decreasequantite", (req, res, next) => {
+router.get("/order/:id", checkAuth, (req, res, next) => {
+  Pharmacie.findById(req.userData.userId)
+    .select({orders: {$elemMatch: {_id: req.params.id}}})
+    .populate('orders.patient')
+    .then(result => {
+      console.log(result);
+      res.status(200).json(result);
+    }).catch(error => {
+    res.status(400).json(error);
+  });
+});
+
+router.put("/addorder",checkAuth, (req, res, next) => {
+  Pharmacie.findOneAndUpdate({_id: req.body.pharmacie},
+    {$push: {orders: {patient: req.userData.userId, products: req.body.cart,
+        date: moment(new Date().toString()).format("YYYY-MM-DDTHH:mm:ss")}}},
+    {'new': true, 'safe': true, 'upsert': true}).then(result => {
+    res.status(201).json(result);
+  }).catch(error => {
+    res.status(400).json(error);
+  });
+});
+router.put("/decreasequantite", checkAuth, (req, res, next) => {
   Pharmacie.findOneAndUpdate({_id: req.body.pharmacieId,
       products: {$elemMatch: {name: req.body.product.name}}},
     {$set: {
        'products.$.stock': +req.body.product.stock - +req.body.quantity}},
     {'new': true, 'safe': true, 'upsert': true}).then(result => {
-    res.status(201).json(result);
+    // res.status(201).json(result);
+    Pharmacie.findOneAndUpdate({_id: req.body.pharmacieId},
+      {$push: {sales: {patient: req.userData.userId, name: req.body.product.name, description: req.body.product.description,
+            price: +req.body.product.price, image: req.body.product.image, quantity: +req.body.quantity,
+          date: moment(new Date().toString()).format("YYYY-MM-DDTHH:mm:ss")}}},
+      {'new': true, 'safe': true, 'upsert': true})
+      .then(result => {
+        res.status(201).json(result);
+      }).catch(error => {
+      console.log(error);
+      res.status(400).json({
+        message: "error occurred",
+        error: error
+      });
+    });
   }).catch(error => {
     console.log(error);
     res.status(401).json({
@@ -163,8 +200,12 @@ router.put("/addproduct",
   });
 });
 
+
 router.get("/getbykey", checkAuth, (req, res, next) => {
-  Pharmacie.findOne({_id: req.userData.userId}).then(pharmacie => {
+  Pharmacie.findOne({_id: req.userData.userId})
+    .populate('sales.patient')
+    .populate('orders.patient')
+    .then(pharmacie => {
     res.status(200).json(pharmacie);
   }).catch(error => {
     res.status(404).json(error);
