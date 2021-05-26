@@ -72,8 +72,11 @@ export class PatientServiceService {
   }
 
   addRdv(id: string, rdvDate: string): Observable<any> {
-    return  this.http.post('http://localhost:3000/patient/' + id + '/rdv',
+    return this.http.post('http://localhost:3000/patient/' + id + '/rdv',
       {appDate: moment(Date.now()).format('YYYY-MM-DDTHH:mm:ss'),
       rdvDate});
+  }
+  getAllPAtient(): Observable<any> {
+    return this.http.get('http://localhost:3000/patient/');
   }
 }

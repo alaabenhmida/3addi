@@ -269,12 +269,19 @@ router.put("/addfav", checkAuth, (req, res, next) => {
 });
 
 router.get("", (req, res, next) => {
+  let fetchedDoctors;
   Patient.find().then(documents => {
+    fetchedDoctors = documents;
+    return Patient.count();
+
+  }).then(count => {
     res.status(200).json({
       message: "Patients fetched successfully!",
-      posts: documents
+      posts: fetchedDoctors,
+      maxPatient: count
     });
-  }).catch(error => {
+  })
+    .catch(error => {
     res.status(401).json({
       message: "error was occurred"
     });

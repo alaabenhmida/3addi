@@ -74,6 +74,9 @@ import { MapListComponent } from './components/Pharmacie/map-list/map-list.compo
 import { OrdersComponent } from './components/Pharmacie/orders/orders.component';
 import { OrderDetailComponent } from './components/Pharmacie/order-detail/order-detail.component';
 import { LoginDialogComponent } from './shared/login-dialog/login-dialog.component';
+import { AdminDashboardComponent } from './components/Admin/admin-dashboard/admin-dashboard.component';
+import {AdminRoutingModule} from './routers/admin-routing/admin-routing.module';
+import {NgxChartsModule, PieChartModule} from '@swimlane/ngx-charts';
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
 @NgModule({
@@ -121,7 +124,8 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     MapListComponent,
     OrdersComponent,
     OrderDetailComponent,
-    LoginDialogComponent
+    LoginDialogComponent,
+    AdminDashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -134,6 +138,7 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     PatientRoutingModule,
     DoctorRoutingModule,
     PharmacieRoutingModule,
+    AdminRoutingModule,
     BrowserModule,
     FormsModule,
     DlDateTimeDateModule,  // <--- Determines the data type of the model
@@ -156,7 +161,9 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     RatingModule,
     AlertModule.forRoot(),
     PaginationModule.forRoot(),
-    MatButtonModule
+    MatButtonModule,
+    PieChartModule,
+    NgxChartsModule,
     // BarRatingModule,
     // // BarRatingModule
   ],

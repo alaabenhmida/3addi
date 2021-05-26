@@ -150,9 +150,12 @@
                   </div>
                   <div class="doc-info-cont">
                     <h4 class="doc-name"><a [routerLink]="['/doctor', doctor?._id]">Dr. {{doctor?.name}} {{doctor?.lastName}}</a></h4>
-                    <p class="doc-speciality">{{doctor?.speciality}}</p>
-                    <h5 class="doc-department"><img src="assets/img/specialities/specialities-05.png" class="img-fluid" alt="Speciality">Dentist</h5>
-                    <h5 class="doc-department"><img src="assets/img/specialities/specialities-01.png" class="img-fluid" alt="Speciality">Dentist</h5>
+<!--                    <p class="doc-speciality">{{doctor?.speciality}}</p>-->
+                    <h5 *ngIf="doctor?.speciality === 'Dentiste'" class="doc-department"><img src="assets/img/specialities/specialities-05.png" class="img-fluid" alt="Speciality">Dentist</h5>
+                    <h5 *ngIf="doctor?.speciality === 'Urologie'" class="doc-department"><img src="assets/img/specialities/specialities-01.png" class="img-fluid" alt="Speciality">Urologie</h5>
+                    <h5 *ngIf="doctor?.speciality === 'Neurologie'" class="doc-department"><img src="assets/img/specialities/specialities-02.png" class="img-fluid" alt="Speciality">Neurologie</h5>
+                    <h5 *ngIf="doctor?.speciality === 'Orthopédique'" class="doc-department"><img src="assets/img/specialities/specialities-03.png" class="img-fluid" alt="Speciality">Orthopédique</h5>
+                    <h5 *ngIf="doctor?.speciality === 'Cardiologue'" class="doc-department"><img src="assets/img/specialities/specialities-04.png" class="img-fluid" alt="Speciality">Cardiologue</h5>
                     <div class="rating">
                       <i class="fas fa-star filled"></i>
                       <i class="fas fa-star filled"></i>
