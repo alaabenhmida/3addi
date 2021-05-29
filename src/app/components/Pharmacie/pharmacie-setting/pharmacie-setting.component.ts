@@ -97,7 +97,8 @@ export class PharmacieSettingComponent implements OnInit {
     this.pharmacieService.modify(this.form.value.name,  this.form.value.email,
       this.form.value.address, this.form.value.city, this.form.value.state,
       this.form.value.country, this.form.value.zip, this.form.value.phone,
-      this.form.value.type, this.form.value.awards, this.form.value.aboutMe, this.form.value.image).subscribe(result => {
+      this.form.value.type, this.form.value.awards, this.form.value.aboutMe, this.latitude, this.longitude,
+      this.form.value.image).subscribe(result => {
       this.authService.userimageListener.next(result.imagePath);
       this.toastr.success('changement enregistré', '', {
         positionClass: 'toast-bottom-right'

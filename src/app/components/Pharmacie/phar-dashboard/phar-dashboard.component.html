@@ -52,8 +52,8 @@
                 <div class="profile-det-info">
                   <h3>{{pharmacieData?.name}}</h3>
                   <div class="patient-details">
-                    <h5><i class="fas fa-birthday-cake"></i> 24 Jul 1983, 38 years</h5>
-                    <h5 class="mb-0"><i class="fas fa-map-marker-alt"></i> {{pharmacieData?.state}}, {{pharmacieData?.country}}</h5>
+                    <h5 class="mb-0"><i class="fas fa-map-marker-alt"></i> {{pharmacieData?.state}}
+                      , {{pharmacieData?.country}}</h5>
                   </div>
                 </div>
               </div>
@@ -68,17 +68,22 @@
                     </a>
                   </li>
                   <li>
-                    <a [routerLink]="['/pharmacie/dashboard/produits']">	<i class="fas fa-cheese"></i>
+                    <a [routerLink]="['/pharmacie/dashboard/produits']"> <i class="fas fa-cheese"></i>
                       <span>Produits</span>
                     </a>
                   </li>
                   <li>
-                    <!--                    <a [routerLink]="['/messages']">-->
-                    <!--                      <i class="fas fa-comments"></i>-->
-                    <!--                      <span>Message</span>-->
-                    <!--                      <small class="unread-msg">23</small>-->
-                    <!--                    </a>-->
+                    <a [routerLink]="['/pharmacie/dashboard/orders']"> <i class="fas fa-file-invoice"></i>
+                      <span>Ordres</span>
+                    </a>
                   </li>
+                  <!--                  <li>-->
+                  <!--                    <a [routerLink]="['/messages']">-->
+                  <!--                      <i class="fas fa-comments"></i>-->
+                  <!--                      <span>Message</span>-->
+                  <!--                      <small class="unread-msg">23</small>-->
+                  <!--                    </a>-->
+                  <!--                  </li>-->
                   <li routerLinkActive="active">
                     <a [routerLink]="['/pharmacie/parametre']">
                       <i class="fas fa-user-cog"></i>
@@ -89,12 +94,6 @@
                     <a>
                       <i class="fas fa-lock"></i>
                       <span>Change Password</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a>
-                      <i class="fas fa-sign-out-alt"></i>
-                      <span>Logout</span>
                     </a>
                   </li>
                 </ul>
@@ -119,9 +118,9 @@
                           </div>
                         </div>
                         <div class="dash-widget-info">
-                          <h6>Total Sales</h6>
+                          <h6>Ventes totales</h6>
                           <h3>${{totalSalesAMount}}</h3>
-                          <p class="text-muted">Till Today</p>
+                          <p class="text-muted">Jusqu'à aujourd'hui</p>
                         </div>
                       </div>
                     </div>
@@ -134,7 +133,7 @@
                           </div>
                         </div>
                         <div class="dash-widget-info">
-                          <h6>Today Sales</h6>
+                          <h6>Ventes d'aujourd'hui</h6>
                           <h3>${{todaySalesAmount}}</h3>
                           <p class="text-muted">{{getDate(today.toString(), 'DD, MMMM YYYY')}}</p>
                         </div>
@@ -149,7 +148,7 @@
                           </div>
                         </div>
                         <div class="dash-widget-info">
-                          <h6>today quantité</h6>
+                          <h6>quantité aujourd'hui vendues</h6>
                           <h3>{{todaySAlesQuantite}}</h3>
                           <p class="text-muted">{{getDate(today.toString(), 'DD, MMMM YYYY')}}</p>
                         </div>

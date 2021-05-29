@@ -101,7 +101,35 @@
         </div>
         <!-- /content-left-->
         <div class="col-xl-5 col-lg-12 map-right">
-          <div id="map" class="map-listing"></div>
+          <div id="map" class="map-listing">
+            <agm-map (mapClick)="placeMarker($event)" class="h-100" style="height: 300px" [latitude]="latitude"
+                     [longitude]="longitude">
+
+              <agm-marker [latitude]="latitude"
+                          [longitude]="longitude"
+                          color="blue"></agm-marker>
+              <agm-marker *ngFor="let pharmacie of pharmacieData" [latitude]="pharmacie?.location.latitude"
+                          [longitude]="pharmacie?.location.longitude">
+                <agm-snazzy-info-window [maxWidth]="300" [maxHeight]="400" [isOpen]="false" [closeWhenOthersOpen]="true">
+                  <ng-template>
+                    <div class="profile-widget" style="width: 100%; display: inline-block;">
+                      <div class="doc-img"><a [routerLink]="['/pharmacie', pharmacie?._id]" tabindex="0" target="_blank"><img
+                        class="img-fluid" alt="Dr." src="{{pharmacie?.imagePath}}"></a></div>
+                      <div class="pro-content"><h3 class="title"><a [routerLink]="['/pharmacie', pharmacie?._id]" tabindex="0">{{pharmacie?.name}}</a><i class="fas fa-check-circle verified"></i></h3>
+                        <p class="speciality">{{pharmacie?.type}}</p>
+                        <div class="rating"><i class="fas fa-star filled"></i><i class="fas fa-star filled"></i><i
+                          class="fas fa-star filled"></i><i class="fas fa-star filled"></i><i
+                          class="fas fa-star"></i><span class="d-inline-block average-rating"> ({{pharmacie?.reviews.length}})</span></div>
+                        <ul class="available-info">
+                          <li><i class="fas fa-map-marker-alt"></i> {{pharmacie?.state}}, {{pharmacie?.country}}</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </ng-template>
+                </agm-snazzy-info-window>
+              </agm-marker>
+            </agm-map>
+          </div>
           <!-- map-->
         </div>
         <!-- /map-right-->

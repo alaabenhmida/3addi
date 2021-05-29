@@ -51,18 +51,36 @@ router.post("/patient/:id/addpresc", checkAuth, (req, res, next) => {
   })
 });
 router.put("/find", (req, res, next) => {
+  console.log(req.body);
   let genders;
+  let speciality;
   if (req.body.genders === []) {
     genders = ["Male, Female"]
   } else {
     genders = req.body.genders
   }
-  Doctor.find({"name": new RegExp(req.body.name, 'i'),
-    gender: {$in: genders}}).then(result => {
+  if (req.body.speciality === []) {
+    speciality = ["Urologie", "Neurologie", "Dentiste", "Orthopédique", "Cardiologue", "Generale"];
+  } else {
+    speciality = req.body.speciality
+  }
+  Doctor.find({
+    "$and": [
+      {gender: {$in: genders}},
+      {speciality: {$in: speciality}},
+      {"city": new RegExp(req.body.name, 'i')}
+    ]
+  }).then(result => {
     res.json(result)
   }).catch(error => {
     res.json(error);
   })
+  // Doctor.find({"city": new RegExp(req.body.name, 'i'),
+  //   gender: {$in: genders}}).then(result => {
+  //   res.json(result)
+  // }).catch(error => {
+  //   res.json(error);
+  // })
 });
 
 router.put("/workingtimes", checkAuth, (req, res, next) => {
@@ -236,6 +254,14 @@ router.get("/:id", (req, res, next) => {
     } else {
       res.status(404).json({ message: "doctor not found!" });
     }
+  });
+});
+
+router.put("/speciality", (req, res, next) => {
+  Doctor.count({speciality: req.body.speciality}).then(count => {
+    res.status(200).json(count);
+  }).catch(error => {
+    res.status(404).json(error);
   });
 });
 

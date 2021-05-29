@@ -16,7 +16,8 @@ export class PharmacieService {
     return this.dataUpdated as Observable<any>;
   }
 
-  modify(name, email, address, city, state, country, zip, phone, type, awards, aboutMe, image?: File): Observable<any> {
+  modify(name, email, address, city, state, country, zip, phone, type, awards, aboutMe,
+         latitude: number, longitude: number, image?: File): Observable<any> {
     if (image) {
       const pharmacie = new FormData();
       pharmacie.append('name', name);
@@ -29,6 +30,8 @@ export class PharmacieService {
       pharmacie.append('phone', phone);
       pharmacie.append('type', type);
       pharmacie.append('aboutMe', aboutMe);
+      pharmacie.append('latitude', latitude.toString());
+      pharmacie.append('longitude', longitude.toString());
       pharmacie.append('image', image, name);
       pharmacie.append('awards', JSON.stringify(awards));
       return this.http.put('http://localhost:3000/pharmacies/edit', pharmacie);
@@ -44,6 +47,8 @@ export class PharmacieService {
       pharmacie.append('phone', phone);
       pharmacie.append('type', type);
       pharmacie.append('aboutMe', aboutMe);
+      pharmacie.append('latitude', latitude.toString());
+      pharmacie.append('longitude', longitude.toString());
       pharmacie.append('awards', JSON.stringify(awards));
       return this.http.put('http://localhost:3000/pharmacies/edit', pharmacie);
     }

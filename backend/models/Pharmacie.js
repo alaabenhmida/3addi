@@ -53,7 +53,11 @@ const pharmacieSchema = mongoose.Schema({
       quantity: {type: Number},
     }],
     date: {type: String}
-  }]
+  }],
+  location: {
+    latitude: {type: Number},
+    longitude: {type: Number}
+  }
 })
 
 module.exports = mongoose.model('Pharmacie', pharmacieSchema);

@@ -6,6 +6,7 @@ import {Subscription} from 'rxjs';
 import {NgForm} from '@angular/forms';
 import {PatientAuthService} from '../../../auth/Patient/patient-auth.service';
 import {ToastrService} from 'ngx-toastr';
+import {LocationModel} from '../../../models/Doctor/location.model';
 
 @Component({
   selector: 'app-pharmacie-profile',
@@ -43,6 +44,7 @@ export class PharmacieProfileComponent implements OnInit, OnDestroy {
         type: data.type,
         phone: data.phone,
         aboutMe: data.aboutMe,
+        location: data.location,
         products: data.products,
         reviews: data.reviews,
         awards: data.awards
@@ -69,6 +71,7 @@ export class PharmacieProfileComponent implements OnInit, OnDestroy {
           type: data.type,
           phone: data.phone,
           aboutMe: data.aboutMe,
+          location: data.location,
           products: data.products,
           reviews: data.reviews,
           awards: data.awards

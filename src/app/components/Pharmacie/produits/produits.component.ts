@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Pharmacie} from '../../../models/Pharmacie/pharmacie.model';
 import {PharmacieService} from '../../../services/pharmacie/pharmacie.service';
 import {Subscription} from 'rxjs';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-produits',
@@ -12,7 +13,8 @@ export class ProduitsComponent implements OnInit, OnDestroy {
   pharmacieData: Pharmacie;
   pharmacieSub: Subscription;
 
-  constructor(private pharmacieService: PharmacieService) { }
+  constructor(private pharmacieService: PharmacieService,
+              private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.pharmacieService.getDataByKey().subscribe(data => {
@@ -26,6 +28,9 @@ export class ProduitsComponent implements OnInit, OnDestroy {
   onDelete(id: string): void {
     this.pharmacieService.deleteProduct(id).subscribe(data => {
       this.pharmacieService.dataUpdated.next(data);
+      this.toastr.success('produit supprimé', '', {
+        positionClass: 'toast-bottom-right'
+      });
     });
   }
 

@@ -43,7 +43,7 @@ router.put("/edit", multer({storage: storage}).single("image"), checkAuth,
             city: req.body.city, state: req.body.state, country: req.body.country,
             zip: req.body.zip, phone: req.body.phone, imagePath: imagePath, type: req.body.type,
             aboutMe: req.body.aboutMe,
-          awards: JSON.parse(req.body.awards)}})
+          awards: JSON.parse(req.body.awards),'location.latitude': +req.body.latitude, 'location.longitude': +req.body.longitude}})
         .then(result => {
           res.status(201).json(result);
         }).catch(error => {
@@ -54,7 +54,7 @@ router.put("/edit", multer({storage: storage}).single("image"), checkAuth,
         {$set: {name: req.body.name, email: req.body.email, address: req.body.address,
             city: req.body.city, state: req.body.state, country: req.body.country,
             zip: req.body.zip, phone: req.body.phone, type: req.body.type, aboutMe: req.body.aboutMe,
-            awards: JSON.parse(req.body.awards)}})
+            awards: JSON.parse(req.body.awards), 'location.latitude': +req.body.latitude, 'location.longitude': +req.body.longitude}})
         .then(result => {
           res.status(201).json(result);
         }).catch(error => {

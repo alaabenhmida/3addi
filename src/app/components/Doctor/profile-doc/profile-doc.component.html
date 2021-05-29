@@ -71,7 +71,7 @@
                 <!--                <bar-rating [theme]="'fontawesome-o'" [showText] [(rate)]="rate" [max]="5"></bar-rating>-->
                 <div class="clinic-details">
                   <p class="doc-location"><i class="fas fa-map-marker-alt"></i> {{doctorData?.address1}} - <a
-                    href="javascript:void(0);">Obtenir des directions</a></p>
+                    [routerLink]="['/doctors']">Obtenir des directions</a></p>
 <!--                  <ul class="clinic-gallery">-->
 <!--                    <li>-->
 <!--                      <a data-fancybox="gallery" href="assets/img/features/feature-01.jpg">-->

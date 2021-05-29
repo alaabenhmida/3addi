@@ -3,7 +3,8 @@ import {Pharmacie} from '../../../models/Pharmacie/pharmacie.model';
 import {PharmacieService} from '../../../services/pharmacie/pharmacie.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {mimeType} from '../../../shared/mime-type.validator';
-import {ActivatedRoute, ParamMap} from '@angular/router';
+import {ActivatedRoute, ParamMap, Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-product',
@@ -18,7 +19,9 @@ export class AddProductComponent implements OnInit {
   productID: string;
 
   constructor(private pharmacieService: PharmacieService,
-              public route: ActivatedRoute) { }
+              public route: ActivatedRoute,
+              private toastr: ToastrService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -73,12 +76,19 @@ export class AddProductComponent implements OnInit {
         this.form.value.price, this.form.value.image, this.form.value.stock).subscribe(result => {
         this.form.reset();
         this.imagePreview = '';
-        console.log(result);
+        this.toastr.success('produit ajouté', '', {
+          positionClass: 'toast-bottom-right'
+        });
       });
     } else {
       this.pharmacieService.updateProduct(this.productID, this.form.value.name,
         this.form.value.description, this.form.value.price,
-        this.form.value.stock, this.form.value.image)
+        this.form.value.stock, this.form.value.image);
+      this.router.navigate(['/pharmacie/dashboard/produits']).then(() => {
+        this.toastr.success('changements enregistrées', '', {
+          positionClass: 'toast-bottom-right'
+        });
+      });
     }
   }
 }

@@ -53,8 +53,8 @@
                 <div class="profile-det-info">
                   <h3>{{pharmacieData?.name}}</h3>
                   <div class="patient-details">
-                    <h5><i class="fas fa-birthday-cake"></i> 24 Jul 1983, 38 years</h5>
-                    <h5 class="mb-0"><i class="fas fa-map-marker-alt"></i> {{pharmacieData?.state}}, {{pharmacieData?.country}}</h5>
+                    <h5 class="mb-0"><i class="fas fa-map-marker-alt"></i> {{pharmacieData?.state}}
+                      , {{pharmacieData?.country}}</h5>
                   </div>
                 </div>
               </div>
@@ -69,17 +69,22 @@
                     </a>
                   </li>
                   <li>
-                    <a [routerLink]="['/pharmacie/dashboard/produits']">	<i class="fas fa-cheese"></i>
+                    <a [routerLink]="['/pharmacie/dashboard/produits']"> <i class="fas fa-cheese"></i>
                       <span>Produits</span>
                     </a>
                   </li>
                   <li>
-<!--                    <a [routerLink]="['/messages']">-->
-<!--                      <i class="fas fa-comments"></i>-->
-<!--                      <span>Message</span>-->
-<!--                      <small class="unread-msg">23</small>-->
-<!--                    </a>-->
+                    <a [routerLink]="['/pharmacie/dashboard/orders']"> <i class="fas fa-file-invoice"></i>
+                      <span>Ordres</span>
+                    </a>
                   </li>
+                  <!--                  <li>-->
+                  <!--                    <a [routerLink]="['/messages']">-->
+                  <!--                      <i class="fas fa-comments"></i>-->
+                  <!--                      <span>Message</span>-->
+                  <!--                      <small class="unread-msg">23</small>-->
+                  <!--                    </a>-->
+                  <!--                  </li>-->
                   <li routerLinkActive="active">
                     <a [routerLink]="['/pharmacie/parametre']">
                       <i class="fas fa-user-cog"></i>
@@ -90,12 +95,6 @@
                     <a>
                       <i class="fas fa-lock"></i>
                       <span>Change Password</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a (click)="authService.logout()">
-                      <i class="fas fa-sign-out-alt"></i>
-                      <span>Logout</span>
                     </a>
                   </li>
                 </ul>
@@ -231,15 +230,16 @@
                     <div class="form-group mt-2 card">
 
                       <agm-map style="height: 300px"
-                               [latitude]="latitude"
-                               [longitude]="longitude"
+                               [latitude]="pharmacieData?.location.latitude"
+                               [longitude]="pharmacieData?.location.longitude"
                                [zoom]="15">
                         <agm-marker
-                          [latitude]="latitude"
-                          [longitude]="longitude"
+                          [latitude]="pharmacieData?.location.latitude"
+                          [longitude]="pharmacieData?.location.longitude"
                           [markerDraggable]="true"
                           (dragEnd)="markerDragEnd($event)"></agm-marker>
                       </agm-map>
+
 
                     </div>
                   </div>

@@ -11,14 +11,21 @@ export class DoctorServiceService {
   medrecord: MedicalRecord;
   recid: string;
   dataUpdated = new Subject<any>();
+  // specialityUpdate = new Subject();
 
   constructor(private http: HttpClient) {
   }
 
-
+  getspecialityCount(speciality: string): Observable<any> {
+    return this.http.put('http://localhost:3000/doctor/speciality', {speciality});
+  }
    getDatalistener(): Observable<any> {
      return this.dataUpdated as Observable<any>;
    }
+
+   // getspecialityUpdateListener(): Observable<any> {
+   //  return this.specialityUpdate as Observable<any>;
+   // }
 
   modify(firstName: string, lastName: string, phone: string, gender: string, birthday: string,
          address1: string, address2: string, city: string, state: string,
@@ -118,8 +125,8 @@ export class DoctorServiceService {
     return  this.http.put('http://localhost:3000/patient/' + patientId + '/updatepresc', {prescID, presc});
   }
 
-  search(name: string, genders?: string[]): Observable<any> {
-    return this.http.put('http://localhost:3000/doctor/find', {name, genders});
+  search(name: string, genders?: string[], speciality?: string[]): Observable<any> {
+    return this.http.put('http://localhost:3000/doctor/find', {name, genders, speciality});
   }
 
   workingTime(duration: number, from: string, to: string, breackTimes: any): Observable<any> {

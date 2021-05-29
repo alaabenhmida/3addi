@@ -7,7 +7,7 @@ import {Subscription} from 'rxjs';
 import {PatientAuthService} from '../../auth/Patient/patient-auth.service';
 import {ToastrService} from 'ngx-toastr';
 import {Router} from '@angular/router';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-index',
@@ -20,6 +20,12 @@ export class IndexComponent implements OnInit, OnDestroy {
   private isloggedIn = false;
   private isloggedInSub: Subscription;
   private today = moment(new Date()).toString();
+  Cardiologist = 0;
+  Cardiologue = 0;
+  Orthopedique = 0;
+  Dentiste = 0;
+  Neurologie = 0;
+  Urologie = 0;
 
   constructor(private doctorService: DoctorServiceService,
               private patientService: PatientServiceService,
@@ -29,16 +35,36 @@ export class IndexComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.doctorService.getspecialityCount('Cardiologist').subscribe(data => {
+      this.Cardiologue = data;
+    });
+    this.doctorService.getspecialityCount('Cardiologue').subscribe(data => {
+      this.Cardiologue = data;
+    });
+    this.doctorService.getspecialityCount('Orthopédique').subscribe(data => {
+      this.Orthopedique = data;
+    });
+    this.doctorService.getspecialityCount('Dentiste').subscribe(data => {
+      this.Dentiste = data;
+    });
+    this.doctorService.getspecialityCount('Neurologie').subscribe(data => {
+      this.Neurologie = data;
+    });
+    this.doctorService.getspecialityCount('Urologie').subscribe(data => {
+      this.Urologie = data;
+    });
     this.isloggedIn = this.authService.getIsAuth();
     this.isloggedInSub = this.authService.getAuthStatusListener().subscribe(
       auth => {
         this.isloggedIn = auth;
       }
     );
-    this.doctorService.getAllDoctors(3, 1).subscribe(result => {
+    this.doctorService.getAllDoctors(5, 1).subscribe(result => {
       this.doctorsData = result.doctors;
     });
     this.form = new FormGroup({
+      speciality: new FormControl(null),
+      sexe: new FormControl(null, { validators: [Validators.required] }),
       city: new FormControl(null),
       name: new FormControl(null)
     });
@@ -62,7 +88,15 @@ export class IndexComponent implements OnInit, OnDestroy {
   }
 
   onSearch(): void {
-    this.router.navigate(['doctor/search'], {queryParams: {name: this.form.value.name,
-      city: this.form.value.city}});
+    if (this.form.invalid) {
+      this.toastr.error('champs requis', '', {
+        positionClass: 'toast-bottom-right'
+      });
+      return;
+    }
+    this.router.navigate(['doctor/search'], {queryParams: {
+      city: this.form.value.city,
+      speciality: this.form.value.speciality,
+      sexe: this.form.value.sexe}});
   }
 }
