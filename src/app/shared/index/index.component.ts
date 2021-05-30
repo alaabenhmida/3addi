@@ -36,7 +36,7 @@ export class IndexComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.doctorService.getspecialityCount('Cardiologist').subscribe(data => {
-      this.Cardiologue = data;
+      this.Cardiologist = data;
     });
     this.doctorService.getspecialityCount('Cardiologue').subscribe(data => {
       this.Cardiologue = data;
