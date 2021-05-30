@@ -32,6 +32,16 @@ const storage = multer.diskStorage({
   }
 });
 
+router.get("/getaverage", (req, res, next) => {
+  Doctor.aggregate([
+    {$addFields : {averageRating : {$avg : "$reviews.rate"}}}
+  ]).then(result => {
+    res.json(result);
+  }).catch(error => {
+    res.json(error);
+  })
+});
+
 router.get("/invoice/:id", checkAuth, (req, res, next) => {
   Doctor.findById(req.userData.userId).select({invoices: {$elemMatch: {_id: req.params.id}}})
     .populate('invoices.patient').then(result => {

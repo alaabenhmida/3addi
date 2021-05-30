@@ -22,7 +22,7 @@ const doctorSchema = mongoose.Schema({
   aboutMe: { type: String},
   reviews : [{
     patientId : { type : mongoose.Schema.Types.ObjectId, ref: 'Patient' },
-    rate : { type : Number },
+    rate : { type : Number , min: 0, max: 5, default: 0},
     title : {type : String},
     review : {type : String}
   }],

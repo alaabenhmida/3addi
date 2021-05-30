@@ -22,10 +22,10 @@
           <nav aria-label="breadcrumb" class="page-breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Add Prescription</li>
+              <li class="breadcrumb-item active" aria-current="page">Ajouter une ordonnance</li>
             </ol>
           </nav>
-          <h2 class="breadcrumb-title">Add Prescription</h2>
+          <h2 class="breadcrumb-title">Ajouter une ordonnance</h2>
         </div>
       </div>
     </div>
@@ -50,7 +50,7 @@
                   <div class="profile-det-info">
                     <h3><a href="patient-profile.html">{{patientData?.name}} {{patientData?.lastName}}</a></h3>
                     <div class="patient-details">
-                      <h5><b>Patient ID :</b> PT0016</h5>
+                      <h5><b>ID :</b> {{patientData?._id}}</h5>
                       <h5 class="mb-0"><i class="fas fa-map-marker-alt"></i> {{patientData?.state}}, {{patientData?.country}}</h5>
                     </div>
                   </div>
@@ -58,9 +58,9 @@
               </div>
               <div class="patient-info">
                 <ul>
-                  <li>Phone <span>{{patientData?.phone}}</span></li>
-                  <li>Age <span>38 Years, {{patientData?.gender}}</span></li>
-                  <li>Blood Group <span>{{patientData?.bloodType}}</span></li>
+                  <li>numéro de téléphone <span>{{patientData?.phone}}</span></li>
+                  <li>Âge <span>38 Years, {{patientData?.gender}}</span></li>
+                  <li>Groupe sanguin <span>{{patientData?.bloodType}}</span></li>
                 </ul>
               </div>
             </div>
@@ -72,7 +72,7 @@
         <div class="col-md-7 col-lg-8 col-xl-9">
           <div class="card">
             <div class="card-header">
-              <h4 class="card-title mb-0">Add Prescription</h4>
+              <h4 class="card-title mb-0">Ajouter une ordonnance</h4>
             </div>
             <div class="card-body">
               <div class="row">
@@ -97,7 +97,7 @@
 
               <!-- Add Item -->
               <div class="add-more-item text-right" id="add">
-                <a (click)="addCreds()"><i class="fas fa-plus-circle"></i> Add Item</a>
+                <a (click)="addCreds()"><i class="fas fa-plus-circle"></i> Ajouter</a>
               </div>
               <!-- /Add Item -->
 
@@ -109,10 +109,10 @@
                       <table formArrayName="Prescription" class="table table-hover table-center">
                         <thead>
                         <tr>
-                          <th style="min-width: 200px">Name</th>
-                          <th style="min-width: 80px;">Quantity</th>
-                          <th style="min-width: 80px">Days</th>
-                          <th style="min-width: 100px;">Time</th>
+                          <th style="min-width: 200px">Nom</th>
+                          <th style="min-width: 80px;">Quantité</th>
+                          <th style="min-width: 80px">Nombre de jours</th>
+                          <th style="min-width: 100px;">Temps</th>
                           <th style="min-width: 80px;"></th>
                         </tr>
                         </thead>
@@ -128,25 +128,11 @@
                             <input class="form-control" [ngClass]="{'is-invalid': creds.controls.days.invalid && creds.controls.days.touched}" type="text" formControlName="days">
                           </td>
                           <td>
-                            <div class="form-check form-check-inline">
-                              <label class="form-check-label">
-                                <input class="form-check-input" type="checkbox" formControlName="mor"> Morning
-                              </label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                              <label class="form-check-label">
-                                <input class="form-check-input" type="checkbox" formControlName="af"> Afternoon
-                              </label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                              <label class="form-check-label">
-                                <input class="form-check-input" type="checkbox" formControlName="ev"> Evening
-                              </label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                              <label class="form-check-label">
-                                <input class="form-check-input" type="checkbox" formControlName="nght"> Night
-                              </label>
+                            <div class="input-group">
+                              <input type="text" placeholder="Matin" class="form-control" formControlName="mor">
+                              <input type="text" placeholder="Après midi" class="form-control" formControlName="af">
+                              <input type="text" placeholder="Soir" class="form-control" formControlName="ev">
+                              <input type="text" placeholder="Nuit" class="form-control" formControlName="nght">
                             </div>
                           </td>
                           <td>

@@ -84,10 +84,10 @@ export class AddPrescComponent implements OnInit, OnDestroy {
         name: new FormControl(null, { validators: [Validators.required] }),
         quantite: new FormControl(null, { validators: [Validators.required] }),
         days: new FormControl(null, { validators: [Validators.required] }),
-        mor: new FormControl(false),
-        af: new FormControl(false),
-        ev: new FormControl(false),
-        nght: new FormControl(false)
+        mor: new FormControl(null),
+        af: new FormControl(null),
+        ev: new FormControl(null),
+        nght: new FormControl(null)
       }));
     // }
 }
@@ -129,7 +129,6 @@ export class AddPrescComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.userIdSub.unsubscribe();
   }
 
 }
