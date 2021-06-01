@@ -78,6 +78,7 @@ import { AdminDashboardComponent } from './components/Admin/admin-dashboard/admi
 import {AdminRoutingModule} from './routers/admin-routing/admin-routing.module';
 import {NgxChartsModule, PieChartModule} from '@swimlane/ngx-charts';
 import {CarouselModule} from 'ngx-bootstrap/carousel';
+import { PrescriptionDetailsComponent } from './components/Patient/prescription-details/prescription-details.component';
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
 @NgModule({
@@ -126,7 +127,8 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     OrdersComponent,
     OrderDetailComponent,
     LoginDialogComponent,
-    AdminDashboardComponent
+    AdminDashboardComponent,
+    PrescriptionDetailsComponent
   ],
   imports: [
     BrowserModule,

@@ -117,7 +117,7 @@ export class AddPrescComponent implements OnInit, OnDestroy {
           this.toastr.success('Ordonnance enregistrée', '', {
             positionClass: 'toast-bottom-right'
           });
-        });;
+        });
     }
   }
   getdate(date: string, format: string): string{

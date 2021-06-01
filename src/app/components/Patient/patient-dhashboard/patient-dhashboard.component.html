@@ -146,7 +146,7 @@
                             <th>Date de réservation</th>
                             <th>Montant</th>
                             <th>Statut</th>
-                            <th></th>
+<!--                            <th></th>-->
                           </tr>
                           </thead>
                           <tbody>
@@ -166,11 +166,11 @@
                             <td *ngIf="rdv.status == 'pending'"><span class="badge badge-pill bg-warning-light">en attente</span></td>
                             <td *ngIf="rdv.status == 'canceled'"><span class="badge badge-pill bg-danger-light">annulé</span></td>
                             <td class="text-right">
-                              <div class="table-action">
-                                <a *ngIf="rdv.status == 'pending'" href="javascript:void(0);" class="btn btn-sm bg-success-light">
-                                  <i class="far fa-edit"></i> Edit
-                                </a>
-                              </div>
+<!--                              <div class="table-action">-->
+<!--                                <a *ngIf="rdv.status == 'pending'" href="javascript:void(0);" class="btn btn-sm bg-success-light">-->
+<!--                                  <i class="far fa-edit"></i> Edit-->
+<!--                                </a>-->
+<!--                              </div>-->
                             </td>
                           </tr>
                           </tbody>
@@ -203,7 +203,7 @@
                             <td>
                               <h2 class="table-avatar">
                                 <a [routerLink]="['/doctor', presc.doctorId._id]" class="avatar avatar-sm mr-2">
-                                  <img class="avatar-img rounded-circle" src="{{presc?.doctorId.imagePath}}" alt="User Image">
+                                  <img class="avatar-img rounded-circle" src="{{presc?.doctorId.imagePath}}">
                                 </a>
                                 <a [routerLink]="['/doctor', presc.doctorId._id]">Dr. {{presc?.doctorId.name}} {{presc?.doctorId.lastName}} <span>{{presc?.doctorId.speciality}}</span></a>
                               </h2>
@@ -213,7 +213,7 @@
                                 <a href="javascript:void(0);" class="btn btn-sm bg-primary-light">
                                   <i class="fas fa-print"></i> Imprimer
                                 </a>
-                                <a [routerLink]="['/patient', id, 'presc', presc._id]" class="btn btn-sm bg-info-light">
+                                <a [routerLink]="['/profile/ordonnace', presc._id]" class="btn btn-sm bg-info-light">
                                   <i class="far fa-eye"></i> Voir
                                 </a>
                               </div>

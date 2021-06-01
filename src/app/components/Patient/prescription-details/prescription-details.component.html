@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from dreamguys.co.in/demo/doccure/template/add-prescription.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 Apr 2020 08:29:23 GMT -->
+<head>
+  <meta charset="utf-8">
+  <title>Doccure</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+
+</head>
+<body>
+
+<!-- Main Wrapper -->
+<div class="main-wrapper">
+
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb-bar">
+    <div class="container-fluid">
+      <div class="row align-items-center">
+        <div class="col-md-12 col-12">
+          <nav aria-label="breadcrumb" class="page-breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">ordonnance</li>
+            </ol>
+          </nav>
+          <h2 class="breadcrumb-title">{{prescData?._id}}</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /Breadcrumb -->
+
+  <!-- Page Content -->
+  <div class="content">
+    <div class="container-fluid">
+
+      <div class="row">
+        <div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
+
+          <!-- Profile Widget -->
+          <div class="card widget-profile pat-widget-profile">
+            <div class="card-body">
+              <div class="pro-widget-content">
+                <div class="profile-info-widget">
+                  <a [routerLink]="['/patient', patientData?._id]" class="booking-doc-img">
+                    <img src="{{patientData?.imagePath}}">
+                  </a>
+                  <div class="profile-det-info">
+                    <h3><a [routerLink]="['/patient', patientData?._id]">{{patientData?.name}} {{patientData?.lastName}}</a></h3>
+                    <div class="patient-details">
+                      <h5><b>ID :</b> {{patientData?._id}}</h5>
+                      <h5 class="mb-0"><i class="fas fa-map-marker-alt"></i> {{patientData?.state}}, {{patientData?.country}}</h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="patient-info">
+                <ul>
+                  <li>numéro de téléphone <span>{{patientData?.phone}}</span></li>
+                  <li>Âge <span>38 Years, {{patientData?.gender}}</span></li>
+                  <li>Groupe sanguin <span>{{patientData?.bloodType}}</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <!-- /Profile Widget -->
+
+        </div>
+
+        <div class="col-md-7 col-lg-8 col-xl-9">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title mb-0">Ordonnance</h4>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="biller-info">
+                    <h4 class="d-block">Dr. {{prescData?.doctorId.name}} {{prescData?.doctorId.lastName}}</h4>
+                    <span class="d-block text-sm text-muted">{{prescData?.doctorId.speciality}}</span>
+                    <span class="d-block text-sm text-muted">{{prescData?.doctorId.state}}, {{prescData?.doctorId.country}}</span>
+                  </div>
+                </div>
+                <div class="col-sm-6 text-sm-right">
+                  <div class="billing-info">
+                    <h4 class="d-block">{{getdate(prescData?.date, 'DD MMMM YYYY')}}</h4>
+                    <span class="d-block text-muted">#INV-{{prescData?._id}}</span>
+                  </div>
+                </div>
+              </div>
+
+
+              <!-- Prescription Item -->
+              <div class="card card-table">
+                <div class="card-body">
+                  <div class="table-responsive">
+                      <table class="table table-hover table-center">
+                        <thead>
+                        <tr>
+                          <th style="min-width: 200px">Nom</th>
+                          <th style="min-width: 80px;">Quantité</th>
+                          <th style="min-width: 80px">Nombre de jours</th>
+                          <th style="min-width: 100px;">Temps</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let creds of prescData?.presc">
+                          <td>
+                            {{creds?.name}}
+                          </td>
+                          <td>
+                            {{creds?.quantite}}
+                          </td>
+                          <td>
+                            {{creds?.days}}
+                          </td>
+                          <td>
+                            <div class="input-group">
+                              <p *ngIf="creds?.mor" class="input-group-text">{{creds?.mor}} Matin</p>
+                              <p *ngIf="creds?.af" class="input-group-text">{{creds?.af}} Après midi</p>
+                              <p *ngIf="creds?.ev" class="input-group-text">{{creds?.ev}} Soir</p>
+                              <p *ngIf="creds?.nght" class="input-group-text">{{creds?.nght}} Nuit</p>
+                            </div>
+                          </td>
+                        </tr>
+                        </tbody>
+                      </table>
+                  </div>
+                </div>
+              </div>
+              <!-- /Prescription Item -->
+
+              <!-- Signature -->
+              <div class="row">
+                <div class="col-md-12 text-right">
+                  <div class="signature-wrap">
+                    <div class="sign-name">
+                      <p class="mb-0">( Dr. {{prescData?.doctorId.name}} {{prescData?.doctorId.lastName}} )</p>
+                      <span class="text-muted">Signature</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- /Signature -->
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <!-- /Page Content -->
+
+
+</div>
+<!-- /Main Wrapper -->
+
+
+
+</body>
+
+<!-- Mirrored from dreamguys.co.in/demo/doccure/template/add-prescription.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 Apr 2020 08:29:23 GMT -->
+</html>
