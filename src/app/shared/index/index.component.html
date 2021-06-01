@@ -388,11 +388,22 @@
                           <i class="fas fa-check-circle verified"></i>
                         </h3>
                         <p class="speciality">{{doctor?.speciality}}</p>
-                        <div class="rating"><i class="fas fa-star filled"></i>
-                          <i class="fas fa-star filled"></i>
-                          <i class="fas fa-star filled"></i>
-                          <i class="fas fa-star filled"></i>
-                          <i class="fas fa-star filled"></i>
+                        <div class="rating">
+                          <i [ngClass]="{
+                    filled: doctor?.averageRating >= 1
+                    }" class="fas fa-star"></i>
+                          <i [ngClass]="{
+                    filled: doctor?.averageRating >= 2
+                    }" class="fas fa-star"></i>
+                          <i [ngClass]="{
+                    filled: doctor?.averageRating >= 3
+                    }" class="fas fa-star"></i>
+                          <i [ngClass]="{
+                    filled: doctor?.averageRating >= 4
+                    }" class="fas fa-star"></i>
+                          <i [ngClass]="{
+                    filled: doctor?.averageRating >= 5
+                    }" class="fas fa-star"></i>
                           <span class="d-inline-block average-rating">({{doctor?.reviews.length}})</span>
                         </div>
                         <ul class="available-info">
