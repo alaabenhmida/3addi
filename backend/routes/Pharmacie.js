@@ -72,6 +72,15 @@ router.put("/getProductbyid",checkAuth, (req, res, next) => {
   });
 });
 
+router.put("/getProductByName", (req, res, next) => {
+  Pharmacie.findById(req.body.pharmacieID).select({products: {$elemMatch: {name: req.body.productName}}})
+    .then(result => {
+      res.status(200).json(result.products[0]);
+    }).catch(error => {
+    res.status(400).json(error);
+  });
+});
+
 router.put("/getProduct", (req, res, next) => {
   Pharmacie.findById(req.body.pharmacieID).select({products: {$elemMatch: {_id: req.body.productID}}})
     .then(result => {

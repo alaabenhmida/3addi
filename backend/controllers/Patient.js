@@ -45,6 +45,7 @@ exports.profileSettings = (req, res, next) => {
 }
 
 exports.addToCart = (req, res, next) => {
+  console.log(req.body);
   Patient.findOne({_id: req.userData.userId,
     cart : {$elemMatch: {pharmacie: req.body.pharmacie}}}).then(result => {
     if (result) {

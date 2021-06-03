@@ -85,8 +85,9 @@
                 </div>
                 <div class="doc-info-right">
                   <div class="clinic-booking">
-                    <a class="view-pro-btn" [routerLink]="['/pharmacie', pharmacie._id, 'about']">Voir les détails</a>
-                    <a class="apt-btn" [routerLink]="['/pharmacie', pharmacie._id]">Parcourir les produits</a>
+                    <a *ngIf="!ordonnanceMode" class="view-pro-btn" [routerLink]="['/pharmacie', pharmacie._id, 'about']">Voir les détails</a>
+                    <a *ngIf="!ordonnanceMode" class="apt-btn" [routerLink]="['/pharmacie', pharmacie._id]">Parcourir les produits</a>
+                    <a *ngIf="ordonnanceMode" (click)="bye(pharmacie._id)" class="view-pro-btn">Acheter ici</a>
                   </div>
                 </div>
               </div>

@@ -119,12 +119,20 @@ export class PharmacieService {
     return this.http.put('http://localhost:3000/pharmacies/find', {city});
   }
 
+  byewithPresc(products: CartItem [], pharmacie): Observable<any> {
+    return this.http.put('http://localhost:3000/patient/addtocart', {products, pharmacie});
+  }
+
   getProductbyid(productID: string): Observable<any> {
     return this.http.put('http://localhost:3000/pharmacies/getProductbyid', {productID});
   }
 
   getProduct(pharmacieID: string, productID: string): Observable<any> {
     return this.http.put('http://localhost:3000/pharmacies/getProduct', {pharmacieID, productID});
+  }
+
+  getProductByName(pharmacieID: string, productName: string): Observable<any> {
+    return this.http.put('http://localhost:3000/pharmacies/getProductByName', {pharmacieID, productName});
   }
 
   getAllPharmacies(): Observable<any> {

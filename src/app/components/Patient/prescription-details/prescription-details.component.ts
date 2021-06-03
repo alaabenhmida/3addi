@@ -32,6 +32,6 @@ export class PrescriptionDetailsComponent implements OnInit {
     });
   }
   getdate(date: string, format: string): string{
-    return (moment(date).format(format));
+    return (moment(date).locale('fr').format(format));
   }
 }

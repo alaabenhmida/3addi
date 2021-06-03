@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {PatientServiceService} from '../../../services/Patient/patient-service.service';
 import {Patient} from '../../../models/Patient/patient.model';
 import * as moment from 'moment';
+import {Router} from '@angular/router';
+import {DoctorServiceService} from '../../../services/doctor/doctor-service.service';
 
 @Component({
   selector: 'app-patient-dhashboard',
@@ -14,7 +16,9 @@ export class PatientDhashboardComponent implements OnInit {
   prescription = [];
   invoices = [];
 
-  constructor(private patientService: PatientServiceService) { }
+  constructor(private patientService: PatientServiceService,
+              private router: Router,
+              private doctorService: DoctorServiceService) { }
 
   ngOnInit(): void {
     this.patientService.getPatientByKey().subscribe(data => {
@@ -48,4 +52,10 @@ export class PatientDhashboardComponent implements OnInit {
     return  Math.floor(age.asYears());
   }
 
+  bye(id: string): void {
+    this.router.navigate(['/pharmacies'], {queryParams: {
+      ordID: id,
+        patientId: this.patientdata.id
+      }});
+  }
 }
