@@ -7,7 +7,7 @@ exports.getAllDoctors = (req, res, next) => {
   const pageSize = +req.query.pagesize;
   const currentPage = +req.query.page;
   const doctorQuery = Doctor.aggregate([
-    {$addFields : {averageRating : {$avg : "$reviews.rate"}}}
+    {$addFields: {averageRating: {$avg: "$reviews.rate"}}}
   ]);
   let fetchedDoctors;
   if (pageSize && currentPage) {
@@ -30,7 +30,7 @@ exports.getAllDoctors = (req, res, next) => {
 
 exports.login = (req, res, next) => {
   let fetchedUser;
-  Doctor.findOne({ email: req.body.email })
+  Doctor.findOne({email: req.body.email})
     .then(user => {
       if (!user) {
         return res.status(401).json({
@@ -47,9 +47,9 @@ exports.login = (req, res, next) => {
         });
       }
       const token = jwt.sign(
-        { email: fetchedUser.email, userId: fetchedUser._id },
+        {email: fetchedUser.email, userId: fetchedUser._id},
         "secret_this_should_be_longer",
-        { expiresIn: "1h" }
+        {expiresIn: "1h"}
       );
       res.status(200).json({
         token: token,
@@ -68,7 +68,7 @@ exports.addReview = (req, res, next) => {
   Patient.findById(req.userData.userId).then(patient => {
     Doctor.updateOne(
       {_id: req.params.id},
-      { $push: { reviews:{ patientId:patient._id, rate: +req.body.rate, title: req.body.title, review: req.body.review} }}
+      {$push: {reviews: {patientId: patient._id, rate: +req.body.rate, title: req.body.title, review: req.body.review}}}
     ).then(result => {
       res.status(201).json({
         message: "reviewed successfully",
@@ -95,7 +95,7 @@ exports.getDoctorByID = (req, res, next) => {
     if (doctor) {
       res.status(200).json(doctor);
     } else {
-      res.status(404).json({ message: "doctor not found!" });
+      res.status(404).json({message: "doctor not found!"});
     }
   });
 }
@@ -146,36 +146,44 @@ exports.getDoctorByKey = (req, res, next) => {
 }
 
 exports.cancelRDV = (req, res, next) => {
-  Patient.findOneAndUpdate({_id: req.body.patientId,
-      rdv: {$elemMatch: {doctorId: req.userData.userId, rdvDate: req.body.appDate}}},
+  Patient.findOneAndUpdate({
+      _id: req.body.patientId,
+      rdv: {$elemMatch: {doctorId: req.userData.userId, rdvDate: req.body.appDate}}
+    },
     {$set: {'rdv.$.status': 'canceled'}},
     {'new': true, 'safe': true, 'upsert': true}).then(result => {
-    Doctor.findOneAndUpdate({_id: req.userData.userId,
-        rdv: {$elemMatch: {patientId: req.body.patientId, appDate: req.body.appDate}}},
+    Doctor.findOneAndUpdate({
+        _id: req.userData.userId,
+        rdv: {$elemMatch: {patientId: req.body.patientId, appDate: req.body.appDate}}
+      },
       {$set: {'rdv.$.status': 'canceled'}},
-      {'new': true, 'safe': true, 'upsert': true}).then( result => {
+      {'new': true, 'safe': true, 'upsert': true}).then(result => {
       res.status(200).json({
         message: "success",
         result: result
-      }).catch(error => {
-        res.status(400).json(error);
-      })
+      });
+    }).catch(error => {
+      res.status(400).json(error);
     });
   });
 }
 
 exports.acceptRDV = (req, res, next) => {
-  Doctor.findOne({patients: {$elemMatch: {id: req.body.patientId}}})
+  Doctor.findOne({_id: req.userData.userId, patients: {$elemMatch: {id: req.body.patientId}}})
     .then(result => {
       if (!result) {
         Doctor.updateOne({_id: req.userData.userId},
-          { $push: { patients:{ id: req.body.patientId} }}).then(result =>{
-          Doctor.findOneAndUpdate({_id: req.userData.userId,
-              rdv: {$elemMatch: {patientId: req.body.patientId, appDate: req.body.appDate}}},
+          {$push: {patients: {id: req.body.patientId}}}).then(result => {
+          Doctor.findOneAndUpdate({
+              _id: req.userData.userId,
+              rdv: {$elemMatch: {patientId: req.body.patientId, appDate: req.body.appDate}}
+            },
             {$set: {'rdv.$.status': 'confirmed'}},
-            {'new': true, 'safe': true, 'upsert': true}).then( res => {
-            Patient.findOneAndUpdate({_id: req.body.patientId,
-                rdv: {$elemMatch: {doctorId: req.userData.userId, rdvDate: req.body.appDate}}},
+            {'new': true, 'safe': true, 'upsert': true}).then(res => {
+            Patient.findOneAndUpdate({
+                _id: req.body.patientId,
+                rdv: {$elemMatch: {doctorId: req.userData.userId, rdvDate: req.body.appDate}}
+              },
               {$set: {'rdv.$.status': 'confirmed'}},
               {'new': true, 'safe': true, 'upsert': true}).then(result => {
               res.status(200).json({
@@ -187,8 +195,32 @@ exports.acceptRDV = (req, res, next) => {
             });
           });
         })
+      } else {
+        Doctor.findOneAndUpdate({
+            _id: req.userData.userId,
+            rdv: {$elemMatch: {patientId: req.body.patientId, appDate: req.body.appDate}}
+          },
+          {$set: {'rdv.$.status': 'confirmed'}},
+          {'new': true, 'safe': true, 'upsert': true}).then(res => {
+          Patient.findOneAndUpdate({
+              _id: req.body.patientId,
+              rdv: {$elemMatch: {doctorId: req.userData.userId, rdvDate: req.body.appDate}}
+            },
+            {$set: {'rdv.$.status': 'confirmed'}},
+            {'new': true, 'safe': true, 'upsert': true}).then(result => {
+            res.status(200).json({
+              message: "success",
+              result: result
+            });
+          }).catch(error => {
+            res.status(400).json(error);
+          });
+        });
       }
-    });
+    }).catch(error => {
+    console.log(error);
+    res.status(400).json(error);
+  });
 }
 
 exports.profileSettings = (req, res, next) => {
@@ -197,33 +229,57 @@ exports.profileSettings = (req, res, next) => {
     const url = req.protocol + "://" + req.get("host");
     imagePath = url + "/images/" + req.file.filename;
     Doctor.findOneAndUpdate({_id: req.userData.userId},
-      {$set: {name: req.body.firstName, lastName: req.body.lastName, phone: req.body.phone,
+      {
+        $set: {
+          name: req.body.firstName, lastName: req.body.lastName, phone: req.body.phone,
           address1: req.body.address1, address2: req.body.address2, city: req.body.city,
           state: req.body.state, country: req.body.country, zip: req.body.zip, price: +req.body.price,
-          aboutMe: req.body.aboutMe,'location.latitude': +req.body.latitude, 'location.longitude': +req.body.longitude,
+          aboutMe: req.body.aboutMe, 'location.latitude': +req.body.latitude, 'location.longitude': +req.body.longitude,
           gender: req.body.gender, birthday: req.body.birthday, imagePath: imagePath,
           education: JSON.parse(req.body.education), experience: JSON.parse(req.body.experience),
           awards: JSON.parse(req.body.awards), memberships: JSON.parse(req.body.memberships),
-          registrations: JSON.parse(req.body.registrations)}},
+          registrations: JSON.parse(req.body.registrations)
+        }
+      },
       {'new': true, 'safe': true, 'upsert': true}).then(result => {
-      res.status(201).json({result: result,
-        message: 'modified successfully'});
+      res.status(201).json({
+        result: result,
+        message: 'modified successfully'
+      });
     }).catch(error => {
       res.status(400).json(error);
     })
   } else {
     Doctor.findOneAndUpdate({_id: req.userData.userId},
-      {$set: {name: req.body.firstName, lastName: req.body.lastName, phone: req.body.phone,
-          address1: req.body.address1, address2: req.body.address2, city: req.body.city,
-          state: req.body.state, country: req.body.country, zip: req.body.zip, price: +req.body.price,
-          aboutMe: req.body.aboutMe,'location.$.latitude': +req.body.latitude, 'location.$.longitude': +req.body.longitude,
-          gender: req.body.gender, birthday: req.body.birthday,
-          education: JSON.parse(req.body.education), experience: JSON.parse(req.body.experience),
-          awards: JSON.parse(req.body.awards), memberships: JSON.parse(req.body.memberships),
-          registrations: JSON.parse(req.body.registrations)}},
+      {
+        $set: {
+          name: req.body.firstName,
+          lastName: req.body.lastName,
+          phone: req.body.phone,
+          address1: req.body.address1,
+          address2: req.body.address2,
+          city: req.body.city,
+          state: req.body.state,
+          country: req.body.country,
+          zip: req.body.zip,
+          price: +req.body.price,
+          aboutMe: req.body.aboutMe,
+          'location.$.latitude': +req.body.latitude,
+          'location.$.longitude': +req.body.longitude,
+          gender: req.body.gender,
+          birthday: req.body.birthday,
+          education: JSON.parse(req.body.education),
+          experience: JSON.parse(req.body.experience),
+          awards: JSON.parse(req.body.awards),
+          memberships: JSON.parse(req.body.memberships),
+          registrations: JSON.parse(req.body.registrations)
+        }
+      },
       {'new': true, 'safe': true, 'upsert': true}).then(result => {
-      res.status(201).json({result: result,
-        message: 'modified successfully'});
+      res.status(201).json({
+        result: result,
+        message: 'modified successfully'
+      });
     }).catch(error => {
       res.status(400).json(error);
     });
@@ -281,8 +337,14 @@ exports.search = (req, res, next) => {
 
 exports.addPrescription = (req, res, next) => {
   Patient.updateOne({_id: req.params.id},
-    { $push: { prescription: {presc: req.body.presc, date: req.body.date,
-          doctorId: req.userData.userId}} }).then(result => {
+    {
+      $push: {
+        prescription: {
+          presc: req.body.presc, date: req.body.date,
+          doctorId: req.userData.userId
+        }
+      }
+    }).then(result => {
     res.status(200).json(result);
   }).catch(error => {
     res.status(400).json(error);

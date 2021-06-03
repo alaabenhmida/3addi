@@ -16,10 +16,10 @@ import {AuthGuard} from '../../auth/doctor-auth.gards';
 import {PatientAuthGuard} from '../../auth/patient-auth.gards';
 import {LoginAuthGuard} from '../../auth/login-auth.gards';
 import {PrescriptionDetailsComponent} from '../../components/Patient/prescription-details/prescription-details.component';
+import {MapGridComponent} from '../../components/Doctor/map-grid/map-grid.component';
 
 
 const appRoutes: Routes = [
-  { path: '', component: IndexComponent },
   { path: 'messages', component: MessagesComponent },
   { path: 'profile/ordonnace/:id', component: PrescriptionDetailsComponent },
   { path: 'login', component: LoginComponent },
