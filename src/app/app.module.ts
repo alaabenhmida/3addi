@@ -40,6 +40,8 @@ import {AgmSnazzyInfoWindowModule} from '@agm/snazzy-info-window';
 import {PatientModule} from './components/Patient/patient.module';
 import {AppRoutingModule} from './app-routing.module';
 import {PharmacieModule} from './components/Pharmacie/pharmacie.module';
+import {NgxStripeModule} from 'ngx-stripe';
+import {MatSelectCountryModule} from '@angular-material-extensions/select-country';
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
 @NgModule({
@@ -68,7 +70,6 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     RouterModule,
     AppRoutingModule,
     PatientRoutingModule,
-    PharmacieRoutingModule,
     AdminRoutingModule,
     FormsModule,
     DlDateTimeDateModule,  // <--- Determines the data type of the model
@@ -84,12 +85,14 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     AgmSnazzyInfoWindowModule,
     AlertModule.forRoot(),
     PaginationModule.forRoot(),
+    NgxStripeModule.forRoot('pk_test_51Iz3EFKNPi1VJcHg2s4jzJrl8hX5vSi5On4k0w2Z8AICRQcSf0z8mWLr1Utv862jdEVfXdZoD7T9RvpL21IqKqMY000A6GtnWf'),
     PieChartModule,
     NgxChartsModule,
     AngularMaterialModule,
     DoctorModule,
     PatientModule,
-    PharmacieModule
+    PharmacieModule,
+    MatSelectCountryModule.forRoot('fr')
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
     FormsModule,

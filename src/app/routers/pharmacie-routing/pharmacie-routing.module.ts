@@ -13,31 +13,29 @@ import {ProduitsComponent} from '../../components/Pharmacie/produits/produits.co
 import {AddProductComponent} from '../../components/Pharmacie/add-product/add-product.component';
 import {PharmacieSettingComponent} from '../../components/Pharmacie/pharmacie-setting/pharmacie-setting.component';
 import {PharmacieCheckoutComponent} from '../../components/Pharmacie/pharmacie-checkout/pharmacie-checkout.component';
-import {MapListComponent} from '../../components/Pharmacie/map-list/map-list.component';
 import {OrdersComponent} from '../../components/Pharmacie/orders/orders.component';
 import {OrderDetailComponent} from '../../components/Pharmacie/order-detail/order-detail.component';
 
 const appRoutes: Routes = [
-  { path: 'pharmacies', component: MapListComponent},
-  { path: 'pharmacie/login', component: PharLoginComponent},
-  { path: 'pharmacie/dashboard', component: PharDashboardComponent},
-  { path: 'pharmacie/parametre', component: PharmacieSettingComponent},
-  { path: 'pharmacie/dashboard/produits', component: ProduitsComponent},
-  { path: 'pharmacie/dashboard/addproduits', component: AddProductComponent},
-  { path: 'pharmacie/dashboard/orders', component: OrdersComponent},
-  { path: 'pharmacie/dashboard/orders/:id', component: OrderDetailComponent},
-  { path: 'pharmacie/dashboard/produits/:id/editer', component: AddProductComponent},
-  { path: 'pharmacie/search', component: PharmacieSearchComponent},
-  { path: 'pharmacie/:id/about', component: PharmacieProfileComponent},
-  { path: 'pharmacie/:id', component: ProductPageGridComponent, canActivate: [PatientAuthGuard] },
-  { path: 'pharmacie/:id/product/:prodId', component: ProductDetailsComponent, canActivate: [PatientAuthGuard] },
-  { path: 'pharmacie/:id/cart', component: CartComponent, canActivate: [PatientAuthGuard] },
-  { path: 'pharmacie/:id/payer', component: PharmacieCheckoutComponent, canActivate: [PatientAuthGuard] }
+  { path: 'login', component: PharLoginComponent},
+  { path: 'dashboard', component: PharDashboardComponent},
+  { path: 'parametre', component: PharmacieSettingComponent},
+  { path: 'dashboard/produits', component: ProduitsComponent},
+  { path: 'dashboard/addproduits', component: AddProductComponent},
+  { path: 'dashboard/orders', component: OrdersComponent},
+  { path: 'dashboard/orders/:id', component: OrderDetailComponent},
+  { path: 'dashboard/produits/:id/editer', component: AddProductComponent},
+  { path: 'search', component: PharmacieSearchComponent},
+  { path: ':id/about', component: PharmacieProfileComponent},
+  { path: ':id', component: ProductPageGridComponent, canActivate: [PatientAuthGuard] },
+  { path: ':id/product/:prodId', component: ProductDetailsComponent, canActivate: [PatientAuthGuard] },
+  { path: ':id/cart', component: CartComponent, canActivate: [PatientAuthGuard] },
+  { path: ':id/payer', component: PharmacieCheckoutComponent, canActivate: [PatientAuthGuard] }
 ];
 
 @NgModule({
   declarations: [],
-  imports: [RouterModule.forRoot(appRoutes)],
+  imports: [RouterModule.forChild(appRoutes)],
   exports: [RouterModule],
   providers: [AuthGuard, PatientAuthGuard]
 })

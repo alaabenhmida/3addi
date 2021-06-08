@@ -101,6 +101,7 @@ exports.getDoctorByID = (req, res, next) => {
 }
 
 exports.signup = (req, res, next) => {
+  // console.log(req.body);
   bcrypt.hash(req.body.password, 10).then(hash => {
     const url = req.protocol + "://" + req.get("host");
     // console.log(req.body)
@@ -109,12 +110,21 @@ exports.signup = (req, res, next) => {
       password: hash,
       imagePath: url + "/images/" + req.file.filename,
       name: req.body.name,
+      lastName: req.body.lastName,
+      gender: req.body.gender,
       address: req.body.address,
       speciality: req.body.speciality,
-      post: req.body.post,
       birthday: req.body.birthday,
       price: +req.body.price,
-      phone: req.body.phone
+      phone: req.body.phone,
+      city: req.body.city,
+      state: req.body.state,
+      country: req.body.country,
+      zip: req.body.zip,
+      location: {
+        latitude: req.body.latitude,
+        longitude: req.body.longitude
+      }
     })
     doctor.save().then(result => {
       res.status(201).json({

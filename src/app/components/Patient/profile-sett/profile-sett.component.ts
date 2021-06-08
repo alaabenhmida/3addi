@@ -4,6 +4,8 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Patient} from '../../../models/Patient/patient.model';
 import {mimeType} from '../../../shared/mime-type.validator';
 import * as moment from 'moment';
+import {PatientAuthService} from '../../../auth/Patient/patient-auth.service';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-profile-sett',
@@ -15,7 +17,9 @@ export class ProfileSettComponent implements OnInit {
   patientdata: Patient;
   imagePreview: string;
 
-  constructor(private patient: PatientServiceService) { }
+  constructor(private patient: PatientServiceService,
+              private authService: PatientAuthService,
+              private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -71,7 +75,11 @@ export class ProfileSettComponent implements OnInit {
       this.form.value.bloodType, this.form.value.phone, this.form.value.city,
       this.form.value.state, this.form.value.zip, this.form.value.country, this.form.value.image)
       .subscribe(result => {
-        console.log(result);
+        this.authService.userimageListener.next(result.imagePath);
+        localStorage.setItem('userimage', result.imagePath);
+        this.toastr.success('modifications enregistrés', '', {
+          positionClass: 'toast-bottom-right'
+        });
       });
   }
   calculateAge(birthday): number { // birthday is a date

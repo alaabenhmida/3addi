@@ -20,6 +20,7 @@ import {AngularMaterialModule} from '../../angular-material.module';
 import {AgmCoreModule} from '@agm/core';
 import {AgmDirectionModule} from 'agm-direction';
 import {AgmSnazzyInfoWindowModule} from '@agm/snazzy-info-window';
+import {PharmacieRoutingModule} from '../../routers/pharmacie-routing/pharmacie-routing.module';
 
 
 
@@ -51,6 +52,7 @@ import {AgmSnazzyInfoWindowModule} from '@agm/snazzy-info-window';
     }),
     AgmDirectionModule,
     AgmSnazzyInfoWindowModule,
+    PharmacieRoutingModule
   ]
 })
 export class PharmacieModule { }

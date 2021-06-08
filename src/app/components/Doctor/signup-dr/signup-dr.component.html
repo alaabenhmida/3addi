@@ -33,70 +33,208 @@
           <!-- Login Tab Content -->
           <div class="account-content">
             <div class="row align-items-center justify-content-center">
-              <div class="col-md-7 col-lg-6 login-left">
-                <img src="assets/img/login-banner.png" class="img-fluid" alt="Doccure Login">
-              </div>
-              <div class="col-md-12 col-lg-6 login-right">
+              <div class="col-md-12 col-lg-12 login-right">
                 <div class="login-header">
-                  <h3>Login <span>Doccure</span></h3>
+                  <h3>créer <span>un compte</span></h3>
                 </div>
                 <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
                   {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
                 </button>
-                <mat-vertical-stepper [linear]="isLinear" #stepper>
+                <mat-horizontal-stepper [linear]="isLinear" #stepper>
                   <mat-step [stepControl]="firstFormGroup">
                     <form [formGroup]="firstFormGroup">
-                      <ng-template matStepLabel>Fill out your name</ng-template>
-                      <mat-form-field appearance="outline">
-                        <mat-label>Name</mat-label>
-                        <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
-                      </mat-form-field>
+                      <div class="row form-row">
+                        <ng-template matStepLabel>données personnels</ng-template>
+                        <div class="col-12 col-md-6">
+                          <div class="form-group">
+                            <mat-form-field class="w-100" appearance="outline">
+                              <mat-label>Nom</mat-label>
+                              <input matInput formControlName="firsName" required>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                          <div class="form-group">
+                            <mat-form-field class="w-100" appearance="outline">
+                              <mat-label>prenom</mat-label>
+                              <input matInput formControlName="lastName" required>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                          <div class="form-group">
+                            <mat-form-field appearance="outline">
+                              <mat-label>email</mat-label>
+                              <input matInput formControlName="email" required>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                          <div class="form-group">
+                            <mat-form-field appearance="outline">
+                              <mat-label>mot de passe</mat-label>
+                              <input matInput type="password" formControlName="password" required>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                          <div class="form-group">
+                            <mat-form-field class="w-100" appearance="outline">
+                              <mat-label>phone</mat-label>
+                              <input matInput formControlName="phone" required>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                          <div class="form-group">
+                            <mat-form-field class="w-100" appearance="outline">
+                              <mat-label>date de naissance</mat-label>
+                              <input matInput type="date" formControlName="birthday" required>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                          <div class="form-group">
+                            <mat-form-field class="w-100" appearance="outline">
+                              <mat-label>sexe</mat-label>
+                              <select matNativeControl required formControlName="gender">
+                                <option value="Homme">Homme</option>
+                                <option value="Femme">Femme</option>
+                              </select>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                      </div>
                       <div>
-                        <button mat-button matStepperNext>Next</button>
+                        <button class="btn btn-primary btn-block btn-lg login-btn" mat-button matStepperNext>suivant</button>
                       </div>
                     </form>
                   </mat-step>
                   <mat-step [stepControl]="secondFormGroup">
                     <form [formGroup]="secondFormGroup">
-                      <ng-template matStepLabel>Fill out your address</ng-template>
-                      <mat-form-field appearance="outline">
-                        <mat-label>Address</mat-label>
-                        <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
-                               required>
-                      </mat-form-field>
-                      <div>
-                        <button mat-button matStepperPrevious>Back</button>
-                        <button mat-button matStepperNext>Next</button>
+                      <div class="row form-row">
+                        <ng-template matStepLabel>adresse</ng-template>
+                        <div class="col-12 col-md-12">
+                          <div class="form-group">
+                            <mat-form-field class="w-100" appearance="outline">
+                              <mat-label>Address</mat-label>
+                              <input matInput formControlName="address" required>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                          <div class="form-group">
+                            <mat-form-field appearance="outline">
+                              <mat-label>city</mat-label>
+                              <input matInput formControlName="city" required>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                          <div class="form-group">
+                            <mat-form-field appearance="outline">
+                              <mat-label>state</mat-label>
+                              <input matInput formControlName="state" required>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                          <div class="form-group">
+                            <mat-form-field appearance="outline">
+                              <mat-label>prix</mat-label>
+                              <input matInput formControlName="price" required>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                          <div class="form-group">
+                            <mat-select-country placeHolder="pays" appearance="outline" formControlName="country" required>
+                            </mat-select-country>
+                          </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                          <div class="form-group">
+                            <mat-form-field appearance="outline">
+                              <mat-label>zip</mat-label>
+                              <input matInput formControlName="zip" required>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                          <div class="form-group">
+                            <mat-form-field class="w-100" appearance="outline">
+                              <mat-label>specialité</mat-label>
+                              <select matNativeControl required formControlName="speciality">
+                                <option value="Urologie">Urologie</option>
+                                <option value="Neurologie">Neurologie</option>
+                                <option value="Dentiste">Dentiste</option>
+                                <option value="Orthopédique">Orthopédique</option>
+                                <option value="Cardiologue">Cardiologue</option>
+                                <option value="Generale">Generale</option>
+                              </select>
+                            </mat-form-field>
+                          </div>
+                        </div>
+
+                        <div class="col-12 col-md-6">
+                          <button class="btn btn-info btn-block btn-lg login-btn" mat-button matStepperPrevious>precedent</button>
+                        </div>
+                        <div class="col-12 col-md-6">
+                          <button class="btn btn-primary btn-block btn-lg login-btn" mat-button matStepperNext>suivant</button>
+                        </div>
+
                       </div>
                     </form>
                   </mat-step>
-                  <mat-step>
-                    <ng-template matStepLabel>Done</ng-template>
-                    <p>You are now done.</p>
-                    <div>
-                      <button mat-button matStepperPrevious>Back</button>
-                      <button mat-button (click)="stepper.reset()">Reset</button>
-                    </div>
+                  <mat-step [stepControl]="localForm">
+                    <form [formGroup]="localForm">
+                      <ng-template matStepLabel>localisation</ng-template>
+                      <agm-map style="height: 300px"
+                               [latitude]="latitude"
+                               [longitude]="longitude"
+                               [zoom]="zoom">
+                        <agm-marker
+                          [latitude]="latitude"
+                          [longitude]="longitude"
+                          [markerDraggable]="true"
+                          (dragEnd)="markerDragEnd($event)"></agm-marker>
+                      </agm-map>
+                      <div class="row form-row">
+                        <div class="col-12 col-md-6">
+                          <button class="btn btn-info btn-block btn-lg login-btn" mat-button matStepperPrevious>precedent</button>
+                        </div>
+                        <div class="col-12 col-md-6">
+                          <button class="btn btn-primary btn-block btn-lg login-btn" mat-button matStepperNext>suivant</button>
+                        </div>
+                      </div>
+                    </form>
                   </mat-step>
-                </mat-vertical-stepper>
+                  <mat-step [stepControl]="imageform">
+                    <form [formGroup]="imageform">
+                      <ng-template matStepLabel>dernière étape</ng-template>
+                      <div class="form-group form-focus">
+                        <input type="file" (change)="onImagePicked($event)" class="custom-file-input" id="customFile">
+                        <label class="custom-file-label" for="customFile">Choose image</label>
+                      </div>
+                      <div class="upload-images form-group" *ngIf="imagePreview !== '' && imagePreview && imageform.get('image').valid">
+                        <img [src]="imagePreview">
+                      </div>
+                      <div class="row form-row">
+                        <div class="col-12 col-md-4">
+                        <button class="btn btn-info btn-block btn-lg login-btn" mat-button matStepperPrevious>precedent</button>
+                        </div>
+                        <div class="col-12 col-md-4">
+                        <button class="btn btn-danger btn-block btn-lg login-btn" mat-button (click)="stepper.reset()">annuler</button>
+                        </div>
+                        <div class="col-12 col-md-4">
+                        <button mat-button (click)="onSubmit()" class="btn btn-primary btn-block btn-lg login-btn" type="submit">Create account</button>
+                        </div>
+                      </div>
+                    </form>
+                  </mat-step>
+                </mat-horizontal-stepper>
 
-                <div class="text-right">
-                    <a class="forgot-link" href="forgot-password.html">Forgot Password ?</a>
-                  </div>
-                  <button class="btn btn-primary btn-block btn-lg login-btn" type="submit">Create account</button>
-                  <div class="login-or">
-                    <span class="or-line"></span>
-                    <span class="span-or">or</span>
-                  </div>
-                  <div class="row form-row social-login">
-                    <div class="col-6">
-                      <a href="#" class="btn btn-facebook btn-block"><i class="fab fa-facebook-f mr-1"></i> Login</a>
-                    </div>
-                    <div class="col-6">
-                      <a href="#" class="btn btn-google btn-block"><i class="fab fa-google mr-1"></i> Login</a>
-                    </div>
-                  </div>
-                  <div class="text-center dont-have">Don’t have an account? <a href="register.html">Register</a></div>
+
 
               </div>
             </div>

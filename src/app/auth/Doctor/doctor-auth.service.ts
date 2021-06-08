@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable, Subject} from 'rxjs';
 import {Patient} from '../../models/Patient/patient.model';
 import {HttpClient} from '@angular/common/http';
@@ -22,20 +22,26 @@ export class DoctorAuthService {
   private userimageListener = new Subject<string>();
   private useridListener = new Subject<string>();
   private usernameListener = new Subject<string>();
-  constructor(private http: HttpClient, private router: Router) { }
+
+  constructor(private http: HttpClient, private router: Router) {
+  }
 
   getUserid(): string {
     return this.userid;
   }
+
   getUsername(): string {
     return this.username;
   }
+
   getUserimage(): string {
     return this.userimage;
   }
+
   getUser(): Doctor {
     return this.user;
   }
+
   getToken(): string {
     return this.token;
   }
@@ -47,18 +53,21 @@ export class DoctorAuthService {
   getuserimageListener(): Observable<any> {
     return this.userimageListener.asObservable();
   }
+
   getuseridListener(): Observable<any> {
     return this.useridListener.asObservable();
   }
+
   getusernameListener(): Observable<any> {
     return this.usernameListener.asObservable();
   }
+
   getAuthStatusListener(): Observable<any> {
     return this.authStatusListener.asObservable();
   }
 
   login(email: string, password: string): void {
-    const authData: AuthData = { email, password };
+    const authData: AuthData = {email, password};
     this.http
       .post<{ token: string; expiresIn: number, user: any }>(
         'http://localhost:3000/doctor/login',
@@ -88,6 +97,7 @@ export class DoctorAuthService {
         }
       });
   }
+
   autoAuthUser(): void {
     const authInformation = this.getAuthData();
     if (!authInformation) {
@@ -161,24 +171,38 @@ export class DoctorAuthService {
 
   signup(email: string, password: string,
          image: File, name: string,
+         lastName: string,
          address: string,
          speciality: string,
-         post: string,
          birthday: string,
          price: string,
          phone: string,
-         ): void {
+         gender: string,
+         city: string,
+         state: string,
+         country: string,
+         zip: string,
+         latitude: number,
+         longitude: number
+  ): void {
     const doctorData = new FormData();
     doctorData.append('email', email);
     doctorData.append('password', password);
     doctorData.append('image', image, name);
     doctorData.append('name', name);
+    doctorData.append('lastName', lastName);
     doctorData.append('address', address);
     doctorData.append('speciality', speciality);
-    doctorData.append('post', post);
     doctorData.append('birthday', birthday);
     doctorData.append('price', price);
     doctorData.append('phone', phone);
+    doctorData.append('gender', gender);
+    doctorData.append('city', city);
+    doctorData.append('state', state);
+    doctorData.append('country', country);
+    doctorData.append('zip', zip);
+    doctorData.append('latitude', latitude.toString());
+    doctorData.append('longitude', longitude.toString());
     this.http.post('http://localhost:3000/doctor/signup', doctorData)
       .subscribe(responsedata => {
         console.log(responsedata);

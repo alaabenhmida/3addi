@@ -14,12 +14,14 @@ export class DocDashboardComponent implements OnInit, OnDestroy {
   patientdata: any;
   patients = [];
   doctorSub: Subscription;
+  todayRDV = [];
+  today = moment(moment.now()).toString();
 
   constructor(private doctor: DoctorServiceService) { }
 
 
   ngOnInit(): void {
-
+    console.log(this.today);
     this.doctor.getDcotorByKey().subscribe(data => {
       this.doctorData = {
         id: data._id,
@@ -47,6 +49,11 @@ export class DocDashboardComponent implements OnInit, OnDestroy {
         rdv: data.rdv
       };
       this.patients = data.patients;
+      data.rdv.forEach(rdv => {
+        if (this.getdate(rdv.appDate, 'DDMMYYYY') === this.getdate(this.today, 'DDMMYYYY')) {
+          this.todayRDV.push(rdv);
+        }
+      });
     });
     this.doctorSub = this.doctor.getDatalistener().subscribe(data => {
       this.doctorData = {
@@ -84,7 +91,7 @@ export class DocDashboardComponent implements OnInit, OnDestroy {
     });
   }
   getdate(date: string, format: string): string{
-    return (moment(date).format(format));
+    return (moment(date).locale('fr').format(format));
   }
 
   onAccept(patientId: string, appDate: string): void{

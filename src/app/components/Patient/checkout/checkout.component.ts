@@ -4,6 +4,8 @@ import {PatientServiceService} from '../../../services/Patient/patient-service.s
 import {RDV} from '../../../models/Patient/rdv.model';
 import * as moment from 'moment';
 import {DoctorServiceService} from '../../../services/doctor/doctor-service.service';
+import { StripeService, Elements, Element as StripeElement, ElementsOptions } from 'ngx-stripe';
+import {FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-checkout',
@@ -17,10 +19,24 @@ export class CheckoutComponent implements OnInit {
   private today = moment(new Date()).toString();
   private price: number;
 
+  element: Element;
+  card: StripeElement;
+  paymentStatus: any;
+  stripData: any;
+  submitted: any;
+  loading: any;
+
+  elementsOptions: ElementsOptions = {
+    locale: 'en'
+  };
+
+  stripeForm: FormGroup;
+
   constructor(public route: ActivatedRoute,
               private router: Router,
               private patientService: PatientServiceService,
-              private doctorService: DoctorServiceService) { }
+              private doctorService: DoctorServiceService,
+              private stripeService: StripeService) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((paramMap: ParamMap) => {

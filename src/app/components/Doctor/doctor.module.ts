@@ -20,6 +20,7 @@ import {AgmDirectionModule} from 'agm-direction';
 import {AgmSnazzyInfoWindowModule} from '@agm/snazzy-info-window';
 import {AlertModule} from 'ngx-bootstrap/alert';
 import {DoctorRoutingModule} from '../../routers/doctor-routing/doctor-routing.module';
+import {NgxStripeModule} from 'ngx-stripe';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import {DoctorRoutingModule} from '../../routers/doctor-routing/doctor-routing.m
     }),
     AgmDirectionModule,
     AgmSnazzyInfoWindowModule,
+    NgxStripeModule.forRoot('pk_test_51Iz3EFKNPi1VJcHg2s4jzJrl8hX5vSi5On4k0w2Z8AICRQcSf0z8mWLr1Utv862jdEVfXdZoD7T9RvpL21IqKqMY000A6GtnWf'),
     AlertModule.forRoot(),
     DoctorRoutingModule
   ]
