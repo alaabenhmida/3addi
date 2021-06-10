@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from doccure-html.dreamguystech.com/template/profile-settings.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 22 Mar 2021 19:28:35 GMT -->
+<head>
+  <meta charset="utf-8">
+  <title>Doccure</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+
+
+</head>
+<body>
+
+<!-- Main Wrapper -->
+<div class="main-wrapper">
+
+
+  <!-- Page Content -->
+  <div class="content">
+    <div class="container-fluid">
+      <div class="row">
+
+        <!-- Profile Sidebar -->
+        <div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
+
+          <!-- Profile Sidebar -->
+          <div class="profile-sidebar">
+            <div class="widget-profile pro-widget-content">
+              <div class="profile-info-widget">
+                <a href="#" class="booking-doc-img">
+                  <img src="assets/img/doctors/doctor-thumb-02.jpg">
+                </a>
+                <div class="profile-det-info">
+                  <h3>Dr. Darren Elder</h3>
+
+                  <div class="patient-details">
+                    <h5 class="mb-0">BDS, MDS - Oral & Maxillofacial Surgery</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="dashboard-widget">
+              <nav class="dashboard-menu">
+                <ul>
+                  <li class="active">
+                    <a [routerLink]="['/admin/dashboard']">
+                      <i class="fas fa-columns"></i>
+                      <span>Dashboard</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+          <!-- /Profile Sidebar -->
+
+        </div>
+        <!-- /Profile Sidebar -->
+
+        <div class="col-md-7 col-lg-8 col-xl-9">
+          <div class="card">
+            <div class="card-body">
+
+              <!-- Profile Settings Form -->
+              <form>
+                <div class="row form-row">
+                  <div class="col-12 col-md-12">
+                    <div class="form-group">
+                      <div class="change-avatar">
+                        <div class="profile-img">
+                          <img src="{{pharmacieData?.imagePath}}" alt="User Image">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+                      <label>nom</label>
+                      <p class="input-group-text">{{pharmacieData?.name}}</p>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+                      <label>email</label>
+                      <p class="input-group-text">{{pharmacieData?.email}}</p>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+                      <label>spécialité</label>
+                      <p class="input-group-text">{{pharmacieData?.speciality}}</p>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+                      <label>Mobile</label>
+                      <p class="input-group-text">{{pharmacieData?.phone}}</p>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="form-group">
+                      <label>Addresse</label>
+                      <p class="input-group-text">{{pharmacieData?.address}}</p>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+                      <label>City</label>
+                      <p class="input-group-text">{{pharmacieData?.city}}</p>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+                      <label>State</label>
+                      <p class="input-group-text">{{pharmacieData?.state}}</p>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+                      <label>Zip Code</label>
+                      <p class="input-group-text">{{pharmacieData?.zip}}</p>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+                      <label>Country</label>
+                      <p class="input-group-text">{{pharmacieData?.country}}</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="submit-section">
+                  <button (click)="onAccept(pharmacieData._id)" type="button" class="btn btn-primary submit-btn">accepter</button>
+                </div>
+                <div class="submit-section">
+                  <button (click)="onReject(pharmacieData._id)" type="button" class="btn btn-danger submit-btn">refusé</button>
+                </div>
+              </form>
+              <!-- /Profile Settings Form -->
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- /Page Content -->
+
+</div>
+<!-- /Main Wrapper -->
+
+
+</body>
+
+<!-- Mirrored from doccure-html.dreamguystech.com/template/profile-settings.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 22 Mar 2021 19:28:35 GMT -->
+</html>

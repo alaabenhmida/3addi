@@ -29,6 +29,7 @@ exports.getAllDoctors = (req, res, next) => {
 }
 
 exports.login = (req, res, next) => {
+  console.log(req.body);
   let fetchedUser;
   Doctor.findOne({email: req.body.email})
     .then(user => {
@@ -58,6 +59,7 @@ exports.login = (req, res, next) => {
       });
     })
     .catch(err => {
+      console.log(err);
       return res.status(401).json({
         message: "something went wrong"
       });
@@ -101,14 +103,10 @@ exports.getDoctorByID = (req, res, next) => {
 }
 
 exports.signup = (req, res, next) => {
-  // console.log(req.body);
-  bcrypt.hash(req.body.password, 10).then(hash => {
-    const url = req.protocol + "://" + req.get("host");
-    // console.log(req.body)
     const doctor = new Doctor({
       email: req.body.email,
-      password: hash,
-      imagePath: url + "/images/" + req.file.filename,
+      password: req.body.password,
+      imagePath: req.body.image,
       name: req.body.name,
       lastName: req.body.lastName,
       gender: req.body.gender,
@@ -136,7 +134,6 @@ exports.signup = (req, res, next) => {
         error: err,
       });
     });
-  });
 }
 
 exports.getDoctorByKey = (req, res, next) => {

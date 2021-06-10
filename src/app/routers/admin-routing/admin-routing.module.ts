@@ -4,9 +4,17 @@ import {AuthGuard} from '../../auth/doctor-auth.gards';
 import {PatientAuthGuard} from '../../auth/patient-auth.gards';
 import {LoginAuthGuard} from '../../auth/login-auth.gards';
 import {AdminDashboardComponent} from '../../components/Admin/admin-dashboard/admin-dashboard.component';
+import {DocCheckDetailsComponent} from '../../components/Admin/doc-check-details/doc-check-details.component';
+import {DocDemandesComponent} from '../../components/Admin/doc-demandes/doc-demandes.component';
+import {PharCheckDetailsComponent} from '../../components/Admin/phar-check-details/phar-check-details.component';
+import {PharDemandesComponent} from '../../components/Admin/phar-demandes/phar-demandes.component';
 
 const appRoutes: Routes = [
-  { path: 'admin/dashboard', component: AdminDashboardComponent }
+  { path: 'admin/dashboard', component: AdminDashboardComponent },
+  { path: 'admin/doctorcheck/:id', component: DocCheckDetailsComponent },
+  { path: 'admin/pharmaciecheck/:id', component: PharCheckDetailsComponent },
+  { path: 'admin/doctorsdemandes', component: DocDemandesComponent },
+  { path: 'admin/pharmaciesdemandes', component: PharDemandesComponent }
 ];
 @NgModule({
   imports: [RouterModule.forRoot(appRoutes)],

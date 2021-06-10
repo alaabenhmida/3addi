@@ -1,15 +1,14 @@
-import {Component, OnInit} from '@angular/core';
-import {DoctorAuthService} from '../../../auth/Doctor/doctor-auth.service';
+import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {mimeType} from '../../../shared/mime-type.validator';
 import {AdminService} from '../../../services/admin/admin.service';
 
 @Component({
-  selector: 'app-signup-dr',
-  templateUrl: './signup-dr.component.html',
-  styleUrls: ['./signup-dr.component.css']
+  selector: 'app-pharmacie-signup',
+  templateUrl: './pharmacie-signup.component.html',
+  styleUrls: ['./pharmacie-signup.component.css']
 })
-export class SignupDrComponent implements OnInit {
+export class PharmacieSignupComponent implements OnInit {
   form: FormGroup;
   imagePreview: string;
   isLinear = false;
@@ -21,19 +20,15 @@ export class SignupDrComponent implements OnInit {
   zoom = 15;
   imageform: FormGroup;
 
-  constructor(public doctorService: DoctorAuthService, private _formBuilder: FormBuilder,
-              private adminService: AdminService) {
-  }
+  constructor(private _formBuilder: FormBuilder,
+              private adminService: AdminService) { }
 
   ngOnInit(): void {
     this.firstFormGroup = this._formBuilder.group({
       email: new FormControl(null, {validators: [Validators.required, Validators.email]}),
       password: new FormControl(null, {validators: [Validators.required]}),
-      birthday: new FormControl(null, {validators: [Validators.required]}),
-      firsName: new FormControl(null, {validators: [Validators.required]}),
-      lastName: new FormControl(null, {validators: [Validators.required]}),
+      name: new FormControl(null, {validators: [Validators.required]}),
       phone: new FormControl(null, {validators: [Validators.required]}),
-      gender: new FormControl(null, {validators: [Validators.required]})
     });
     this.secondFormGroup = this._formBuilder.group({
       address: new FormControl(null, {validators: [Validators.required]}),
@@ -41,8 +36,7 @@ export class SignupDrComponent implements OnInit {
       state: new FormControl(null, {validators: [Validators.required]}),
       country: new FormControl(null, {validators: [Validators.required]}),
       zip: new FormControl(null, {validators: [Validators.required]}),
-      speciality: new FormControl(null, {validators: [Validators.required]}),
-      price: new FormControl(null, {validators: [Validators.required]})
+      speciality: new FormControl(null, {validators: [Validators.required]})
     });
     this.localForm = this._formBuilder.group({
       localisation: new FormControl(null, {validators: [Validators.required]}),
@@ -72,20 +66,9 @@ export class SignupDrComponent implements OnInit {
   }
 
   onSubmit(): void {
-    // if (this.form.invalid){
-    //   return;
-    // }
-    this.adminService.addDoctor(this.firstFormGroup.value.email, this.firstFormGroup.value.password, this.imageform.value.image,
-      this.firstFormGroup.value.firsName, this.firstFormGroup.value.lastName, this.secondFormGroup.value.address,
-      this.secondFormGroup.value.speciality, this.firstFormGroup.value.birthday, this.secondFormGroup.value.price,
-      this.firstFormGroup.value.phone, this.firstFormGroup.value.gender, this.secondFormGroup.value.city,
-      this.secondFormGroup.value.state, this.secondFormGroup.value.country.name, this.secondFormGroup.value.zip,
-      this.latitude, this.longitude);
-    // this.doctorService.signup(this.form.value.email,
-    //   this.form.value.password,
-    //   this.form.value.image,
-    //   this.form.value.name, this.form.value.address, this.form.value.speciality, this.form.value.post,
-    //   this.form.value.birthday.toString(), this.form.value.price, this.form.value.phone);
+    this.adminService.addPharmacie(this.firstFormGroup.value.email, this.firstFormGroup.value.password, this.imageform.value.image,
+      this.firstFormGroup.value.name, this.secondFormGroup.value.address, this.secondFormGroup.value.speciality,
+      this.firstFormGroup.value.phone, this.secondFormGroup.value.address, this.secondFormGroup.value.state,
+      this.secondFormGroup.value.country.name, this.secondFormGroup.value.zip, this.latitude, this.longitude);
   }
-
 }

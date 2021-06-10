@@ -15,9 +15,11 @@ import {PharmacieSettingComponent} from '../../components/Pharmacie/pharmacie-se
 import {PharmacieCheckoutComponent} from '../../components/Pharmacie/pharmacie-checkout/pharmacie-checkout.component';
 import {OrdersComponent} from '../../components/Pharmacie/orders/orders.component';
 import {OrderDetailComponent} from '../../components/Pharmacie/order-detail/order-detail.component';
+import {PharmacieSignupComponent} from '../../components/Pharmacie/pharmacie-signup/pharmacie-signup.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: PharLoginComponent},
+  { path: 'register', component: PharmacieSignupComponent},
   { path: 'dashboard', component: PharDashboardComponent},
   { path: 'parametre', component: PharmacieSettingComponent},
   { path: 'dashboard/produits', component: ProduitsComponent},

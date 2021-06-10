@@ -42,6 +42,10 @@ import {AppRoutingModule} from './app-routing.module';
 import {PharmacieModule} from './components/Pharmacie/pharmacie.module';
 import {NgxStripeModule} from 'ngx-stripe';
 import {MatSelectCountryModule} from '@angular-material-extensions/select-country';
+import {DocCheckDetailsComponent} from './components/Admin/doc-check-details/doc-check-details.component';
+import {DocDemandesComponent} from './components/Admin/doc-demandes/doc-demandes.component';
+import {PharCheckDetailsComponent} from './components/Admin/phar-check-details/phar-check-details.component';
+import {PharDemandesComponent} from './components/Admin/phar-demandes/phar-demandes.component';
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
 @NgModule({
@@ -59,6 +63,10 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     ErrorComponent,
     LoginDialogComponent,
     AdminDashboardComponent,
+    DocCheckDetailsComponent,
+    DocDemandesComponent,
+    PharCheckDetailsComponent,
+    PharDemandesComponent
   ],
   imports: [
     BrowserModule,

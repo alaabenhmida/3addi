@@ -21,6 +21,8 @@ import {AgmCoreModule} from '@agm/core';
 import {AgmDirectionModule} from 'agm-direction';
 import {AgmSnazzyInfoWindowModule} from '@agm/snazzy-info-window';
 import {PharmacieRoutingModule} from '../../routers/pharmacie-routing/pharmacie-routing.module';
+import { PharmacieSignupComponent } from './pharmacie-signup/pharmacie-signup.component';
+import {MatSelectCountryModule} from '@angular-material-extensions/select-country';
 
 
 
@@ -39,7 +41,8 @@ import {PharmacieRoutingModule} from '../../routers/pharmacie-routing/pharmacie-
     ProductPageGridComponent,
     ProductDetailsComponent,
     CartComponent,
-    OrderDetailComponent
+    OrderDetailComponent,
+    PharmacieSignupComponent
   ],
   imports: [
     CommonModule,
@@ -52,7 +55,8 @@ import {PharmacieRoutingModule} from '../../routers/pharmacie-routing/pharmacie-
     }),
     AgmDirectionModule,
     AgmSnazzyInfoWindowModule,
-    PharmacieRoutingModule
+    PharmacieRoutingModule,
+    MatSelectCountryModule.forRoot('fr')
   ]
 })
 export class PharmacieModule { }

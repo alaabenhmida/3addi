@@ -32,6 +32,37 @@ const storage = multer.diskStorage({
   }
 });
 
+router.post("/signup", multer({storage: storage}).single("image"), (req, res, next) => {
+  const pharmacie = new Pharmacie({
+    email: req.body.email,
+    password: req.body.password,
+    imagePath: req.body.image,
+    name: req.body.name,
+    address: req.body.address,
+    speciality: req.body.speciality,
+    phone: req.body.phone,
+    city: req.body.city,
+    state: req.body.state,
+    country: req.body.country,
+    zip: req.body.zip,
+    location: {
+      latitude: req.body.latitude,
+      longitude: req.body.longitude
+    }
+  })
+  pharmacie.save().then(result => {
+    res.status(201).json({
+      message: "pharmacie created!",
+      result: result
+    });
+  }).catch(err => {
+    console.log(err);
+    res.status(500).json({
+      error: err,
+    });
+  });
+});
+
 router.put("/edit", multer({storage: storage}).single("image"), checkAuth,
   (req, res, next) => {
     let imagePath = req.body.image;

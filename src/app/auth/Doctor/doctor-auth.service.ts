@@ -170,7 +170,7 @@ export class DoctorAuthService {
   }
 
   signup(email: string, password: string,
-         image: File, name: string,
+         image: string, name: string,
          lastName: string,
          address: string,
          speciality: string,
@@ -184,11 +184,11 @@ export class DoctorAuthService {
          zip: string,
          latitude: number,
          longitude: number
-  ): void {
+  ): Observable<any> {
     const doctorData = new FormData();
     doctorData.append('email', email);
     doctorData.append('password', password);
-    doctorData.append('image', image, name);
+    doctorData.append('image', image);
     doctorData.append('name', name);
     doctorData.append('lastName', lastName);
     doctorData.append('address', address);
@@ -203,9 +203,6 @@ export class DoctorAuthService {
     doctorData.append('zip', zip);
     doctorData.append('latitude', latitude.toString());
     doctorData.append('longitude', longitude.toString());
-    this.http.post('http://localhost:3000/doctor/signup', doctorData)
-      .subscribe(responsedata => {
-        console.log(responsedata);
-      });
+    return  this.http.post('http://localhost:3000/doctor/signup', doctorData);
   }
 }
