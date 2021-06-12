@@ -34,7 +34,6 @@ const storage = multer.diskStorage({
 });
 
 router.post("/sendmail", (req, res, next) => {
-  console.log(req.body);
   let transporter = nodemailer.createTransport({
     service: 'Gmail',
     auth: {

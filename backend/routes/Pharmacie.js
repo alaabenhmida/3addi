@@ -94,7 +94,7 @@ router.put("/edit", multer({storage: storage}).single("image"), checkAuth,
     }
   });
 
-router.put("/getProductbyid",checkAuth, (req, res, next) => {
+router.put("/getProductbyid", checkAuth, (req, res, next) => {
   Pharmacie.findById(req.userData.userId).select({products: {$elemMatch: {_id: req.body.productID}}})
     .then(result => {
       res.status(200).json(result);
@@ -103,7 +103,7 @@ router.put("/getProductbyid",checkAuth, (req, res, next) => {
   });
 });
 
-router.put("/getProductByName", (req, res, next) => {
+router.put("/getProductByName", checkAuth, (req, res, next) => {
   Pharmacie.findById(req.body.pharmacieID).select({products: {$elemMatch: {name: req.body.productName}}})
     .then(result => {
       res.status(200).json(result.products[0]);
@@ -112,7 +112,7 @@ router.put("/getProductByName", (req, res, next) => {
   });
 });
 
-router.put("/getProduct", (req, res, next) => {
+router.put("/getProduct", checkAuth, (req, res, next) => {
   Pharmacie.findById(req.body.pharmacieID).select({products: {$elemMatch: {_id: req.body.productID}}})
     .then(result => {
       res.status(200).json(result);
@@ -294,7 +294,9 @@ router.get("/:id", (req, res, next) => {
 router.get("", (req, res, next) => {
   const pageSize = +req.query.pagesize;
   const currentPage = +req.query.page;
-  const pharmacieQuery = Pharmacie.find();
+  const pharmacieQuery = Pharmacie.aggregate([
+    {$addFields: {averageRating: {$avg: "$reviews.rate"}}}
+  ]);
   let fetchedPharmacies;
   if (pageSize && currentPage) {
     pharmacieQuery

@@ -207,7 +207,8 @@
                     <ul class="booking-total-list">
                       <li>
                         <span>Total</span>
-                        <span class="total-cost">${{getTotal()}}</span>
+                        <span *ngIf="!ordonnanceMode" class="total-cost">${{getTotal()}}</span>
+                        <span *ngIf="ordonnanceMode" class="total-cost">${{getTotalAmount()}}</span>
                       </li>
                       <li>
                     </ul>

@@ -35,7 +35,7 @@
               <th scope="col">Produit</th>
               <th scope="col" width="120">Quantité</th>
               <th scope="col" width="120">Prix</th>
-              <th scope="col" class="text-right" width="200"> </th>
+              <th  *ngIf="!ordonnanceMode" scope="col" class="text-right" width="200"> </th>
             </tr>
             </thead>
             <tbody>
@@ -53,11 +53,11 @@
                 <div class="mat-cell text-muted">
                   <div fxLayout="row" fxLayout.xs="column"  class="text-muted">
                     <div fxLayout="row" fxLayoutAlign="center start">
-                      <button mat-icon-button matTooltip="Remove" (click)="decrement(product.product)">
+                      <button *ngIf="!ordonnanceMode" mat-icon-button matTooltip="Remove" (click)="decrement(product.product)">
                         <mat-icon>remove</mat-icon>
                       </button>
                       <input type="text" name="quantity"  [(ngModel)]="product.quantity" disabled class="form-control input-number">
-                      <button mat-icon-button matTooltip="Add" (click)="increment(product.product)">
+                      <button *ngIf="!ordonnanceMode" mat-icon-button matTooltip="Add" (click)="increment(product.product)">
                         <mat-icon>add</mat-icon>
                       </button>
                     </div>
@@ -70,7 +70,7 @@
                   <small class="text-muted"> ${{product?.product.price}} chaque </small>
                 </div> <!-- price-wrap .// -->
               </td>
-              <td class="text-right">
+              <td *ngIf="!ordonnanceMode" class="text-right">
                 <a (click)="removeItem(product)" class="btn btn-light"> Supprimer</a>
               </td>
             </tr>
@@ -78,14 +78,11 @@
           </table>
 
           <div class="card-body border-top">
-            <a [routerLink]="['/pharmacie', pharmacieId, 'payer']" class="btn btn-primary float-md-right"> Acheter <i class="fa fa-chevron-right"></i> </a>
+            <a (click)="onAcheter()" class="btn btn-primary float-md-right text-white"> Acheter <i class="fa fa-chevron-right"></i> </a>
             <a [routerLink]="['/pharmacie', pharmacieId]" class="btn btn-light"> <i class="fa fa-chevron-left"></i> Continuer vos achats </a>
           </div>
         </div> <!-- card.// -->
 
-        <div class="alert alert-success mt-3">
-          <p class="icontext"><i class="icon text-success fa fa-truck"></i> Livraison gratuite sous 1 à 2 heures</p>
-        </div>
 
       </main> <!-- col.// -->
       <aside class="col-md-3">
@@ -116,7 +113,8 @@
             </dl>
             <dl class="dlist-align">
               <dt>Total:</dt>
-              <dd class="text-right  h5"><strong>{{getTotal()}}</strong></dd>
+              <dd *ngIf="!ordonnanceMode" class="text-right  h5"><strong>{{getTotal()}}</strong></dd>
+              <dd *ngIf="ordonnanceMode" class="text-right  h5"><strong>{{getTotalAmount()}}</strong></dd>
             </dl>
             <hr>
             <p class="text-center mb-3">

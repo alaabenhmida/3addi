@@ -140,12 +140,22 @@
                   <div class="doc-info-cont">
                     <h4 class="doc-name mb-2"><a [routerLink]="['/pharmacie', pharmacie._id, 'about']">{{pharmacie?.name}}</a></h4>
                     <div class="rating mb-2">
-                      <span class="badge badge-primary">4.0</span>
-                      <i class="fas fa-star filled"></i>
-                      <i class="fas fa-star filled"></i>
-                      <i class="fas fa-star filled"></i>
-                      <i class="fas fa-star filled"></i>
-                      <i class="fas fa-star"></i>
+                      <span class="badge badge-primary">{{pharmacie?.averageRating}}</span>
+                      <i [ngClass]="{
+                    filled: pharmacie?.averageRating >= 1
+                    }" class="fas fa-star"></i>
+                      <i [ngClass]="{
+                    filled: pharmacie?.averageRating >= 2
+                    }" class="fas fa-star"></i>
+                      <i [ngClass]="{
+                    filled: pharmacie?.averageRating >= 3
+                    }" class="fas fa-star"></i>
+                      <i [ngClass]="{
+                    filled: pharmacie?.averageRating >= 4
+                    }" class="fas fa-star"></i>
+                      <i [ngClass]="{
+                    filled: pharmacie?.averageRating >= 5
+                    }" class="fas fa-star"></i>
                       <span class="d-inline-block average-rating">({{pharmacie?.reviews.length}})</span>
                     </div>
                     <div class="clinic-details">

@@ -5,6 +5,7 @@ import {ActivatedRoute, ParamMap, Params, Route, Router} from '@angular/router';
 import {CartItem} from '../../../models/Pharmacie/cartItem.model';
 import {DoctorServiceService} from '../../../services/doctor/doctor-service.service';
 import {Product} from '../../../models/Pharmacie/product.model';
+import {forkJoin} from 'rxjs';
 
 @Component({
   selector: 'app-map-list',
@@ -51,21 +52,38 @@ export class MapListComponent implements OnInit {
   }
 
   bye(pharmacieID: string): void {
-    this.doctorService.getPrescription(this.patientId, this.prescID).subscribe(data => {
-        const promiseArray = data.prescription[0].presc.map(product => {
-          this.pharmacieService.getProductByName(pharmacieID, product.name).subscribe(products => {
-            let prod: Product;
-            prod = products;
-            this.products.push({product: prod, quantity: product.quantite});
-          });
-        }) ;
-        Promise.all(promiseArray).then(result => {
-          this.pharmacieService.byewithPresc(this.products, pharmacieID).subscribe(results => {
-            this.router.navigate(['pharmacie', pharmacieID, 'cart']);
-          });
-        });
-
+    // forkJoin(
+    //   this.doctorService.getPrescription(this.patientId, this.prescID).subscribe(data => {
+    //     data.prescription[0].presc.map(product => {
+    //       this.pharmacieService.getProductByName(pharmacieID, product.name).subscribe(products => {
+    //         let prod: Product;
+    //         prod = products;
+    //         this.products.push({product: prod, quantity: product.quantite});
+    //       });
+    //     });
+    //   }),
+    // );
+    this.pharmacieService.byewithPresc(this.products, pharmacieID).subscribe(results => {
+      this.router.navigate(['pharmacie', pharmacieID, 'cart'], {queryParams: {
+          ordID: this.prescID,
+          patientId: this.patientId
+        }});
     });
+    // this.doctorService.getPrescription(this.patientId, this.prescID).subscribe(data => {
+    //     const promiseArray = data.prescription[0].presc.map(product => {
+    //       this.pharmacieService.getProductByName(pharmacieID, product.name).subscribe(products => {
+    //         let prod: Product;
+    //         prod = products;
+    //         this.products.push({product: prod, quantity: product.quantite});
+    //       });
+    //     }) ;
+    //     Promise.all(promiseArray).then(result => {
+    //       this.pharmacieService.byewithPresc(this.products, pharmacieID).subscribe(results => {
+    //         this.router.navigate(['pharmacie', pharmacieID, 'cart']);
+    //       });
+    //     });
+    //
+    // });
 
   }
 }

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {IndexComponent} from '../../shared/index/index.component';
 import {LoginComponent} from '../../components/Patient/login/login.component';
 import {SignupComponent} from '../../components/Patient/signup/signup.component';
 import {ProfileComponent} from '../../components/Patient/profile/profile.component';
@@ -16,12 +15,11 @@ import {AuthGuard} from '../../auth/doctor-auth.gards';
 import {PatientAuthGuard} from '../../auth/patient-auth.gards';
 import {LoginAuthGuard} from '../../auth/login-auth.gards';
 import {PrescriptionDetailsComponent} from '../../components/Patient/prescription-details/prescription-details.component';
-import {MapGridComponent} from '../../components/Doctor/map-grid/map-grid.component';
 
 
 const appRoutes: Routes = [
   { path: 'messages', component: MessagesComponent },
-  { path: 'profile/ordonnace/:id', component: PrescriptionDetailsComponent },
+  { path: 'profile/ordonnace/:id', component: PrescriptionDetailsComponent, canActivate: [PatientAuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent},
   { path: 'profile/setting', component: ProfileSettComponent, canActivate: [PatientAuthGuard] },
@@ -29,7 +27,7 @@ const appRoutes: Routes = [
   { path: 'profile/favdocs', component: FavDocsComponent, canActivate: [PatientAuthGuard] },
   { path: 'facture/:rdvid', component: InvoiceDetailComponent },
   { path: 'ordre/:rdvid', component: BookingSuccessComponent, canActivate: [PatientAuthGuard] },
-  { path: 'patient/:id', component: ProfileComponent },
+  { path: 'patient/:id', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'patient/:id/ajoutDossier', component: MedRecordComponent, canActivate: [AuthGuard] },
   { path: 'patient/:id/ajoutOrd', component: AddPrescComponent, canActivate: [AuthGuard] },
   { path: 'patient/:id/presc/:prescID', component: AddPrescComponent }
