@@ -546,6 +546,22 @@
               </div>
             </div>
           </div>
+
+            <div class="card bg-danger-light">
+              <form [formGroup]="passwordForm" (submit)="onVerifyPassword()">
+              <div class="card-body">
+                <h4 class="card-title text-danger">supprimé mon compte</h4>
+                <div class="col-12 col-md-4">
+                  <div class="form-group">
+                    <input class="form-control" type="text" placeholder="entrer mot de passe" formControlName="password">
+                  </div>
+                </div>
+                <div class="col-12 col-md-4">
+                  <input class="btn btn-danger" type="submit" value="supprimer">
+                  </div>
+              </div>
+          </form>
+            </div>
             <div class="submit-section submit-btn-bottom">
               <button [disabled]="form.invalid" type="submit" class="btn btn-primary submit-btn">Save Changes</button>
             </div>

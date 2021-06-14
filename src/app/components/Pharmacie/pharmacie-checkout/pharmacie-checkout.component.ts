@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CartItem} from '../../../models/Pharmacie/cartItem.model';
 import {CartService} from '../../../services/pharmacie/cart.service';
-import {ActivatedRoute, ParamMap} from '@angular/router';
+import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {Pharmacie} from '../../../models/Pharmacie/pharmacie.model';
 import {PharmacieService} from '../../../services/pharmacie/pharmacie.service';
 import {combineLatest, Observable, Subscription} from 'rxjs';
@@ -27,6 +27,7 @@ export class PharmacieCheckoutComponent implements OnInit, OnDestroy {
 
   constructor(private cartService: CartService,
               private route: ActivatedRoute,
+              private router: Router,
               private pharmacieService: PharmacieService,
               private doctorService: DoctorServiceService) { }
 
@@ -82,7 +83,7 @@ export class PharmacieCheckoutComponent implements OnInit, OnDestroy {
     this.updatequantites().then(() => {
       this.pharmacieService.addOrder(this.products, this.pharmacieId).subscribe(data => {
         this.pharmacieService.deleteCart(this.pharmacieId).subscribe(result => {
-            console.log(result);
+            this.router.navigate(['pharmacie', this.pharmacieId, 'payer', 'succee']);
           });
       });
     });

@@ -16,6 +16,17 @@ export class DoctorServiceService {
   constructor(private http: HttpClient) {
   }
 
+  verifypassword(password: string): Observable<any> {
+    return this.http.put('http://localhost:3000/doctor/verifyPassword', {password});
+  }
+
+  deleteDoctor(id: string): Observable<any> {
+    return this.http.delete('http://localhost:3000/doctor/' + id);
+  }
+  deleteDoctorByKey(): Observable<any> {
+    return this.http.delete('http://localhost:3000/doctor/delete');
+  }
+
   getspecialityCount(speciality: string): Observable<any> {
     return this.http.put('http://localhost:3000/doctor/speciality', {speciality});
   }

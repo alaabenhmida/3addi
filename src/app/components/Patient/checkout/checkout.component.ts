@@ -1,11 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {PatientServiceService} from '../../../services/Patient/patient-service.service';
 import {RDV} from '../../../models/Patient/rdv.model';
 import * as moment from 'moment';
+// import {DoctorServiceService} from '../../../services/doctor/doctor-service.service';
+// import { StripeService, Elements, Element as StripeElement, ElementsOptions } from 'ngx-stripe';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {DoctorServiceService} from '../../../services/doctor/doctor-service.service';
-import { StripeService, Elements, Element as StripeElement, ElementsOptions } from 'ngx-stripe';
-import {FormGroup} from '@angular/forms';
+import {StripeCardComponent, StripeService} from 'ngx-stripe';
+import {
+  StripeCardElementOptions,
+  StripeElementsOptions
+} from '@stripe/stripe-js';
+import {PaymentService} from '../../../services/payment/payment.service';
 
 @Component({
   selector: 'app-checkout',
@@ -13,6 +20,7 @@ import {FormGroup} from '@angular/forms';
   styleUrls: ['./checkout.component.css']
 })
 export class CheckoutComponent implements OnInit {
+  @ViewChild(StripeCardComponent) card: StripeCardComponent;
   rdv: RDV;
   bookingFees: number;
   private rdvId: string;
@@ -20,15 +28,35 @@ export class CheckoutComponent implements OnInit {
   private price: number;
 
   element: Element;
-  card: StripeElement;
+  // card: StripeElement;
   paymentStatus: any;
   stripData: any;
   submitted: any;
   loading: any;
 
-  elementsOptions: ElementsOptions = {
-    locale: 'en'
+  // elementsOptions: ElementsOptions = {
+  //   locale: 'en'
+  // };
+  cardOptions: StripeCardElementOptions = {
+    style: {
+      base: {
+        iconColor: '#666EE8',
+        color: '#31325F',
+        fontWeight: '300',
+        fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+        fontSize: '18px',
+        '::placeholder': {
+          color: '#CFD7E0'
+        }
+      }
+    }
   };
+
+  elementsOptions: StripeElementsOptions = {
+    locale: 'es'
+  };
+
+  stripeTest: FormGroup;
 
   stripeForm: FormGroup;
 
@@ -36,9 +64,13 @@ export class CheckoutComponent implements OnInit {
               private router: Router,
               private patientService: PatientServiceService,
               private doctorService: DoctorServiceService,
-              private stripeService: StripeService) { }
+              private fb: FormBuilder, private stripeService: StripeService,
+              private paymentService: PaymentService) { }
 
   ngOnInit(): void {
+    this.stripeTest = this.fb.group({
+      name: ['', [Validators.required]]
+    });
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       this.rdvId = paramMap.get('rdvID');
       this.patientService.getRdv(paramMap.get('rdvID')).subscribe(result => {
@@ -58,6 +90,29 @@ export class CheckoutComponent implements OnInit {
       'master Card', '123456789', this.rdv.rdvDate)
       .subscribe(result => {
         this.router.navigate(['/ordre', result.invoiceID]);
+      });
+  }
+
+  createToken(): void {
+    const name = this.stripeTest.get('name').value;
+    this.stripeService
+      .createToken(this.card.element, { name })
+      .subscribe((result) => {
+        if (result.token) {
+          // Use the token
+          // console.log(result.token);
+          // this.stripData.token = result.token;
+          this.paymentService.pay(result.token).subscribe(res => {
+            if (res.success) {
+              this.paymentStatus = res.status;
+              console.log(res);
+            }
+          });
+        } else if (result.error) {
+          // Error creating the token
+          console.log(result.error.message);
+          this.paymentStatus = result.error.message;
+        }
       });
   }
 }

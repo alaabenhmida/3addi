@@ -16,6 +16,7 @@ import {PharmacieCheckoutComponent} from '../../components/Pharmacie/pharmacie-c
 import {OrdersComponent} from '../../components/Pharmacie/orders/orders.component';
 import {OrderDetailComponent} from '../../components/Pharmacie/order-detail/order-detail.component';
 import {PharmacieSignupComponent} from '../../components/Pharmacie/pharmacie-signup/pharmacie-signup.component';
+import {PaymentSuccessComponent} from '../../components/Pharmacie/payment-success/payment-success.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: PharLoginComponent},
@@ -32,7 +33,8 @@ const appRoutes: Routes = [
   { path: ':id', component: ProductPageGridComponent, canActivate: [PatientAuthGuard] },
   { path: ':id/product/:prodId', component: ProductDetailsComponent, canActivate: [PatientAuthGuard] },
   { path: ':id/cart', component: CartComponent, canActivate: [PatientAuthGuard] },
-  { path: ':id/payer', component: PharmacieCheckoutComponent, canActivate: [PatientAuthGuard] }
+  { path: ':id/payer', component: PharmacieCheckoutComponent, canActivate: [PatientAuthGuard] },
+  { path: ':id/payer/succee', component: PaymentSuccessComponent, canActivate: [PatientAuthGuard] }
 ];
 
 @NgModule({

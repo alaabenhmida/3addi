@@ -21,10 +21,14 @@ export class ErrorInterceptor implements HttpInterceptor {
     return next.handle(req).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.error.message) {
-          this.toaster.error(error.statusText, '');
+          this.toaster.error(error.error.message, '', {
+            positionClass: 'toast-bottom-right'
+          });
           // this.dialog.open(ErrorComponent, {data: {message: error.error.message}, minWidth: 300});
         } else {
-          this.toaster.error(error.statusText, '');
+          this.toaster.error(error.statusText, '', {
+            positionClass: 'toast-bottom-right'
+          });
           // this.dialog.open(ErrorComponent, {data: {message: error.statusText, minWidth: 300}});
         }
         return throwError(error);

@@ -46,6 +46,7 @@ import {DocCheckDetailsComponent} from './components/Admin/doc-check-details/doc
 import {DocDemandesComponent} from './components/Admin/doc-demandes/doc-demandes.component';
 import {PharCheckDetailsComponent} from './components/Admin/phar-check-details/phar-check-details.component';
 import {PharDemandesComponent} from './components/Admin/phar-demandes/phar-demandes.component';
+import {Error404Component} from './shared/error404/error404.component';
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
 @NgModule({
@@ -66,7 +67,8 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     DocCheckDetailsComponent,
     DocDemandesComponent,
     PharCheckDetailsComponent,
-    PharDemandesComponent
+    PharDemandesComponent,
+    Error404Component
   ],
   imports: [
     BrowserModule,

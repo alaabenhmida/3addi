@@ -217,6 +217,16 @@
             </div>
           </div>
           <!-- /Booking Summary -->
+          <form novalidate (ngSubmit)="createToken()" [formGroup]="stripeTest">
+            <input type="text" formControlName="name" placeholder="Jane Doe">
+            <ngx-stripe-card
+              [options]="cardOptions"
+              [elementsOptions]="elementsOptions"
+            ></ngx-stripe-card>
+            <button type="submit">
+              CREATE TOKEN
+            </button>
+          </form>
 
         </div>
       </div>

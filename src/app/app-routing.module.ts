@@ -6,13 +6,16 @@ import {LoginAuthGuard} from './auth/login-auth.gards';
 import {IndexComponent} from './shared/index/index.component';
 import {MapGridComponent} from './components/Doctor/map-grid/map-grid.component';
 import {MapListComponent} from './components/Pharmacie/map-list/map-list.component';
+import {Error404Component} from './shared/error404/error404.component';
 
 const appRoutes: Routes = [
   { path: '', component: IndexComponent },
   { path: 'doctors', component: MapGridComponent },
   { path: 'pharmacies', component: MapListComponent},
   { path: 'doctor', loadChildren: () => import('./components/Doctor/doctor.module').then(m => m.DoctorModule) },
-  { path: 'pharmacie', loadChildren: () => import('./components/Pharmacie/pharmacie.module').then(p => p.PharmacieModule) }
+  { path: 'pharmacie', loadChildren: () => import('./components/Pharmacie/pharmacie.module').then(p => p.PharmacieModule) },
+  // { path: 'not-found', component: Error404Component },
+  // { path: '**', redirectTo: '/not-found', pathMatch: 'full' },
 ];
 
 

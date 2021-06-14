@@ -23,6 +23,7 @@ import {AgmSnazzyInfoWindowModule} from '@agm/snazzy-info-window';
 import {PharmacieRoutingModule} from '../../routers/pharmacie-routing/pharmacie-routing.module';
 import { PharmacieSignupComponent } from './pharmacie-signup/pharmacie-signup.component';
 import {MatSelectCountryModule} from '@angular-material-extensions/select-country';
+import { PaymentSuccessComponent } from './payment-success/payment-success.component';
 
 
 
@@ -42,7 +43,8 @@ import {MatSelectCountryModule} from '@angular-material-extensions/select-countr
     ProductDetailsComponent,
     CartComponent,
     OrderDetailComponent,
-    PharmacieSignupComponent
+    PharmacieSignupComponent,
+    PaymentSuccessComponent
   ],
   imports: [
     CommonModule,

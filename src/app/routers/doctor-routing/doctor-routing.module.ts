@@ -17,19 +17,19 @@ import {PatientAuthGuard} from '../../auth/patient-auth.gards';
 import {ManageTimeComponent} from '../../components/Doctor/manage-time/manage-time.component';
 
 const appRoutes: Routes = [
-      { path: 'doctor/signup', component: SignupDrComponent },
-      { path: 'doctor/login', component: LogindrComponent },
-      { path: 'doctor/factures', component: InvoicesComponent, canActivate: [AuthGuard] },
-      { path: 'doctor/reviews', component: ReviewsComponent, canActivate: [AuthGuard] },
-      { path: 'doctor/search', component: SearchComponent },
-      { path: 'doctor/gererTemps', component: ManageTimeComponent, canActivate: [AuthGuard] },
-      { path: 'doctor/:id', component: ProfileDocComponent },
-      { path: 'doctor/:id/check/:rdvID', component: CheckoutComponent, canActivate: [PatientAuthGuard] },
-      { path: 'doctor/:id/app', component: AppointmentComponent, canActivate: [PatientAuthGuard] },
-      { path: 'doctor/profile/dashboard', component: DocDashboardComponent, canActivate: [AuthGuard] },
-      { path: 'doctor/profile/myRDV', component: AppointementsComponent, canActivate: [AuthGuard] },
-      { path: 'doctor/profile/myPatients', component: MyPatientsComponent, canActivate: [AuthGuard] },
-      { path: 'doctor/profile/setting', component: DocProfilSettingComponent, canActivate: [AuthGuard] }
+      { path: 'signup', component: SignupDrComponent },
+      { path: 'login', component: LogindrComponent },
+      { path: 'factures', component: InvoicesComponent, canActivate: [AuthGuard] },
+      { path: 'reviews', component: ReviewsComponent, canActivate: [AuthGuard] },
+      { path: 'search', component: SearchComponent },
+      { path: 'gererTemps', component: ManageTimeComponent, canActivate: [AuthGuard] },
+      { path: ':id', component: ProfileDocComponent },
+      { path: ':id/check/:rdvID', component: CheckoutComponent, canActivate: [PatientAuthGuard] },
+      { path: ':id/app', component: AppointmentComponent, canActivate: [PatientAuthGuard] },
+      { path: 'profile/dashboard', component: DocDashboardComponent, canActivate: [AuthGuard] },
+      { path: 'profile/myRDV', component: AppointementsComponent, canActivate: [AuthGuard] },
+      { path: 'profile/myPatients', component: MyPatientsComponent, canActivate: [AuthGuard] },
+      { path: 'profile/setting', component: DocProfilSettingComponent, canActivate: [AuthGuard] }
   ];
 
 @NgModule({

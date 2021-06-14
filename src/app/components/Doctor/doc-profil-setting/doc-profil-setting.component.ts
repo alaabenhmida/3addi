@@ -19,7 +19,8 @@ export interface Fruit {
 })
 export class DocProfilSettingComponent implements OnInit {
   form: FormGroup;
-  doctorData: Doctor;
+  passwordForm: FormGroup;
+  doctorData: any;
   imagePreview: string;
   latitude = 51.673858;
   longitude = 7.815982;
@@ -41,6 +42,9 @@ export class DocProfilSettingComponent implements OnInit {
 
   ngOnInit(): void {
     this.setCurrentLocation();
+    this.passwordForm = this.fb.group({
+      password: new FormControl(null)
+    });
     this.form = this.fb.group({
       image: new FormControl(null, {
         validators: [Validators.required],
@@ -292,5 +296,20 @@ export class DocProfilSettingComponent implements OnInit {
   markerDragEnd($event: any): void {
     this.latitude = $event.coords.lat;
     this.longitude = $event.coords.lng;
+  }
+
+  onVerifyPassword(): void {
+    this.doctorService.verifypassword(this.passwordForm.value.password).subscribe(result => {
+      if (result.message === 'password correct') {
+        this.doctorService.deleteDoctorByKey().subscribe(resulte => {
+          this.authService.logout();
+          this.toastr.warning('compte supprimé', '', {
+            positionClass: 'toast-bottom-right'
+          });
+        });
+      }
+    }, error => {
+      console.log(error.error.message);
+    });
   }
 }
