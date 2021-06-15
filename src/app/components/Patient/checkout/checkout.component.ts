@@ -13,6 +13,7 @@ import {
   StripeElementsOptions
 } from '@stripe/stripe-js';
 import {PaymentService} from '../../../services/payment/payment.service';
+import {Patient} from '../../../models/Patient/patient.model';
 
 @Component({
   selector: 'app-checkout',
@@ -21,11 +22,12 @@ import {PaymentService} from '../../../services/payment/payment.service';
 })
 export class CheckoutComponent implements OnInit {
   @ViewChild(StripeCardComponent) card: StripeCardComponent;
-  rdv: RDV;
+  rdv: any;
   bookingFees: number;
   private rdvId: string;
   private today = moment(new Date()).toString();
   private price: number;
+  private patient: Patient;
 
   element: Element;
   // card: StripeElement;
@@ -46,14 +48,14 @@ export class CheckoutComponent implements OnInit {
         fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
         fontSize: '18px',
         '::placeholder': {
-          color: '#CFD7E0'
-        }
-      }
-    }
+          color: '#CFD7E0',
+        },
+      },
+    },
   };
 
   elementsOptions: StripeElementsOptions = {
-    locale: 'es'
+    locale: 'fr'
   };
 
   stripeTest: FormGroup;
@@ -102,7 +104,7 @@ export class CheckoutComponent implements OnInit {
           // Use the token
           // console.log(result.token);
           // this.stripData.token = result.token;
-          this.paymentService.pay(result.token).subscribe(res => {
+          this.paymentService.pay(result.token, this.rdv.doctorId.price).subscribe(res => {
             if (res.success) {
               this.paymentStatus = res.status;
               console.log(res);

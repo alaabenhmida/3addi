@@ -85,9 +85,11 @@
                 <!-- /Personal Information -->
 
                 <div class="payment-widget">
+
                   <h4 class="card-title">Mode de paiement</h4>
 
                   <!-- Credit Card Payment -->
+                  <form novalidate (ngSubmit)="createToken()" [formGroup]="stripeTest">
                   <div class="payment-list">
                     <label class="payment-radio credit-card-option">
                       <input type="radio" name="radio" checked>
@@ -98,46 +100,20 @@
                       <div class="col-md-6">
                         <div class="form-group card-label">
                           <label for="card_name">Nom sur la carte</label>
-                          <input class="form-control" id="card_name" type="text">
+                          <input formControlName="name" class="form-control" id="card_name" type="text">
                         </div>
                       </div>
-                      <div class="col-md-6">
-                        <div class="form-group card-label">
-                          <label for="card_number">Numéro de carte</label>
-                          <input class="form-control" id="card_number" placeholder="1234  5678  9876  5432" type="text">
-                        </div>
+                      <div class="col-md-12">
+                        <ngx-stripe-card
+                          class="form-control"
+                          [options]="cardOptions"
+                          [elementsOptions]="elementsOptions"
+                        ></ngx-stripe-card>
                       </div>
-                      <div class="col-md-4">
-                        <div class="form-group card-label">
-                          <label for="expiry_month">Mois d'expiration</label>
-                          <input class="form-control" id="expiry_month" placeholder="MM" type="text">
-                        </div>
-                      </div>
-                      <div class="col-md-4">
-                        <div class="form-group card-label">
-                          <label for="expiry_year">Année d'expiration</label>
-                          <input class="form-control" id="expiry_year" placeholder="YY" type="text">
-                        </div>
-                      </div>
-                      <div class="col-md-4">
-                        <div class="form-group card-label">
-                          <label for="cvv">CVV</label>
-                          <input class="form-control" id="cvv" type="text">
-                        </div>
-                      </div>
+
                     </div>
                   </div>
                   <!-- /Credit Card Payment -->
-
-                  <!-- Paypal Payment -->
-                  <div class="payment-list">
-                    <label class="payment-radio paypal-option">
-                      <input type="radio" name="radio">
-                      <span class="checkmark"></span>
-                      Paypal
-                    </label>
-                  </div>
-                  <!-- /Paypal Payment -->
 
                   <!-- Terms Accept -->
                   <div class="terms-accept">
@@ -146,12 +122,14 @@
                       <label for="terms_accept">J'ai lu et j'accepte <a href="#">les termes et conditions</a></label>
                     </div>
                   </div>
+
                   <!-- /Terms Accept -->
 
                   <!-- Submit Section -->
                   <div class="submit-section mt-4">
-                    <button (click)="onClick()" type="submit" class="btn btn-primary submit-btn">Confirmer et payer</button>
+                    <button type="submit" class="btn btn-primary submit-btn">Confirmer et payer</button>
                   </div>
+                  </form>
                   <!-- /Submit Section -->
 
                 </div>
@@ -217,16 +195,16 @@
             </div>
           </div>
           <!-- /Booking Summary -->
-          <form novalidate (ngSubmit)="createToken()" [formGroup]="stripeTest">
-            <input type="text" formControlName="name" placeholder="Jane Doe">
-            <ngx-stripe-card
-              [options]="cardOptions"
-              [elementsOptions]="elementsOptions"
-            ></ngx-stripe-card>
-            <button type="submit">
-              CREATE TOKEN
-            </button>
-          </form>
+<!--          <form novalidate (ngSubmit)="createToken()" [formGroup]="stripeTest">-->
+<!--            <input type="text" formControlName="name" placeholder="Jane Doe">-->
+<!--            <ngx-stripe-card-->
+<!--              [options]="cardOptions"-->
+<!--              [elementsOptions]="elementsOptions"-->
+<!--            ></ngx-stripe-card>-->
+<!--            <button type="submit">-->
+<!--              CREATE TOKEN-->
+<!--            </button>-->
+<!--          </form>-->
 
         </div>
       </div>

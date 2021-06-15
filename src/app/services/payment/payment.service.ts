@@ -9,7 +9,7 @@ export class PaymentService {
 
   constructor(private http: HttpClient) { }
 
-  pay(token: any): Observable<any> {
-    return this.http.post('http://localhost:3000/payment', {token});
+  pay(token: any, amount: number): Observable<any> {
+    return this.http.post('http://localhost:3000/payment', {token, amount});
   }
 }
