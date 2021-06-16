@@ -46,6 +46,7 @@ router.get("/invoice/:id", checkAuth, patient.getInvoice);
 router.put("/addfav", checkAuth, patient.addToFav);
 router.get("", patient.getAllPatient);
 router.put("/:id", checkAuth, patient.addMedRecord);
+router.put("/:id/delrecord", checkAuth, patient.deleteMedRecor);
 router.put("/:id/delpresc", checkAuth, patient.deletePrescription);
 router.post("/:id/rdv", checkAuth, patient.addRDV);
 router.post("/login", patient.login);

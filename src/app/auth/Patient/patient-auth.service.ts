@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Patient} from '../../models/Patient/patient.model';
 import {Observable, Subject} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
@@ -23,23 +23,29 @@ export class PatientAuthService {
   private roleListener = new Subject<string>();
   private role: string;
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router) {
+  }
 
-  getRole(): string{
+  getRole(): string {
     return this.role;
   }
+
   getUserid(): string {
     return this.userid;
   }
+
   getUsername(): string {
     return this.username;
   }
+
   getUserimage(): string {
     return this.userimage;
   }
+
   getUser(): any {
     return this.user;
   }
+
   getToken(): string {
     return this.token;
   }
@@ -48,114 +54,60 @@ export class PatientAuthService {
     return this.isAuthenticated;
   }
 
-  getRoleListener(): Observable<any>{
+  getRoleListener(): Observable<any> {
     return this.roleListener.asObservable();
   }
 
   getuserimageListener(): Observable<any> {
     return this.userimageListener.asObservable();
   }
+
   getuseridListener(): Observable<any> {
     return this.useridListener.asObservable();
   }
+
   getusernameListener(): Observable<any> {
     return this.usernameListener.asObservable();
   }
+
   getAuthStatusListener(): Observable<any> {
     return this.authStatusListener.asObservable();
   }
-  login(email: string, password: string, role: string): void {
-    this.role = role;
-    const authData: AuthData = { email, password };
-    if (role === 'patient'){
-      this.http
-        .post<{ token: string; expiresIn: number, user: any }>(
-          'http://localhost:3000/patient/login',
-          authData
-        )
-        .subscribe(response => {
-          const token = response.token;
-          this.token = token;
-          if (token) {
-            const expiresInDuration = response.expiresIn;
-            this.setAuthTimer(expiresInDuration);
-            this.isAuthenticated = true;
-            const userid = response.user._id;
-            const username = response.user.name;
-            const userimage = response.user.imagePath;
-            this.user = response.user;
-            this.authStatusListener.next(true);
-            this.useridListener.next(userid);
-            this.usernameListener.next(username);
-            this.userimageListener.next(userimage);
-            this.roleListener.next('patient');
-            const now = new Date();
-            const expirationDate = new Date(now.getTime() + expiresInDuration * 1000);
-            console.log(expirationDate);
-            this.saveAuthData(token, expirationDate, userid, username, userimage, role);
-            this.router.navigate(['/']);
-          }
-        });
-    } else if (role === 'doctor') {
-      this.http
-        .post<{ token: string; expiresIn: number, user: any }>(
-          'http://localhost:3000/doctor/login',
-          authData
-        )
-        .subscribe(response => {
-          const token = response.token;
-          this.token = token;
-          if (token) {
-            const expiresInDuration = response.expiresIn;
-            this.setAuthTimer(expiresInDuration);
-            this.isAuthenticated = true;
-            const userid = response.user._id;
-            const username = response.user.name;
-            const userimage = response.user.imagePath;
-            this.user = response.user;
-            this.authStatusListener.next(true);
-            this.useridListener.next(userid);
-            this.usernameListener.next(username);
-            this.userimageListener.next(userimage);
-            this.roleListener.next('doctor');
-            const now = new Date();
-            const expirationDate = new Date(now.getTime() + expiresInDuration * 1000);
-            console.log(expirationDate);
-            this.saveAuthData(token, expirationDate, userid, username, userimage, role);
-            this.router.navigate(['/']);
-          }
-        });
-    } else {
-      this.http
-        .post<{ token: string; expiresIn: number, user: any }>(
-          'http://localhost:3000/pharmacies/login',
-          authData
-        )
-        .subscribe(response => {
-          const token = response.token;
-          this.token = token;
-          if (token) {
-            const expiresInDuration = response.expiresIn;
-            this.setAuthTimer(expiresInDuration);
-            this.isAuthenticated = true;
-            const userid = response.user._id;
-            const username = response.user.name;
-            const userimage = response.user.imagePath;
-            this.user = response.user;
-            this.authStatusListener.next(true);
-            this.useridListener.next(userid);
-            this.usernameListener.next(username);
-            this.userimageListener.next(userimage);
-            this.roleListener.next('pharmacien');
-            const now = new Date();
-            const expirationDate = new Date(now.getTime() + expiresInDuration * 1000);
-            console.log(expirationDate);
-            this.saveAuthData(token, expirationDate, userid, username, userimage, role);
-            this.router.navigate(['/']);
-          }
-        });
-    }
+
+  login(email: string, password: string): void {
+    const authData: AuthData = {email, password};
+    this.http
+      .post<{ token: string; expiresIn: number, user: any, role: string }>(
+        'http://localhost:3000/patient/login',
+        authData
+      )
+      .subscribe(response => {
+        const token = response.token;
+        this.token = token;
+        if (token) {
+          const expiresInDuration = response.expiresIn;
+          this.setAuthTimer(expiresInDuration);
+          this.isAuthenticated = true;
+          const userid = response.user._id;
+          const username = response.user.name;
+          const userimage = response.user.imagePath;
+          const userRole = response.role;
+          this.user = response.user;
+          this.authStatusListener.next(true);
+          this.useridListener.next(userid);
+          this.usernameListener.next(username);
+          this.userimageListener.next(userimage);
+          this.role = response.role;
+          this.roleListener.next(userRole);
+          const now = new Date();
+          const expirationDate = new Date(now.getTime() + expiresInDuration * 1000);
+          console.log(expirationDate);
+          this.saveAuthData(token, expirationDate, userid, username, userimage, userRole);
+          this.router.navigate(['/']);
+        }
+      });
   }
+
   autoAuthUser(): void {
     const authInformation = this.getAuthData();
     if (!authInformation) {
@@ -235,6 +187,7 @@ export class PatientAuthService {
       role
     };
   }
+
   signup(email: string, password: string, image: File, name: string, address: string,
          birthday: string, bloodType: string, phone: string): void {
     const patientData = new FormData();

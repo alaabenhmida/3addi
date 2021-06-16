@@ -20,6 +20,6 @@ export class PharLoginComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.authService.login(this.form.value.email, this.form.value.password, 'pharmacien');
+    this.authService.login(this.form.value.email, this.form.value.password);
   }
 }

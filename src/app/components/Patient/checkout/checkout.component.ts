@@ -14,6 +14,7 @@ import {
 } from '@stripe/stripe-js';
 import {PaymentService} from '../../../services/payment/payment.service';
 import {Patient} from '../../../models/Patient/patient.model';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-checkout',
@@ -67,7 +68,9 @@ export class CheckoutComponent implements OnInit {
               private patientService: PatientServiceService,
               private doctorService: DoctorServiceService,
               private fb: FormBuilder, private stripeService: StripeService,
-              private paymentService: PaymentService) { }
+              private paymentService: PaymentService,
+              private spinner: NgxSpinnerService) {
+  }
 
   ngOnInit(): void {
     this.stripeTest = this.fb.group({
@@ -84,21 +87,16 @@ export class CheckoutComponent implements OnInit {
       });
     });
   }
+
   getDay(day: string, format: string): string {
     return moment(day).format(format);
   }
-  onClick(): void {
-    this.patientService.addInvoice(this.rdv.doctorId, this.today, this.price,
-      'master Card', '123456789', this.rdv.rdvDate)
-      .subscribe(result => {
-        this.router.navigate(['/ordre', result.invoiceID]);
-      });
-  }
 
   createToken(): void {
+    this.spinner.show();
     const name = this.stripeTest.get('name').value;
     this.stripeService
-      .createToken(this.card.element, { name })
+      .createToken(this.card.element, {name})
       .subscribe((result) => {
         if (result.token) {
           // Use the token
@@ -107,7 +105,12 @@ export class CheckoutComponent implements OnInit {
           this.paymentService.pay(result.token, this.rdv.doctorId.price).subscribe(res => {
             if (res.success) {
               this.paymentStatus = res.status;
-              console.log(res);
+              this.patientService.addInvoice(this.rdv.doctorId, this.today, this.price,
+                res.charge.payment_method_details.card.brand, res.charge.payment_method_details.card.last4, this.rdv.rdvDate)
+                .subscribe(results => {
+                  this.spinner.hide();
+                  this.router.navigate(['/ordre', results.invoiceID]);
+                });
             }
           });
         } else if (result.error) {

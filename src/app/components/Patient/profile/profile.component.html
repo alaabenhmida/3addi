@@ -116,13 +116,13 @@
               <div class="user-tabs">
                 <ul class="nav nav-tabs nav-tabs-bottom nav-justified flex-wrap">
                   <li class="nav-item">
-                    <a class="nav-link active" href="#pat_appointments" data-toggle="tab">Appointments</a>
+                    <a class="nav-link active" href="#pat_appointments" data-toggle="tab">Rendez-vous</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#pres" data-toggle="tab"><span>Prescription</span></a>
+                    <a class="nav-link" href="#pres" data-toggle="tab"><span>ordonnances</span></a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#medical" data-toggle="tab"><span class="med-records">Medical Records</span></a>
+                    <a class="nav-link" href="#medical" data-toggle="tab"><span class="med-records">Dossiers médicaux</span></a>
                   </li>
                 </ul>
               </div>
@@ -140,11 +140,11 @@
                             <th class="text-center">pas de RDV</th>
                           </tr>
                           <tr *ngIf="patientdata?.rdv.length > 0">
-                            <th>Doctor</th>
-                            <th>Appt Date</th>
-                            <th>Booking Date</th>
-                            <th>Amount</th>
-                            <th>Status</th>
+                            <th>Docteur</th>
+                            <th>Date de rendez-vous</th>
+                            <th>Date de réservation</th>
+                            <th>Montant</th>
+                            <th>Statut</th>
                             <th></th>
                           </tr>
                           </thead>
@@ -167,9 +167,6 @@
                             <td *ngIf="rdv.status == 'canceled'"><span class="badge badge-pill bg-danger-light">{{rdv.status}}</span></td>
                             <td class="text-right">
                               <div class="table-action">
-                                <a *ngIf="rdv.status == 'pending'" href="javascript:void(0);" class="btn btn-sm bg-success-light">
-                                  <i class="far fa-edit"></i> Edit
-                                </a>
                               </div>
                             </td>
                           </tr>
@@ -183,8 +180,8 @@
 
                 <!-- Prescription Tab -->
                 <div class="tab-pane fade" id="pres">
-                  <div class="text-right">
-                    <a [routerLink]="['ajoutOrd']" class="add-new-btn">Add Prescription</a>
+                  <div *ngIf="role === 'doctor'" class="text-right">
+                    <a [routerLink]="['ajoutOrd']" class="add-new-btn">Ajouter une ordonnance</a>
                   </div>
                   <div class="card card-table mb-0">
                     <div class="card-body">
@@ -193,7 +190,7 @@
                           <thead>
                           <tr>
                             <th>Date </th>
-                            <th>Created by </th>
+                            <th>Créé par </th>
                             <th></th>
                           </tr>
                           </thead>
@@ -214,7 +211,10 @@
                                   <i class="fas fa-print"></i> Print
                                 </a>
                                 <a [routerLink]="['/patient', id, 'presc', presc._id]" class="btn btn-sm bg-info-light">
-                                  <i class="far fa-eye"></i> View
+                                  <i class="far fa-eye"></i> détails
+                                </a>
+                                <a *ngIf="presc.doctorId._id === userId && userIsAuthenticated" (click)="ondeletePrecription(id, presc._id)" class="btn btn-sm bg-warning-light">
+                                  <i class="far fa-eye"></i> supprimer
                                 </a>
                               </div>
                             </td>
@@ -230,7 +230,7 @@
                 <!-- Medical Records Tab -->
                 <div class="tab-pane fade" id="medical">
                   <div class="text-right">
-                    <a [routerLink]="['ajoutDossier']" class="add-new-btn" data-toggle="modal" data-target="#add_medical_records">Add Medical Records</a>
+                    <a *ngIf="role === 'doctor'" [routerLink]="['ajoutDossier']" class="add-new-btn" data-toggle="modal" data-target="#add_medical_records">Ajouter un dossier médical</a>
                   </div>
                   <div class="card card-table mb-0">
                     <div class="card-body">
@@ -242,7 +242,7 @@
                             <th>Date </th>
                             <th>Description</th>
                             <th>Attachment</th>
-                            <th>Created</th>
+                            <th>Créé</th>
                             <th></th>
                           </tr>
                           </thead>
@@ -254,10 +254,10 @@
                             <td><a href="#">{{med?.attachment}}</a></td>
                             <td>
                               <h2 class="table-avatar">
-                                <a href="doctor-profile.html" class="avatar avatar-sm mr-2">
+                                <a [routerLink]="['/doctor', med.doctorId._id]" class="avatar avatar-sm mr-2">
                                   <img class="avatar-img rounded-circle" src="{{med.doctorId.imagePath}}" alt="User Image">
                                 </a>
-                                <a href="doctor-profile.html">{{med.doctorId.name}} {{med.doctorId.lastName}}<span>{{med.doctorId.speciality}}</span></a>
+                                <a [routerLink]="['/doctor', med.doctorId._id]">{{med.doctorId.name}} {{med.doctorId.lastName}}<span>{{med.doctorId.speciality}}</span></a>
                               </h2>
                             </td>
                             <td *ngIf="userIsAuthenticated" class="text-right">
@@ -266,13 +266,13 @@
                                   <i class="fas fa-print"></i> Print
                                 </a>
                                 <a href="javascript:void(0);" class="btn btn-sm bg-info-light">
-                                  <i class="far fa-eye"></i> View
+                                  <i class="far fa-eye"></i> détails
                                 </a>
-                                <a *ngIf="userId == med.doctorId" href="edit-prescription.html" class="btn btn-sm bg-success-light">
-                                  <i class="fas fa-edit"></i> Edit
+                                <a *ngIf="med.doctorId._id === userId && userIsAuthenticated" href="edit-prescription.html" class="btn btn-sm bg-success-light">
+                                  <i class="fas fa-edit"></i> Editer
                                 </a>
-                                <a *ngIf="userId == med.doctorId" (click)="onDelete(id, med._id)" class="btn btn-sm bg-danger-light">
-                                  <i class="far fa-trash-alt"></i> Delete
+                                <a *ngIf="med.doctorId._id === userId && userIsAuthenticated" (click)="onDelete(id, med._id)" class="btn btn-sm bg-danger-light">
+                                  <i class="far fa-trash-alt"></i> supprimer
                                 </a>
                               </div>
                             </td>

@@ -21,9 +21,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
   private authListenerSubs: Subscription;
   userId: string;
   isLoading = true;
+  role: string;
 
   constructor(public route: ActivatedRoute, public patient: PatientServiceService, private authService: PatientAuthService,
-              private doctorService: DoctorServiceService) { }
+              private doctorService: DoctorServiceService) {
+  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
@@ -31,21 +33,21 @@ export class ProfileComponent implements OnInit, OnDestroy {
       this.patient.getPatient(this.id).subscribe(data => {
         if (data) {
           this.patientdata = {
-            id : data._id,
-            email : data.email,
-            password : data.password,
-            imagePath : data.imagePath,
-            name : data.name,
+            id: data._id,
+            email: data.email,
+            password: data.password,
+            imagePath: data.imagePath,
+            name: data.name,
             lastName: data.lastName,
-            address : data.address,
-            birthday : data.birthday,
-            bloodType : data.bloodType,
-            phone : data.phone,
+            address: data.address,
+            birthday: data.birthday,
+            bloodType: data.bloodType,
+            phone: data.phone,
             city: data.city,
             state: data.state,
             zip: data.zip,
             country: data.country,
-            rdv : data.rdv
+            rdv: data.rdv
           };
           this.medicalRecord = data.medicalRecord;
           this.prescription = data.prescription;
@@ -55,6 +57,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
         }
       });
     });
+    this.role = this.authService.getRole();
     this.userId = this.authService.getUserid();
     this.userIsAuthenticated = this.authService.getIsAuth();
     this.authListenerSubs = this.authService
@@ -62,12 +65,21 @@ export class ProfileComponent implements OnInit, OnDestroy {
       .subscribe(isAuthenticated => {
         this.userIsAuthenticated = isAuthenticated;
         this.userId = this.authService.getUserid();
+        this.role = this.authService.getRole();
       });
   }
+
   onDelete(patienttid: string, recid: string): void {
     this.doctorService.deleteRecord(patienttid, recid);
-}
-  getdate(date: string, format: string): string{
+  }
+
+  ondeletePrecription(patientId: string, precId: string): void {
+    this.doctorService.deletePrescription(patientId, precId).subscribe(result => {
+      console.log(result);
+    });
+  }
+
+  getdate(date: string, format: string): string {
     return (moment(date).format(format));
   }
 

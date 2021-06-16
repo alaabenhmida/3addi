@@ -9,6 +9,7 @@ import {PatientDhashboardComponent} from './patient-dhashboard/patient-dhashboar
 import {PrescriptionDetailsComponent} from './prescription-details/prescription-details.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
+import {NgxSpinnerModule} from 'ngx-spinner';
 
 
 
@@ -27,6 +28,7 @@ import {RouterModule} from '@angular/router';
     ReactiveFormsModule,
     FormsModule,
     RouterModule,
+    NgxSpinnerModule
   ]
 })
 export class PatientModule { }

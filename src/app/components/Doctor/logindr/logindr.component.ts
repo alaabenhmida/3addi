@@ -23,7 +23,7 @@ export class LogindrComponent implements OnInit {
     if (form.invalid) {
       return;
     }
-    this.authService.login(form.value.email, form.value.password, 'doctor');
+    this.authService.login(form.value.email, form.value.password);
   }
 
 }

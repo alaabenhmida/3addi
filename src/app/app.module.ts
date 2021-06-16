@@ -47,6 +47,7 @@ import {DocDemandesComponent} from './components/Admin/doc-demandes/doc-demandes
 import {PharCheckDetailsComponent} from './components/Admin/phar-check-details/phar-check-details.component';
 import {PharDemandesComponent} from './components/Admin/phar-demandes/phar-demandes.component';
 import {Error404Component} from './shared/error404/error404.component';
+import {NgxSpinnerModule} from 'ngx-spinner';
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
 @NgModule({
@@ -102,7 +103,8 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     DoctorModule,
     PatientModule,
     PharmacieModule,
-    MatSelectCountryModule.forRoot('fr')
+    MatSelectCountryModule.forRoot('fr'),
+    NgxSpinnerModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
     FormsModule,

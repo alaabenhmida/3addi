@@ -153,6 +153,10 @@ export class DoctorServiceService {
     date: moment(Date.now()).format('YYYY-MM-DDTHH:mm:ss')});
   }
 
+  deletePrescription(patientId: string, recId: string): Observable<any> {
+    return this.http.put('http://localhost:3000/patient/' + patientId + '/delpresc', {recId});
+  }
+
   addrecord(id: string, date: string, desc: string, file: string): void{
     this.medrecord = {
       date,
@@ -162,7 +166,7 @@ export class DoctorServiceService {
     this.http.put('http://localhost:3000/patient/' + id, this.medrecord).subscribe(response => {console.log(response); });
   }
   deleteRecord(patientid: string, recId: string): void{
-    this.http.put('http://localhost:3000/patient/' + patientid + '/delpresc', {recId })
+    this.http.put('http://localhost:3000/patient/' + patientid + '/delrecord', {recId })
       .subscribe(response => {console.log(response); });
   }
 
