@@ -220,6 +220,7 @@ exports.acceptRDV = (req, res, next) => {
               result: result
             });
           }).catch(error => {
+            console.log(error);
             res.status(400).json(error);
           });
         });
@@ -348,7 +349,8 @@ exports.addPrescription = (req, res, next) => {
       $push: {
         prescription: {
           presc: req.body.presc, date: req.body.date,
-          doctorId: req.userData.userId
+          doctorId: req.userData.userId,
+          description: req.body.description
         }
       }
     }).then(result => {

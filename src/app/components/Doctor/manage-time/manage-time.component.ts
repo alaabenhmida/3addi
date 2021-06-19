@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import * as moment from 'moment';
 import {DoctorServiceService} from '../../../services/doctor/doctor-service.service';
 import {Doctor} from '../../../models/Doctor/doctor.model';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-manage-time',
@@ -19,7 +20,8 @@ export class ManageTimeComponent implements OnInit {
   to: string;
   duration: number;
 
-  constructor(private doctorService: DoctorServiceService) { }
+  constructor(private doctorService: DoctorServiceService,
+              private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -92,7 +94,9 @@ export class ManageTimeComponent implements OnInit {
     if (!this.form.invalid) {
       this.doctorService.workingTime(this.form.value.duration, this.form.value.from, this.form.value.to, this.breackTimes)
         .subscribe(result => {
-          console.log(result);
+          this.toastr.success('modifications enregistrés', '', {
+            positionClass: 'toast-bottom-right'
+          });
         }, error => {
           console.log(error);
         });

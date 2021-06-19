@@ -3,11 +3,11 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Doccure</title>
+  <title>3addi</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
   <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
+<!--  <link href="assets/img/favicon.png" rel="icon">-->
 
 
   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -38,7 +38,7 @@
               </div>
               <div class="col-md-12 col-lg-6 login-right">
                 <div class="login-header">
-                  <h3>Login <span>Doccure</span></h3>
+                  <h3>Connectez-vous ici</h3>
                 </div>
                 <form (submit)="onLogin(loginForm)" #loginForm="ngForm">
                   <div class="form-group form-focus">
@@ -54,7 +54,7 @@
                   <div class="form-group form-focus">
                     <mat-form-field appearance="outline" class="w-100 is-invalid">
                       <mat-label>
-                        password
+                        mot de passe
                       </mat-label>
                       <input ngModel #passwordInput="ngModel" type="password" name="password" matInput required>
                     </mat-form-field>
@@ -62,23 +62,23 @@
 <!--                    <label class="focus-label">Password</label>-->
                   </div>
                   <div class="text-right">
-                    <a class="forgot-link" href="forgot-password.html">Forgot Password ?</a>
+<!--                    <a class="forgot-link" href="forgot-password.html">Forgot Password ?</a>-->
                   </div>
                   <button class="btn btn-primary btn-block btn-lg login-btn" type="submit"
-                  [disabled]="loginForm.invalid">Login</button>
+                  [disabled]="loginForm.invalid">Connexion</button>
                   <div class="login-or">
                     <span class="or-line"></span>
-                    <span class="span-or">or</span>
+                    <span class="span-or">ou</span>
                   </div>
-                  <div class="row form-row social-login">
-                    <div class="col-6">
-                      <a href="#" class="btn btn-facebook btn-block"><i class="fab fa-facebook-f mr-1"></i> Login</a>
-                    </div>
-                    <div class="col-6">
-                      <a href="#" class="btn btn-google btn-block"><i class="fab fa-google mr-1"></i> Login</a>
-                    </div>
-                  </div>
-                  <div class="text-center dont-have">Don’t have an account? <a href="register.html">Register</a></div>
+<!--                  <div class="row form-row social-login">-->
+<!--                    <div class="col-6">-->
+<!--                      <a href="#" class="btn btn-facebook btn-block"><i class="fab fa-facebook-f mr-1"></i> Login</a>-->
+<!--                    </div>-->
+<!--                    <div class="col-6">-->
+<!--                      <a href="#" class="btn btn-google btn-block"><i class="fab fa-google mr-1"></i> Login</a>-->
+<!--                    </div>-->
+<!--                  </div>-->
+                  <div class="text-center dont-have">Vous n'avez pas de compte ? <a href="register.html">créer un maintenant</a></div>
                 </form>
               </div>
             </div>

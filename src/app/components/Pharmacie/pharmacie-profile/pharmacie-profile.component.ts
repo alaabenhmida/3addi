@@ -7,6 +7,7 @@ import {NgForm} from '@angular/forms';
 import {PatientAuthService} from '../../../auth/Patient/patient-auth.service';
 import {ToastrService} from 'ngx-toastr';
 import {LocationModel} from '../../../models/Doctor/location.model';
+import {HeaderService} from '../../../services/header/header.service';
 
 @Component({
   selector: 'app-pharmacie-profile',
@@ -26,9 +27,11 @@ export class PharmacieProfileComponent implements OnInit, OnDestroy {
               private route: ActivatedRoute,
               private authService: PatientAuthService,
               private toastr: ToastrService,
-              public router: Router) { }
+              public router: Router,
+              private headerService: HeaderService) { }
 
   ngOnInit(): void {
+    this.headerService.isInPharmacie.next(true);
     this.dataSub = this.pharmacieService.getDatalistener().subscribe(data => {
       this.pharmacieData = {
         id: data._id,
@@ -56,6 +59,7 @@ export class PharmacieProfileComponent implements OnInit, OnDestroy {
     });
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       this.pharmacieID = paramMap.get('id');
+      this.headerService.pharmacieId.next(paramMap.get('id'));
       this.pharmacieService.getPharmacie(paramMap.get('id')).subscribe(data => {
         this.pharmacieData = {
           id: data._id,
@@ -103,6 +107,7 @@ export class PharmacieProfileComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.dataSub.unsubscribe();
+    this.headerService.isInPharmacie.next(false);
   }
 
   onNav(): void {

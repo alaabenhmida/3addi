@@ -16,6 +16,7 @@ import {ToastrService} from 'ngx-toastr';
 })
 export class AddPrescComponent implements OnInit, OnDestroy {
   form: FormGroup;
+  descForm: FormGroup;
   patientData: any;
   patientId: string;
   userIdSub: Subscription;
@@ -35,8 +36,11 @@ export class AddPrescComponent implements OnInit, OnDestroy {
               private toastr: ToastrService) {}
 
   ngOnInit(): void {
+    this.descForm = new FormGroup({
+      description: new FormControl(null)
+    });
     this.form = this.fb.group({
-      Prescription: this.fb.array([])
+      Prescription: this.fb.array([]),
     });
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       this.patientService.getPatient(paramMap.get('id')).subscribe(patient => {
@@ -60,6 +64,9 @@ export class AddPrescComponent implements OnInit, OnDestroy {
               nght: new FormControl(pres.nght)
             }));
           }
+          this.descForm.patchValue({
+            description: data.prescription[0].description
+          });
         });
       } else {
         this.doctorSevive.getDcotorByKey().subscribe(doctor => {
@@ -102,7 +109,7 @@ export class AddPrescComponent implements OnInit, OnDestroy {
       return;
     }
     if (this.mode === 'create') {
-      this.doctorSevive.addPrescription(this.form.value.Prescription, this.patientId)
+      this.doctorSevive.addPrescription(this.form.value.Prescription, this.patientId, this.descForm.value.description)
         .subscribe(data => {
           this.toastr.success('Ordonnance ajoutée', '', {
             positionClass: 'toast-bottom-right'
@@ -112,7 +119,7 @@ export class AddPrescComponent implements OnInit, OnDestroy {
       // console.log(this.form.value.Prescription);
     } else {
       this.doctorSevive.updatePrescription(this.patientId, this.prescId,
-        this.form.value.Prescription)
+        this.form.value.Prescription, this.descForm.value.description)
         .subscribe(result => {
           this.toastr.success('Ordonnance enregistrée', '', {
             positionClass: 'toast-bottom-right'

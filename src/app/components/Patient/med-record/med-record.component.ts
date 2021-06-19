@@ -14,6 +14,7 @@ export class MedRecordComponent implements OnInit, OnDestroy {
   form: FormGroup;
   id: string;
   user: any;
+  pdfPreview: string;
 
 
   constructor(public route: ActivatedRoute,
@@ -27,14 +28,24 @@ export class MedRecordComponent implements OnInit, OnDestroy {
     this.form = new FormGroup({
       date: new FormControl(null, { validators: [Validators.required] }),
       description: new FormControl(null, { validators: [Validators.required] }),
-      file: new FormControl(null, { validators: [Validators.required] }),
+      pdfFile: new FormControl(null, { validators: [Validators.required] }),
     });
   }
 
   onSubmit(): void {
-    this.patient.addrecord(this.id, this.form.value.date.toString(), this.form.value.description, this.form.value.file);
+    this.patient.addrecord(this.id, this.form.value.date.toString(), this.form.value.description, this.form.value.pdfFile);
   }
 
+  onImagePicked(event: Event): void {
+    const file = (event.target as HTMLInputElement).files[0];
+    this.form.patchValue({ pdfFile: file });
+    this.form.get('pdfFile').updateValueAndValidity();
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.pdfPreview = reader.result as string;
+    };
+    reader.readAsDataURL(file);
+  }
   ngOnDestroy(): void {
   }
 }

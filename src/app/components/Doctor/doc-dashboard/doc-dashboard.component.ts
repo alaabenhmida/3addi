@@ -21,7 +21,6 @@ export class DocDashboardComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
-    console.log(this.today);
     this.doctor.getDcotorByKey().subscribe(data => {
       this.doctorData = {
         id: data._id,
@@ -96,6 +95,9 @@ export class DocDashboardComponent implements OnInit, OnDestroy {
 
   onAccept(patientId: string, appDate: string): void{
     this.doctor.acceptRDV(patientId, appDate);
+    this.doctor.getDcotorByKey().subscribe(doctor => {
+      this.doctor.dataUpdated.next(doctor);
+    });
   }
 
   onCancel(patientId: string, appDate: string): void {

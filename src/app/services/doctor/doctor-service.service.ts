@@ -132,8 +132,8 @@ export class DoctorServiceService {
     return this.http.get('http://localhost:3000/doctor/invoice/' + id);
   }
 
-  updatePrescription(patientId: string, prescID: string, presc: any): Observable<any> {
-    return  this.http.put('http://localhost:3000/patient/' + patientId + '/updatepresc', {prescID, presc});
+  updatePrescription(patientId: string, prescID: string, presc: any, description: string): Observable<any> {
+    return  this.http.put('http://localhost:3000/patient/' + patientId + '/updatepresc', {prescID, presc, description});
   }
 
   search(name: string, genders?: string[], speciality?: string[]): Observable<any> {
@@ -148,22 +148,26 @@ export class DoctorServiceService {
     return this.http.put('http://localhost:3000/patient/' + patiendId + '/getpresc', {prescID});
   }
 
-  addPrescription(presc: string[], patientId: string): Observable<any> {
+  addPrescription(presc: string[], patientId: string, description: string): Observable<any> {
     return  this.http.post('http://localhost:3000/doctor/patient/' + patientId + '/addpresc', {presc,
-    date: moment(Date.now()).format('YYYY-MM-DDTHH:mm:ss')});
+    date: moment(Date.now()).format('YYYY-MM-DDTHH:mm:ss'), description});
   }
 
   deletePrescription(patientId: string, recId: string): Observable<any> {
     return this.http.put('http://localhost:3000/patient/' + patientId + '/delpresc', {recId});
   }
 
-  addrecord(id: string, date: string, desc: string, file: string): void{
-    this.medrecord = {
-      date,
-      description : desc,
-      file
-    };
-    this.http.put('http://localhost:3000/patient/' + id, this.medrecord).subscribe(response => {console.log(response); });
+  addrecord(id: string, nom: string, desc: string, file: File): void{
+    const medrecord = new FormData();
+    medrecord.append('nom', nom);
+    medrecord.append('description', desc);
+    medrecord.append('image', file, 'dossier medicale');
+    // this.medrecord = {
+    //   date,
+    //   description : desc,
+    //   file
+    // };
+    this.http.put('http://localhost:3000/patient/' + id, medrecord).subscribe(response => {console.log(response); });
   }
   deleteRecord(patientid: string, recId: string): void{
     this.http.put('http://localhost:3000/patient/' + patientid + '/delrecord', {recId })

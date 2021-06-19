@@ -117,7 +117,9 @@ export class CheckoutComponent implements OnInit {
           // Error creating the token
           console.log(result.error.message);
           this.paymentStatus = result.error.message;
+          this.spinner.hide();
         }
       });
+    this.spinner.hide();
   }
 }

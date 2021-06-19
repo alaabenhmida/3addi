@@ -248,10 +248,10 @@
                           </thead>
                           <tbody>
                           <tr *ngFor="let med of medicalRecord">
-                            <td><a href="javascript:void(0);">{{med._id}}</a></td>
+                            <td><a>{{med._id}}</a></td>
                             <td>{{getdate(med?.date, 'DD MMM YYYY')}}</td>
                             <td>{{med?.description}}</td>
-                            <td><a href="#">{{med?.attachment}}</a></td>
+                            <td><a href="{{med?.attachment}}">{{med?.nom}}.pdf  <i class="fa fa-file-pdf"></i></a></td>
                             <td>
                               <h2 class="table-avatar">
                                 <a [routerLink]="['/doctor', med.doctorId._id]" class="avatar avatar-sm mr-2">
@@ -262,12 +262,6 @@
                             </td>
                             <td *ngIf="userIsAuthenticated" class="text-right">
                               <div class="table-action">
-                                <a href="javascript:void(0);" class="btn btn-sm bg-primary-light">
-                                  <i class="fas fa-print"></i> Print
-                                </a>
-                                <a href="javascript:void(0);" class="btn btn-sm bg-info-light">
-                                  <i class="far fa-eye"></i> détails
-                                </a>
                                 <a *ngIf="med.doctorId._id === userId && userIsAuthenticated" href="edit-prescription.html" class="btn btn-sm bg-success-light">
                                   <i class="fas fa-edit"></i> Editer
                                 </a>

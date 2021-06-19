@@ -1,16 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {PharmacieService} from '../../../services/pharmacie/pharmacie.service';
 import {ActivatedRoute, ParamMap, Route} from '@angular/router';
 import {Product} from '../../../models/Pharmacie/product.model';
 import {CartService} from '../../../services/pharmacie/cart.service';
 import {CartItem} from '../../../models/Pharmacie/cartItem.model';
+import {HeaderService} from '../../../services/header/header.service';
 
 @Component({
   selector: 'app-product-page-grid',
   templateUrl: './product-page-grid.component.html',
   styleUrls: ['./product-page-grid.component.css']
 })
-export class ProductPageGridComponent implements OnInit {
+export class ProductPageGridComponent implements OnInit, OnDestroy {
   pharmacieId: string;
   pharmacie: any;
   products: CartItem[] = [];
@@ -18,11 +19,14 @@ export class ProductPageGridComponent implements OnInit {
 
   constructor(private pharmacieService: PharmacieService,
               private route: ActivatedRoute,
-              private cartService: CartService) { }
+              private cartService: CartService,
+              private headerService: HeaderService) { }
 
   ngOnInit(): void {
+    this.headerService.isInPharmacie.next(true);
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       this.pharmacieId = paramMap.get('id');
+      this.headerService.pharmacieId.next(paramMap.get('id'));
       this.cartService.getcart(paramMap.get('id'));
       this.products = this.cartService.products;
       this.pharmacieService.getPharmacie(paramMap.get('id')).subscribe(data => {
@@ -42,9 +46,15 @@ export class ProductPageGridComponent implements OnInit {
         console.log(error);
       });
     });
+    this.headerService.productNumber.next(this.cartService.products.length);
   }
 
   addTocart(product: Product): void {
     this.cartService.addToCart(product, 1, this.pharmacieId);
+    this.headerService.productNumber.next(this.cartService.products.length);
+  }
+
+  ngOnDestroy(): void {
+    this.headerService.isInPharmacie.next(false);
   }
 }

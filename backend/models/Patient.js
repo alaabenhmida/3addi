@@ -33,9 +33,12 @@ const patientSchema = mongoose.Schema({
       nght: { type : String },
     }],
     date : { type : String },
-    doctorId : { type : mongoose.Schema.Types.ObjectId, ref:'Doctor'}
+    doctorId : { type : mongoose.Schema.Types.ObjectId, ref:'Doctor'},
+    description: {type: String},
+    pharmacie: {type: mongoose.Schema.Types.ObjectId, ref:'Pharmacie'}
   }],
   medicalRecord : [{
+    nom : { type : String },
     date : { type : String },
     description : { type : String },
     attachment : { type : String },

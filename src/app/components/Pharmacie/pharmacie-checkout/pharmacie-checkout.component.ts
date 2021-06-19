@@ -80,13 +80,25 @@ export class PharmacieCheckoutComponent implements OnInit, OnDestroy {
   }
 
   onclick(): void {
-    this.updatequantites().then(() => {
-      this.pharmacieService.addOrder(this.products, this.pharmacieId).subscribe(data => {
-        this.pharmacieService.deleteCart(this.pharmacieId).subscribe(result => {
+    if (!this.ordonnanceMode) {
+      this.updatequantites().then(() => {
+        this.pharmacieService.addOrder(this.products, this.pharmacieId).subscribe(data => {
+          this.pharmacieService.deleteCart(this.pharmacieId).subscribe(result => {
             this.router.navigate(['pharmacie', this.pharmacieId, 'payer', 'succee']);
           });
+        });
       });
-    });
+    } else {
+      this.updatequantites().then(() => {
+        this.pharmacieService.addOrder(this.products, this.pharmacieId).subscribe(data => {
+          this.pharmacieService.deleteCart(this.pharmacieId).subscribe(result => {
+            this.pharmacieService.signPrescription(this.pharmacieId, this.prescID).subscribe(resultat => {
+              this.router.navigate(['pharmacie', this.pharmacieId, 'payer', 'succee']);
+            });
+          });
+        });
+      });
+    }
   }
 
   public getTotalAmount(): number {

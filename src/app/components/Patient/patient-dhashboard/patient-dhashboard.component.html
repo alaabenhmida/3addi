@@ -210,11 +210,11 @@
                             </td>
                             <td class="text-right">
                               <div class="table-action">
-                                <a href="javascript:void(0);" class="btn btn-sm bg-primary-light">
-                                  <i class="fas fa-print"></i> Imprimer
-                                </a>
-                                <a (click)="bye(presc._id)" class="btn btn-sm bg-success-light">
+                                <a *ngIf="!presc?.pharmacie" (click)="bye(presc._id)" class="btn btn-sm bg-success-light">
                                   <i class="fas fa-money-bill-wave-alt"></i> Acheter
+                                </a>
+                                <a *ngIf="presc?.pharmacie" class="btn btn-sm bg-danger-light">
+                                  <i class="fas fa-warehouse"></i> Expiré
                                 </a>
                                 <a [routerLink]="['/profile/ordonnace', presc._id]" class="btn btn-sm bg-info-light">
                                   <i class="far fa-eye"></i> Voir

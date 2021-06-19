@@ -3,9 +3,9 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const Doctor = require("../models/Doctor");
 const Pharmacie = require("../models/Pharmacie");
+const moment = require("moment");
 
 exports.deleteCart = (req, res, next) => {
-  console.log(req.body);
   Patient.updateOne(
     {_id: req.userData.userId},
     {$pull: {cart: {pharmacie: req.body.pharmacieID}}}
@@ -140,7 +140,18 @@ exports.updatePrescription = (req, res, next) => {
       _id: req.params.id,
       prescription: {$elemMatch: {_id: req.body.prescID}}
     },
-    {$set: {'prescription.$.presc': req.body.presc}},
+    {$set: {'prescription.$.presc': req.body.presc, 'prescription.$.description': req.body.description}},
+    {'new': true, 'safe': true, 'upsert': true}).then(result => {
+    res.status(200).json(result)
+  });
+}
+
+exports.signPrescription = (req, res, next) => {
+  Patient.findOneAndUpdate({
+      _id: req.userData.userId,
+      prescription: {$elemMatch: {_id: req.body.prescID}}
+    },
+    {$set: {'prescription.$.pharmacie': req.body.pharmacie}},
     {'new': true, 'safe': true, 'upsert': true}).then(result => {
     res.status(200).json(result)
   });
@@ -166,6 +177,7 @@ exports.getPatientByKey = (req, res, next) => {
 exports.getPrescription = (req, res, next) => {
   Patient.findOne({_id: req.params.id}).select({prescription: {$elemMatch: {_id: req.body.prescID}}})
     .populate('prescription.doctorId')
+    .populate('prescription.pharmacie')
     .then(result => {
       res.status(200).json(result)
     }).catch(error => {
@@ -285,17 +297,22 @@ exports.getAllPatient = (req, res, next) => {
 }
 
 exports.addMedRecord = (req, res, next) => {
+  let pdfFile = req.body.pdf;
+  const url = req.protocol + "://" + req.get("host");
+  pdfFile = url + "/images/" + req.file.filename;
   Doctor.findById(req.userData.userId).then(doctor => {
     Patient.updateOne(
       {_id: req.params.id},
       {
         $push: {
           medicalRecord: {
-            date: req.body.date, description: req.body.description, attachment: req.body.file, doctorId: doctor._id,
+            nom: req.body.nom,
+            date: moment(new Date().toString()).utc(false).format("YYYY-MM-DDTHH:mm:ss"), description: req.body.description, attachment: pdfFile, doctorId: doctor._id,
             doctorImage: doctor.imagePath, doctorName: doctor.name
           }
         }
-      }
+      },
+      {'new': true, 'safe': true, 'upsert': true}
     ).then(result => {
       res.status(201).json({
         message: "added successfully",
@@ -599,7 +616,7 @@ exports.login = (req, res, next) => {
       });
     })
     .catch(err => {
-      return res.status(401).json({
+      return res.status(201).json({
         message: "error occurred",
         error: err
       });
