@@ -34,4 +34,13 @@ export class PrescriptionDetailsComponent implements OnInit {
   getdate(date: string, format: string): string{
     return (moment(date).locale('fr').format(format));
   }
+  print(): void {
+    const printContent = document.getElementById('contenr');
+    const WindowPrt = window.open('', '', 'left=0,top=0,width=900,height=900,toolbar=0,scrollbars=0,status=0');
+    WindowPrt.document.write(printContent.innerHTML);
+    WindowPrt.document.close();
+    WindowPrt.focus();
+    WindowPrt.print();
+    WindowPrt.close();
+  }
 }
