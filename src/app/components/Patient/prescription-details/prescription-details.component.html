@@ -135,7 +135,7 @@
                 <p class="w-25 ">{{prescData?.description}}</p>
               </div>
               <!-- /Prescription Item -->
-              <div class="signature">
+              <div *ngIf="prescData?.pharmacie" class="signature">
                 <h4 class="text-uppercase text-purple">acheté depuis pharmacie {{prescData?.pharmacie.name}}, {{prescData?.pharmacie.address}}, {{prescData?.pharmacie.city}}, {{prescData?.pharmacie.state}}</h4>
 <!--                <h1 *ngIf="prescData?.pharmacie" class="text-info">{{prescData?.pharmacie._id}}</h1>-->
               </div>

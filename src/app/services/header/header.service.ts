@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable, Subject} from 'rxjs';
 
 @Injectable({
@@ -9,13 +9,17 @@ export class HeaderService {
   pharmacieId = new Subject<string>();
   productNumber = new Subject<number>();
 
-  constructor() { }
+  constructor() {
+  }
+
   getIsInPharmacie(): Observable<boolean> {
     return this.isInPharmacie as Observable<boolean>;
   }
+
   getpharmacieId(): Observable<string> {
     return this.pharmacieId as Observable<string>;
   }
+
   getProductNumber(): Observable<number> {
     return this.productNumber as Observable<number>;
   }

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable, Subject} from 'rxjs';
 import {Product} from '../../models/Pharmacie/product.model';
@@ -11,7 +11,9 @@ import {CartItem} from '../../models/Pharmacie/cartItem.model';
 export class PharmacieService {
   dataUpdated = new Subject<any>();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
+
   getDatalistener(): Observable<any> {
     return this.dataUpdated as Observable<any>;
   }
@@ -57,6 +59,7 @@ export class PharmacieService {
   deleteCart(pharmacieID: string): Observable<any> {
     return this.http.put('http://localhost:3000/patient/deletecart', {pharmacieID});
   }
+
   signPrescription(pharmacie: string, prescID: string): Observable<any> {
     return this.http.put('http://localhost:3000/patient/signpresc', {pharmacie, prescID});
   }
@@ -145,7 +148,8 @@ export class PharmacieService {
   getPharmacie(id: string): Observable<any> {
     return this.http.get('http://localhost:3000/pharmacies/' + id);
   }
-  addReview(id: string, rate: number, title: string, review: string): Observable<any>{
+
+  addReview(id: string, rate: number, title: string, review: string): Observable<any> {
     return this.http.post('http://localhost:3000/pharmacies/' + id + '/addreview', {rate, title, review});
   }
 }

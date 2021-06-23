@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {PatientServiceService} from '../../../services/Patient/patient-service.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Patient} from '../../../models/Patient/patient.model';
@@ -19,20 +19,21 @@ export class ProfileSettComponent implements OnInit {
 
   constructor(private patient: PatientServiceService,
               private authService: PatientAuthService,
-              private toastr: ToastrService) { }
+              private toastr: ToastrService) {
+  }
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      email: new FormControl(null, { validators: [Validators.required] }),
+      email: new FormControl(null, {validators: [Validators.required]}),
       image: new FormControl(null, {
         validators: [Validators.required],
         asyncValidators: [mimeType]
       }),
-      name: new FormControl(null, { validators: [Validators.required] }),
-      lastName: new FormControl(null, { validators: [Validators.required] }),
+      name: new FormControl(null, {validators: [Validators.required]}),
+      lastName: new FormControl(null, {validators: [Validators.required]}),
       address: new FormControl(null),
-      birthday: new FormControl(null, { validators: [Validators.required] }),
-      bloodType: new FormControl(null, { validators: [Validators.required] }),
+      birthday: new FormControl(null, {validators: [Validators.required]}),
+      bloodType: new FormControl(null, {validators: [Validators.required]}),
       phone: new FormControl(null),
       city: new FormControl(null),
       state: new FormControl(null),
@@ -42,7 +43,7 @@ export class ProfileSettComponent implements OnInit {
     this.patient.getPatientByKey().subscribe(patient => {
       this.patientdata = patient;
       this.imagePreview = patient.imagePath;
-      this.form.patchValue ({
+      this.form.patchValue({
         email: patient.email,
         name: patient.name,
         lastName: patient.lastName,
@@ -60,7 +61,7 @@ export class ProfileSettComponent implements OnInit {
 
   onImagePicked(event: Event): void {
     const file = (event.target as HTMLInputElement).files[0];
-    this.form.patchValue({ image: file });
+    this.form.patchValue({image: file});
     this.form.get('image').updateValueAndValidity();
     const reader = new FileReader();
     reader.onload = () => {
@@ -82,10 +83,12 @@ export class ProfileSettComponent implements OnInit {
         });
       });
   }
+
   calculateAge(birthday): number { // birthday is a date
     const age = moment.duration(moment().diff(moment(birthday)));
-    return  Math.floor(age.asYears());
+    return Math.floor(age.asYears());
   }
+
   getDay(day: string, format: string): string {
     return moment(day).format(format);
   }

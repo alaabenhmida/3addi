@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from dreamguys.co.in/demo/doccure/template/invoice-view.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 Apr 2020 08:29:07 GMT -->
+<head>
+  <meta charset="utf-8">
+  <title>Doccure</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+  <script src="assets/js/html5shiv.min.js"></script>
+  <script src="assets/js/respond.min.js"></script>
+  <![endif]-->
+
+</head>
+<body>
+
+<!-- Main Wrapper -->
+<div class="main-wrapper">
+  <!-- Breadcrumb -->
+  <div class="breadcrumb-bar">
+    <div class="container-fluid">
+      <div class="row align-items-center">
+        <div class="col-md-12 col-12">
+          <nav aria-label="breadcrumb" class="page-breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Ordre</li>
+            </ol>
+          </nav>
+          <h2 class="breadcrumb-title">Ordre: {{orderID}}</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /Breadcrumb -->
+
+  <!-- Page Content -->
+  <div class="content">
+    <div class="container-fluid">
+
+      <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+          <div class="invoice-content">
+            <div class="invoice-item">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="invoice-logo">
+                    <img src="assets/img/Untitled.png" alt="logo">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <p class="invoice-details">
+                    <strong>ID:</strong> {{orderID}} <br>
+                    <strong>Publié:</strong> {{getDay(order?.date, 'DD/MM/YYYY')}}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Invoice Item -->
+            <div class="invoice-item">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="invoice-info">
+                    <strong class="customer-text">Facture de</strong>
+                    <p class="invoice-details invoice-details-two">
+                      {{order?.pharmacie?.name}} <br>
+                      {{order?.pharmacie?.zip}}  {{order?.pharmacie?.address}}, {{order?.pharmacie?.city}},<br>
+                      {{order?.pharmacie?.state}}, {{order?.pharmacie?.country}} <br>
+                    </p>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="invoice-info invoice-info2">
+                    <strong class="customer-text">Facture à</strong>
+                    <p class="invoice-details">
+                      {{patientData?.name}} {{patientData?.lastName}} <br>
+                      {{patientData?.address}}, {{patientData?.city}}, <br>
+                      {{patientData?.state}}, {{patientData?.zip}}, {{patientData?.country}} <br>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /Invoice Item -->
+
+            <!-- Invoice Item -->
+            <!--            <div class="invoice-item">-->
+            <!--              <div class="row">-->
+            <!--                <div class="col-md-12">-->
+            <!--                  <div class="invoice-info">-->
+            <!--                    <strong class="customer-text">Mode de paiement</strong>-->
+            <!--                    <p class="invoice-details invoice-details-two">-->
+            <!--&lt;!&ndash;                      {{facture?.paymentMethod}} <br>&ndash;&gt;-->
+            <!--&lt;!&ndash;                      {{facture?.cardNumber}} <br>&ndash;&gt;-->
+            <!--                      HDFC Bank<br>-->
+            <!--                    </p>-->
+            <!--                  </div>-->
+            <!--                </div>-->
+            <!--              </div>-->
+            <!--            </div>-->
+            <!-- /Invoice Item -->
+
+            <!-- Invoice Item -->
+            <div class="invoice-item invoice-table-wrap">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="table-responsive">
+                    <table class="invoice-table table table-bordered">
+                      <thead>
+                      <tr>
+                        <th>Produit</th>
+                        <th>Prix</th>
+                        <th class="text-center">Quantite</th>
+                        <th class="text-right">Total</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr *ngFor="let produit of order?.products">
+                        <td>{{produit?.product.name}}</td>
+                        <td class="text-center">${{produit?.product.price}}</td>
+                        <td class="text-center">{{produit?.quantity}}</td>
+                        <td class="text-right">${{produit?.product.price * produit?.quantity}}</td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div class="col-md-6 col-xl-4 ml-auto">
+                  <div class="table-responsive">
+                    <table class="invoice-table-two table">
+                      <tbody>
+
+                      <tr>
+                        <th>Total:</th>
+                        <td><span>${{total}}</span></td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /Invoice Item -->
+
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <!-- /Page Content -->
+
+</div>
+<!-- /Main Wrapper -->
+
+</body>
+</html>

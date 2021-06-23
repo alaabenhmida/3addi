@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {PatientServiceService} from '../../../services/Patient/patient-service.service';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import * as moment from 'moment';
@@ -33,7 +33,8 @@ export class AppointmentComponent implements OnInit {
   constructor(private patient: PatientServiceService,
               private doctor: DoctorServiceService,
               public route: ActivatedRoute,
-              private router: Router) { }
+              private router: Router) {
+  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
@@ -130,6 +131,7 @@ export class AppointmentComponent implements OnInit {
   getDay(day: string, format: string): string {
     return moment(day).locale('fr').format(format);
   }
+
   onclick(time: any, date: any): void {
     const datenow = moment(date).format('YYYY-MM-DD');
     const fullDate = datenow + 'T' + time + ':00';
@@ -137,6 +139,7 @@ export class AppointmentComponent implements OnInit {
     console.log(fullDate);
 
   }
+
   // onClick(): void{
   //   this.patient.addRdv(this.id, this.selectedDate);
   // }

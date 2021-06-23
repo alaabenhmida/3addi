@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {PatientAuthService} from '../../../auth/Patient/patient-auth.service';
 import {mimeType} from '../../../shared/mime-type.validator';
 
@@ -11,24 +11,38 @@ import {mimeType} from '../../../shared/mime-type.validator';
 export class SignupComponent implements OnInit {
   form: FormGroup;
   imagePreview: string;
+  firstFormGroup: FormGroup;
+  secondFormGroup: FormGroup;
+  isLinear = false;
 
-  constructor(public patientService: PatientAuthService) { }
+  constructor(public patientService: PatientAuthService,
+              private _formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
-    this.form = new FormGroup({
+    this.firstFormGroup = this._formBuilder.group({
       email: new FormControl(null, {
         validators: [Validators.required, Validators.minLength(3)]
       }),
       password: new FormControl(null, { validators: [Validators.required] }),
-      image: new FormControl(null, {
-        validators: [Validators.required],
-        asyncValidators: [mimeType]
-      }),
       name: new FormControl(null, { validators: [Validators.required] }),
-      address: new FormControl(null, { validators: [Validators.required] }),
+      lastName: new FormControl(null, { validators: [Validators.required] }),
       birthday: new FormControl(null, { validators: [Validators.required] }),
       bloodType: new FormControl(null, { validators: [Validators.required] }),
       phone: new FormControl(null, { validators: [Validators.required] }),
+      gender: new FormControl(null, { validators: [Validators.required] })
+    });
+    this.secondFormGroup = this._formBuilder.group({
+      address: new FormControl(null, { validators: [Validators.required] }),
+      city: new FormControl(null, { validators: [Validators.required] }),
+      state: new FormControl(null, { validators: [Validators.required] }),
+      zip: new FormControl(null, { validators: [Validators.required] }),
+      country: new FormControl(null, { validators: [Validators.required] }),
+    });
+    this.form = new FormGroup({
+      image: new FormControl(null, {
+        validators: [Validators.required],
+        asyncValidators: [mimeType]
+      })
     });
   }
 
@@ -44,14 +58,22 @@ export class SignupComponent implements OnInit {
   }
   onSubmit(): void{
     if (this.form.invalid){
+      console.log(this.form.errors);
       return;
     }
     console.log(this.form.value);
-    this.patientService.signup(this.form.value.email,
-      this.form.value.password,
+    this.patientService.signup(this.firstFormGroup.value.email,
+      this.firstFormGroup.value.password,
       this.form.value.image,
-      this.form.value.name, this.form.value.address,
-      this.form.value.birthday.toString(), this.form.value.bloodType, this.form.value.phone);
+      this.firstFormGroup.value.name,
+      this.firstFormGroup.value.lastName,
+      this.firstFormGroup.value.gender,
+      this.secondFormGroup.value.address,
+      this.secondFormGroup.value.city,
+      this.secondFormGroup.value.state,
+      this.secondFormGroup.value.zip,
+      this.secondFormGroup.value.country,
+      this.firstFormGroup.value.birthday.toString(), this.firstFormGroup.value.bloodType, this.firstFormGroup.value.phone);
   }
 
 }

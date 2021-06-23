@@ -119,7 +119,17 @@
                         <tbody>
                         <tr *ngFor="let creds of controls; let i = index" [formGroupName]="i">
                           <td>
-                            <input class="form-control" [ngClass]="{'is-invalid': creds.controls.name.invalid && creds.controls.name.touched}" type="text" formControlName="name">
+<!--                            <input [(ngModel)]="search"-->
+<!--                                   typeaheadOptionField="login"-->
+<!--                                   [typeahead]="suggestions$"-->
+<!--                                   [typeaheadAsync]="true"-->
+<!--                                   class="form-control"-->
+<!--                                   placeholder="Enter GitHub username">-->
+                            <input class="form-control" (input)="onTest($event, i)" [ngClass]="{'is-invalid': creds.controls.name.invalid && creds.controls.name.touched}" type="text"
+                                   typeaheadOptionField="login"
+                                   [typeahead]="suggestions$"
+                                   [typeaheadAsync]="true"
+                                   formControlName="name">
                           </td>
                           <td>
                             <input class="form-control" [ngClass]="{'is-invalid': creds.controls.quantite.invalid && creds.controls.quantite.touched}" type="text" formControlName="quantite">

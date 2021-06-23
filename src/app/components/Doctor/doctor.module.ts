@@ -55,4 +55,5 @@ import {NgxSpinnerModule} from 'ngx-spinner';
     NgxSpinnerModule
   ]
 })
-export class DoctorModule { }
+export class DoctorModule {
+}

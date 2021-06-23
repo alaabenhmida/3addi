@@ -1,13 +1,15 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {DoctorAuthService} from '../../../auth/Doctor/doctor-auth.service';
-import {Subscription} from 'rxjs';
+import {noop, Observable, Observer, of, Subscription} from 'rxjs';
 import {DoctorServiceService} from '../../../services/doctor/doctor-service.service';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {PatientServiceService} from '../../../services/Patient/patient-service.service';
 import * as moment from 'moment';
 import {Doctor} from '../../../models/Doctor/doctor.model';
 import {ToastrService} from 'ngx-toastr';
+import {HttpClient} from '@angular/common/http';
+import {map, switchMap, tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-add-presc',
@@ -25,6 +27,10 @@ export class AddPrescComponent implements OnInit, OnDestroy {
   prescId: string;
   prescData: any;
   today = moment(new Date()).toString();
+  testData = 'ff';
+  search: string;
+  suggestions$: Observable<any[]>;
+  errorMessage: string;
 
 
   constructor(public route: ActivatedRoute,
@@ -33,9 +39,32 @@ export class AddPrescComponent implements OnInit, OnDestroy {
               private doctor: DoctorAuthService,
               private doctorSevive: DoctorServiceService,
               private patientService: PatientServiceService,
-              private toastr: ToastrService) {}
+              private toastr: ToastrService,
+              private http: HttpClient) {
+  }
 
   ngOnInit(): void {
+    this.suggestions$ = new Observable((observer: Observer<string>) => {
+      observer.next(this.search);
+    }).pipe(
+      switchMap((query: string) => {
+        if (query) {
+          // using github public api to get users by name
+          return this.http.get<any>(
+            'https://clinicaltables.nlm.nih.gov/api/rxterms/v3/search', {
+              params: { terms: query }
+            }).pipe(
+            map((data: any) => data && data[1] || []),
+            tap(() => noop, err => {
+              // in case of http error
+              this.errorMessage = err && err.message || 'Something goes wrong';
+            })
+          );
+        }
+
+        return of([]);
+      })
+    );
     this.descForm = new FormGroup({
       description: new FormControl(null)
     });
@@ -56,8 +85,10 @@ export class AddPrescComponent implements OnInit, OnDestroy {
           for (const pres of data.prescription[0].presc) {
             creds.push(this.fb.group({
               name: new FormControl(pres.name, { validators: [Validators.required] }),
-              quantite: new FormControl(pres.quantite, { validators: [Validators.required] }),
-              days: new FormControl(pres.days, { validators: [Validators.required] }),
+              quantite: new FormControl(pres.quantite, { validators: [Validators.required,
+                  Validators.pattern(/^-?(0|[1-9]\d*)?$/)] }),
+              days: new FormControl(pres.days, { validators: [Validators.required,
+                  Validators.pattern(/^-?(0|[1-9]\d*)?$/)] }),
               mor: new FormControl(pres.mor),
               af: new FormControl(pres.af),
               ev: new FormControl(pres.ev),
@@ -89,8 +120,10 @@ export class AddPrescComponent implements OnInit, OnDestroy {
     // for (let i = 0; i < 2; i++) {
     creds.push(this.fb.group({
         name: new FormControl(null, { validators: [Validators.required] }),
-        quantite: new FormControl(null, { validators: [Validators.required] }),
-        days: new FormControl(null, { validators: [Validators.required] }),
+        quantite: new FormControl(null, { validators: [Validators.required,
+            Validators.pattern(/^-?(0|[1-9]\d*)?$/)] }),
+        days: new FormControl(null, { validators: [Validators.required,
+            Validators.pattern(/^-?(0|[1-9]\d*)?$/)] }),
         mor: new FormControl(null),
         af: new FormControl(null),
         ev: new FormControl(null),
@@ -138,4 +171,9 @@ export class AddPrescComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
   }
 
+  onTest($event: Event, index: number): void {
+    const arrayControl = this.form.get('Prescription') as FormArray;
+    const item = arrayControl.at(index);
+    this.search = item.value.name;
+  }
 }

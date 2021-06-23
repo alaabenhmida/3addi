@@ -15,6 +15,7 @@ export class PatientDhashboardComponent implements OnInit {
   medicalRecord: string[];
   prescription = [];
   invoices = [];
+  certificats = [];
 
   constructor(private patientService: PatientServiceService,
               private router: Router,
@@ -42,6 +43,7 @@ export class PatientDhashboardComponent implements OnInit {
       this.medicalRecord = data.medicalRecord;
       this.prescription = data.prescription;
       this.invoices = data.invoices;
+      this.certificats = data.certificat;
     });
   }
   getdate(date: string, format: string): string{
@@ -50,6 +52,10 @@ export class PatientDhashboardComponent implements OnInit {
   calculateAge(birthday): number { // birthday is a date
     const age = moment.duration(moment().diff(moment(birthday)));
     return  Math.floor(age.asYears());
+  }
+
+  isAfter(date: string): boolean {
+    return moment(date).isAfter(new Date());
   }
 
   bye(id: string): void {

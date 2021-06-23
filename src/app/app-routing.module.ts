@@ -14,8 +14,6 @@ const appRoutes: Routes = [
   { path: 'pharmacies', component: MapListComponent},
   { path: 'doctor', loadChildren: () => import('./components/Doctor/doctor.module').then(m => m.DoctorModule) },
   { path: 'pharmacie', loadChildren: () => import('./components/Pharmacie/pharmacie.module').then(p => p.PharmacieModule) },
-  // { path: 'not-found', component: Error404Component },
-  // { path: '**', redirectTo: '/not-found', pathMatch: 'full' },
 ];
 
 

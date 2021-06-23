@@ -1,7 +1,6 @@
 import {Component, ElementRef, NgZone, OnInit, ViewChild} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {DoctorServiceService} from '../../../services/doctor/doctor-service.service';
-import {Doctor} from '../../../models/Doctor/doctor.model';
 import {mimeType} from '../../../shared/mime-type.validator';
 import {PatientAuthService} from '../../../auth/Patient/patient-auth.service';
 import {ToastrService} from 'ngx-toastr';
@@ -38,7 +37,8 @@ export class DocProfilSettingComponent implements OnInit {
   fruits: Fruit[] = [];
 
   constructor(private fb: FormBuilder, private doctorService: DoctorServiceService, private authService: PatientAuthService,
-              private toastr: ToastrService) { }
+              private toastr: ToastrService) {
+  }
 
   ngOnInit(): void {
     this.setCurrentLocation();
@@ -52,11 +52,11 @@ export class DocProfilSettingComponent implements OnInit {
       }),
       username: new FormControl(null),
       email: new FormControl(null),
-      firstName: new FormControl(null, { validators: [Validators.required] }),
-      lastName: new FormControl(null, { validators: [Validators.required] }),
+      firstName: new FormControl(null, {validators: [Validators.required]}),
+      lastName: new FormControl(null, {validators: [Validators.required]}),
       phone: new FormControl(null),
-      gender: new FormControl(null, { validators: [Validators.required] }),
-      birthday: new FormControl(null, { validators: [Validators.required] }),
+      gender: new FormControl(null, {validators: [Validators.required]}),
+      birthday: new FormControl(null, {validators: [Validators.required]}),
       address1: new FormControl(null),
       address2: new FormControl(null),
       city: new FormControl(null),
@@ -78,9 +78,9 @@ export class DocProfilSettingComponent implements OnInit {
       const edu = this.form.controls.education as FormArray;
       for (const ed of doctor.education) {
         edu.push(this.fb.group({
-          Degree: new FormControl(ed.Degree, { validators: [Validators.required] }),
-          College: new FormControl(ed.College, { validators: [Validators.required] }),
-          Year_of_Completion: new FormControl(ed.Year_of_Completion, { validators: [Validators.required] })
+          Degree: new FormControl(ed.Degree, {validators: [Validators.required]}),
+          College: new FormControl(ed.College, {validators: [Validators.required]}),
+          Year_of_Completion: new FormControl(ed.Year_of_Completion, {validators: [Validators.required]})
         }));
       }
 
@@ -91,7 +91,7 @@ export class DocProfilSettingComponent implements OnInit {
           from: new FormControl(exp.from),
           to: new FormControl(exp.to),
           designation: new FormControl(exp.designation)
-          }));
+        }));
       }
 
       const awards = this.form.controls.awards as FormArray;
@@ -181,12 +181,13 @@ export class DocProfilSettingComponent implements OnInit {
   addRegistrations(): void {
     const award = this.form.controls.registrations as FormArray;
     award.push(this.fb.group({
-      registrations: new FormControl(null, { validators: [Validators.required] }),
-      year: new FormControl(null, { validators: [Validators.required] }),
-      to: new FormControl(null, { validators: [Validators.required] })
+      registrations: new FormControl(null, {validators: [Validators.required]}),
+      year: new FormControl(null, {validators: [Validators.required]}),
+      to: new FormControl(null, {validators: [Validators.required]})
     }));
   }
-  deleteRegistrations(index): void{
+
+  deleteRegistrations(index): void {
     const reg = this.form.controls.registrations as FormArray;
     reg.removeAt(index);
   }
@@ -194,10 +195,11 @@ export class DocProfilSettingComponent implements OnInit {
   addMembership(): void {
     const award = this.form.controls.memberships as FormArray;
     award.push(this.fb.group({
-      Membership: new FormControl(null, { validators: [Validators.required] })
+      Membership: new FormControl(null, {validators: [Validators.required]})
     }));
   }
-  deleteMembership(index): void{
+
+  deleteMembership(index): void {
     const award = this.form.controls.memberships as FormArray;
     award.removeAt(index);
   }
@@ -205,11 +207,12 @@ export class DocProfilSettingComponent implements OnInit {
   addAward(): void {
     const award = this.form.controls.awards as FormArray;
     award.push(this.fb.group({
-      awards: new FormControl(null, { validators: [Validators.required] }),
-      year: new FormControl(null, { validators: [Validators.required] })
+      awards: new FormControl(null, {validators: [Validators.required]}),
+      year: new FormControl(null, {validators: [Validators.required]})
     }));
   }
-  deleteAward(index): void{
+
+  deleteAward(index): void {
     const award = this.form.controls.awards as FormArray;
     award.removeAt(index);
   }
@@ -217,13 +220,14 @@ export class DocProfilSettingComponent implements OnInit {
   addExperience(): void {
     const ex = this.form.controls.experience as FormArray;
     ex.push(this.fb.group({
-      hospital_Name: new FormControl(null, { validators: [Validators.required] }),
-      from: new FormControl(null, { validators: [Validators.required] }),
-      to: new FormControl(null, { validators: [Validators.required] }),
-      designation: new FormControl(null, { validators: [Validators.required] })
+      hospital_Name: new FormControl(null, {validators: [Validators.required]}),
+      from: new FormControl(null, {validators: [Validators.required]}),
+      to: new FormControl(null, {validators: [Validators.required]}),
+      designation: new FormControl(null, {validators: [Validators.required]})
     }));
   }
-  deleteExperience(index): void{
+
+  deleteExperience(index): void {
     const experience = this.form.controls.experience as FormArray;
     experience.removeAt(index);
   }
@@ -231,19 +235,20 @@ export class DocProfilSettingComponent implements OnInit {
   addEducation(): void {
     const education = this.form.controls.education as FormArray;
     education.push(this.fb.group({
-      Degree: new FormControl(null, { validators: [Validators.required] }),
-      College: new FormControl(null, { validators: [Validators.required] }),
-      Year_of_Completion: new FormControl(null, { validators: [Validators.required] })
+      Degree: new FormControl(null, {validators: [Validators.required]}),
+      College: new FormControl(null, {validators: [Validators.required]}),
+      Year_of_Completion: new FormControl(null, {validators: [Validators.required]})
     }));
   }
-  deleteEducation(index): void{
+
+  deleteEducation(index): void {
     const education = this.form.controls.education as FormArray;
     education.removeAt(index);
   }
 
   onImagePicked(event: Event): void {
     const file = (event.target as HTMLInputElement).files[0];
-    this.form.patchValue({ image: file });
+    this.form.patchValue({image: file});
     this.form.get('image').updateValueAndValidity();
     const reader = new FileReader();
     reader.onload = () => {
@@ -255,15 +260,19 @@ export class DocProfilSettingComponent implements OnInit {
   get registrations(): any { // a getter!
     return (this.form.get('registrations') as FormArray).controls;
   }
+
   get education(): any { // a getter!
     return (this.form.get('education') as FormArray).controls;
   }
+
   get memberships(): any { // a getter!
     return (this.form.get('memberships') as FormArray).controls;
   }
+
   get awards(): any { // a getter!
     return (this.form.get('awards') as FormArray).controls;
   }
+
   get experience(): any { // a getter!
     return (this.form.get('experience') as FormArray).controls;
   }
@@ -280,14 +289,14 @@ export class DocProfilSettingComponent implements OnInit {
       this.form.value.education, this.form.value.experience, this.form.value.awards,
       this.form.value.memberships, this.form.value.registrations, this.form.value.image).subscribe(result => {
 
-          this.authService.userimageListener.next(result.result.imagePath);
-          localStorage.setItem('userimage', result.result.imagePath);
-          this.toastr.success(result.message, '', {
-            positionClass: 'toast-bottom-right'
-          });
+      this.authService.userimageListener.next(result.result.imagePath);
+      localStorage.setItem('userimage', result.result.imagePath);
+      this.toastr.success(result.message, '', {
+        positionClass: 'toast-bottom-right'
+      });
 
     }, error => {
-        this.toastr.error(error.name, '', {
+      this.toastr.error(error.name, '', {
         positionClass: 'toast-bottom-right'
       });
     });

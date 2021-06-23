@@ -42,6 +42,7 @@ router.delete("/delete", checkAuth, (req, res, next) => {
 });
 router.get("/invoice/:id", checkAuth, doctor.getInvoice);
 router.post("/patient/:id/addpresc", checkAuth, doctor.addPrescription);
+router.post("/patient/:id/addcertificat", checkAuth, doctor.addCertificat);
 router.put("/find", doctor.search);
 router.put("/workingtimes", checkAuth, doctor.updateWorkingTime);
 router.get("/:name/:state", doctor.findByNameAndState);

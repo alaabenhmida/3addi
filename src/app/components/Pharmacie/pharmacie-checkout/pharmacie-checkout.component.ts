@@ -8,6 +8,7 @@ import {combineLatest, Observable, Subscription} from 'rxjs';
 import * as moment from 'moment';
 import {Product} from '../../../models/Pharmacie/product.model';
 import {DoctorServiceService} from '../../../services/doctor/doctor-service.service';
+import {PatientServiceService} from '../../../services/Patient/patient-service.service';
 
 @Component({
   selector: 'app-pharmacie-checkout',
@@ -29,7 +30,8 @@ export class PharmacieCheckoutComponent implements OnInit, OnDestroy {
               private route: ActivatedRoute,
               private router: Router,
               private pharmacieService: PharmacieService,
-              private doctorService: DoctorServiceService) { }
+              private doctorService: DoctorServiceService,
+              private patientService: PatientServiceService) { }
 
   ngOnInit(): void {
     combineLatest(this.route.params, this.route.queryParams, (params, qparams) => ({ params, qparams }))
@@ -81,19 +83,32 @@ export class PharmacieCheckoutComponent implements OnInit, OnDestroy {
 
   onclick(): void {
     if (!this.ordonnanceMode) {
-      this.updatequantites().then(() => {
-        this.pharmacieService.addOrder(this.products, this.pharmacieId).subscribe(data => {
-          this.pharmacieService.deleteCart(this.pharmacieId).subscribe(result => {
-            this.router.navigate(['pharmacie', this.pharmacieId, 'payer', 'succee']);
+      this.patientService.addInoicePharmaice(this.products, this.pharmacieId).subscribe(res => {
+        this.updatequantites().then(() => {
+          this.pharmacieService.addOrder(this.products, this.pharmacieId).subscribe(data => {
+            this.pharmacieService.deleteCart(this.pharmacieId).subscribe(result => {
+              this.router.navigate(['pharmacie', this.pharmacieId, 'payer', 'succee'], {
+                queryParams: {
+                  invoiceId: res
+                }
+              });
+            });
           });
         });
       });
     } else {
-      this.updatequantites().then(() => {
-        this.pharmacieService.addOrder(this.products, this.pharmacieId).subscribe(data => {
-          this.pharmacieService.deleteCart(this.pharmacieId).subscribe(result => {
-            this.pharmacieService.signPrescription(this.pharmacieId, this.prescID).subscribe(resultat => {
-              this.router.navigate(['pharmacie', this.pharmacieId, 'payer', 'succee']);
+      this.patientService.addInoicePharmaice(this.products, this.pharmacieId).subscribe(res => {
+        console.log(res);
+        this.updatequantites().then(() => {
+          this.pharmacieService.addOrder(this.products, this.pharmacieId).subscribe(data => {
+            this.pharmacieService.deleteCart(this.pharmacieId).subscribe(result => {
+              this.pharmacieService.signPrescription(this.pharmacieId, this.prescID).subscribe(resultat => {
+                this.router.navigate(['pharmacie', this.pharmacieId, 'payer', 'succee'], {
+                  queryParams: {
+                    invoiceId: res
+                  }
+                });
+              });
             });
           });
         });

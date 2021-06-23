@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DoctorServiceService} from '../../../services/doctor/doctor-service.service';
 import {Doctor} from '../../../models/Doctor/doctor.model';
 import * as moment from 'moment';
@@ -6,7 +6,8 @@ import {PatientServiceService} from '../../../services/Patient/patient-service.s
 import {Subscription} from 'rxjs';
 import {PatientAuthService} from '../../../auth/Patient/patient-auth.service';
 import {PageEvent} from '@angular/material/paginator';
-import { get } from 'scriptjs';
+import {get} from 'scriptjs';
+
 declare var klokantech;
 
 @Component({
@@ -33,7 +34,8 @@ export class MapGridComponent implements OnInit {
 
   constructor(private doctorService: DoctorServiceService,
               private patientService: PatientServiceService,
-              private authService: PatientAuthService) { }
+              private authService: PatientAuthService) {
+  }
 
   ngOnInit(): void {
     this.getDirection();
@@ -51,8 +53,8 @@ export class MapGridComponent implements OnInit {
   }
 
   getDirection(): void {
-    this.origin = { lat: 24.799448, lng: 120.979021 };
-    this.destination = { lat: 24.799524, lng: 120.975017 };
+    this.origin = {lat: 24.799448, lng: 120.979021};
+    this.destination = {lat: 24.799524, lng: 120.975017};
 
     // Location within a string
     // this.origin = 'Taipei Main Station';
@@ -67,6 +69,7 @@ export class MapGridComponent implements OnInit {
       });
     }
   }
+
   getDay(day: string, format: string): string {
     return moment(day).format(format);
   }
@@ -85,7 +88,7 @@ export class MapGridComponent implements OnInit {
     });
   }
 
-  placeMarker($event): void{
+  placeMarker($event): void {
     console.log($event.coords.lat);
     console.log($event.coords.lng);
   }

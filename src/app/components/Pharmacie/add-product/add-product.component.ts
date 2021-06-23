@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Pharmacie} from '../../../models/Pharmacie/pharmacie.model';
 import {PharmacieService} from '../../../services/pharmacie/pharmacie.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
@@ -21,20 +21,25 @@ export class AddProductComponent implements OnInit {
   constructor(private pharmacieService: PharmacieService,
               public route: ActivatedRoute,
               private toastr: ToastrService,
-              private router: Router) { }
+              private router: Router) {
+  }
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      name: new FormControl(null, { validators: [Validators.required] }),
+      name: new FormControl(null, {validators: [Validators.required]}),
       image: new FormControl(null, {
         validators: [Validators.required],
         asyncValidators: [mimeType]
       }),
-      price: new FormControl(null, { validators: [Validators.required,
-          Validators.pattern(/^-?(0|[1-9]\d*)?$/)] }),
-      stock: new FormControl(null, { validators: [Validators.required,
-          Validators.pattern(/^-?(0|[1-9]\d*)?$/)] }),
-      description: new FormControl(null, { validators: [Validators.required] }),
+      price: new FormControl(null, {
+        validators: [Validators.required,
+          Validators.pattern(/^-?(0|[1-9]\d*)?$/)]
+      }),
+      stock: new FormControl(null, {
+        validators: [Validators.required,
+          Validators.pattern(/^-?(0|[1-9]\d*)?$/)]
+      }),
+      description: new FormControl(null, {validators: [Validators.required]}),
     });
     this.pharmacieService.getDataByKey().subscribe(data => {
       this.pharmacieData = data;
@@ -60,7 +65,7 @@ export class AddProductComponent implements OnInit {
 
   onImagePicked(event: Event): void {
     const file = (event.target as HTMLInputElement).files[0];
-    this.form.patchValue({ image: file });
+    this.form.patchValue({image: file});
     this.form.get('image').updateValueAndValidity();
     const reader = new FileReader();
     reader.onload = () => {
@@ -70,7 +75,9 @@ export class AddProductComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.form.invalid) { return; }
+    if (this.form.invalid) {
+      return;
+    }
     if (this.mode === 'create') {
       this.pharmacieService.addProduct(this.form.value.name, this.form.value.description,
         this.form.value.price, this.form.value.image, this.form.value.stock).subscribe(result => {

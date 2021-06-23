@@ -103,37 +103,37 @@ exports.getDoctorByID = (req, res, next) => {
 }
 
 exports.signup = (req, res, next) => {
-    const doctor = new Doctor({
-      email: req.body.email,
-      password: req.body.password,
-      imagePath: req.body.image,
-      name: req.body.name,
-      lastName: req.body.lastName,
-      gender: req.body.gender,
-      address: req.body.address,
-      speciality: req.body.speciality,
-      birthday: req.body.birthday,
-      price: +req.body.price,
-      phone: req.body.phone,
-      city: req.body.city,
-      state: req.body.state,
-      country: req.body.country,
-      zip: req.body.zip,
-      location: {
-        latitude: req.body.latitude,
-        longitude: req.body.longitude
-      }
-    })
-    doctor.save().then(result => {
-      res.status(201).json({
-        message: "doctor created!",
-        result: result
-      });
-    }).catch(err => {
-      res.status(500).json({
-        error: err,
-      });
+  const doctor = new Doctor({
+    email: req.body.email,
+    password: req.body.password,
+    imagePath: req.body.image,
+    name: req.body.name,
+    lastName: req.body.lastName,
+    gender: req.body.gender,
+    address: req.body.address,
+    speciality: req.body.speciality,
+    birthday: req.body.birthday,
+    price: +req.body.price,
+    phone: req.body.phone,
+    city: req.body.city,
+    state: req.body.state,
+    country: req.body.country,
+    zip: req.body.zip,
+    location: {
+      latitude: req.body.latitude,
+      longitude: req.body.longitude
+    }
+  })
+  doctor.save().then(result => {
+    res.status(201).json({
+      message: "doctor created!",
+      result: result
     });
+  }).catch(err => {
+    res.status(500).json({
+      error: err,
+    });
+  });
 }
 
 exports.getDoctorByKey = (req, res, next) => {
@@ -350,6 +350,25 @@ exports.addPrescription = (req, res, next) => {
         prescription: {
           presc: req.body.presc, date: req.body.date,
           doctorId: req.userData.userId,
+          description: req.body.description
+        }
+      }
+    }).then(result => {
+    res.status(200).json(result);
+  }).catch(error => {
+    res.status(400).json(error);
+  });
+}
+
+exports.addCertificat = (req, res, next) => {
+  Patient.updateOne({_id: req.params.id},
+    {
+      $push: {
+        certificat: {
+          from: req.body.from,
+          to: req.body.to,
+          date: req.body.date,
+          doctor: req.userData.userId,
           description: req.body.description
         }
       }

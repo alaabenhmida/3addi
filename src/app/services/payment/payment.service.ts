@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
@@ -7,7 +7,8 @@ import {Observable} from 'rxjs';
 })
 export class PaymentService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   pay(token: any, amount: number): Observable<any> {
     return this.http.post('http://localhost:3000/payment', {token, amount});

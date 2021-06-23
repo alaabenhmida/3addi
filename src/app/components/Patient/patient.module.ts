@@ -10,6 +10,12 @@ import {PrescriptionDetailsComponent} from './prescription-details/prescription-
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 import {NgxSpinnerModule} from 'ngx-spinner';
+import { AddCertificatComponent } from './add-certificat/add-certificat.component';
+import {AngularMaterialModule} from '../../angular-material.module';
+import {TypeaheadModule} from 'ngx-bootstrap/typeahead';
+import { CertificatDetailsComponent } from './certificat-details/certificat-details.component';
+import { InvoicePharDetailComponent } from './invoice-phar-detail/invoice-phar-detail.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 
 @NgModule({
@@ -20,14 +26,20 @@ import {NgxSpinnerModule} from 'ngx-spinner';
     ProfileSettComponent,
     FavDocsComponent,
     PatientDhashboardComponent,
-    PrescriptionDetailsComponent
+    PrescriptionDetailsComponent,
+    AddCertificatComponent,
+    CertificatDetailsComponent,
+    InvoicePharDetailComponent,
+    ChangePasswordComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
     RouterModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    AngularMaterialModule,
+    TypeaheadModule.forRoot()
   ]
 })
 export class PatientModule { }

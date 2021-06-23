@@ -51,12 +51,14 @@ export class ProfileDocComponent implements OnInit, OnDestroy {
   resetStar(): void {
     this.overStar = void 0;
   }
+
 ////////////////////////////
 
-    constructor(public route: ActivatedRoute, public doctorServive: DoctorServiceService,
-                private authService: PatientAuthService, private chatService: MessagesService,
-                private router: Router, private patientService: PatientServiceService,
-                private toastr: ToastrService) { }
+  constructor(public route: ActivatedRoute, public doctorServive: DoctorServiceService,
+              private authService: PatientAuthService, private chatService: MessagesService,
+              private router: Router, private patientService: PatientServiceService,
+              private toastr: ToastrService) {
+  }
 
   ngOnInit(): void {
     this.isauth = this.authService.getIsAuth();
@@ -173,13 +175,14 @@ export class ProfileDocComponent implements OnInit, OnDestroy {
   chat(): void {
     let roomName = '';
     if (this.userid < this.doctorData.id) {
-        roomName = this.userid.concat(this.doctorData.id);
-      } else {
-        roomName = this.doctorData.id.concat(this.userid);
+      roomName = this.userid.concat(this.doctorData.id);
+    } else {
+      roomName = this.doctorData.id.concat(this.userid);
     }
     this.chatService.createRoom(this.doctorData.id, this.userid, roomName);
     this.router.navigate(['/messages']);
   }
+
   onAddFavDoc(doctorId: string): void {
     this.patientService.addFavourite(doctorId).subscribe(result => {
       console.log(result);

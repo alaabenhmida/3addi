@@ -4,6 +4,7 @@ import {Observable, Subject} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {AuthData} from '../auth-data';
+import {ToastrService} from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,7 @@ export class PatientAuthService {
   private roleListener = new Subject<string>();
   private role: string;
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient, private router: Router, private toastr: ToastrService) {
   }
 
   getRole(): string {
@@ -103,7 +104,13 @@ export class PatientAuthService {
           const expirationDate = new Date(now.getTime() + expiresInDuration * 1000);
           console.log(expirationDate);
           this.saveAuthData(token, expirationDate, userid, username, userimage, userRole);
-          this.router.navigate(['/']);
+          if (response.role === 'patient') {
+            this.router.navigate(['/']);
+          } else if (response.role === 'doctor') {
+            this.router.navigate(['/doctor/profile/dashboard']);
+          } else {
+            this.router.navigate(['/pharmacie/dashboard']);
+          }
         }
       });
   }
@@ -188,20 +195,30 @@ export class PatientAuthService {
     };
   }
 
-  signup(email: string, password: string, image: File, name: string, address: string,
+  signup(email: string, password: string, image: File, name: string, lastName, gender: string, address: string,
+         city: string, state: string, zip: string, country: string,
          birthday: string, bloodType: string, phone: string): void {
     const patientData = new FormData();
     patientData.append('email', email);
     patientData.append('password', password);
     patientData.append('image', image, name);
     patientData.append('name', name);
+    patientData.append('lastName', lastName);
+    patientData.append('gender', gender);
     patientData.append('address', address);
+    patientData.append('city', city);
+    patientData.append('state', state);
+    patientData.append('zip', zip);
+    patientData.append('country', country);
     patientData.append('birthday', birthday);
     patientData.append('bloodType', bloodType);
     patientData.append('phone', phone);
-    this.http.post('http://localhost:3000/doctor/signup', patientData)
+    this.http.post('http://localhost:3000/patient/signup', patientData)
       .subscribe(responsedata => {
-        console.log(responsedata);
+        this.toastr.success('compte créé avec succès', '', {
+          positionClass: 'toast-bottom-right'
+        });
+        this.router.navigate(['/login']);
       });
   }
 }

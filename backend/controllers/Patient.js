@@ -5,6 +5,47 @@ const Doctor = require("../models/Doctor");
 const Pharmacie = require("../models/Pharmacie");
 const moment = require("moment");
 
+exports.verifyPassword = (req, res, next) => {
+  let fetchedUser;
+  Patient.findOne({_id: req.userData.userId}).then(user => {
+    fetchedUser = user
+    return bcrypt.compare(req.body.password, user.password);
+  }).then(result => {
+    if (!result) {
+      return res.status(401).json({
+        message: "mot de passe incorrect"
+      });
+    }
+    res.status(200).json({
+      message: "password correct"
+    });
+  })
+    .catch(err => {
+      console.log(err);
+      return res.status(401).json({
+        message: "something went wrong"
+      });
+    });
+}
+
+exports.changePassword = (req, res, next) => {
+  bcrypt.hash(req.body.password, 10).then(hash => {
+    Patient.findOneAndUpdate({_id: req.userData.userId},
+      {$set: {password: hash}}).then(result => {
+      res.status(201).json(result);
+    }).catch(err => {
+      res.status(500).json(err);
+    });
+  });
+}
+exports.deletePatient = (req, res, next) => {
+  Patient.findOneAndDelete({_id: req.params.id}).then(result => {
+    res.status(201).json(result);
+  }).catch(err => {
+    res.status(500).json(err);
+  });
+}
+
 exports.deleteCart = (req, res, next) => {
   Patient.updateOne(
     {_id: req.userData.userId},
@@ -110,6 +151,7 @@ exports.getCart = (req, res, next) => {
 }
 
 exports.signup = (req, res, next) => {
+  console.log(req.body);
   bcrypt.hash(req.body.password, 10).then(hash => {
     const url = req.protocol + "://" + req.get("host");
     const patient = new Patient({
@@ -117,10 +159,16 @@ exports.signup = (req, res, next) => {
       password: hash,
       imagePath: url + "/images/" + req.file.filename,
       name: req.body.name,
+      lastName: req.body.lastName,
       address: req.body.address,
       birthday: req.body.birthday,
       bloodType: req.body.bloodType,
-      phone: req.body.bloodType
+      phone: req.body.bloodType,
+      city: req.body.city,
+      state: req.body.state,
+      gender: req.body.gender,
+      zip: req.body.zip,
+      country: req.body.country
     })
     patient.save().then(result => {
       res.status(201).json({
@@ -128,6 +176,7 @@ exports.signup = (req, res, next) => {
         result: result
       });
     }).catch(err => {
+      console.log(err);
       res.status(500).json({
         error: err
       });
@@ -164,6 +213,7 @@ exports.getPatientByKey = (req, res, next) => {
     .populate('prescription.doctorId')
     .populate('medicalRecord.doctorId')
     .populate('invoices.doctor')
+    .populate('certificat.doctor')
     .populate('favDocs.doctor').then(patient => {
     res.status(200).json(patient)
   }).catch(error => {
@@ -179,6 +229,19 @@ exports.getPrescription = (req, res, next) => {
     .populate('prescription.doctorId')
     .populate('prescription.pharmacie')
     .then(result => {
+      res.status(200).json(result)
+    }).catch(error => {
+    res.status(404).json({
+      message: "error was occurred"
+    });
+  });
+}
+
+exports.getCertificat = (req, res, next) => {
+  Patient.findOne({_id: req.params.id}).select({certificat: {$elemMatch: {_id: req.body.certID}}})
+    .populate('certificat.doctor')
+    .then(result => {
+      // console.log(result);
       res.status(200).json(result)
     }).catch(error => {
     res.status(404).json({
@@ -249,6 +312,35 @@ exports.addInvoice = (req, res, next) => {
   });
 }
 
+exports.addInvoicePharmacie = (req, res, next) => {
+  // console.log(req.body);
+  Patient.findOneAndUpdate({_id: req.userData.userId},
+    {
+      $push: {
+        orders: {
+          pharmacie: req.body.pharmacie, products: req.body.cart,
+          date: moment(new Date().toString()).format("YYYY-MM-DDTHH:mm:ss")
+        }
+      }
+    },
+    {'new': true, 'safe': true, 'upsert': true}).then(result => {
+    res.status(201).json(result.orders[result.orders.length - 1]._id);
+  }).catch(error => {
+    res.status(400).json(error);
+  });
+}
+
+exports.getInvoicePhar = (req, res, next) => {
+  Patient.findById(req.userData.userId)
+    .select({orders: {$elemMatch: {_id: req.params.id}}})
+    .populate('orders.pharmacie')
+    .then(result => {
+      res.status(200).json(result);
+    }).catch(error => {
+    res.status(400).json(error);
+  });
+}
+
 exports.getInvoice = (req, res, next) => {
   Patient.findById(req.userData.userId).select({invoices: {$elemMatch: {_id: req.params.id}}})
     .populate('invoices.doctor').then(result => {
@@ -307,8 +399,12 @@ exports.addMedRecord = (req, res, next) => {
         $push: {
           medicalRecord: {
             nom: req.body.nom,
-            date: moment(new Date().toString()).utc(false).format("YYYY-MM-DDTHH:mm:ss"), description: req.body.description, attachment: pdfFile, doctorId: doctor._id,
-            doctorImage: doctor.imagePath, doctorName: doctor.name
+            date: moment(new Date().toString()).utc(false).format("YYYY-MM-DDTHH:mm:ss"),
+            description: req.body.description,
+            attachment: pdfFile,
+            doctorId: doctor._id,
+            doctorImage: doctor.imagePath,
+            doctorName: doctor.name
           }
         }
       },
@@ -531,7 +627,7 @@ exports.login = (req, res, next) => {
         return Doctor.findOne({email: req.body.email})
           .then(user => {
             if (!user) {
-              return Pharmacie.findOne({ email: req.body.email })
+              return Pharmacie.findOne({email: req.body.email})
                 .then(user => {
                   if (!user) {
                     return res.status(401).json({
@@ -548,9 +644,9 @@ exports.login = (req, res, next) => {
                     });
                   }
                   const token = jwt.sign(
-                    { email: fetchedUser.email, userId: fetchedUser._id },
+                    {email: fetchedUser.email, userId: fetchedUser._id},
                     "secret_this_should_be_longer",
-                    { expiresIn: "1h" }
+                    {expiresIn: "1h"}
                   );
                   res.status(200).json({
                     token: token,
@@ -621,4 +717,5 @@ exports.login = (req, res, next) => {
         error: err
       });
     });
+
 }

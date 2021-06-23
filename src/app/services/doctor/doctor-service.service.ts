@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable, Subject} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {MedicalRecord} from '../../models/Doctor/medicalRecord.model';
@@ -11,6 +11,7 @@ export class DoctorServiceService {
   medrecord: MedicalRecord;
   recid: string;
   dataUpdated = new Subject<any>();
+
   // specialityUpdate = new Subject();
 
   constructor(private http: HttpClient) {
@@ -23,6 +24,7 @@ export class DoctorServiceService {
   deleteDoctor(id: string): Observable<any> {
     return this.http.delete('http://localhost:3000/doctor/' + id);
   }
+
   deleteDoctorByKey(): Observable<any> {
     return this.http.delete('http://localhost:3000/doctor/delete');
   }
@@ -30,13 +32,14 @@ export class DoctorServiceService {
   getspecialityCount(speciality: string): Observable<any> {
     return this.http.put('http://localhost:3000/doctor/speciality', {speciality});
   }
-   getDatalistener(): Observable<any> {
-     return this.dataUpdated as Observable<any>;
-   }
 
-   // getspecialityUpdateListener(): Observable<any> {
-   //  return this.specialityUpdate as Observable<any>;
-   // }
+  getDatalistener(): Observable<any> {
+    return this.dataUpdated as Observable<any>;
+  }
+
+  // getspecialityUpdateListener(): Observable<any> {
+  //  return this.specialityUpdate as Observable<any>;
+  // }
 
   modify(firstName: string, lastName: string, phone: string, gender: string, birthday: string,
          address1: string, address2: string, city: string, state: string,
@@ -95,7 +98,7 @@ export class DoctorServiceService {
     }
   }
 
-  acceptRDV(patientId: string, appDate: string): void{
+  acceptRDV(patientId: string, appDate: string): void {
     this.http.post('http://localhost:3000/doctor/rdv/accept', {patientId, appDate})
       .subscribe(result => {
         console.log(result);
@@ -105,7 +108,7 @@ export class DoctorServiceService {
       });
   }
 
-  rejectRDV(patientId: string, appDate: string): void{
+  rejectRDV(patientId: string, appDate: string): void {
     this.http.post('http://localhost:3000/doctor/rdv/cancel', {patientId, appDate})
       .subscribe(result => {
         console.log(result);
@@ -133,7 +136,7 @@ export class DoctorServiceService {
   }
 
   updatePrescription(patientId: string, prescID: string, presc: any, description: string): Observable<any> {
-    return  this.http.put('http://localhost:3000/patient/' + patientId + '/updatepresc', {prescID, presc, description});
+    return this.http.put('http://localhost:3000/patient/' + patientId + '/updatepresc', {prescID, presc, description});
   }
 
   search(name: string, genders?: string[], speciality?: string[]): Observable<any> {
@@ -149,15 +152,24 @@ export class DoctorServiceService {
   }
 
   addPrescription(presc: string[], patientId: string, description: string): Observable<any> {
-    return  this.http.post('http://localhost:3000/doctor/patient/' + patientId + '/addpresc', {presc,
-    date: moment(Date.now()).format('YYYY-MM-DDTHH:mm:ss'), description});
+    return this.http.post('http://localhost:3000/doctor/patient/' + patientId + '/addpresc', {
+      presc,
+      date: moment(Date.now()).format('YYYY-MM-DDTHH:mm:ss'), description
+    });
+  }
+
+  addCertificat(patientId: string, from: string, to: string, description: string): Observable<any> {
+    return this.http.post('http://localhost:3000/doctor/patient/' + patientId + '/addcertificat', {
+      from, to,
+      date: moment(Date.now()).format('YYYY-MM-DDTHH:mm:ss'), description
+    });
   }
 
   deletePrescription(patientId: string, recId: string): Observable<any> {
     return this.http.put('http://localhost:3000/patient/' + patientId + '/delpresc', {recId});
   }
 
-  addrecord(id: string, nom: string, desc: string, file: File): void{
+  addrecord(id: string, nom: string, desc: string, file: File): Observable<any> {
     const medrecord = new FormData();
     medrecord.append('nom', nom);
     medrecord.append('description', desc);
@@ -167,14 +179,14 @@ export class DoctorServiceService {
     //   description : desc,
     //   file
     // };
-    this.http.put('http://localhost:3000/patient/' + id, medrecord).subscribe(response => {console.log(response); });
-  }
-  deleteRecord(patientid: string, recId: string): void{
-    this.http.put('http://localhost:3000/patient/' + patientid + '/delrecord', {recId })
-      .subscribe(response => {console.log(response); });
+    return this.http.put('http://localhost:3000/patient/' + id, medrecord);
   }
 
-  addReview(id: string, rate: number, title: string, review: string): Observable<any>{
+  deleteRecord(patientid: string, recId: string): Observable<any> {
+    return this.http.put('http://localhost:3000/patient/' + patientid + '/delrecord', {recId});
+  }
+
+  addReview(id: string, rate: number, title: string, review: string): Observable<any> {
     return this.http.post('http://localhost:3000/doctor/' + id + '/addreview', {rate, title, review});
   }
 }

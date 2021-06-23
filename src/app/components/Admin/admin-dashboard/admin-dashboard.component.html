@@ -51,16 +51,28 @@
                       <span>Dashboard</span>
                     </a>
                   </li>
-                  <li>
+                  <li routerLinkActive="active">
                     <a [routerLink]="['/admin/doctorsdemandes']">
                       <i class="fas fa-thermometer-full"></i>
                       <span>médecins demandes</span>
                     </a>
                   </li>
-                  <li>
+                  <li routerLinkActive="active">
                     <a [routerLink]="['/admin/pharmaciesdemandes']">
                       <i class="fas fa-ambulance"></i>
                       <span>pharmacie/para demandes</span>
+                    </a>
+                  </li>
+                  <li routerLinkActive="active">
+                    <a [routerLink]="['/admin/patients-list']">
+                      <i class="fas fa-user-alt"></i>
+                      <span>liste des patients</span>
+                    </a>
+                  </li>
+                  <li routerLinkActive="active">
+                    <a [routerLink]="['/admin/doctors-list']">
+                      <i class="fas fa-user-md"></i>
+                      <span>liste des médecins</span>
                     </a>
                   </li>
                 </ul>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Pharmacie} from '../../../models/Pharmacie/pharmacie.model';
 import {PharmacieService} from '../../../services/pharmacie/pharmacie.service';
 import {ActivatedRoute, ParamMap, Params, Route, Router} from '@angular/router';
@@ -24,7 +24,8 @@ export class MapListComponent implements OnInit {
   constructor(private pharmacieService: PharmacieService,
               private router: Router,
               public route: ActivatedRoute,
-              private doctorService: DoctorServiceService) { }
+              private doctorService: DoctorServiceService) {
+  }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params: Params) => {
@@ -38,6 +39,7 @@ export class MapListComponent implements OnInit {
       this.pharmacieData = data.pharmacies;
     });
   }
+
   private setCurrentLocation(): void {
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -46,7 +48,8 @@ export class MapListComponent implements OnInit {
       });
     }
   }
-  placeMarker($event): void{
+
+  placeMarker($event): void {
     console.log($event.coords.lat);
     console.log($event.coords.lng);
   }
@@ -64,10 +67,12 @@ export class MapListComponent implements OnInit {
     //   }),
     // );
     this.pharmacieService.byewithPresc(this.products, pharmacieID).subscribe(results => {
-      this.router.navigate(['pharmacie', pharmacieID, 'cart'], {queryParams: {
+      this.router.navigate(['pharmacie', pharmacieID, 'cart'], {
+        queryParams: {
           ordID: this.prescID,
           patientId: this.patientId
-        }});
+        }
+      });
     });
     // this.doctorService.getPrescription(this.patientId, this.prescID).subscribe(data => {
     //     const promiseArray = data.prescription[0].presc.map(product => {

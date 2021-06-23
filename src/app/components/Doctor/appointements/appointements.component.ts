@@ -13,7 +13,8 @@ export class AppointementsComponent implements OnInit, OnDestroy {
   doctorData: Doctor;
   doctorSub: Subscription;
 
-  constructor(private doctorService: DoctorServiceService) { }
+  constructor(private doctorService: DoctorServiceService) {
+  }
 
   ngOnInit(): void {
     this.doctorSub = this.doctorService.getDatalistener().subscribe(doctor => {
@@ -24,10 +25,11 @@ export class AppointementsComponent implements OnInit, OnDestroy {
     });
   }
 
-  getdate(date: string, format: string): string{
+  getdate(date: string, format: string): string {
     return (moment(date).format(format));
   }
-  onAccept(patientId: string, appDate: string): void{
+
+  onAccept(patientId: string, appDate: string): void {
     this.doctorService.acceptRDV(patientId, appDate);
     this.doctorService.getDcotorByKey().subscribe(doctor => {
       this.doctorService.dataUpdated.next(doctor);

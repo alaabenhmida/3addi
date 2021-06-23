@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DoctorServiceService} from '../../../services/doctor/doctor-service.service';
 import {FormControl, FormGroup} from '@angular/forms';
 import {Doctor} from '../../../models/Doctor/doctor.model';
@@ -15,8 +15,10 @@ export class SearchComponent implements OnInit {
   doctors: Doctor[];
   genders: string[] = [];
   speciality: string [] = [];
+
   constructor(private doctor: DoctorServiceService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute) {
+  }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params: Params) => {
@@ -45,7 +47,8 @@ export class SearchComponent implements OnInit {
       Cardiologue: new FormControl(false)
     });
   }
-  onSubmit(): void{
+
+  onSubmit(): void {
     console.log(this.speciality);
     // console.log(this.filtergroupe.value.filter);
     if (this.genders.length === 0) {
@@ -69,6 +72,7 @@ export class SearchComponent implements OnInit {
       this.genders.splice(gender.indexOf(gender), 1);
     }
   }
+
   onChangespec(speciality: string, target: any): void {
     if (target.checked) {
       if (this.speciality.indexOf(speciality) === -1) {

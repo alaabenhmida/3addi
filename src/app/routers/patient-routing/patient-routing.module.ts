@@ -15,22 +15,33 @@ import {AuthGuard} from '../../auth/doctor-auth.gards';
 import {PatientAuthGuard} from '../../auth/patient-auth.gards';
 import {LoginAuthGuard} from '../../auth/login-auth.gards';
 import {PrescriptionDetailsComponent} from '../../components/Patient/prescription-details/prescription-details.component';
+import {AddCertificatComponent} from '../../components/Patient/add-certificat/add-certificat.component';
+import {CertificatDetailsComponent} from '../../components/Patient/certificat-details/certificat-details.component';
+import {InvoicePharDetailComponent} from '../../components/Patient/invoice-phar-detail/invoice-phar-detail.component';
+import {ChangePasswordComponent} from '../../components/Patient/change-password/change-password.component';
+import {Error404Component} from '../../shared/error404/error404.component';
 
 
 const appRoutes: Routes = [
   { path: 'messages', component: MessagesComponent },
   { path: 'profile/ordonnace/:id', component: PrescriptionDetailsComponent, canActivate: [PatientAuthGuard] },
+  { path: 'certificat/:id', component: CertificatDetailsComponent, canActivate: [PatientAuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent},
   { path: 'profile/setting', component: ProfileSettComponent, canActivate: [PatientAuthGuard] },
   { path: 'profile/dashboard', component: PatientDhashboardComponent, canActivate: [PatientAuthGuard] },
   { path: 'profile/favdocs', component: FavDocsComponent, canActivate: [PatientAuthGuard] },
+  { path: 'profile/change-password', component: ChangePasswordComponent, canActivate: [PatientAuthGuard] },
   { path: 'facture/:rdvid', component: InvoiceDetailComponent },
+  { path: 'ordre/:id', component: InvoicePharDetailComponent },
   { path: 'ordre/:rdvid', component: BookingSuccessComponent, canActivate: [PatientAuthGuard] },
   { path: 'patient/:id', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'patient/:id/ajoutDossier', component: MedRecordComponent, canActivate: [AuthGuard] },
   { path: 'patient/:id/ajoutOrd', component: AddPrescComponent, canActivate: [AuthGuard] },
-  { path: 'patient/:id/presc/:prescID', component: AddPrescComponent }
+  { path: 'patient/:id/ajoucertificat', component: AddCertificatComponent, canActivate: [AuthGuard] },
+  { path: 'patient/:id/presc/:prescID', component: AddPrescComponent },
+  { path: 'not-found', component: Error404Component },
+  { path: '**', redirectTo: '/not-found', pathMatch: 'full' },
 ];
 
 @NgModule({

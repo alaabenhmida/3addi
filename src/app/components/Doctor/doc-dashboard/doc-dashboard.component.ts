@@ -17,7 +17,8 @@ export class DocDashboardComponent implements OnInit, OnDestroy {
   todayRDV = [];
   today = moment(moment.now()).toString();
 
-  constructor(private doctor: DoctorServiceService) { }
+  constructor(private doctor: DoctorServiceService) {
+  }
 
 
   ngOnInit(): void {
@@ -89,11 +90,12 @@ export class DocDashboardComponent implements OnInit, OnDestroy {
       return slotTime >= moment(br[0], 'HH:mm') && slotTime < moment(br[1], 'HH:mm');
     });
   }
-  getdate(date: string, format: string): string{
+
+  getdate(date: string, format: string): string {
     return (moment(date).locale('fr').format(format));
   }
 
-  onAccept(patientId: string, appDate: string): void{
+  onAccept(patientId: string, appDate: string): void {
     this.doctor.acceptRDV(patientId, appDate);
     this.doctor.getDcotorByKey().subscribe(doctor => {
       this.doctor.dataUpdated.next(doctor);
@@ -103,6 +105,7 @@ export class DocDashboardComponent implements OnInit, OnDestroy {
   onCancel(patientId: string, appDate: string): void {
     this.doctor.rejectRDV(patientId, appDate);
   }
+
   ngOnDestroy(): void {
     this.doctorSub.unsubscribe();
   }

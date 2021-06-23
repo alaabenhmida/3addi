@@ -12,6 +12,7 @@ const patientSchema = mongoose.Schema({
   phone: { type: String, required: true },
   city: { type: String},
   state: { type: String},
+  gender: { type: String},
   zip: { type: String, required: true },
   country: { type: String, required: true },
   rdv : [{
@@ -59,6 +60,13 @@ const patientSchema = mongoose.Schema({
   favDocs: [{
     doctor: { type : mongoose.Schema.Types.ObjectId, ref: 'Doctor'}
   }],
+  certificat: [{
+    doctor: { type : mongoose.Schema.Types.ObjectId, ref: 'Doctor'},
+    from: { type : String},
+    to: { type : String},
+    description: { type : String},
+    date: { type : String}
+  }],
   invoices: [{
     doctor: { type : mongoose.Schema.Types.ObjectId, ref: 'Doctor'},
     date: {type: String},
@@ -80,6 +88,21 @@ const patientSchema = mongoose.Schema({
       },
       quantity: {type: Number},
     }]
+  }],
+  orders: [{
+    pharmacie: { type : mongoose.Schema.Types.ObjectId, ref: 'Pharmacie'},
+    products: [{
+      product: {
+        id: {type: mongoose.Schema.Types.ObjectId},
+        name: {type: String},
+        description: {type: String},
+        price: {type: Number},
+        image: {type: String},
+        stock: {type: Number}
+      },
+      quantity: {type: Number},
+    }],
+    date: {type: String}
   }]
 });
 

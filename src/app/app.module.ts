@@ -48,6 +48,8 @@ import {PharCheckDetailsComponent} from './components/Admin/phar-check-details/p
 import {PharDemandesComponent} from './components/Admin/phar-demandes/phar-demandes.component';
 import {Error404Component} from './shared/error404/error404.component';
 import {NgxSpinnerModule} from 'ngx-spinner';
+import {ListePatientsComponent} from './components/Admin/liste-patients/liste-patients.component';
+import {DoctorsListeComponent} from './components/Admin/doctors-liste/doctors-liste.component';
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
 @NgModule({
@@ -69,7 +71,9 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     DocDemandesComponent,
     PharCheckDetailsComponent,
     PharDemandesComponent,
-    Error404Component
+    Error404Component,
+    ListePatientsComponent,
+    DoctorsListeComponent
   ],
   imports: [
     BrowserModule,

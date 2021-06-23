@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DoctorServiceService} from '../../../services/doctor/doctor-service.service';
 import {Doctor} from '../../../models/Doctor/doctor.model';
 import {Patient} from '../../../models/Patient/patient.model';
@@ -14,7 +14,8 @@ export class MyPatientsComponent implements OnInit {
   patients: Patient[] = [];
   isLoading = false;
 
-  constructor(private doctor: DoctorServiceService) { }
+  constructor(private doctor: DoctorServiceService) {
+  }
 
   ngOnInit(): void {
     this.isLoading = true;
@@ -48,8 +49,9 @@ export class MyPatientsComponent implements OnInit {
     });
     this.isLoading = false;
   }
+
   calculateAge(birthday): number { // birthday is a date
     const age = moment.duration(moment().diff(moment(birthday)));
-    return  Math.floor(age.asYears());
+    return Math.floor(age.asYears());
   }
 }

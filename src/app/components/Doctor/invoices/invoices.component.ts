@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DoctorServiceService} from '../../../services/doctor/doctor-service.service';
 import {Doctor} from '../../../models/Doctor/doctor.model';
 import * as moment from 'moment';
@@ -12,7 +12,8 @@ export class InvoicesComponent implements OnInit {
   invoices = [];
   doctorData: Doctor;
 
-  constructor(private doctorService: DoctorServiceService) { }
+  constructor(private doctorService: DoctorServiceService) {
+  }
 
   ngOnInit(): void {
     this.doctorService.getDcotorByKey().subscribe(data => {
@@ -44,7 +45,8 @@ export class InvoicesComponent implements OnInit {
       this.invoices = data.invoices;
     });
   }
-  getdate(date: string, format: string): string{
+
+  getdate(date: string, format: string): string {
     return (moment(date).format(format));
   }
 

@@ -88,15 +88,9 @@
                     </a>
                   </li>
                   <li>
-                    <a>
+                    <a [routerLink]="['/profile/change-password']">
                       <i class="fas fa-lock"></i>
                       <span>Changer le mot de passe</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="index.html">
-                      <i class="fas fa-sign-out-alt"></i>
-                      <span>déconnecter</span>
                     </a>
                   </li>
                 </ul>
@@ -125,6 +119,9 @@
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="#pat_billing" data-toggle="tab">Factures</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#pat_certificat" data-toggle="tab">Certificats</a>
                   </li>
                 </ul>
               </nav>
@@ -342,6 +339,57 @@
                 </div>
                 <!-- /Billing Tab -->
 
+                <div id="pat_certificat" class="tab-pane fade">
+                  <div class="card card-table mb-0">
+                    <div class="card-body">
+                      <div class="table-responsive">
+                        <table class="table table-hover table-center mb-0">
+                          <thead>
+                          <tr *ngIf="certificats?.length <= 0">
+                            <th class="text-center">pas de certificats</th>
+                          </tr>
+                          <tr *ngIf="certificats?.length > 0">
+                            <th>Certificat No</th>
+                            <th>Docteur</th>
+                            <th>de</th>
+                            <th>à</th>
+                            <th></th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          <tr></tr>
+                          <tbody>
+                          <tr *ngFor="let certificat of certificats">
+                            <td>
+                              <a href="invoice-view.html">#CRF-{{certificat?._id}}</a>
+                            </td>
+                            <td>
+                              <h2 class="table-avatar">
+                                <a [routerLink]="['/doctor', certificat?.doctor._id]" class="avatar avatar-sm mr-2">
+                                  <img class="avatar-img rounded-circle" src="{{certificat?.doctor.imagePath}}" alt="User Image">
+                                </a>
+                                <a [routerLink]="['/doctor', certificat?.doctor._id]">{{certificat?.doctor.name}} {{certificat?.doctor.lastName}} <span>{{certificat?.doctor.speciality}}</span></a>
+                              </h2>
+                            </td>
+                            <td>{{getdate(certificat?.to, 'DD MMMM YYYY')}}</td>
+                            <td>{{getdate(certificat?.to, 'DD MMMM YYYY')}}</td>
+                            <td class="text-right">
+                              <div class="table-action">
+                                <a [routerLink]="['/certificat', certificat?._id]" class="btn btn-sm bg-info-light">
+                                  <i class="far fa-eye"></i> Details
+                                </a>
+                                <a *ngIf="isAfter(certificat?.to)" class="btn btn-sm bg-danger-light">
+                                  <i class="fas fa-warehouse"></i> expiré
+                                </a>
+                              </div>
+                            </td>
+                          </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
               <!-- Tab Content -->
 

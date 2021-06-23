@@ -70,22 +70,48 @@ router.put("/edit", multer({storage: storage}).single("image"), checkAuth,
       const url = req.protocol + "://" + req.get("host");
       imagePath = url + "/images/" + req.file.filename;
       Pharmacie.findOneAndUpdate({_id: req.userData.userId},
-        {$set: {name: req.body.name, email: req.body.email, address: req.body.address,
-            city: req.body.city, state: req.body.state, country: req.body.country,
-            zip: req.body.zip, phone: req.body.phone, imagePath: imagePath, type: req.body.type,
+        {
+          $set: {
+            name: req.body.name,
+            email: req.body.email,
+            address: req.body.address,
+            city: req.body.city,
+            state: req.body.state,
+            country: req.body.country,
+            zip: req.body.zip,
+            phone: req.body.phone,
+            imagePath: imagePath,
+            type: req.body.type,
             aboutMe: req.body.aboutMe,
-          awards: JSON.parse(req.body.awards),'location.latitude': +req.body.latitude, 'location.longitude': +req.body.longitude}})
+            awards: JSON.parse(req.body.awards),
+            'location.latitude': +req.body.latitude,
+            'location.longitude': +req.body.longitude
+          }
+        })
         .then(result => {
           res.status(201).json(result);
         }).catch(error => {
-          res.status(400).json(error);
+        res.status(400).json(error);
       });
     } else {
       Pharmacie.findOneAndUpdate({_id: req.userData.userId},
-        {$set: {name: req.body.name, email: req.body.email, address: req.body.address,
-            city: req.body.city, state: req.body.state, country: req.body.country,
-            zip: req.body.zip, phone: req.body.phone, type: req.body.type, aboutMe: req.body.aboutMe,
-            awards: JSON.parse(req.body.awards), 'location.latitude': +req.body.latitude, 'location.longitude': +req.body.longitude}})
+        {
+          $set: {
+            name: req.body.name,
+            email: req.body.email,
+            address: req.body.address,
+            city: req.body.city,
+            state: req.body.state,
+            country: req.body.country,
+            zip: req.body.zip,
+            phone: req.body.phone,
+            type: req.body.type,
+            aboutMe: req.body.aboutMe,
+            awards: JSON.parse(req.body.awards),
+            'location.latitude': +req.body.latitude,
+            'location.longitude': +req.body.longitude
+          }
+        })
         .then(result => {
           res.status(201).json(result);
         }).catch(error => {
@@ -117,15 +143,15 @@ router.put("/getProduct", checkAuth, (req, res, next) => {
     .then(result => {
       res.status(200).json(result);
     }).catch(error => {
-      res.status(400).json(error);
+    res.status(400).json(error);
   });
 });
 
-router.delete("/product/:id",checkAuth, (req, res, next) => {
+router.delete("/product/:id", checkAuth, (req, res, next) => {
   Pharmacie.findOneAndUpdate({_id: req.userData.userId},
     {$pull: {products: {_id: req.params.id}}},
     {'new': true, 'safe': true, 'upsert': true}).then(result => {
-     res.status(201).json(result);
+    res.status(201).json(result);
   }).catch(error => {
     res.status(400).json(error);
   });
@@ -143,10 +169,16 @@ router.get("/order/:id", checkAuth, (req, res, next) => {
   });
 });
 
-router.put("/addorder",checkAuth, (req, res, next) => {
-  Pharmacie.findOneAndUpdate({_id: req.body.pharmacie},
-    {$push: {orders: {patient: req.userData.userId, products: req.body.cart,
-        date: moment(new Date().toString()).format("YYYY-MM-DDTHH:mm:ss")}}},
+router.put("/addorder", checkAuth, (req, res, next) => {
+  Pharmacie.findOneAndUpdate({_id: req.userData.userId},
+    {
+      $push: {
+        orders: {
+          patient: req.body.patient, products: req.body.cart,
+          date: moment(new Date().toString()).format("YYYY-MM-DDTHH:mm:ss")
+        }
+      }
+    },
     {'new': true, 'safe': true, 'upsert': true}).then(result => {
     res.status(201).json(result);
   }).catch(error => {
@@ -154,16 +186,27 @@ router.put("/addorder",checkAuth, (req, res, next) => {
   });
 });
 router.put("/decreasequantite", checkAuth, (req, res, next) => {
-  Pharmacie.findOneAndUpdate({_id: req.body.pharmacieId,
-      products: {$elemMatch: {name: req.body.product.name}}},
-    {$set: {
-       'products.$.stock': +req.body.product.stock - +req.body.quantity}},
+  Pharmacie.findOneAndUpdate({
+      _id: req.body.pharmacieId,
+      products: {$elemMatch: {name: req.body.product.name}}
+    },
+    {
+      $set: {
+        'products.$.stock': +req.body.product.stock - +req.body.quantity
+      }
+    },
     {'new': true, 'safe': true, 'upsert': true}).then(result => {
     // res.status(201).json(result);
     Pharmacie.findOneAndUpdate({_id: req.body.pharmacieId},
-      {$push: {sales: {patient: req.userData.userId, name: req.body.product.name, description: req.body.product.description,
+      {
+        $push: {
+          sales: {
+            patient: req.userData.userId, name: req.body.product.name, description: req.body.product.description,
             price: +req.body.product.price, image: req.body.product.image, quantity: +req.body.quantity,
-          date: moment(new Date().toString()).format("YYYY-MM-DDTHH:mm:ss")}}},
+            date: moment(new Date().toString()).format("YYYY-MM-DDTHH:mm:ss")
+          }
+        }
+      },
       {'new': true, 'safe': true, 'upsert': true})
       .then(result => {
         res.status(201).json(result);
@@ -186,17 +229,23 @@ router.put("/decreasequantite", checkAuth, (req, res, next) => {
 router.put("/editproduct/:id",
   multer({storage: storage}).single("image"), checkAuth,
   (req, res, next) => {
-     if (req.file) {
+    if (req.file) {
       let imagePath = req.body.image;
       const url = req.protocol + "://" + req.get("host");
       imagePath = url + "/images/" + req.file.filename;
-      Pharmacie.findOneAndUpdate({_id: req.userData.userId,
-        products: {$elemMatch: {_id: req.params.id}}},
-        {$set: {'products.$.name': req.body.name, 'products.$.description': req.body.description,
-          'products.$.price': +req.body.price, 'products.$.image:': imagePath,
-          'products.$.stock': +req.body.stock}},
+      Pharmacie.findOneAndUpdate({
+          _id: req.userData.userId,
+          products: {$elemMatch: {_id: req.params.id}}
+        },
+        {
+          $set: {
+            'products.$.name': req.body.name, 'products.$.description': req.body.description,
+            'products.$.price': +req.body.price, 'products.$.image:': imagePath,
+            'products.$.stock': +req.body.stock
+          }
+        },
         {'new': true, 'safe': true, 'upsert': true}).then(result => {
-         res.status(201).json(result);
+        res.status(201).json(result);
       }).catch(error => {
         res.status(401).json({
           message: "error occurred",
@@ -204,11 +253,17 @@ router.put("/editproduct/:id",
         });
       });
     } else {
-      Pharmacie.findOneAndUpdate({_id: req.userData.userId,
-          products: {$elemMatch: {_id: req.params.id}}},
-        {$set: {'products.$.name': req.body.name, 'products.$.description': req.body.description,
+      Pharmacie.findOneAndUpdate({
+          _id: req.userData.userId,
+          products: {$elemMatch: {_id: req.params.id}}
+        },
+        {
+          $set: {
+            'products.$.name': req.body.name, 'products.$.description': req.body.description,
             'products.$.price': +req.body.price,
-            'products.$.stock': +req.body.stock}},
+            'products.$.stock': +req.body.stock
+          }
+        },
         {'new': true, 'safe': true, 'upsert': true}).then(result => {
         res.status(201).json(result);
       }).catch(error => {
@@ -218,27 +273,33 @@ router.put("/editproduct/:id",
         });
       });
     }
-});
+  });
 
 router.put("/addproduct",
   multer({storage: storage}).single("image"), checkAuth, (req, res, next) => {
     let imagePath = req.body.image;
     const url = req.protocol + "://" + req.get("host");
     imagePath = url + "/images/" + req.file.filename;
-  Pharmacie.findOneAndUpdate({_id: req.userData.userId},
-    {$push: {products: {name: req.body.name, description: req.body.description,
-          price: +req.body.price, image: imagePath, stock: +req.body.stock}}},
-    {'new': true, 'safe': true, 'upsert': true})
-    .then(result => {
-      res.status(201).json(result);
-    }).catch(error => {
+    Pharmacie.findOneAndUpdate({_id: req.userData.userId},
+      {
+        $push: {
+          products: {
+            name: req.body.name, description: req.body.description,
+            price: +req.body.price, image: imagePath, stock: +req.body.stock
+          }
+        }
+      },
+      {'new': true, 'safe': true, 'upsert': true})
+      .then(result => {
+        res.status(201).json(result);
+      }).catch(error => {
       console.log(error);
-     res.status(400).json({
-       message: "error occurred",
-       error: error
-     });
+      res.status(400).json({
+        message: "error occurred",
+        error: error
+      });
+    });
   });
-});
 
 
 router.get("/getbykey", checkAuth, (req, res, next) => {
@@ -246,25 +307,34 @@ router.get("/getbykey", checkAuth, (req, res, next) => {
     .populate('sales.patient')
     .populate('orders.patient')
     .then(pharmacie => {
-    res.status(200).json(pharmacie);
-  }).catch(error => {
+      res.status(200).json(pharmacie);
+    }).catch(error => {
     res.status(404).json(error);
   });
 });
 
 router.post("/:id/addreview", checkAuth, (req, res, next) => {
-    Pharmacie.updateOne(
-      {_id: req.params.id},
-      { $push: { reviews:{ patientId:req.userData.userId, rate: +req.body.rate, title: req.body.title, review: req.body.review} }}
-    ).then(result => {
-      res.status(201).json({
-        message: "reviewed successfully",
-        result: result
-      })
+  Pharmacie.updateOne(
+    {_id: req.params.id},
+    {
+      $push: {
+        reviews: {
+          patientId: req.userData.userId,
+          rate: +req.body.rate,
+          title: req.body.title,
+          review: req.body.review
+        }
+      }
+    }
+  ).then(result => {
+    res.status(201).json({
+      message: "reviewed successfully",
+      result: result
     })
-      .catch(err => {
-        console.log(err);
-      });
+  })
+    .catch(err => {
+      console.log(err);
+    });
 });
 
 router.put("/find", (req, res, next) => {
@@ -319,7 +389,7 @@ router.get("", (req, res, next) => {
 
 router.post("/login", (req, res, next) => {
   let fetchedUser;
-  Pharmacie.findOne({ email: req.body.email })
+  Pharmacie.findOne({email: req.body.email})
     .then(user => {
       if (!user) {
         return res.status(401).json({
@@ -336,9 +406,9 @@ router.post("/login", (req, res, next) => {
         });
       }
       const token = jwt.sign(
-        { email: fetchedUser.email, userId: fetchedUser._id },
+        {email: fetchedUser.email, userId: fetchedUser._id},
         "secret_this_should_be_longer",
-        { expiresIn: "1h" }
+        {expiresIn: "1h"}
       );
       res.status(200).json({
         token: token,

@@ -58,12 +58,10 @@ router.get("", (req, res, next) => {
 });
 
 
-
-
 router.delete("/deldoc/:id", (req, res, next) => {
   Admin.updateOne({_id: "60bf8db44f7bdb27342dde75"},
-    { $pull: { doctors:{_id:req.params.id} }}).then(result => {
-     res.status(200).json(result);
+    {$pull: {doctors: {_id: req.params.id}}}).then(result => {
+    res.status(200).json(result);
   }).catch(error => {
     console.log(error);
     res.status(400).json(error);
@@ -72,7 +70,7 @@ router.delete("/deldoc/:id", (req, res, next) => {
 
 router.delete("/delphar/:id", (req, res, next) => {
   Admin.updateOne({_id: "60bf8db44f7bdb27342dde75"},
-    { $pull: { pharmacies:{_id:req.params.id} }}).then(result => {
+    {$pull: {pharmacies: {_id: req.params.id}}}).then(result => {
     res.status(200).json(result);
   }).catch(error => {
     console.log(error);
@@ -94,7 +92,7 @@ router.get("/getdoctor/:id", (req, res, next) => {
     .then(result => {
       res.status(200).json(result);
     }).catch(error => {
-      res.status(404).json(error);
+    res.status(404).json(error);
   });
 });
 

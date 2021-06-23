@@ -7,6 +7,8 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatButtonModule} from '@angular/material/button';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 
 
@@ -19,7 +21,9 @@ import {MatButtonModule} from '@angular/material/button';
     MatIconModule,
     MatStepperModule,
     MatSnackBarModule,
-    MatButtonModule
+    MatButtonModule,
+    MatAutocompleteModule,
+    MatFormFieldModule
   ]
 })
 export class AngularMaterialModule { }

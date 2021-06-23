@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import * as moment from 'moment';
 import {DoctorServiceService} from '../../../services/doctor/doctor-service.service';
@@ -21,13 +21,14 @@ export class ManageTimeComponent implements OnInit {
   duration: number;
 
   constructor(private doctorService: DoctorServiceService,
-              private toastr: ToastrService) { }
+              private toastr: ToastrService) {
+  }
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      duration: new FormControl(null, { validators: [Validators.required] }),
-      from: new FormControl(null, { validators: [Validators.required] }),
-      to: new FormControl(null, { validators: [Validators.required] })
+      duration: new FormControl(null, {validators: [Validators.required]}),
+      from: new FormControl(null, {validators: [Validators.required]}),
+      to: new FormControl(null, {validators: [Validators.required]})
     });
 
     this.doctorService.getDcotorByKey().subscribe(doctor => {

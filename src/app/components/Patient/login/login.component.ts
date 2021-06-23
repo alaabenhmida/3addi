@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {PatientAuthService} from '../../../auth/Patient/patient-auth.service';
 import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
+import {LoginDialogComponent} from '../../../shared/login-dialog/login-dialog.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +12,8 @@ import {Router} from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(public authService: PatientAuthService, public router: Router) { }
+  constructor(public authService: PatientAuthService, public router: Router,
+              private dialog: MatDialog) { }
 
   ngOnInit(): void {
     if (this.authService.getIsAuth()) {
@@ -24,5 +27,7 @@ export class LoginComponent implements OnInit {
     }
     this.authService.login(form.value.email, form.value.password);
   }
-
+  onclick(): void {
+    this.dialog.open(LoginDialogComponent, {minWidth: 300});
+  }
 }

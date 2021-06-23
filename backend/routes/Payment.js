@@ -10,7 +10,7 @@ router.post("", (req, res, next) => {
     currency: "USD",
     description: 'One-time setup fee',
     source: req.body.token.id,
-  } , (err, charge) => {
+  }, (err, charge) => {
     if (err) {
       next(err);
     }

@@ -67,23 +67,23 @@ export class CartService {
     }
     this.http.put<any>('http://localhost:3000/patient/addtocart', {products: this.products, pharmacie})
       .subscribe(items => {
-      // this.cartItems.next(items.cart[0].products);
-      // this.products = items.cart[0].products;
-      let products: CartItem[] = [];
-      for (let product of items.cart[0].products) {
-        products.push({product: product.product, quantity: product.quantity});
-      }
-      this.products = products;
-      this.cartItems.next([...this.products]);
-    });
+        // this.cartItems.next(items.cart[0].products);
+        // this.products = items.cart[0].products;
+        let products: CartItem[] = [];
+        for (let product of items.cart[0].products) {
+          products.push({product: product.product, quantity: product.quantity});
+        }
+        this.products = products;
+        this.cartItems.next([...this.products]);
+      });
     return item;
   }
 
   public getTotalAmount(): number {
     // return this.cartItems.pipe(map((product: CartItem[]) => {
-      return this.products.reduce((prev, curr: CartItem) => {
-        return prev + curr.product.price * curr.quantity;
-      }, 0);
+    return this.products.reduce((prev, curr: CartItem) => {
+      return prev + curr.product.price * curr.quantity;
+    }, 0);
     // }));
   }
 
@@ -111,6 +111,7 @@ export class CartService {
       }
     });
   }
+
   // getcart(pharmacie: string): void {
   //   this.http.put<any>('http://localhost:3000/patient/getcart', {pharmacie})
   //     .subscribe(items => {
@@ -140,8 +141,11 @@ export class CartService {
     }
     return true;
   }
+
   public removeFromCart(item: CartItem, pharmacie: string) {
-    if (item === undefined) { return false; }
+    if (item === undefined) {
+      return false;
+    }
     const index = this.products.indexOf(item);
     this.products.splice(index, 1);
     this.http.put<any>('http://localhost:3000/patient/addtocart', {products: this.products, pharmacie})
