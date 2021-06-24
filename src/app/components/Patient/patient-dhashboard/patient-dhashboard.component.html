@@ -53,8 +53,10 @@
                 <div class="profile-det-info">
                   <h3>{{patientdata?.name}} {{patientdata?.lastName}}</h3>
                   <div class="patient-details">
-                    <h5><i class="fas fa-birthday-cake"></i> {{getdate(patientdata?.birthday, 'DD MMM YYYY')}}, {{calculateAge(patientdata?.birthday)}} ans</h5>
-                    <h5 class="mb-0"><i class="fas fa-map-marker-alt"></i> {{patientdata?.state}}, {{patientdata?.country}}</h5>
+                    <h5><i class="fas fa-birthday-cake"></i> {{getdate(patientdata?.birthday, 'DD MMM YYYY')}}
+                      , {{calculateAge(patientdata?.birthday)}} ans</h5>
+                    <h5 class="mb-0"><i class="fas fa-map-marker-alt"></i> {{patientdata?.state}}
+                      , {{patientdata?.country}}</h5>
                   </div>
                 </div>
               </div>
@@ -143,7 +145,7 @@
                             <th>Date de réservation</th>
                             <th>Montant</th>
                             <th>Statut</th>
-<!--                            <th></th>-->
+                            <!--                            <th></th>-->
                           </tr>
                           </thead>
                           <tbody>
@@ -151,23 +153,30 @@
                             <td>
                               <h2 class="table-avatar">
                                 <a [routerLink]="['/doctor', rdv.doctorId._id]" class="avatar avatar-sm mr-2">
-                                  <img class="avatar-img rounded-circle" src="{{rdv?.doctorId.imagePath}}" alt="User Image">
+                                  <img class="avatar-img rounded-circle" src="{{rdv?.doctorId.imagePath}}"
+                                       alt="User Image">
                                 </a>
-                                <a [routerLink]="['/doctor', rdv.doctorId._id]">Dr. {{rdv?.doctorId.name}} {{rdv?.doctorId.lastName}} <span>{{rdv?.doctorId.speciality}}</span></a>
+                                <a
+                                  [routerLink]="['/doctor', rdv.doctorId._id]">Dr. {{rdv?.doctorId.name}} {{rdv?.doctorId.lastName}}
+                                  <span>{{rdv?.doctorId.speciality}}</span></a>
                               </h2>
                             </td>
-                            <td>{{getdate(rdv.rdvDate, 'DD MMM YYYY')}} <span class="d-block text-info">{{getdate(rdv.rdvDate, 'HH:mm')}}</span></td>
+                            <td>{{getdate(rdv.rdvDate, 'DD MMM YYYY')}} <span
+                              class="d-block text-info">{{getdate(rdv.rdvDate, 'HH:mm')}}</span></td>
                             <td>{{getdate(rdv.appDate, 'DD MMM YYYY')}}</td>
                             <td>${{rdv?.doctorId.price}}</td>
-                            <td *ngIf="rdv.status == 'confirmed'"><span class="badge badge-pill bg-success-light">confirmé</span></td>
-                            <td *ngIf="rdv.status == 'pending'"><span class="badge badge-pill bg-warning-light">en attente</span></td>
-                            <td *ngIf="rdv.status == 'canceled'"><span class="badge badge-pill bg-danger-light">annulé</span></td>
+                            <td *ngIf="rdv.status == 'confirmed'"><span class="badge badge-pill bg-success-light">confirmé</span>
+                            </td>
+                            <td *ngIf="rdv.status == 'pending'"><span class="badge badge-pill bg-warning-light">en attente</span>
+                            </td>
+                            <td *ngIf="rdv.status == 'canceled'"><span
+                              class="badge badge-pill bg-danger-light">annulé</span></td>
                             <td class="text-right">
-<!--                              <div class="table-action">-->
-<!--                                <a *ngIf="rdv.status == 'pending'" href="javascript:void(0);" class="btn btn-sm bg-success-light">-->
-<!--                                  <i class="far fa-edit"></i> Edit-->
-<!--                                </a>-->
-<!--                              </div>-->
+                              <!--                              <div class="table-action">-->
+                              <!--                                <a *ngIf="rdv.status == 'pending'" href="javascript:void(0);" class="btn btn-sm bg-success-light">-->
+                              <!--                                  <i class="far fa-edit"></i> Edit-->
+                              <!--                                </a>-->
+                              <!--                              </div>-->
                             </td>
                           </tr>
                           </tbody>
@@ -189,8 +198,8 @@
                             <th class="text-center">pas de prescription</th>
                           </tr>
                           <tr *ngIf="prescription?.length > 0">
-                            <th>Date </th>
-                            <th>Créé par </th>
+                            <th>Date</th>
+                            <th>Créé par</th>
                             <th></th>
                           </tr>
                           </thead>
@@ -202,12 +211,15 @@
                                 <a [routerLink]="['/doctor', presc.doctorId._id]" class="avatar avatar-sm mr-2">
                                   <img class="avatar-img rounded-circle" src="{{presc?.doctorId.imagePath}}">
                                 </a>
-                                <a [routerLink]="['/doctor', presc.doctorId._id]">Dr. {{presc?.doctorId.name}} {{presc?.doctorId.lastName}} <span>{{presc?.doctorId.speciality}}</span></a>
+                                <a
+                                  [routerLink]="['/doctor', presc.doctorId._id]">Dr. {{presc?.doctorId.name}} {{presc?.doctorId.lastName}}
+                                  <span>{{presc?.doctorId.speciality}}</span></a>
                               </h2>
                             </td>
                             <td class="text-right">
                               <div class="table-action">
-                                <a *ngIf="!presc?.pharmacie" (click)="bye(presc._id)" class="btn btn-sm bg-success-light">
+                                <a *ngIf="!presc?.pharmacie" (click)="bye(presc._id)"
+                                   class="btn btn-sm bg-success-light">
                                   <i class="fas fa-money-bill-wave-alt"></i> Acheter
                                 </a>
                                 <a *ngIf="presc?.pharmacie" class="btn btn-sm bg-danger-light">
@@ -239,7 +251,7 @@
                           </tr>
                           <tr *ngIf="medicalRecord?.length > 0">
                             <th>ID</th>
-                            <th>Date </th>
+                            <th>Date</th>
                             <th>Description</th>
                             <th>Attachment</th>
                             <th>Crée</th>
@@ -255,9 +267,11 @@
                             <td>
                               <h2 class="table-avatar">
                                 <a href="doctor-profile.html" class="avatar avatar-sm mr-2">
-                                  <img class="avatar-img rounded-circle" src="{{med.doctorId.imagePath}}" alt="User Image">
+                                  <img class="avatar-img rounded-circle" src="{{med.doctorId.imagePath}}"
+                                       alt="User Image">
                                 </a>
-                                <a href="doctor-profile.html">{{med.doctorId.name}} {{med.doctorId.lastName}}<span>{{med.doctorId.speciality}}</span></a>
+                                <a href="doctor-profile.html">{{med.doctorId.name}} {{med.doctorId.lastName}}
+                                  <span>{{med.doctorId.speciality}}</span></a>
                               </h2>
                             </td>
                             <td *ngIf="userIsAuthenticated" class="text-right">
@@ -268,10 +282,12 @@
                                 <a href="javascript:void(0);" class="btn btn-sm bg-info-light">
                                   <i class="far fa-eye"></i> Voir
                                 </a>
-                                <a *ngIf="userId == med.doctorId" href="edit-prescription.html" class="btn btn-sm bg-success-light">
+                                <a *ngIf="userId == med.doctorId" href="edit-prescription.html"
+                                   class="btn btn-sm bg-success-light">
                                   <i class="fas fa-edit"></i> Editer
                                 </a>
-                                <a *ngIf="userId == med.doctorId" (click)="onDelete(id, med._id)" class="btn btn-sm bg-danger-light">
+                                <a *ngIf="userId == med.doctorId" (click)="onDelete(id, med._id)"
+                                   class="btn btn-sm bg-danger-light">
                                   <i class="far fa-trash-alt"></i> supprimer
                                 </a>
                               </div>
@@ -313,9 +329,12 @@
                             <td>
                               <h2 class="table-avatar">
                                 <a [routerLink]="['/doctor', invoice?.doctor._id]" class="avatar avatar-sm mr-2">
-                                  <img class="avatar-img rounded-circle" src="{{invoice?.doctor.imagePath}}" alt="User Image">
+                                  <img class="avatar-img rounded-circle" src="{{invoice?.doctor.imagePath}}"
+                                       alt="User Image">
                                 </a>
-                                <a [routerLink]="['/doctor', invoice?.doctor._id]">{{invoice?.doctor.name}} {{invoice?.doctor.lastName}} <span>{{invoice?.doctor.speciality}}</span></a>
+                                <a
+                                  [routerLink]="['/doctor', invoice?.doctor._id]">{{invoice?.doctor.name}} {{invoice?.doctor.lastName}}
+                                  <span>{{invoice?.doctor.speciality}}</span></a>
                               </h2>
                             </td>
                             <td>${{invoice?.price}}</td>
@@ -366,9 +385,12 @@
                             <td>
                               <h2 class="table-avatar">
                                 <a [routerLink]="['/doctor', certificat?.doctor._id]" class="avatar avatar-sm mr-2">
-                                  <img class="avatar-img rounded-circle" src="{{certificat?.doctor.imagePath}}" alt="User Image">
+                                  <img class="avatar-img rounded-circle" src="{{certificat?.doctor.imagePath}}"
+                                       alt="User Image">
                                 </a>
-                                <a [routerLink]="['/doctor', certificat?.doctor._id]">{{certificat?.doctor.name}} {{certificat?.doctor.lastName}} <span>{{certificat?.doctor.speciality}}</span></a>
+                                <a
+                                  [routerLink]="['/doctor', certificat?.doctor._id]">{{certificat?.doctor.name}} {{certificat?.doctor.lastName}}
+                                  <span>{{certificat?.doctor.speciality}}</span></a>
                               </h2>
                             </td>
                             <td>{{getdate(certificat?.to, 'DD MMMM YYYY')}}</td>

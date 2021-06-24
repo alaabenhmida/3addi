@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {PatientServiceService} from '../../../services/Patient/patient-service.service';
 
 @Component({
@@ -10,13 +10,15 @@ export class ListePatientsComponent implements OnInit {
 
   patients: any;
 
-  constructor(private patientService: PatientServiceService) { }
+  constructor(private patientService: PatientServiceService) {
+  }
 
   ngOnInit(): void {
     this.patientService.getAllPAtient().subscribe(patients => {
       this.patients = patients.posts;
     });
   }
+
   ondelete(id: string): void {
     this.patientService.deleteUser(id).subscribe(data => {
       console.log(data);

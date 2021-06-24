@@ -48,10 +48,13 @@
                     <img src="{{patientData?.imagePath}}">
                   </a>
                   <div class="profile-det-info">
-                    <h3><a [routerLink]="['/patient', patientData?._id]">{{patientData?.name}} {{patientData?.lastName}}</a></h3>
+                    <h3><a
+                      [routerLink]="['/patient', patientData?._id]">{{patientData?.name}} {{patientData?.lastName}}</a>
+                    </h3>
                     <div class="patient-details">
                       <h5><b>ID :</b> {{patientData?._id}}</h5>
-                      <h5 class="mb-0"><i class="fas fa-map-marker-alt"></i> {{patientData?.state}}, {{patientData?.country}}</h5>
+                      <h5 class="mb-0"><i class="fas fa-map-marker-alt"></i> {{patientData?.state}}
+                        , {{patientData?.country}}</h5>
                     </div>
                   </div>
                 </div>
@@ -80,7 +83,8 @@
                   <div class="biller-info">
                     <h4 class="d-block">Dr. {{prescData?.doctorId.name}} {{prescData?.doctorId.lastName}}</h4>
                     <span class="d-block text-sm text-muted">{{prescData?.doctorId.speciality}}</span>
-                    <span class="d-block text-sm text-muted">{{prescData?.doctorId.state}}, {{prescData?.doctorId.country}}</span>
+                    <span class="d-block text-sm text-muted">{{prescData?.doctorId.state}}
+                      , {{prescData?.doctorId.country}}</span>
                   </div>
                 </div>
                 <div class="col-sm-6 text-sm-right">
@@ -96,37 +100,37 @@
               <div class="card card-table">
                 <div class="card-body">
                   <div class="table-responsive">
-                      <table class="table table-hover table-center">
-                        <thead>
-                        <tr>
-                          <th style="min-width: 200px">Nom</th>
-                          <th style="min-width: 80px;">Quantité</th>
-                          <th style="min-width: 80px">Nombre de jours</th>
-                          <th style="min-width: 100px;">Temps</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr *ngFor="let creds of prescData?.presc">
-                          <td>
-                            {{creds?.name}}
-                          </td>
-                          <td>
-                            {{creds?.quantite}}
-                          </td>
-                          <td>
-                            {{creds?.days}}
-                          </td>
-                          <td>
-                            <div class="input-group">
-                              <p *ngIf="creds?.mor" class="input-group-text">{{creds?.mor}} Matin</p>
-                              <p *ngIf="creds?.af" class="input-group-text">{{creds?.af}} Après midi</p>
-                              <p *ngIf="creds?.ev" class="input-group-text">{{creds?.ev}} Soir</p>
-                              <p *ngIf="creds?.nght" class="input-group-text">{{creds?.nght}} Nuit</p>
-                            </div>
-                          </td>
-                        </tr>
-                        </tbody>
-                      </table>
+                    <table class="table table-hover table-center">
+                      <thead>
+                      <tr>
+                        <th style="min-width: 200px">Nom</th>
+                        <th style="min-width: 80px;">Quantité</th>
+                        <th style="min-width: 80px">Nombre de jours</th>
+                        <th style="min-width: 100px;">Temps</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr *ngFor="let creds of prescData?.presc">
+                        <td>
+                          {{creds?.name}}
+                        </td>
+                        <td>
+                          {{creds?.quantite}}
+                        </td>
+                        <td>
+                          {{creds?.days}}
+                        </td>
+                        <td>
+                          <div class="input-group">
+                            <p *ngIf="creds?.mor" class="input-group-text">{{creds?.mor}} Matin</p>
+                            <p *ngIf="creds?.af" class="input-group-text">{{creds?.af}} Après midi</p>
+                            <p *ngIf="creds?.ev" class="input-group-text">{{creds?.ev}} Soir</p>
+                            <p *ngIf="creds?.nght" class="input-group-text">{{creds?.nght}} Nuit</p>
+                          </div>
+                        </td>
+                      </tr>
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               </div>
@@ -136,8 +140,9 @@
               </div>
               <!-- /Prescription Item -->
               <div *ngIf="prescData?.pharmacie" class="signature">
-                <h4 class="text-uppercase text-purple">acheté depuis pharmacie {{prescData?.pharmacie.name}}, {{prescData?.pharmacie.address}}, {{prescData?.pharmacie.city}}, {{prescData?.pharmacie.state}}</h4>
-<!--                <h1 *ngIf="prescData?.pharmacie" class="text-info">{{prescData?.pharmacie._id}}</h1>-->
+                <h4 class="text-uppercase text-purple">acheté depuis pharmacie {{prescData?.pharmacie.name}}
+                  , {{prescData?.pharmacie.address}}, {{prescData?.pharmacie.city}}, {{prescData?.pharmacie.state}}</h4>
+                <!--                <h1 *ngIf="prescData?.pharmacie" class="text-info">{{prescData?.pharmacie._id}}</h1>-->
               </div>
               <!-- Signature -->
               <div class="row">
@@ -166,7 +171,6 @@
 
 </div>
 <!-- /Main Wrapper -->
-
 
 
 </body>

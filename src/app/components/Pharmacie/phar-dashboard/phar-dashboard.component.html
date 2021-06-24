@@ -197,17 +197,21 @@
                             <tr *ngFor="let sale of sales">
                               <td>
                                 <h2 class="table-avatar">
-                                  <a class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{sale?.image}}"></a>
+                                  <a class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle"
+                                                                        src="{{sale?.image}}"></a>
                                   <a>{{sale?.name}} <span> </span></a>
                                 </h2>
                               </td>
-                              <td>{{getDate(sale.date, 'DD MMM YYYY')}} <span class="d-block text-info">{{getDate(sale.date, 'HH:mm')}}</span></td>
+                              <td>{{getDate(sale.date, 'DD MMM YYYY')}} <span
+                                class="d-block text-info">{{getDate(sale.date, 'HH:mm')}}</span></td>
                               <td>{{sale?.quantity}}</td>
                               <td>${{sale?.price}}</td>
                               <td>
                                 <h2 class="table-avatar">
-                                  <a class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{sale?.patient.imagePath}}"></a>
-                                  <a>{{sale?.patient.name}} {{sale?.patient.lastName}} <span>{{sale?.patient._id}} </span></a>
+                                  <a class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle"
+                                                                        src="{{sale?.patient.imagePath}}"></a>
+                                  <a>{{sale?.patient.name}} {{sale?.patient.lastName}}
+                                    <span>{{sale?.patient._id}} </span></a>
                                 </h2>
                               </td>
                             </tr>
@@ -238,17 +242,21 @@
                             <tr *ngFor="let sale of todaySales">
                               <td>
                                 <h2 class="table-avatar">
-                                  <a class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{sale?.image}}"></a>
+                                  <a class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle"
+                                                                        src="{{sale?.image}}"></a>
                                   <a>{{sale?.name}} <span> </span></a>
                                 </h2>
                               </td>
-                              <td>{{getDate(sale.date, 'DD MMM YYYY')}} <span class="d-block text-info">{{getDate(sale.date, 'HH:mm')}}</span></td>
+                              <td>{{getDate(sale.date, 'DD MMM YYYY')}} <span
+                                class="d-block text-info">{{getDate(sale.date, 'HH:mm')}}</span></td>
                               <td>{{sale?.quantity}}</td>
                               <td>${{sale?.price}}</td>
                               <td>
                                 <h2 class="table-avatar">
-                                  <a class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{sale?.patient.imagePath}}"></a>
-                                  <a>{{sale?.patient.name}} {{sale?.patient.lastName}} <span>{{sale?.patient._id}} </span></a>
+                                  <a class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle"
+                                                                        src="{{sale?.patient.imagePath}}"></a>
+                                  <a>{{sale?.patient.name}} {{sale?.patient.lastName}}
+                                    <span>{{sale?.patient._id}} </span></a>
                                 </h2>
                               </td>
                             </tr>

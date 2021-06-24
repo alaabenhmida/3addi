@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { BookingSuccessComponent } from './booking-success.component';
+import {BookingSuccessComponent} from './booking-success.component';
 
 describe('BookingSuccessComponent', () => {
   let component: BookingSuccessComponent;
@@ -8,9 +8,9 @@ describe('BookingSuccessComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BookingSuccessComponent ]
+      declarations: [BookingSuccessComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

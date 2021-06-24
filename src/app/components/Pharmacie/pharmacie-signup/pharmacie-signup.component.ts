@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {mimeType} from '../../../shared/mime-type.validator';
 import {AdminService} from '../../../services/admin/admin.service';
@@ -21,7 +21,8 @@ export class PharmacieSignupComponent implements OnInit {
   imageform: FormGroup;
 
   constructor(private _formBuilder: FormBuilder,
-              private adminService: AdminService) { }
+              private adminService: AdminService) {
+  }
 
   ngOnInit(): void {
     this.firstFormGroup = this._formBuilder.group({

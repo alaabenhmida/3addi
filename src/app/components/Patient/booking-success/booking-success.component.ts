@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {PatientServiceService} from '../../../services/Patient/patient-service.service';
 import {RDV} from '../../../models/Patient/rdv.model';
@@ -15,7 +15,8 @@ export class BookingSuccessComponent implements OnInit {
 
   constructor(public route: ActivatedRoute,
               private router: Router,
-              private patientService: PatientServiceService) { }
+              private patientService: PatientServiceService) {
+  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
@@ -25,6 +26,7 @@ export class BookingSuccessComponent implements OnInit {
       });
     });
   }
+
   getDay(day: string, format: string): string {
     return moment(day).format(format);
   }

@@ -64,7 +64,7 @@ export class IndexComponent implements OnInit, OnDestroy {
     });
     this.form = new FormGroup({
       speciality: new FormControl(null),
-      sexe: new FormControl(null, { validators: [Validators.required] }),
+      sexe: new FormControl(null, {validators: [Validators.required]}),
       city: new FormControl(null),
       name: new FormControl(null)
     });
@@ -94,9 +94,12 @@ export class IndexComponent implements OnInit, OnDestroy {
       });
       return;
     }
-    this.router.navigate(['doctor/search'], {queryParams: {
-      city: this.form.value.city,
-      speciality: this.form.value.speciality,
-      sexe: this.form.value.sexe}});
+    this.router.navigate(['doctor/search'], {
+      queryParams: {
+        city: this.form.value.city,
+        speciality: this.form.value.speciality,
+        sexe: this.form.value.sexe
+      }
+    });
   }
 }

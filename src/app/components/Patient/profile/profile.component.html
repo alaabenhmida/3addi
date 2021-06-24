@@ -83,24 +83,34 @@
               <li class="list-group-item">
                 <div class="media align-items-center">
                   <div class="mr-3">
-                    <img alt="Image placeholder" src="{{patientdata?.rdv[patientdata?.rdv.length-1].doctorId.imagePath}}" class="avatar  rounded-circle">
+                    <img alt="Image placeholder"
+                         src="{{patientdata?.rdv[patientdata?.rdv.length-1].doctorId.imagePath}}"
+                         class="avatar  rounded-circle">
                   </div>
                   <div class="media-body">
-                    <h5 class="d-block mb-0">Dr. {{patientdata?.rdv[patientdata?.rdv.length-1].doctorId.name}} {{patientdata?.rdv[patientdata?.rdv.length-1].doctorId.lastName}} </h5>
-                    <span class="d-block text-sm text-muted">{{patientdata?.rdv[patientdata?.rdv.length-1].doctorId.speciality}}</span>
-                    <span class="d-block text-sm text-muted">{{getdate(patientdata?.rdv[patientdata?.rdv.length-1].rdvDate, 'DD MMM YYYY HH:mm')}}</span>
+                    <h5 class="d-block mb-0">
+                      Dr. {{patientdata?.rdv[patientdata?.rdv.length - 1].doctorId.name}} {{patientdata?.rdv[patientdata?.rdv.length - 1].doctorId.lastName}} </h5>
+                    <span
+                      class="d-block text-sm text-muted">{{patientdata?.rdv[patientdata?.rdv.length - 1].doctorId.speciality}}</span>
+                    <span
+                      class="d-block text-sm text-muted">{{getdate(patientdata?.rdv[patientdata?.rdv.length - 1].rdvDate, 'DD MMM YYYY HH:mm')}}</span>
                   </div>
                 </div>
               </li>
               <li class="list-group-item">
                 <div class="media align-items-center">
                   <div class="mr-3">
-                    <img alt="Image placeholder" src="{{patientdata?.rdv[patientdata?.rdv.length-2].doctorId.imagePath}}" class="avatar  rounded-circle">
+                    <img alt="Image placeholder"
+                         src="{{patientdata?.rdv[patientdata?.rdv.length-2].doctorId.imagePath}}"
+                         class="avatar  rounded-circle">
                   </div>
                   <div class="media-body">
-                    <h5 class="d-block mb-0">Dr. {{patientdata?.rdv[patientdata?.rdv.length-2].doctorId.name}} {{patientdata?.rdv[patientdata?.rdv.length-2].doctorId.lastName}} </h5>
-                    <span class="d-block text-sm text-muted">{{patientdata?.rdv[patientdata?.rdv.length-2].doctorId.speciality}}</span>
-                    <span class="d-block text-sm text-muted">{{getdate(patientdata?.rdv[patientdata?.rdv.length-2].rdvDate, 'DD MMM YYYY HH:mm')}}</span>
+                    <h5 class="d-block mb-0">
+                      Dr. {{patientdata?.rdv[patientdata?.rdv.length - 2].doctorId.name}} {{patientdata?.rdv[patientdata?.rdv.length - 2].doctorId.lastName}} </h5>
+                    <span
+                      class="d-block text-sm text-muted">{{patientdata?.rdv[patientdata?.rdv.length - 2].doctorId.speciality}}</span>
+                    <span
+                      class="d-block text-sm text-muted">{{getdate(patientdata?.rdv[patientdata?.rdv.length - 2].rdvDate, 'DD MMM YYYY HH:mm')}}</span>
                   </div>
                 </div>
               </li>
@@ -122,7 +132,8 @@
                     <a class="nav-link" href="#pres" data-toggle="tab"><span>ordonnances</span></a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#medical" data-toggle="tab"><span class="med-records">Dossiers médicaux</span></a>
+                    <a class="nav-link" href="#medical" data-toggle="tab"><span
+                      class="med-records">Dossiers médicaux</span></a>
                   </li>
                 </ul>
               </div>
@@ -154,17 +165,24 @@
                             <td>
                               <h2 class="table-avatar">
                                 <a [routerLink]="['/doctor', rdv.doctorId._id]" class="avatar avatar-sm mr-2">
-                                  <img class="avatar-img rounded-circle" src="{{rdv?.doctorId.imagePath}}" alt="User Image">
+                                  <img class="avatar-img rounded-circle" src="{{rdv?.doctorId.imagePath}}"
+                                       alt="User Image">
                                 </a>
-                                <a [routerLink]="['/doctor', rdv.doctorId._id]">Dr. {{rdv?.doctorId.name}} {{rdv?.doctorId.lastName}} <span>{{rdv?.doctorId.speciality}}</span></a>
+                                <a
+                                  [routerLink]="['/doctor', rdv.doctorId._id]">Dr. {{rdv?.doctorId.name}} {{rdv?.doctorId.lastName}}
+                                  <span>{{rdv?.doctorId.speciality}}</span></a>
                               </h2>
                             </td>
-                            <td>{{getdate(rdv.rdvDate, 'DD MMM YYYY')}} <span class="d-block text-info">{{getdate(rdv.rdvDate, 'HH:mm')}}</span></td>
+                            <td>{{getdate(rdv.rdvDate, 'DD MMM YYYY')}} <span
+                              class="d-block text-info">{{getdate(rdv.rdvDate, 'HH:mm')}}</span></td>
                             <td>{{getdate(rdv.appDate, 'DD MMM YYYY')}}</td>
                             <td>${{rdv?.doctorId.price}}</td>
-                            <td *ngIf="rdv.status == 'confirmed'"><span class="badge badge-pill bg-success-light">{{rdv.status}}</span></td>
-                            <td *ngIf="rdv.status == 'pending'"><span class="badge badge-pill bg-warning-light">{{rdv.status}}</span></td>
-                            <td *ngIf="rdv.status == 'canceled'"><span class="badge badge-pill bg-danger-light">{{rdv.status}}</span></td>
+                            <td *ngIf="rdv.status == 'confirmed'"><span
+                              class="badge badge-pill bg-success-light">{{rdv.status}}</span></td>
+                            <td *ngIf="rdv.status == 'pending'"><span
+                              class="badge badge-pill bg-warning-light">{{rdv.status}}</span></td>
+                            <td *ngIf="rdv.status == 'canceled'"><span
+                              class="badge badge-pill bg-danger-light">{{rdv.status}}</span></td>
                             <td class="text-right">
                               <div class="table-action">
                               </div>
@@ -189,8 +207,8 @@
                         <table class="table table-hover table-center mb-0">
                           <thead>
                           <tr>
-                            <th>Date </th>
-                            <th>Créé par </th>
+                            <th>Date</th>
+                            <th>Créé par</th>
                             <th></th>
                           </tr>
                           </thead>
@@ -200,9 +218,12 @@
                             <td>
                               <h2 class="table-avatar">
                                 <a [routerLink]="['/doctor', presc.doctorId._id]" class="avatar avatar-sm mr-2">
-                                  <img class="avatar-img rounded-circle" src="{{presc?.doctorId.imagePath}}" alt="User Image">
+                                  <img class="avatar-img rounded-circle" src="{{presc?.doctorId.imagePath}}"
+                                       alt="User Image">
                                 </a>
-                                <a [routerLink]="['/doctor', presc.doctorId._id]">Dr. {{presc?.doctorId.name}} {{presc?.doctorId.lastName}} <span>{{presc?.doctorId.speciality}}</span></a>
+                                <a
+                                  [routerLink]="['/doctor', presc.doctorId._id]">Dr. {{presc?.doctorId.name}} {{presc?.doctorId.lastName}}
+                                  <span>{{presc?.doctorId.speciality}}</span></a>
                               </h2>
                             </td>
                             <td class="text-right">
@@ -213,7 +234,8 @@
                                 <a [routerLink]="['/patient', id, 'presc', presc._id]" class="btn btn-sm bg-info-light">
                                   <i class="far fa-eye"></i> détails
                                 </a>
-                                <a *ngIf="presc.doctorId._id === userId && userIsAuthenticated" (click)="ondeletePrecription(id, presc._id)" class="btn btn-sm bg-warning-light">
+                                <a *ngIf="presc.doctorId._id === userId && userIsAuthenticated"
+                                   (click)="ondeletePrecription(id, presc._id)" class="btn btn-sm bg-warning-light">
                                   <i class="far fa-eye"></i> supprimer
                                 </a>
                               </div>
@@ -230,7 +252,8 @@
                 <!-- Medical Records Tab -->
                 <div class="tab-pane fade" id="medical">
                   <div class="text-right">
-                    <a *ngIf="role === 'doctor'" [routerLink]="['ajoutDossier']" class="add-new-btn" data-toggle="modal" data-target="#add_medical_records">Ajouter un dossier médical</a>
+                    <a *ngIf="role === 'doctor'" [routerLink]="['ajoutDossier']" class="add-new-btn" data-toggle="modal"
+                       data-target="#add_medical_records">Ajouter un dossier médical</a>
                   </div>
                   <div class="card card-table mb-0">
                     <div class="card-body">
@@ -239,7 +262,7 @@
                           <thead>
                           <tr>
                             <th>ID</th>
-                            <th>Date </th>
+                            <th>Date</th>
                             <th>Description</th>
                             <th>Attachment</th>
                             <th>Créé</th>
@@ -251,21 +274,26 @@
                             <td><a>{{med._id}}</a></td>
                             <td>{{getdate(med?.date, 'DD MMM YYYY')}}</td>
                             <td>{{med?.description}}</td>
-                            <td><a href="{{med?.attachment}}">{{med?.nom}}.pdf  <i class="fa fa-file-pdf"></i></a></td>
+                            <td><a href="{{med?.attachment}}">{{med?.nom}}.pdf <i class="fa fa-file-pdf"></i></a></td>
                             <td>
                               <h2 class="table-avatar">
                                 <a [routerLink]="['/doctor', med.doctorId._id]" class="avatar avatar-sm mr-2">
-                                  <img class="avatar-img rounded-circle" src="{{med.doctorId.imagePath}}" alt="User Image">
+                                  <img class="avatar-img rounded-circle" src="{{med.doctorId.imagePath}}"
+                                       alt="User Image">
                                 </a>
-                                <a [routerLink]="['/doctor', med.doctorId._id]">{{med.doctorId.name}} {{med.doctorId.lastName}}<span>{{med.doctorId.speciality}}</span></a>
+                                <a
+                                  [routerLink]="['/doctor', med.doctorId._id]">{{med.doctorId.name}} {{med.doctorId.lastName}}
+                                  <span>{{med.doctorId.speciality}}</span></a>
                               </h2>
                             </td>
                             <td *ngIf="userIsAuthenticated" class="text-right">
                               <div class="table-action">
-                                <a *ngIf="med.doctorId._id === userId && userIsAuthenticated" href="edit-prescription.html" class="btn btn-sm bg-success-light">
+                                <a *ngIf="med.doctorId._id === userId && userIsAuthenticated"
+                                   href="edit-prescription.html" class="btn btn-sm bg-success-light">
                                   <i class="fas fa-edit"></i> Editer
                                 </a>
-                                <a *ngIf="med.doctorId._id === userId && userIsAuthenticated" (click)="onDelete(id, med._id)" class="btn btn-sm bg-danger-light">
+                                <a *ngIf="med.doctorId._id === userId && userIsAuthenticated"
+                                   (click)="onDelete(id, med._id)" class="btn btn-sm bg-danger-light">
                                   <i class="far fa-trash-alt"></i> supprimer
                                 </a>
                               </div>
@@ -522,7 +550,8 @@
     <div class="modal-content">
       <div class="modal-header">
         <h3 class="modal-title">Medical Records</h3>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+          aria-hidden="true">&times;</span></button>
       </div>
       <form>
         <div class="modal-body">

@@ -9,11 +9,11 @@ import {MapListComponent} from './components/Pharmacie/map-list/map-list.compone
 import {Error404Component} from './shared/error404/error404.component';
 
 const appRoutes: Routes = [
-  { path: '', component: IndexComponent },
-  { path: 'doctors', component: MapGridComponent },
-  { path: 'pharmacies', component: MapListComponent},
-  { path: 'doctor', loadChildren: () => import('./components/Doctor/doctor.module').then(m => m.DoctorModule) },
-  { path: 'pharmacie', loadChildren: () => import('./components/Pharmacie/pharmacie.module').then(p => p.PharmacieModule) },
+  {path: '', component: IndexComponent},
+  {path: 'doctors', component: MapGridComponent},
+  {path: 'pharmacies', component: MapListComponent},
+  {path: 'doctor', loadChildren: () => import('./components/Doctor/doctor.module').then(m => m.DoctorModule)},
+  {path: 'pharmacie', loadChildren: () => import('./components/Pharmacie/pharmacie.module').then(p => p.PharmacieModule)},
 ];
 
 
@@ -22,4 +22,5 @@ const appRoutes: Routes = [
   exports: [RouterModule],
   providers: [AuthGuard, PatientAuthGuard, LoginAuthGuard]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

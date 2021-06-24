@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {AdminService} from '../../../services/admin/admin.service';
 import {DoctorAuthService} from '../../../auth/Doctor/doctor-auth.service';
@@ -14,7 +14,8 @@ export class DocCheckDetailsComponent implements OnInit {
   constructor(public route: ActivatedRoute,
               private adminService: AdminService,
               private doctorauth: DoctorAuthService,
-              public router: Router) { }
+              public router: Router) {
+  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
@@ -39,6 +40,7 @@ export class DocCheckDetailsComponent implements OnInit {
       });
     });
   }
+
   onReject(id: string): void {
     this.adminService.delDoctor(id).subscribe(data => {
       this.adminService.sendmail(this.doctorData.email, 'votre compte a était refusé',

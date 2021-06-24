@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { AddPrescComponent } from './add-presc.component';
+import {AddPrescComponent} from './add-presc.component';
 
 describe('AddPrescComponent', () => {
   let component: AddPrescComponent;
@@ -8,9 +8,9 @@ describe('AddPrescComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddPrescComponent ]
+      declarations: [AddPrescComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

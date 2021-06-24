@@ -1,36 +1,36 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 
-import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HeaderComponent } from './shared/header/header.component';
-import { SignupComponent } from './components/Patient/signup/signup.component';
-import { LoginComponent } from './components/Patient/login/login.component';
+import {AppComponent} from './app.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {HeaderComponent} from './shared/header/header.component';
+import {SignupComponent} from './components/Patient/signup/signup.component';
+import {LoginComponent} from './components/Patient/login/login.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { IndexComponent } from './shared/index/index.component';
+import {IndexComponent} from './shared/index/index.component';
 import {PatientRoutingModule} from './routers/patient-routing/patient-routing.module';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import { SignupDrComponent } from './components/Doctor/signup-dr/signup-dr.component';
-import { LogindrComponent } from './components/Doctor/logindr/logindr.component';
+import {SignupDrComponent} from './components/Doctor/signup-dr/signup-dr.component';
+import {LogindrComponent} from './components/Doctor/logindr/logindr.component';
 import {AuthInterceptor} from './auth/auth-interceptor';
 import {DlDateTimeDateModule, DlDateTimePickerModule} from 'angular-bootstrap-datetimepicker';
 import {NgxSkeletonLoaderModule} from 'ngx-skeleton-loader';
-import { MessagesComponent } from './shared/messages/messages.component';
+import {MessagesComponent} from './shared/messages/messages.component';
 import {SocketIoConfig, SocketIoModule} from 'ngx-socket-io';
 import {ToastrModule} from 'ngx-toastr';
 import {TooltipModule} from 'ngx-bootstrap/tooltip';
 import {AgmCoreModule} from '@agm/core';
-import { InvoiceDetailComponent } from './components/Patient/invoice-detail/invoice-detail.component';
+import {InvoiceDetailComponent} from './components/Patient/invoice-detail/invoice-detail.component';
 import {RouterModule} from '@angular/router';
-import { InvoicesComponent } from './components/Doctor/invoices/invoices.component';
-import { AlertModule } from 'ngx-bootstrap/alert';
+import {InvoicesComponent} from './components/Doctor/invoices/invoices.component';
+import {AlertModule} from 'ngx-bootstrap/alert';
 import {PaginationModule} from 'ngx-bootstrap/pagination';
 import {ErrorInterceptor} from './error-interceptor';
-import { ErrorComponent } from './error/error.component';
+import {ErrorComponent} from './error/error.component';
 import {PharmacieRoutingModule} from './routers/pharmacie-routing/pharmacie-routing.module';
 import {AgmDirectionModule} from 'agm-direction';
-import { LoginDialogComponent } from './shared/login-dialog/login-dialog.component';
-import { AdminDashboardComponent } from './components/Admin/admin-dashboard/admin-dashboard.component';
+import {LoginDialogComponent} from './shared/login-dialog/login-dialog.component';
+import {AdminDashboardComponent} from './components/Admin/admin-dashboard/admin-dashboard.component';
 import {AdminRoutingModule} from './routers/admin-routing/admin-routing.module';
 import {NgxChartsModule, PieChartModule} from '@swimlane/ngx-charts';
 import {CarouselModule} from 'ngx-bootstrap/carousel';
@@ -50,7 +50,8 @@ import {Error404Component} from './shared/error404/error404.component';
 import {NgxSpinnerModule} from 'ngx-spinner';
 import {ListePatientsComponent} from './components/Admin/liste-patients/liste-patients.component';
 import {DoctorsListeComponent} from './components/Admin/doctors-liste/doctors-liste.component';
-const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
+
+const config: SocketIoConfig = {url: 'http://localhost:3000', options: {}};
 
 @NgModule({
   declarations: [
@@ -117,4 +118,5 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
   bootstrap: [AppComponent],
   entryComponents: [ErrorComponent, LoginDialogComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

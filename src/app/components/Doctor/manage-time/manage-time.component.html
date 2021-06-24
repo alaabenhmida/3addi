@@ -177,42 +177,40 @@
                       </div>
 
 
-
-                    <div class="row">
-                      <div class="col-md-12">
-                        <div class="card schedule-widget mb-0">
-
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="card schedule-widget mb-0">
 
 
-                          <!-- Schedule Content -->
-                          <div class="tab-content schedule-cont">
+                            <!-- Schedule Content -->
+                            <div class="tab-content schedule-cont">
 
-                            <!-- Monday Slot -->
-                            <div id="slot_monday" class="tab-pane fade show active">
-                              <h4 class="card-title d-flex justify-content-between">
-                                <span>Tranches de temps</span>
-                              </h4>
+                              <!-- Monday Slot -->
+                              <div id="slot_monday" class="tab-pane fade show active">
+                                <h4 class="card-title d-flex justify-content-between">
+                                  <span>Tranches de temps</span>
+                                </h4>
 
-                              <!-- Slot List -->
-                              <div class="doc-times">
-                                <div *ngFor="let time of tab, let i = index" class="doc-slot-list">
-                                  {{time}} - {{addTime(time)}}
-                                  <a (click)="onDelete(i)" href="javascript:void(0)" class="delete_schedule">
-                                    <i class="fa fa-times"></i>
-                                  </a>
+                                <!-- Slot List -->
+                                <div class="doc-times">
+                                  <div *ngFor="let time of tab, let i = index" class="doc-slot-list">
+                                    {{time}} - {{addTime(time)}}
+                                    <a (click)="onDelete(i)" href="javascript:void(0)" class="delete_schedule">
+                                      <i class="fa fa-times"></i>
+                                    </a>
+                                  </div>
                                 </div>
+                                <!-- /Slot List -->
+
                               </div>
-                              <!-- /Slot List -->
+                              <!-- /Monday Slot -->
 
                             </div>
-                            <!-- /Monday Slot -->
+                            <!-- /Schedule Content -->
 
                           </div>
-                          <!-- /Schedule Content -->
-
                         </div>
                       </div>
-                    </div>
 
 
                       <div class="submit-section submit-btn-bottom">

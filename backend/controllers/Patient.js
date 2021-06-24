@@ -313,7 +313,7 @@ exports.addInvoice = (req, res, next) => {
 }
 
 exports.addInvoicePharmacie = (req, res, next) => {
-  // console.log(req.body);
+  console.log("wsol");
   Patient.findOneAndUpdate({_id: req.userData.userId},
     {
       $push: {
@@ -326,6 +326,7 @@ exports.addInvoicePharmacie = (req, res, next) => {
     {'new': true, 'safe': true, 'upsert': true}).then(result => {
     res.status(201).json(result.orders[result.orders.length - 1]._id);
   }).catch(error => {
+    console.log("wsolch");
     res.status(400).json(error);
   });
 }

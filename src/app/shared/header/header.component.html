@@ -52,8 +52,10 @@
       </li>
       <li *ngIf="inPharmacie">
         <div class="dropdown">
-          <button [routerLink]="['/pharmacie', pharmacieId, 'cart']" type="button" class="btn btn-info" data-toggle="dropdown">
-            <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart <span class="badge badge-pill badge-danger">{{productNumber}}</span>
+          <button [routerLink]="['/pharmacie', pharmacieId, 'cart']" type="button" class="btn btn-info"
+                  data-toggle="dropdown">
+            <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart <span
+            class="badge badge-pill badge-danger">{{productNumber}}</span>
           </button>
         </div>
       </li>

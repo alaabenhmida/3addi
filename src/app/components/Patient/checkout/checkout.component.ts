@@ -1,7 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {PatientServiceService} from '../../../services/Patient/patient-service.service';
-import {RDV} from '../../../models/Patient/rdv.model';
 import * as moment from 'moment';
 // import {DoctorServiceService} from '../../../services/doctor/doctor-service.service';
 // import { StripeService, Elements, Element as StripeElement, ElementsOptions } from 'ngx-stripe';
@@ -31,15 +30,8 @@ export class CheckoutComponent implements OnInit {
   private patient: Patient;
 
   element: Element;
-  // card: StripeElement;
   paymentStatus: any;
-  stripData: any;
-  submitted: any;
   loading: any;
-
-  // elementsOptions: ElementsOptions = {
-  //   locale: 'en'
-  // };
   cardOptions: StripeCardElementOptions = {
     style: {
       base: {
@@ -81,8 +73,8 @@ export class CheckoutComponent implements OnInit {
       this.patientService.getRdv(paramMap.get('rdvID')).subscribe(result => {
         this.rdv = result.rdv[0];
         this.bookingFees = result.rdv[0].doctorId.price * 10 / 100;
-        this.doctorService.getDoctor(result.rdv[0].doctorId._id).subscribe(result => {
-          this.price = result.price;
+        this.doctorService.getDoctor(result.rdv[0].doctorId._id).subscribe(results => {
+          this.price = results.price;
         });
       });
     });

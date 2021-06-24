@@ -170,11 +170,12 @@ router.get("/order/:id", checkAuth, (req, res, next) => {
 });
 
 router.put("/addorder", checkAuth, (req, res, next) => {
-  Pharmacie.findOneAndUpdate({_id: req.userData.userId},
+  console.log("wsollllll!!!!");
+  Pharmacie.findOneAndUpdate({_id: req.body.pharmacie},
     {
       $push: {
         orders: {
-          patient: req.body.patient, products: req.body.cart,
+          patient: req.userData.userId, products: req.body.cart,
           date: moment(new Date().toString()).format("YYYY-MM-DDTHH:mm:ss")
         }
       }
@@ -182,6 +183,7 @@ router.put("/addorder", checkAuth, (req, res, next) => {
     {'new': true, 'safe': true, 'upsert': true}).then(result => {
     res.status(201).json(result);
   }).catch(error => {
+    console.log("wsollllllchhhhhhhh!!!!");
     res.status(400).json(error);
   });
 });

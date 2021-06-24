@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { DocCheckDetailsComponent } from './doc-check-details.component';
+import {DocCheckDetailsComponent} from './doc-check-details.component';
 
 describe('DocCheckDetailsComponent', () => {
   let component: DocCheckDetailsComponent;
@@ -8,9 +8,9 @@ describe('DocCheckDetailsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DocCheckDetailsComponent ]
+      declarations: [DocCheckDetailsComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

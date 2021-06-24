@@ -34,33 +34,41 @@ exports = module.exports = (io) => {
     socket.on('message', data => {
       Doctor.findOne({_id: data.user}).then(result => {
         if (result) {
-          Doctor.findOneAndUpdate({_id: data.user,
-            chatRoom: {$elemMatch: {name: data.room}}},
+          Doctor.findOneAndUpdate({
+              _id: data.user,
+              chatRoom: {$elemMatch: {name: data.room}}
+            },
             {$push: {'chatRoom.$.messages': data}},
             {'new': true, 'safe': true, 'upsert': true}).catch(error => {
-              console.log(error);
+            console.log(error);
           });
         } else {
-          Patient.findOneAndUpdate({_id: data.user,
-              chatRoom: {$elemMatch: {name: data.room}}},
+          Patient.findOneAndUpdate({
+              _id: data.user,
+              chatRoom: {$elemMatch: {name: data.room}}
+            },
             {$push: {'chatRoom.$.messages': data}},
             {'new': true, 'safe': true, 'upsert': true}).catch(error => {
-              console.log(error);
+            console.log(error);
           });
         }
       })
 
       Doctor.findOne({_id: data.to}).then(result => {
         if (result) {
-          Doctor.findOneAndUpdate({_id: data.to,
-              chatRoom: {$elemMatch: {name: data.room}}},
+          Doctor.findOneAndUpdate({
+              _id: data.to,
+              chatRoom: {$elemMatch: {name: data.room}}
+            },
             {$push: {'chatRoom.$.messages': data}},
             {'new': true, 'safe': true, 'upsert': true}).catch(error => {
             console.log(error);
           });
         } else {
-          Patient.findOneAndUpdate({_id: data.to,
-              chatRoom: {$elemMatch: {name: data.room}}},
+          Patient.findOneAndUpdate({
+              _id: data.to,
+              chatRoom: {$elemMatch: {name: data.room}}
+            },
             {$push: {'chatRoom.$.messages': data}},
             {'new': true, 'safe': true, 'upsert': true}).catch(error => {
             console.log(error);

@@ -28,14 +28,14 @@
           <nav aria-label="breadcrumb" class="page-breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Search</li>
+              <li class="breadcrumb-item active" aria-current="page">rechercher</li>
             </ol>
           </nav>
           <h2 class="breadcrumb-title">{{pharmacieData?.length}} résultats pour : Pharmacies à {{form.value.city}}</h2>
         </div>
         <div class="col-md-4 col-12 d-md-block d-none">
           <div class="sort-by">
-            <span class="sort-title">Sort by</span>
+            <span class="sort-title">filtrer</span>
             <span class="sortby-fliter">
 									<select class="select">
 										<option>Select</option>
@@ -62,58 +62,58 @@
           <!-- Search Filter -->
           <div class="card search-filter">
             <form [formGroup]="form" (submit)="onSearch()">
-            <div class="card-header">
-              <h4 class="card-title mb-0">Search Filter</h4>
-            </div>
-            <div class="card-body">
-              <div class="filter-widget">
-                <label>Location</label>
-                <input type="text" class="form-control" placeholder="Select Location" formControlName="city">
+              <div class="card-header">
+                <h4 class="card-title mb-0">filtrer</h4>
               </div>
-<!--              <div class="filter-widget">-->
-<!--                <h4>Categories</h4>-->
-<!--                <div>-->
-<!--                  <label class="custom_check">-->
-<!--                    <input type="checkbox" name="gender_type">-->
-<!--                    <span class="checkmark"></span> Popular-->
-<!--                  </label>-->
-<!--                </div>-->
-<!--                <div>-->
-<!--                  <label class="custom_check">-->
-<!--                    <input type="checkbox" name="gender_type">-->
-<!--                    <span class="checkmark"></span> Latest-->
-<!--                  </label>-->
-<!--                </div>-->
-<!--                <div>-->
-<!--                  <label class="custom_check">-->
-<!--                    <input type="checkbox" name="gender_type">-->
-<!--                    <span class="checkmark"></span> Ratings-->
-<!--                  </label>-->
-<!--                </div>-->
-<!--                <div>-->
-<!--                  <label class="custom_check">-->
-<!--                    <input type="checkbox" name="gender_type">-->
-<!--                    <span class="checkmark"></span> Availability-->
-<!--                  </label>-->
-<!--                </div>-->
-<!--                <div>-->
-<!--                  <label class="custom_check">-->
-<!--                    <input type="checkbox" name="gender_type" checked>-->
-<!--                    <span class="checkmark"></span> Open 24 Hrs-->
-<!--                  </label>-->
-<!--                </div>-->
-<!--                <div>-->
-<!--                  <label class="custom_check">-->
-<!--                    <input type="checkbox" name="gender_type">-->
-<!--                    <span class="checkmark"></span> Home Delivery-->
-<!--                  </label>-->
-<!--                </div>-->
-<!--              </div>-->
+              <div class="card-body">
+                <div class="filter-widget">
+                  <label>rechercher par village</label>
+                  <input type="text" class="form-control" placeholder="village" formControlName="city">
+                </div>
+                <!--              <div class="filter-widget">-->
+                <!--                <h4>Categories</h4>-->
+                <!--                <div>-->
+                <!--                  <label class="custom_check">-->
+                <!--                    <input type="checkbox" name="gender_type">-->
+                <!--                    <span class="checkmark"></span> Popular-->
+                <!--                  </label>-->
+                <!--                </div>-->
+                <!--                <div>-->
+                <!--                  <label class="custom_check">-->
+                <!--                    <input type="checkbox" name="gender_type">-->
+                <!--                    <span class="checkmark"></span> Latest-->
+                <!--                  </label>-->
+                <!--                </div>-->
+                <!--                <div>-->
+                <!--                  <label class="custom_check">-->
+                <!--                    <input type="checkbox" name="gender_type">-->
+                <!--                    <span class="checkmark"></span> Ratings-->
+                <!--                  </label>-->
+                <!--                </div>-->
+                <!--                <div>-->
+                <!--                  <label class="custom_check">-->
+                <!--                    <input type="checkbox" name="gender_type">-->
+                <!--                    <span class="checkmark"></span> Availability-->
+                <!--                  </label>-->
+                <!--                </div>-->
+                <!--                <div>-->
+                <!--                  <label class="custom_check">-->
+                <!--                    <input type="checkbox" name="gender_type" checked>-->
+                <!--                    <span class="checkmark"></span> Open 24 Hrs-->
+                <!--                  </label>-->
+                <!--                </div>-->
+                <!--                <div>-->
+                <!--                  <label class="custom_check">-->
+                <!--                    <input type="checkbox" name="gender_type">-->
+                <!--                    <span class="checkmark"></span> Home Delivery-->
+                <!--                  </label>-->
+                <!--                </div>-->
+                <!--              </div>-->
 
-              <div class="btn-search">
-                <input type="submit" class="btn btn-block" value="search">
+                <div class="btn-search">
+                  <input type="submit" class="btn btn-block" value="trouver">
+                </div>
               </div>
-            </div>
             </form>
           </div>
           <!-- /Search Filter -->
@@ -138,7 +138,8 @@
                     </a>
                   </div>
                   <div class="doc-info-cont">
-                    <h4 class="doc-name mb-2"><a [routerLink]="['/pharmacie', pharmacie._id, 'about']">{{pharmacie?.name}}</a></h4>
+                    <h4 class="doc-name mb-2"><a
+                      [routerLink]="['/pharmacie', pharmacie._id, 'about']">{{pharmacie?.name}}</a></h4>
                     <div class="rating mb-2">
                       <span class="badge badge-primary">{{pharmacie?.averageRating}}</span>
                       <i [ngClass]="{
@@ -162,7 +163,8 @@
                       <div class="clini-infos pt-3">
 
                         <p class="doc-location mb-2"><i class="fas fa-phone-volume mr-1"></i> {{pharmacie?.phone}}</p>
-                        <p class="doc-location mb-2 text-ellipse"><i class="fas fa-map-marker-alt mr-1"></i> {{pharmacie?.address}} {{pharmacie?.city}}</p>
+                        <p class="doc-location mb-2 text-ellipse"><i
+                          class="fas fa-map-marker-alt mr-1"></i> {{pharmacie?.address}} {{pharmacie?.city}}</p>
                         <p class="doc-location mb-2"><i class="fas fa-chevron-right mr-1"></i> {{pharmacie?.type}}</p>
 
                       </div>
@@ -179,8 +181,6 @@
             </div>
           </div>
           <!-- /Doctor Widget -->
-
-
 
 
           <div class="load-more text-center">

@@ -36,9 +36,7 @@
         <div class="col-xl-6 col-lg-12 order-md-last order-sm-last order-last map-left">
 
           <div class="row align-items-center mb-4">
-            <div class="col-md-6 col">
-              <h4>{{doctors?.length}} Doctors found</h4>
-            </div>
+
 
             <div class="col-md-6 col-auto">
               <div class="view-icons ">
@@ -49,7 +47,7 @@
 									<span class="sortby-fliter">
 										<select class="select select2-hidden-accessible" data-select2-id="1" tabindex="-1"
                             aria-hidden="true">
-											<option data-select2-id="3">Sort by</option>
+											<option data-select2-id="3">filtrer</option>
 											<option class="sorting">Rating</option>
 											<option class="sorting">Popular</option>
 											<option class="sorting">Latest</option>
@@ -61,7 +59,7 @@
                     aria-labelledby="select2-vhle-container"><span class="select2-selection__rendered"
                                                                    id="select2-vhle-container" role="textbox"
                                                                    aria-readonly="true"
-                                                                   title="Sort by">Sort by</span><span
+                                                                   title="Sort by">filtrer</span><span
                     class="select2-selection__arrow" role="presentation"><b
                     role="presentation"></b></span></span></span><span class="dropdown-wrapper"
                                                                        aria-hidden="true"></span></span>
@@ -86,11 +84,18 @@
                     <a href="doctor-profile.html">Dr. {{doctor?.name}} {{doctor?.lastName}}</a>
                     <i class="fas fa-check-circle verified"></i>
                   </h3>
-                  <h5 *ngIf="doctor?.speciality === 'Dentiste'" class="doc-department"><img src="assets/img/specialities/specialities-05.png" class="img-fluid" alt="Speciality">Dentist</h5>
-                  <h5 *ngIf="doctor?.speciality === 'Urologie'" class="doc-department"><img src="assets/img/specialities/specialities-01.png" class="img-fluid" alt="Speciality">Urologie</h5>
-                  <h5 *ngIf="doctor?.speciality === 'Neurologie'" class="doc-department"><img src="assets/img/specialities/specialities-02.png" class="img-fluid" alt="Speciality">Neurologie</h5>
-                  <h5 *ngIf="doctor?.speciality === 'Orthopédique'" class="doc-department"><img src="assets/img/specialities/specialities-03.png" class="img-fluid" alt="Speciality">Orthopédique</h5>
-                  <h5 *ngIf="doctor?.speciality === 'Cardiologue'" class="doc-department"><img src="assets/img/specialities/specialities-04.png" class="img-fluid" alt="Speciality">Cardiologue</h5>
+                  <h5 *ngIf="doctor?.speciality === 'Dentiste'" class="doc-department"><img
+                    src="assets/img/specialities/specialities-05.png" class="img-fluid" alt="Speciality">Dentist</h5>
+                  <h5 *ngIf="doctor?.speciality === 'Urologie'" class="doc-department"><img
+                    src="assets/img/specialities/specialities-01.png" class="img-fluid" alt="Speciality">Urologie</h5>
+                  <h5 *ngIf="doctor?.speciality === 'Neurologie'" class="doc-department"><img
+                    src="assets/img/specialities/specialities-02.png" class="img-fluid" alt="Speciality">Neurologie</h5>
+                  <h5 *ngIf="doctor?.speciality === 'Orthopédique'" class="doc-department"><img
+                    src="assets/img/specialities/specialities-03.png" class="img-fluid" alt="Speciality">Orthopédique
+                  </h5>
+                  <h5 *ngIf="doctor?.speciality === 'Cardiologue'" class="doc-department"><img
+                    src="assets/img/specialities/specialities-04.png" class="img-fluid" alt="Speciality">Cardiologue
+                  </h5>
                   <div class="rating">
                     <i [ngClass]="{
                     filled: doctor?.averageRating >= 1
@@ -113,10 +118,10 @@
                     <li>
                       <i class="fas fa-map-marker-alt"></i> {{doctor?.state}}, {{doctor?.country}}
                     </li>
-<!--                    <li>-->
-<!--                      <i *ngIf="getDay(today, 'ddd') !== 'Sun'" class="far fa-clock"></i> Available-->
-<!--                      on {{getDay(today, 'ddd, DD MMM')}}-->
-<!--                    </li>-->
+                    <!--                    <li>-->
+                    <!--                      <i *ngIf="getDay(today, 'ddd') !== 'Sun'" class="far fa-clock"></i> Available-->
+                    <!--                      on {{getDay(today, 'ddd, DD MMM')}}-->
+                    <!--                    </li>-->
                     <li>
                       <i class="far fa-money-bill-alt"></i> ${{doctor?.price}} <i class="fas fa-info-circle"
                                                                                   data-toggle="tooltip" title=""
@@ -128,7 +133,7 @@
                       <a [routerLink]="['/doctor', doctor._id]" class="btn view-btn">Voir le profil</a>
                     </div>
                     <div class="col-6">
-                      <a [routerLink]="['/doctor', doctor._id, 'app']" class="btn book-btn">Reserve maintenant</a>
+                      <a [routerLink]="['/doctor', doctor._id, 'app']" class="btn book-btn">Rendez-vous</a>
                     </div>
                   </div>
                 </div>
@@ -160,29 +165,32 @@
               </agm-direction>
               <agm-marker [latitude]="latitude"
                           [longitude]="longitude"
-              color="blue"></agm-marker>
-              <agm-marker *ngFor="let doctor of doctors" [latitude]="doctor?.location.latitude"
+                          color="blue"></agm-marker>
+              <agm-marker *ngFor="let doctor of allDoctors" [latitude]="doctor?.location.latitude"
                           [longitude]="doctor?.location.longitude">
-              <agm-snazzy-info-window [maxWidth]="300" [maxHeight]="400" [isOpen]="false" [closeWhenOthersOpen]="true">
-                <ng-template>
-                  <div class="profile-widget" style="width: 100%; display: inline-block;">
-                    <div class="doc-img"><a [routerLink]="['/doctor', doctor?._id]" tabindex="0" target="_blank"><img
-                      class="img-fluid" alt="Dr." src="{{doctor?.imagePath}}"></a></div>
-                    <div class="pro-content"><h3 class="title"><a [routerLink]="['/doctor', doctor?._id]" tabindex="0">Dr. {{doctor?.name}}
-                      {{doctor?.lastName}}</a><i class="fas fa-check-circle verified"></i></h3>
-                      <p class="speciality">{{doctor?.speciality}}</p>
-                      <div class="rating"><i class="fas fa-star filled"></i><i class="fas fa-star filled"></i><i
-                        class="fas fa-star filled"></i><i class="fas fa-star filled"></i><i
-                        class="fas fa-star"></i><span class="d-inline-block average-rating"> ({{doctor?.reviews.length}})</span></div>
-                      <ul class="available-info">
-                        <li><i class="fas fa-map-marker-alt"></i> {{doctor?.state}}, {{doctor?.country}}</li>
-                        <li><i class="far fa-clock"></i> Available on Fri, 25 Mar</li>
-                        <li><i class="far fa-money-bill-alt"></i> ${{doctor?.price}}</li>
-                      </ul>
+                <agm-snazzy-info-window [maxWidth]="300" [maxHeight]="400" [isOpen]="false"
+                                        [closeWhenOthersOpen]="true">
+                  <ng-template>
+                    <div class="profile-widget" style="width: 100%; display: inline-block;">
+                      <div class="doc-img"><a [routerLink]="['/doctor', doctor?._id]" tabindex="0" target="_blank"><img
+                        class="img-fluid" alt="Dr." src="{{doctor?.imagePath}}"></a></div>
+                      <div class="pro-content"><h3 class="title"><a [routerLink]="['/doctor', doctor?._id]"
+                                                                    tabindex="0">Dr. {{doctor?.name}}
+                        {{doctor?.lastName}}</a><i class="fas fa-check-circle verified"></i></h3>
+                        <p class="speciality">{{doctor?.speciality}}</p>
+                        <div class="rating"><i class="fas fa-star filled"></i><i class="fas fa-star filled"></i><i
+                          class="fas fa-star filled"></i><i class="fas fa-star filled"></i><i
+                          class="fas fa-star"></i><span
+                          class="d-inline-block average-rating"> ({{doctor?.reviews.length}})</span></div>
+                        <ul class="available-info">
+                          <li><i class="fas fa-map-marker-alt"></i> {{doctor?.state}}, {{doctor?.country}}</li>
+                          <li><i class="far fa-clock"></i> Available on Fri, 25 Mar</li>
+                          <li><i class="far fa-money-bill-alt"></i> ${{doctor?.price}}</li>
+                        </ul>
+                      </div>
                     </div>
-                  </div>
-                </ng-template>
-              </agm-snazzy-info-window>
+                  </ng-template>
+                </agm-snazzy-info-window>
               </agm-marker>
             </agm-map>
           </div>

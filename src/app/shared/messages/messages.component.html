@@ -24,34 +24,34 @@
             <div class="chat-cont-left">
               <div class="chat-header">
                 <span>Chats</span>
-                <a href="javascript:void(0)" class="chat-compose">
-                  <i class="material-icons">control_point</i>
-                </a>
+<!--                <a href="javascript:void(0)" class="chat-compose">-->
+<!--                  <i class="material-icons">control_point</i>-->
+<!--                </a>-->
               </div>
               <form class="chat-search">
                 <div class="input-group">
-                  <div class="input-group-prepend">
-                    <i class="fas fa-search"></i>
-                  </div>
-                  <input type="text" class="form-control" placeholder="Search">
+<!--                  <div class="input-group-prepend">-->
+<!--                    <i class="fas fa-search"></i>-->
+<!--                  </div>-->
+<!--                  <input type="text" class="form-control" placeholder="Search">-->
                 </div>
               </form>
               <div class="chat-users-list">
                 <div class="chat-scroll">
                   <a *ngFor="let rooms of chatRooms" (click)="switchRoom(rooms.name, rooms.with._id)" class="media">
                     <div class="media-img-wrap">
-                      <div class="avatar avatar-away">
+                      <div class="avatar">
                         <img src="{{rooms?.with.imagePath}}" alt="User Image" class="avatar-img rounded-circle">
                       </div>
                     </div>
                     <div class="media-body">
                       <div>
                         <div class="user-name">Dr. {{rooms?.with.name}} {{rooms?.with.lastName}}</div>
-<!--                        <div class="user-last-chat">{{rooms?.messages[rooms.messages.length - 1].message}}</div>-->
+                        <!--                        <div class="user-last-chat">{{rooms?.messages[rooms.messages.length - 1].message}}</div>-->
                       </div>
                       <div>
-                        <div class="last-chat-time block">2 min</div>
-                        <div class="badge badge-success badge-pill">15</div>
+<!--                        <div class="last-chat-time block">2 min</div>-->
+<!--                        <div class="badge badge-success badge-pill">15</div>-->
                       </div>
                     </div>
                   </a>
@@ -68,8 +68,9 @@
                 </a>
                 <div class="media">
                   <div class="media-img-wrap">
-                    <div class="avatar avatar-online">
-                      <img src="{{withData?.imagePath}}" alt="{{withData?.name}} {{withData?.lastName}}" class="avatar-img rounded-circle">
+                    <div class="avatar">
+                      <img src="{{withData?.imagePath}}" alt="{{withData?.name}} {{withData?.lastName}}"
+                           class="avatar-img rounded-circle">
                     </div>
                   </div>
                   <div class="media-body">
@@ -77,17 +78,17 @@
                     <div class="user-status">online</div>
                   </div>
                 </div>
-                <div class="chat-options">
-                  <a href="javascript:void(0)" data-toggle="modal" data-target="#voice_call">
-                    <i class="material-icons">local_phone</i>
-                  </a>
-                  <a href="javascript:void(0)" data-toggle="modal" data-target="#video_call">
-                    <i class="material-icons">videocam</i>
-                  </a>
-                  <a href="javascript:void(0)">
-                    <i class="material-icons">more_vert</i>
-                  </a>
-                </div>
+<!--                <div class="chat-options">-->
+<!--                  <a href="javascript:void(0)" data-toggle="modal" data-target="#voice_call">-->
+<!--                    <i class="material-icons">local_phone</i>-->
+<!--                  </a>-->
+<!--                  <a href="javascript:void(0)" data-toggle="modal" data-target="#video_call">-->
+<!--                    <i class="material-icons">videocam</i>-->
+<!--                  </a>-->
+<!--                  <a href="javascript:void(0)">-->
+<!--                    <i class="material-icons">more_vert</i>-->
+<!--                  </a>-->
+<!--                </div>-->
               </div>
               <div class="chat-body">
                 <div class="chat-scroll">
@@ -100,7 +101,7 @@
                             <ul class="chat-msg-info">
                               <li>
                                 <div class="chat-time">
-                                  <span>8:30 AM</span>
+                                  <span>8:30</span>
                                 </div>
                               </li>
                             </ul>
@@ -138,9 +139,11 @@
                       <input type="file">
                     </div>
                   </div>
-                  <input type="text" class="input-msg-send form-control" placeholder="Type something" [(ngModel)]="message">
+                  <input type="text" class="input-msg-send form-control" placeholder="Tapez quelque chose"
+                         [(ngModel)]="message">
                   <div class="input-group-append">
-                    <button type="button" class="btn msg-send-btn"><i class="fab fa-telegram-plane" (click)="sendMessage()"></i></button>
+                    <button type="button" class="btn msg-send-btn"><i class="fab fa-telegram-plane"
+                                                                      (click)="sendMessage()"></i></button>
                   </div>
                 </div>
               </div>

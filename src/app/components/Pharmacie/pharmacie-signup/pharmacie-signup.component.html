@@ -37,9 +37,9 @@
                 <div class="login-header">
                   <h3>créer <span>un compte</span></h3>
                 </div>
-                <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
-                  {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
-                </button>
+<!--                <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">-->
+<!--                  {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}-->
+<!--                </button>-->
                 <mat-horizontal-stepper [linear]="isLinear" #stepper>
                   <mat-step [stepControl]="firstFormGroup">
                     <form [formGroup]="firstFormGroup">
@@ -79,7 +79,8 @@
                         </div>
                       </div>
                       <div>
-                        <button class="btn btn-primary btn-block btn-lg login-btn" mat-button matStepperNext>suivant</button>
+                        <button class="btn btn-primary btn-block btn-lg login-btn" mat-button matStepperNext>suivant
+                        </button>
                       </div>
                     </form>
                   </mat-step>
@@ -113,7 +114,8 @@
                         </div>
                         <div class="col-12 col-md-4">
                           <div class="form-group">
-                            <mat-select-country placeHolder="pays" appearance="outline" formControlName="country" required>
+                            <mat-select-country placeHolder="pays" appearance="outline" formControlName="country"
+                                                required>
                             </mat-select-country>
                           </div>
                         </div>
@@ -139,10 +141,13 @@
                         </div>
 
                         <div class="col-12 col-md-6">
-                          <button class="btn btn-info btn-block btn-lg login-btn" mat-button matStepperPrevious>precedent</button>
+                          <button class="btn btn-info btn-block btn-lg login-btn" mat-button matStepperPrevious>
+                            precedent
+                          </button>
                         </div>
                         <div class="col-12 col-md-6">
-                          <button class="btn btn-primary btn-block btn-lg login-btn" mat-button matStepperNext>suivant</button>
+                          <button class="btn btn-primary btn-block btn-lg login-btn" mat-button matStepperNext>suivant
+                          </button>
                         </div>
 
                       </div>
@@ -163,10 +168,13 @@
                       </agm-map>
                       <div class="row form-row">
                         <div class="col-12 col-md-6">
-                          <button class="btn btn-info btn-block btn-lg login-btn" mat-button matStepperPrevious>precedent</button>
+                          <button class="btn btn-info btn-block btn-lg login-btn" mat-button matStepperPrevious>
+                            precedent
+                          </button>
                         </div>
                         <div class="col-12 col-md-6">
-                          <button class="btn btn-primary btn-block btn-lg login-btn" mat-button matStepperNext>suivant</button>
+                          <button class="btn btn-primary btn-block btn-lg login-btn" mat-button matStepperNext>suivant
+                          </button>
                         </div>
                       </div>
                     </form>
@@ -178,24 +186,30 @@
                         <input type="file" (change)="onImagePicked($event)" class="custom-file-input" id="customFile">
                         <label class="custom-file-label" for="customFile">Choose image</label>
                       </div>
-                      <div class="upload-images form-group" *ngIf="imagePreview !== '' && imagePreview && imageform.get('image').valid">
+                      <div class="upload-images form-group"
+                           *ngIf="imagePreview !== '' && imagePreview && imageform.get('image').valid">
                         <img [src]="imagePreview">
                       </div>
                       <div class="row form-row">
                         <div class="col-12 col-md-4">
-                          <button class="btn btn-info btn-block btn-lg login-btn" mat-button matStepperPrevious>precedent</button>
+                          <button class="btn btn-info btn-block btn-lg login-btn" mat-button matStepperPrevious>
+                            precedent
+                          </button>
                         </div>
                         <div class="col-12 col-md-4">
-                          <button class="btn btn-danger btn-block btn-lg login-btn" mat-button (click)="stepper.reset()">annuler</button>
+                          <button class="btn btn-danger btn-block btn-lg login-btn" mat-button
+                                  (click)="stepper.reset()">annuler
+                          </button>
                         </div>
                         <div class="col-12 col-md-4">
-                          <button mat-button (click)="onSubmit()" class="btn btn-primary btn-block btn-lg login-btn" type="submit">Create account</button>
+                          <button mat-button (click)="onSubmit()" class="btn btn-primary btn-block btn-lg login-btn"
+                                  type="submit">Create account
+                          </button>
                         </div>
                       </div>
                     </form>
                   </mat-step>
                 </mat-horizontal-stepper>
-
 
 
               </div>

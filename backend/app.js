@@ -13,17 +13,17 @@ const app = express();
 
 mongoose
   .connect(
-    "mongodb://127.0.0.1:27017/pfeTest",{ useNewUrlParser: true, useUnifiedTopology: true }
+    "mongodb://127.0.0.1:27017/pfeTest", {useNewUrlParser: true, useUnifiedTopology: true}
   )
   .then(() => {
     console.log("Connected to database!");
   })
-  .catch(( err ) => {
+  .catch((err) => {
     console.log(err);
   });
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({extended: false}));
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");

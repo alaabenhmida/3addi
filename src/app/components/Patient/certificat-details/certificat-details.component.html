@@ -47,10 +47,13 @@
                     <img src="{{patientData?.imagePath}}" alt="User Image">
                   </a>
                   <div class="profile-det-info">
-                    <h3><a [routerLink]="['/patient', patientData?._id]">{{patientData?.name}} {{patientData?.lastName}}</a></h3>
+                    <h3><a
+                      [routerLink]="['/patient', patientData?._id]">{{patientData?.name}} {{patientData?.lastName}}</a>
+                    </h3>
                     <div class="patient-details">
                       <h5><b>ID :</b> {{patientData?._id}}</h5>
-                      <h5 class="mb-0"><i class="fas fa-map-marker-alt"></i> {{patientData?.state}}, {{patientData?.country}}</h5>
+                      <h5 class="mb-0"><i class="fas fa-map-marker-alt"></i> {{patientData?.state}}
+                        , {{patientData?.country}}</h5>
                     </div>
                   </div>
                 </div>
@@ -79,7 +82,8 @@
                   <div class="biller-info">
                     <h4 class="d-block">Dr. {{certificatData?.doctor.name}} {{certificatData?.doctor.lastName}}</h4>
                     <span class="d-block text-sm text-muted">{{certificatData?.doctor.speciality}}</span>
-                    <span class="d-block text-sm text-muted">{{certificatData?.doctor.state}}, {{certificatData?.doctor.country}}</span>
+                    <span class="d-block text-sm text-muted">{{certificatData?.doctor.state}}
+                      , {{certificatData?.doctor.country}}</span>
                   </div>
                 </div>
                 <div class="col-sm-6 text-sm-right">
@@ -95,27 +99,27 @@
               <div class="card card-table">
                 <div class="card-body">
                   <div class="table-responsive">
-<!--                    <form [formGroup]="form" (submit)="onSubmit()">-->
-                      <table class="table table-hover table-center">
-                        <thead>
-                        <tr>
-                          <th >De</th>
-                          <th >A</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                          <td>
-                           <p class="text-center input-group-text">{{getdate(certificatData?.from, 'DD MMMM YYYY')}}</p>
-                          </td>
-                          <td>
-                           <p class="text-center input-group-text"> {{getdate(certificatData?.to, 'DD MMMM YYYY')}}</p>
-                          </td>
-                        </tr>
-                        </tbody>
-                      </table>
-                   <p class="text-uppercase" *ngIf="certificatData?.description">{{certificatData?.description}}</p>
-<!--                    </form>-->
+                    <!--                    <form [formGroup]="form" (submit)="onSubmit()">-->
+                    <table class="table table-hover table-center">
+                      <thead>
+                      <tr>
+                        <th>De</th>
+                        <th>A</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr>
+                        <td>
+                          <p class="text-center input-group-text">{{getdate(certificatData?.from, 'DD MMMM YYYY')}}</p>
+                        </td>
+                        <td>
+                          <p class="text-center input-group-text"> {{getdate(certificatData?.to, 'DD MMMM YYYY')}}</p>
+                        </td>
+                      </tr>
+                      </tbody>
+                    </table>
+                    <p class="text-uppercase" *ngIf="certificatData?.description">{{certificatData?.description}}</p>
+                    <!--                    </form>-->
                   </div>
                 </div>
               </div>
@@ -127,7 +131,7 @@
                   <div class="signature-wrap">
                     <div class="sign-name">
                       <p class="mb-0">( Dr. {{certificatData?.doctor.name}} {{certificatData?.doctor.lastName}} )</p>
-<!--                      <span class="text-muted">Signature</span>-->
+                      <!--                      <span class="text-muted">Signature</span>-->
                     </div>
                   </div>
                 </div>

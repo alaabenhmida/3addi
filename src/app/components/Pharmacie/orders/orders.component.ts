@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Pharmacie} from '../../../models/Pharmacie/pharmacie.model';
 import {Subscription} from 'rxjs';
 import {PharmacieService} from '../../../services/pharmacie/pharmacie.service';
@@ -14,7 +14,8 @@ export class OrdersComponent implements OnInit {
   pharmacieSub: Subscription;
   orders = [];
 
-  constructor(private pharmacieService: PharmacieService) { }
+  constructor(private pharmacieService: PharmacieService) {
+  }
 
   ngOnInit(): void {
     this.pharmacieService.getDataByKey().subscribe(data => {
@@ -34,6 +35,7 @@ export class OrdersComponent implements OnInit {
     });
     console.log(this.orders);
   }
+
   getDate(day: string, format: string): string {
     return moment(day).locale('fr').format(format);
   }

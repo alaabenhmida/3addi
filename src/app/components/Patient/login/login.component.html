@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
   <!-- Favicons -->
-<!--  <link href="assets/img/favicon.png" rel="icon">-->
+  <!--  <link href="assets/img/favicon.png" rel="icon">-->
 
 
   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -48,8 +48,8 @@
                       </mat-label>
                       <input ngModel #emailInput="ngModel" type="email" name="email" matInput required>
                     </mat-form-field>
-<!--                    <input [ngClass]="{'is-invalid': emailInput.invalid && emailInput.touched}" type="email" class="form-control floating" name="email" ngModel type="email" #emailInput="ngModel" required email>-->
-<!--                    <label class="focus-label">Email</label>-->
+                    <!--                    <input [ngClass]="{'is-invalid': emailInput.invalid && emailInput.touched}" type="email" class="form-control floating" name="email" ngModel type="email" #emailInput="ngModel" required email>-->
+                    <!--                    <label class="focus-label">Email</label>-->
                   </div>
                   <div class="form-group form-focus">
                     <mat-form-field appearance="outline" class="w-100 is-invalid">
@@ -58,27 +58,29 @@
                       </mat-label>
                       <input ngModel #passwordInput="ngModel" type="password" name="password" matInput required>
                     </mat-form-field>
-<!--                    <input [ngClass]="{'is-invalid': passwordInput.invalid && passwordInput.touched}" type="password" class="form-control floating" type="password" name="password" ngModel matInput #passwordInput="ngModel" required>-->
-<!--                    <label class="focus-label">Password</label>-->
+                    <!--                    <input [ngClass]="{'is-invalid': passwordInput.invalid && passwordInput.touched}" type="password" class="form-control floating" type="password" name="password" ngModel matInput #passwordInput="ngModel" required>-->
+                    <!--                    <label class="focus-label">Password</label>-->
                   </div>
                   <div class="text-right">
-<!--                    <a class="forgot-link" href="forgot-password.html">Forgot Password ?</a>-->
+                    <!--                    <a class="forgot-link" href="forgot-password.html">Forgot Password ?</a>-->
                   </div>
                   <button class="btn btn-primary btn-block btn-lg login-btn" type="submit"
-                  [disabled]="loginForm.invalid">Connexion</button>
+                          [disabled]="loginForm.invalid">Connexion
+                  </button>
                   <div class="login-or">
                     <span class="or-line"></span>
                     <span class="span-or">ou</span>
                   </div>
-<!--                  <div class="row form-row social-login">-->
-<!--                    <div class="col-6">-->
-<!--                      <a href="#" class="btn btn-facebook btn-block"><i class="fab fa-facebook-f mr-1"></i> Login</a>-->
-<!--                    </div>-->
-<!--                    <div class="col-6">-->
-<!--                      <a href="#" class="btn btn-google btn-block"><i class="fab fa-google mr-1"></i> Login</a>-->
-<!--                    </div>-->
-<!--                  </div>-->
-                  <div class="text-center dont-have">Vous n'avez pas de compte ? <a (click)="onclick()">créer un maintenant</a></div>
+                  <!--                  <div class="row form-row social-login">-->
+                  <!--                    <div class="col-6">-->
+                  <!--                      <a href="#" class="btn btn-facebook btn-block"><i class="fab fa-facebook-f mr-1"></i> Login</a>-->
+                  <!--                    </div>-->
+                  <!--                    <div class="col-6">-->
+                  <!--                      <a href="#" class="btn btn-google btn-block"><i class="fab fa-google mr-1"></i> Login</a>-->
+                  <!--                    </div>-->
+                  <!--                  </div>-->
+                  <div class="text-center dont-have">Vous n'avez pas de compte ? <a (click)="onclick()">créer un
+                    maintenant</a></div>
                 </form>
               </div>
             </div>

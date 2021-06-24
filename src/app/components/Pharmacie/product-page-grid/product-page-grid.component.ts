@@ -20,7 +20,8 @@ export class ProductPageGridComponent implements OnInit, OnDestroy {
   constructor(private pharmacieService: PharmacieService,
               private route: ActivatedRoute,
               private cartService: CartService,
-              private headerService: HeaderService) { }
+              private headerService: HeaderService) {
+  }
 
   ngOnInit(): void {
     this.headerService.isInPharmacie.next(true);

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 
 @Component({
@@ -9,7 +9,8 @@ import {ActivatedRoute, ParamMap} from '@angular/router';
 export class PaymentSuccessComponent implements OnInit {
   invoiceId: string;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute) {
+  }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((paramMap) => {

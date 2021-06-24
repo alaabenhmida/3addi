@@ -203,6 +203,6 @@ export class DoctorAuthService {
     doctorData.append('zip', zip);
     doctorData.append('latitude', latitude.toString());
     doctorData.append('longitude', longitude.toString());
-    return  this.http.post('http://localhost:3000/doctor/signup', doctorData);
+    return this.http.post('http://localhost:3000/doctor/signup', doctorData);
   }
 }

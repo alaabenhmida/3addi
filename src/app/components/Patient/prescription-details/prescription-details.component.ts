@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Patient} from '../../../models/Patient/patient.model';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {PatientServiceService} from '../../../services/Patient/patient-service.service';
@@ -18,7 +18,8 @@ export class PrescriptionDetailsComponent implements OnInit {
   constructor(public route: ActivatedRoute,
               private router: Router,
               private patientService: PatientServiceService,
-              private doctorSevive: DoctorServiceService) { }
+              private doctorSevive: DoctorServiceService) {
+  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
@@ -31,9 +32,11 @@ export class PrescriptionDetailsComponent implements OnInit {
       });
     });
   }
-  getdate(date: string, format: string): string{
+
+  getdate(date: string, format: string): string {
     return (moment(date).locale('fr').format(format));
   }
+
   print(): void {
     const printContent = document.getElementById('contenr');
     const WindowPrt = window.open('', '', 'left=0,top=0,width=900,height=900,toolbar=0,scrollbars=0,status=0');

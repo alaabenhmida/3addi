@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {PatientAuthService} from '../../../auth/Patient/patient-auth.service';
 
@@ -10,12 +10,13 @@ import {PatientAuthService} from '../../../auth/Patient/patient-auth.service';
 export class PharLoginComponent implements OnInit {
   form: FormGroup;
 
-  constructor(private authService: PatientAuthService) { }
+  constructor(private authService: PatientAuthService) {
+  }
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      email: new FormControl(null, { validators: [Validators.required, Validators.email] }),
-      password: new FormControl(null, { validators: [Validators.required] })
+      email: new FormControl(null, {validators: [Validators.required, Validators.email]}),
+      password: new FormControl(null, {validators: [Validators.required]})
     });
   }
 

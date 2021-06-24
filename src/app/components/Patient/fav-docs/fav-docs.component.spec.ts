@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { FavDocsComponent } from './fav-docs.component';
+import {FavDocsComponent} from './fav-docs.component';
 
 describe('FavDocsComponent', () => {
   let component: FavDocsComponent;
@@ -8,9 +8,9 @@ describe('FavDocsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FavDocsComponent ]
+      declarations: [FavDocsComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

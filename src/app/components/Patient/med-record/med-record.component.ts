@@ -21,16 +21,17 @@ export class MedRecordComponent implements OnInit, OnDestroy {
   constructor(public route: ActivatedRoute,
               public patient: DoctorServiceService,
               private toastr: ToastrService,
-              private router: Router) { }
+              private router: Router) {
+  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       this.id = paramMap.get('id');
     });
     this.form = new FormGroup({
-      date: new FormControl(null, { validators: [Validators.required] }),
-      description: new FormControl(null, { validators: [Validators.required] }),
-      pdfFile: new FormControl(null, { validators: [Validators.required] }),
+      date: new FormControl(null, {validators: [Validators.required]}),
+      description: new FormControl(null, {validators: [Validators.required]}),
+      pdfFile: new FormControl(null, {validators: [Validators.required]}),
     });
   }
 
@@ -46,7 +47,7 @@ export class MedRecordComponent implements OnInit, OnDestroy {
 
   onImagePicked(event: Event): void {
     const file = (event.target as HTMLInputElement).files[0];
-    this.form.patchValue({ pdfFile: file });
+    this.form.patchValue({pdfFile: file});
     this.form.get('pdfFile').updateValueAndValidity();
     const reader = new FileReader();
     reader.onload = () => {
@@ -54,6 +55,7 @@ export class MedRecordComponent implements OnInit, OnDestroy {
     };
     reader.readAsDataURL(file);
   }
+
   ngOnDestroy(): void {
   }
 }

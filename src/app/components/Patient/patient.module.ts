@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {ProfileComponent} from './profile/profile.component';
 import {MedRecordComponent} from './med-record/med-record.component';
 import {AddPrescComponent} from './add-presc/add-presc.component';
@@ -10,12 +10,12 @@ import {PrescriptionDetailsComponent} from './prescription-details/prescription-
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 import {NgxSpinnerModule} from 'ngx-spinner';
-import { AddCertificatComponent } from './add-certificat/add-certificat.component';
+import {AddCertificatComponent} from './add-certificat/add-certificat.component';
 import {AngularMaterialModule} from '../../angular-material.module';
 import {TypeaheadModule} from 'ngx-bootstrap/typeahead';
-import { CertificatDetailsComponent } from './certificat-details/certificat-details.component';
-import { InvoicePharDetailComponent } from './invoice-phar-detail/invoice-phar-detail.component';
-import { ChangePasswordComponent } from './change-password/change-password.component';
+import {CertificatDetailsComponent} from './certificat-details/certificat-details.component';
+import {InvoicePharDetailComponent} from './invoice-phar-detail/invoice-phar-detail.component';
+import {ChangePasswordComponent} from './change-password/change-password.component';
 
 
 @NgModule({
@@ -42,4 +42,5 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     TypeaheadModule.forRoot()
   ]
 })
-export class PatientModule { }
+export class PatientModule {
+}

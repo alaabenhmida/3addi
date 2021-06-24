@@ -1,23 +1,22 @@
-
 <!-- ========================= SECTION PAGETOP ========================= -->
 
-  <!-- Breadcrumb -->
-  <div class="breadcrumb-bar">
-    <div class="container-fluid">
-      <div class="row align-items-center">
-        <div class="col-md-12 col-12">
-          <nav aria-label="breadcrumb" class="page-breadcrumb">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Pharmacie</li>
-            </ol>
-          </nav>
-          <h2 class="breadcrumb-title">Panier</h2>
-        </div>
+<!-- Breadcrumb -->
+<div class="breadcrumb-bar">
+  <div class="container-fluid">
+    <div class="row align-items-center">
+      <div class="col-md-12 col-12">
+        <nav aria-label="breadcrumb" class="page-breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Pharmacie</li>
+          </ol>
+        </nav>
+        <h2 class="breadcrumb-title">Panier</h2>
       </div>
     </div>
   </div>
-  <!-- /Breadcrumb -->
+</div>
+<!-- /Breadcrumb -->
 
 <!-- ========================= SECTION INTRO END// ========================= -->
 
@@ -35,7 +34,7 @@
               <th scope="col">Produit</th>
               <th scope="col" width="120">Quantité</th>
               <th scope="col" width="120">Prix</th>
-              <th  *ngIf="!ordonnanceMode" scope="col" class="text-right" width="200"> </th>
+              <th *ngIf="!ordonnanceMode" scope="col" class="text-right" width="200"></th>
             </tr>
             </thead>
             <tbody>
@@ -51,13 +50,16 @@
               </td>
               <td>
                 <div class="mat-cell text-muted">
-                  <div fxLayout="row" fxLayout.xs="column"  class="text-muted">
+                  <div fxLayout="row" fxLayout.xs="column" class="text-muted">
                     <div fxLayout="row" fxLayoutAlign="center start">
-                      <button *ngIf="!ordonnanceMode" mat-icon-button matTooltip="Remove" (click)="decrement(product.product)">
+                      <button *ngIf="!ordonnanceMode" mat-icon-button matTooltip="Remove"
+                              (click)="decrement(product.product)">
                         <mat-icon>remove</mat-icon>
                       </button>
-                      <input type="text" name="quantity"  [(ngModel)]="product.quantity" disabled class="form-control input-number">
-                      <button *ngIf="!ordonnanceMode" mat-icon-button matTooltip="Add" (click)="increment(product.product)">
+                      <input type="text" name="quantity" [(ngModel)]="product.quantity" disabled
+                             class="form-control input-number">
+                      <button *ngIf="!ordonnanceMode" mat-icon-button matTooltip="Add"
+                              (click)="increment(product.product)">
                         <mat-icon>add</mat-icon>
                       </button>
                     </div>
@@ -78,8 +80,10 @@
           </table>
 
           <div class="card-body border-top">
-            <a (click)="onAcheter()" class="btn btn-primary float-md-right text-white"> Acheter <i class="fa fa-chevron-right"></i> </a>
-            <a [routerLink]="['/pharmacie', pharmacieId]" class="btn btn-light"> <i class="fa fa-chevron-left"></i> Continuer vos achats </a>
+            <a (click)="onAcheter()" class="btn btn-primary float-md-right text-white"> Acheter <i
+              class="fa fa-chevron-right"></i> </a>
+            <a [routerLink]="['/pharmacie', pharmacieId]" class="btn btn-light"> <i class="fa fa-chevron-left"></i>
+              Continuer vos achats </a>
           </div>
         </div> <!-- card.// -->
 
@@ -103,14 +107,14 @@
         </div>  <!-- card .// -->
         <div class="card">
           <div class="card-body">
-            <dl class="dlist-align">
-              <dt>Total price:</dt>
-              <dd class="text-right">USD 568</dd>
-            </dl>
-            <dl class="dlist-align">
-              <dt>Discount:</dt>
-              <dd class="text-right">USD 658</dd>
-            </dl>
+<!--            <dl class="dlist-align">-->
+<!--              <dt>prix total:</dt>-->
+<!--              <dd class="text-right">USD 568</dd>-->
+<!--            </dl>-->
+<!--            <dl class="dlist-align">-->
+<!--              <dt>Discount:</dt>-->
+<!--              <dd class="text-right">USD 658</dd>-->
+<!--            </dl>-->
             <dl class="dlist-align">
               <dt>Total:</dt>
               <dd *ngIf="!ordonnanceMode" class="text-right  h5"><strong>{{getTotal()}}</strong></dd>

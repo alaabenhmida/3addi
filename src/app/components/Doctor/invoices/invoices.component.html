@@ -155,7 +155,9 @@
                         <a [routerLink]="['/patient', invoice.patient._id]" class="avatar avatar-sm mr-2">
                           <img class="avatar-img rounded-circle" src="{{invoice?.patient.imagePath}}" alt="User Image">
                         </a>
-                        <a [routerLink]="['/patient', invoice.patient._id]">{{invoice?.patient.name}} {{invoice?.patient.lastName}} <span>#{{invoice?.patient._id}}</span></a>
+                        <a
+                          [routerLink]="['/patient', invoice.patient._id]">{{invoice?.patient.name}} {{invoice?.patient.lastName}}
+                          <span>#{{invoice?.patient._id}}</span></a>
                       </h2>
                     </td>
                     <td>${{invoice?.price}}</td>

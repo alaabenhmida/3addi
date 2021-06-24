@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatInputModule} from '@angular/material/input';
 import {MatDialogModule} from '@angular/material/dialog';
@@ -9,7 +9,6 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatButtonModule} from '@angular/material/button';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatFormFieldModule} from '@angular/material/form-field';
-
 
 
 @NgModule({
@@ -26,4 +25,5 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     MatFormFieldModule
   ]
 })
-export class AngularMaterialModule { }
+export class AngularMaterialModule {
+}

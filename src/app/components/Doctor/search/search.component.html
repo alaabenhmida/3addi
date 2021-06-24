@@ -32,15 +32,15 @@
         </div>
         <div class="col-md-4 col-12 d-md-block d-none">
           <form [formGroup]="filtergroupe" (change)="onFilter($event.target)">
-          <div class="sort-by">
-            <span class="sort-title">Trier par</span>
-            <span class="sortby-fliter">
+            <div class="sort-by">
+              <span class="sort-title">Trier par</span>
+              <span class="sortby-fliter">
 									<select class="select" formControlName="filter">
 										<option>Select</option>
 										<option value="price" class="sorting">Prix</option>
 									</select>
 								</span>
-          </div>
+            </div>
           </form>
         </div>
       </div>
@@ -58,72 +58,79 @@
           <!-- Search Filter -->
           <div class="card search-filter">
             <form [formGroup]="form" (submit)="onSubmit()">
-            <div class="card-header">
-              <h4 class="card-title mb-0">Filtre de recherche</h4>
-            </div>
-            <div class="card-body">
-              <div class="filter-widget">
-                <div>
-                  <mat-form-field appearance="outline" class="w-100">
-                    <mat-label>
-                      rechercher
-                    </mat-label>
-                    <input formControlName="name" matInput>
-                  </mat-form-field>
+              <div class="card-header">
+                <h4 class="card-title mb-0">Filtre de recherche</h4>
+              </div>
+              <div class="card-body">
+                <div class="filter-widget">
+                  <div>
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-label>
+                        rechercher
+                      </mat-label>
+                      <input formControlName="name" matInput>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="filter-widget">
+                  <h4>sexe</h4>
+                  <div>
+                    <label class="custom_check">
+                      <input type="checkbox" name="gender_type" (change)="onChange('Male', $event.target)"
+                             formControlName="male">
+                      <span class="checkmark"></span> Homme
+                    </label>
+                  </div>
+                  <div>
+                    <label class="custom_check">
+                      <input type="checkbox" name="gender_type" (change)="onChange('Female', $event.target)"
+                             formControlName="female">
+                      <span class="checkmark"></span> Femme
+                    </label>
+                  </div>
+                </div>
+                <div class="filter-widget">
+                  <h4>Sélectionnez un spécialiste</h4>
+                  <div>
+                    <label class="custom_check">
+                      <input type="checkbox" name="select_specialist" (change)="onChangespec('Urologie', $event.target)"
+                             formControlName="Urologie">
+                      <span class="checkmark"></span> Urologie
+                    </label>
+                  </div>
+                  <div>
+                    <label class="custom_check">
+                      <input type="checkbox" name="select_specialist"
+                             (change)="onChangespec('Neurologie', $event.target)" formControlName="Neurologie">
+                      <span class="checkmark"></span> Neurologie
+                    </label>
+                  </div>
+                  <div>
+                    <label class="custom_check">
+                      <input type="checkbox" name="select_specialist" (change)="onChangespec('Dentiste', $event.target)"
+                             formControlName="Dentiste">
+                      <span class="checkmark"></span> Dentiste
+                    </label>
+                  </div>
+                  <div>
+                    <label class="custom_check">
+                      <input type="checkbox" name="select_specialist"
+                             (change)="onChangespec('Orthopédique', $event.target)" formControlName="Orthopedique">
+                      <span class="checkmark"></span> Orthopédique
+                    </label>
+                  </div>
+                  <div>
+                    <label class="custom_check">
+                      <input type="checkbox" name="select_specialist"
+                             (change)="onChangespec('Cardiologue', $event.target)" formControlName="Cardiologue">
+                      <span class="checkmark"></span> Cardiologue
+                    </label>
+                  </div>
+                </div>
+                <div class="btn-search">
+                  <input type="submit" class="btn btn-block" value="Rechercher">
                 </div>
               </div>
-              <div class="filter-widget">
-                <h4>sexe</h4>
-                <div>
-                  <label class="custom_check">
-                    <input type="checkbox" name="gender_type" (change)="onChange('Male', $event.target)" formControlName="male">
-                    <span class="checkmark"></span> Homme
-                  </label>
-                </div>
-                <div>
-                  <label class="custom_check">
-                    <input type="checkbox" name="gender_type" (change)="onChange('Female', $event.target)" formControlName="female">
-                    <span class="checkmark"></span> Femme
-                  </label>
-                </div>
-              </div>
-              <div class="filter-widget">
-                <h4>Sélectionnez un spécialiste</h4>
-                <div>
-                  <label class="custom_check">
-                    <input type="checkbox" name="select_specialist" (change)="onChangespec('Urologie', $event.target)" formControlName="Urologie">
-                    <span class="checkmark"></span> Urologie
-                  </label>
-                </div>
-                <div>
-                  <label class="custom_check">
-                    <input type="checkbox" name="select_specialist" (change)="onChangespec('Neurologie', $event.target)" formControlName="Neurologie">
-                    <span class="checkmark"></span> Neurologie
-                  </label>
-                </div>
-                <div>
-                  <label class="custom_check">
-                    <input type="checkbox" name="select_specialist" (change)="onChangespec('Dentiste', $event.target)" formControlName="Dentiste">
-                    <span class="checkmark"></span> Dentiste
-                  </label>
-                </div>
-                <div>
-                  <label class="custom_check">
-                    <input type="checkbox" name="select_specialist" (change)="onChangespec('Orthopédique', $event.target)" formControlName="Orthopedique">
-                    <span class="checkmark"></span> Orthopédique
-                  </label>
-                </div>
-                <div>
-                  <label class="custom_check">
-                    <input type="checkbox" name="select_specialist" (change)="onChangespec('Cardiologue', $event.target)" formControlName="Cardiologue">
-                    <span class="checkmark"></span> Cardiologue
-                  </label>
-                </div>
-              </div>
-              <div class="btn-search">
-                <input type="submit" class="btn btn-block" value="Rechercher">
-              </div>
-            </div>
             </form>
           </div>
           <!-- /Search Filter -->
@@ -143,13 +150,22 @@
                     </a>
                   </div>
                   <div class="doc-info-cont">
-                    <h4 class="doc-name"><a [routerLink]="['/doctor', doctor?._id]">Dr. {{doctor?.name}} {{doctor?.lastName}}</a></h4>
-<!--                    <p class="doc-speciality">{{doctor?.speciality}}</p>-->
-                    <h5 *ngIf="doctor?.speciality === 'Dentiste'" class="doc-department"><img src="assets/img/specialities/specialities-05.png" class="img-fluid" alt="Speciality">Dentist</h5>
-                    <h5 *ngIf="doctor?.speciality === 'Urologie'" class="doc-department"><img src="assets/img/specialities/specialities-01.png" class="img-fluid" alt="Speciality">Urologie</h5>
-                    <h5 *ngIf="doctor?.speciality === 'Neurologie'" class="doc-department"><img src="assets/img/specialities/specialities-02.png" class="img-fluid" alt="Speciality">Neurologie</h5>
-                    <h5 *ngIf="doctor?.speciality === 'Orthopédique'" class="doc-department"><img src="assets/img/specialities/specialities-03.png" class="img-fluid" alt="Speciality">Orthopédique</h5>
-                    <h5 *ngIf="doctor?.speciality === 'Cardiologue'" class="doc-department"><img src="assets/img/specialities/specialities-04.png" class="img-fluid" alt="Speciality">Cardiologue</h5>
+                    <h4 class="doc-name"><a
+                      [routerLink]="['/doctor', doctor?._id]">Dr. {{doctor?.name}} {{doctor?.lastName}}</a></h4>
+                    <!--                    <p class="doc-speciality">{{doctor?.speciality}}</p>-->
+                    <h5 *ngIf="doctor?.speciality === 'Dentiste'" class="doc-department"><img
+                      src="assets/img/specialities/specialities-05.png" class="img-fluid" alt="Speciality">Dentist</h5>
+                    <h5 *ngIf="doctor?.speciality === 'Urologie'" class="doc-department"><img
+                      src="assets/img/specialities/specialities-01.png" class="img-fluid" alt="Speciality">Urologie</h5>
+                    <h5 *ngIf="doctor?.speciality === 'Neurologie'" class="doc-department"><img
+                      src="assets/img/specialities/specialities-02.png" class="img-fluid" alt="Speciality">Neurologie
+                    </h5>
+                    <h5 *ngIf="doctor?.speciality === 'Orthopédique'" class="doc-department"><img
+                      src="assets/img/specialities/specialities-03.png" class="img-fluid" alt="Speciality">Orthopédique
+                    </h5>
+                    <h5 *ngIf="doctor?.speciality === 'Cardiologue'" class="doc-department"><img
+                      src="assets/img/specialities/specialities-04.png" class="img-fluid" alt="Speciality">Cardiologue
+                    </h5>
                     <div class="rating">
                       <i class="fas fa-star filled"></i>
                       <i class="fas fa-star filled"></i>
@@ -159,7 +175,8 @@
                       <span class="d-inline-block average-rating">({{doctor?.reviews.length}})</span>
                     </div>
                     <div class="clinic-details">
-                      <p class="doc-location"><i class="fas fa-map-marker-alt"></i> {{doctor?.state}}, {{doctor?.country}}</p>
+                      <p class="doc-location"><i class="fas fa-map-marker-alt"></i> {{doctor?.state}}
+                        , {{doctor?.country}}</p>
                       <ul class="clinic-gallery">
                         <li>
                           <a href="assets/img/features/feature-01.jpg" data-fancybox="gallery">
@@ -168,7 +185,7 @@
                         </li>
                         <li>
                           <a href="assets/img/features/feature-02.jpg" data-fancybox="gallery">
-                            <img  src="assets/img/features/feature-02.jpg" alt="Feature">
+                            <img src="assets/img/features/feature-02.jpg" alt="Feature">
                           </a>
                         </li>
                         <li>
@@ -183,10 +200,10 @@
                         </li>
                       </ul>
                     </div>
-<!--                    <div class="clinic-services">-->
-<!--                      <span>Dental Fillings</span>-->
-<!--                      <span> Whitneing</span>-->
-<!--                    </div>-->
+                    <!--                    <div class="clinic-services">-->
+                    <!--                      <span>Dental Fillings</span>-->
+                    <!--                      <span> Whitneing</span>-->
+                    <!--                    </div>-->
                   </div>
                 </div>
                 <div class="doc-info-right">
@@ -194,7 +211,9 @@
                     <ul>
                       <li><i class="far fa-comment"></i> {{doctor?.reviews.length}} Feedback</li>
                       <li><i class="fas fa-map-marker-alt"></i> {{doctor?.state}}, {{doctor?.country}}</li>
-                      <li><i class="far fa-money-bill-alt"></i> ${{doctor?.price}} <i class="fas fa-info-circle" data-toggle="tooltip" title="Lorem Ipsum"></i> </li>
+                      <li><i class="far fa-money-bill-alt"></i> ${{doctor?.price}} <i class="fas fa-info-circle"
+                                                                                      data-toggle="tooltip"
+                                                                                      title="Lorem Ipsum"></i></li>
                     </ul>
                   </div>
                   <div class="clinic-booking">

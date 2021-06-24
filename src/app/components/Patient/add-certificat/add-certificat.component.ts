@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {Doctor} from '../../../models/Doctor/doctor.model';
 import * as moment from 'moment';
@@ -23,7 +23,8 @@ export class AddCertificatComponent implements OnInit {
               private fb: FormBuilder,
               private doctorSevive: DoctorServiceService,
               private patientService: PatientServiceService,
-              private toastr: ToastrService) { }
+              private toastr: ToastrService) {
+  }
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -41,7 +42,7 @@ export class AddCertificatComponent implements OnInit {
     });
   }
 
-  getdate(date: string, format: string): string{
+  getdate(date: string, format: string): string {
     return (moment(date).locale('fr').format(format));
   }
 

@@ -31,18 +31,35 @@ const faker = require('faker');
 //     products: prod
 //   })
 // }
-
+let location = [
+  {latitude: 35.828113, longitude: 10.611763},
+  {latitude: 35.76385712086968, longitude: 10.82131862640381},
+  {latitude: 35.77158743162626, longitude: 10.808959007263185},
+  {latitude: 35.767339335824644, longitude: 10.8056116104126},
+  {latitude: 35.75821909082465, longitude: 10.811061859130861},
+  {latitude: 35.82060169062259, longitude: 10.629100799560549},
+  {latitude: 35.816147414714855, longitude: 10.621204376220703},
+  {latitude: 35.6980227281262, longitude: 10.740852355957031},
+  {latitude: 35.74484966427712, longitude: 10.810203552246094},
+]
 let data = []
-let genders = ["Male", "Female"];
+let names = ["Mohamed", "abbas", "Ali", "Amir", "Bassam", "Hosni", "Kamel", "Karim", "Khalid", "Mahdi",
+"Mansour", "Omar", "Salem", "Aya", "Rania", "Saida", "Mounira"];
+let lastNames = ["Trabelsi", "Gharbi","Hammami", "Dridi", "Ayari", "Mejri", "Ayadi", "Riahi", "Oueslati",
+"Ben Amor", "Kamoun", "Amara", "Bahri"];
+let gouv = ["Ariana", "Béja", "Sousse", "Bizerte", "Gabès", "Nabeul", "Jendouba", "Kairouan",
+"Zaghouan", "Kebili", "Kef", "Mahdia", "Manouba", "Medenine", "Monastir", "Gafsa", "Sfax",
+"Sidi Bouzid", "Siliana", "Ben Arous", "Tataouine", "Tozeur", "Tunis", "Kasserine"];
+let genders = ["Homme", "Femme"];
 let spec = ["Urologie", "Neurologie", "Dentiste", "Orthopédique", "Cardiologue", "Generale"];
-for (let i = 0; i < 20; i++) {
+for (let i = 0; i < 10; i++) {
   data.push(
     {
       email: faker.internet.email(),
       password: 'ala,',
-      imagePath: 'http://localhost:3000/images/ala-1618588732868.jpg',
-      name: faker.name.firstName(),
-      lastName: faker.name.lastName(),
+      imagePath: `${faker.image.people()}?random=${Date.now()}`,
+      name: faker.random.arrayElement(names),
+      lastName: faker.random.arrayElement(lastNames),
       gender: faker.random.arrayElement(genders),
       address: faker.address.streetAddress(),
       speciality: faker.random.arrayElement(spec),
@@ -53,13 +70,10 @@ for (let i = 0; i < 20; i++) {
       address1: faker.address.streetAddress(),
       address2: faker.address.secondaryAddress(),
       city: faker.address.city(),
-      state: faker.address.state(),
-      country: faker.address.country(),
+      state: faker.random.arrayElement(gouv),
+      country: 'Tunisie',
       zip: faker.address.zipCode(),
-      location: {
-        latitude: faker.address.latitude(),
-        longitude: faker.address.longitude()
-      }
+      location: location[i]
     }
   )
 }

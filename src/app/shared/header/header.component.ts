@@ -57,7 +57,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     // if (this.router.url.indexOf('pharmacie') > -1) {
     //   console.log(this.route.snapshot.pathFromRoot);
     // }
-   // console.log( this.route.snapshot.firstChild.url[0].path);
+    // console.log( this.route.snapshot.firstChild.url[0].path);
 
     this.role = this.authService.getRole();
     this.roleSubs = this.authService.getRoleListener().subscribe(role => {

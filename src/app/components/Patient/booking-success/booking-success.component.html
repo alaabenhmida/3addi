@@ -48,7 +48,8 @@
               <div class="success-cont">
                 <i class="fas fa-check"></i>
                 <h3>Rendez-vous pris avec succès!</h3>
-                <p>Rendez-vous réservé avec <strong>Dr. {{rdv?.doctor.name}} {{rdv?.doctor.lastName}} </strong><br> on <strong>{{getDay(rdv?.rdvDate, 'DD MMM YYYY HH:mm')}} </strong></p>
+                <p>Rendez-vous réservé avec <strong>Dr. {{rdv?.doctor.name}} {{rdv?.doctor.lastName}} </strong><br> on
+                  <strong>{{getDay(rdv?.rdvDate, 'DD MMM YYYY HH:mm')}} </strong></p>
                 <a [routerLink]="['/facture', id]" class="btn btn-primary view-inv-btn">Voir la facture</a>
               </div>
             </div>

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {LoginComponent} from '../../components/Patient/login/login.component';
 import {SignupComponent} from '../../components/Patient/signup/signup.component';
@@ -23,25 +23,25 @@ import {Error404Component} from '../../shared/error404/error404.component';
 
 
 const appRoutes: Routes = [
-  { path: 'messages', component: MessagesComponent },
-  { path: 'profile/ordonnace/:id', component: PrescriptionDetailsComponent, canActivate: [PatientAuthGuard] },
-  { path: 'certificat/:id', component: CertificatDetailsComponent, canActivate: [PatientAuthGuard] },
-  { path: 'login', component: LoginComponent },
-  { path: 'signup', component: SignupComponent},
-  { path: 'profile/setting', component: ProfileSettComponent, canActivate: [PatientAuthGuard] },
-  { path: 'profile/dashboard', component: PatientDhashboardComponent, canActivate: [PatientAuthGuard] },
-  { path: 'profile/favdocs', component: FavDocsComponent, canActivate: [PatientAuthGuard] },
-  { path: 'profile/change-password', component: ChangePasswordComponent, canActivate: [PatientAuthGuard] },
-  { path: 'facture/:rdvid', component: InvoiceDetailComponent },
-  { path: 'ordre/:id', component: InvoicePharDetailComponent },
-  { path: 'ordre/:rdvid', component: BookingSuccessComponent, canActivate: [PatientAuthGuard] },
-  { path: 'patient/:id', component: ProfileComponent, canActivate: [AuthGuard] },
-  { path: 'patient/:id/ajoutDossier', component: MedRecordComponent, canActivate: [AuthGuard] },
-  { path: 'patient/:id/ajoutOrd', component: AddPrescComponent, canActivate: [AuthGuard] },
-  { path: 'patient/:id/ajoucertificat', component: AddCertificatComponent, canActivate: [AuthGuard] },
-  { path: 'patient/:id/presc/:prescID', component: AddPrescComponent },
-  { path: 'not-found', component: Error404Component },
-  { path: '**', redirectTo: '/not-found', pathMatch: 'full' },
+  {path: 'messages', component: MessagesComponent},
+  {path: 'profile/ordonnace/:id', component: PrescriptionDetailsComponent, canActivate: [PatientAuthGuard]},
+  {path: 'certificat/:id', component: CertificatDetailsComponent, canActivate: [PatientAuthGuard]},
+  {path: 'login', component: LoginComponent},
+  {path: 'signup', component: SignupComponent},
+  {path: 'profile/setting', component: ProfileSettComponent, canActivate: [PatientAuthGuard]},
+  {path: 'profile/dashboard', component: PatientDhashboardComponent, canActivate: [PatientAuthGuard]},
+  {path: 'profile/favdocs', component: FavDocsComponent, canActivate: [PatientAuthGuard]},
+  {path: 'profile/change-password', component: ChangePasswordComponent, canActivate: [PatientAuthGuard]},
+  {path: 'facture/:rdvid', component: InvoiceDetailComponent},
+  {path: 'ordres/:id', component: InvoicePharDetailComponent},
+  {path: 'ordre/:rdvid', component: BookingSuccessComponent, canActivate: [PatientAuthGuard]},
+  {path: 'patient/:id', component: ProfileComponent, canActivate: [AuthGuard]},
+  {path: 'patient/:id/ajoutDossier', component: MedRecordComponent, canActivate: [AuthGuard]},
+  {path: 'patient/:id/ajoutOrd', component: AddPrescComponent, canActivate: [AuthGuard]},
+  {path: 'patient/:id/ajoucertificat', component: AddCertificatComponent, canActivate: [AuthGuard]},
+  {path: 'patient/:id/presc/:prescID', component: AddPrescComponent},
+  // {path: 'not-found', component: Error404Component},
+  // {path: '**', redirectTo: '/not-found', pathMatch: 'full'},
 ];
 
 @NgModule({
@@ -49,4 +49,5 @@ const appRoutes: Routes = [
   exports: [RouterModule],
   providers: [AuthGuard, PatientAuthGuard, LoginAuthGuard]
 })
-export class PatientRoutingModule { }
+export class PatientRoutingModule {
+}

@@ -28,7 +28,8 @@ export class PharmacieProfileComponent implements OnInit, OnDestroy {
               private authService: PatientAuthService,
               private toastr: ToastrService,
               public router: Router,
-              private headerService: HeaderService) { }
+              private headerService: HeaderService) {
+  }
 
   ngOnInit(): void {
     this.headerService.isInPharmacie.next(true);

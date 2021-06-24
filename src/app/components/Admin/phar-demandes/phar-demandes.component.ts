@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AdminService} from '../../../services/admin/admin.service';
 
 @Component({
@@ -9,7 +9,8 @@ import {AdminService} from '../../../services/admin/admin.service';
 export class PharDemandesComponent implements OnInit {
   pharmacies: any;
 
-  constructor(private adminService: AdminService) { }
+  constructor(private adminService: AdminService) {
+  }
 
   ngOnInit(): void {
     this.adminService.getAdmin().subscribe(data => {

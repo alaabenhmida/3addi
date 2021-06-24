@@ -52,7 +52,7 @@ export class AddPrescComponent implements OnInit, OnDestroy {
           // using github public api to get users by name
           return this.http.get<any>(
             'https://clinicaltables.nlm.nih.gov/api/rxterms/v3/search', {
-              params: { terms: query }
+              params: {terms: query}
             }).pipe(
             map((data: any) => data && data[1] || []),
             tap(() => noop, err => {
@@ -84,11 +84,15 @@ export class AddPrescComponent implements OnInit, OnDestroy {
           const creds = this.form.controls.Prescription as FormArray;
           for (const pres of data.prescription[0].presc) {
             creds.push(this.fb.group({
-              name: new FormControl(pres.name, { validators: [Validators.required] }),
-              quantite: new FormControl(pres.quantite, { validators: [Validators.required,
-                  Validators.pattern(/^-?(0|[1-9]\d*)?$/)] }),
-              days: new FormControl(pres.days, { validators: [Validators.required,
-                  Validators.pattern(/^-?(0|[1-9]\d*)?$/)] }),
+              name: new FormControl(pres.name, {validators: [Validators.required]}),
+              quantite: new FormControl(pres.quantite, {
+                validators: [Validators.required,
+                  Validators.pattern(/^-?(0|[1-9]\d*)?$/)]
+              }),
+              days: new FormControl(pres.days, {
+                validators: [Validators.required,
+                  Validators.pattern(/^-?(0|[1-9]\d*)?$/)]
+              }),
               mor: new FormControl(pres.mor),
               af: new FormControl(pres.af),
               ev: new FormControl(pres.ev),
@@ -112,32 +116,39 @@ export class AddPrescComponent implements OnInit, OnDestroy {
     });
 
   }
+
   get controls(): any { // a getter!
     return (this.form.get('Prescription') as FormArray).controls;
   }
+
   addCreds(): void {
     const creds = this.form.controls.Prescription as FormArray;
     // for (let i = 0; i < 2; i++) {
     creds.push(this.fb.group({
-        name: new FormControl(null, { validators: [Validators.required] }),
-        quantite: new FormControl(null, { validators: [Validators.required,
-            Validators.pattern(/^-?(0|[1-9]\d*)?$/)] }),
-        days: new FormControl(null, { validators: [Validators.required,
-            Validators.pattern(/^-?(0|[1-9]\d*)?$/)] }),
-        mor: new FormControl(null),
-        af: new FormControl(null),
-        ev: new FormControl(null),
-        nght: new FormControl(null)
-      }));
+      name: new FormControl(null, {validators: [Validators.required]}),
+      quantite: new FormControl(null, {
+        validators: [Validators.required,
+          Validators.pattern(/^-?(0|[1-9]\d*)?$/)]
+      }),
+      days: new FormControl(null, {
+        validators: [Validators.required,
+          Validators.pattern(/^-?(0|[1-9]\d*)?$/)]
+      }),
+      mor: new FormControl(null),
+      af: new FormControl(null),
+      ev: new FormControl(null),
+      nght: new FormControl(null)
+    }));
     // }
-}
+  }
 
-  deleteCreds(index): void{
+  deleteCreds(index): void {
     const creds = this.form.controls.Prescription as FormArray;
     creds.removeAt(index);
   }
-  onSubmit(): void{
-    if (this.form.invalid){
+
+  onSubmit(): void {
+    if (this.form.invalid) {
       console.log(this.form.controls.Prescription.get('name'));
       return;
     }
@@ -160,8 +171,9 @@ export class AddPrescComponent implements OnInit, OnDestroy {
         });
     }
   }
-  getdate(date: string, format: string): string{
-    return (moment(date).format(format));
+
+  getdate(date: string, format: string): string {
+    return (moment(date).locale('fr').format(format));
   }
 
   clearForm(): void {

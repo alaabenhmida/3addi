@@ -51,7 +51,8 @@
                     <h3><a href="patient-profile.html">{{patientData?.name}} {{patientData?.lastName}}</a></h3>
                     <div class="patient-details">
                       <h5><b>ID :</b> {{patientData?._id}}</h5>
-                      <h5 class="mb-0"><i class="fas fa-map-marker-alt"></i> {{patientData?.state}}, {{patientData?.country}}</h5>
+                      <h5 class="mb-0"><i class="fas fa-map-marker-alt"></i> {{patientData?.state}}
+                        , {{patientData?.country}}</h5>
                     </div>
                   </div>
                 </div>
@@ -79,11 +80,15 @@
                 <div class="col-sm-6">
                   <div class="biller-info">
                     <h4 *ngIf="mode ==='create'" class="d-block">Dr. {{doctorData?.name}} {{doctorData?.lastName}}</h4>
-                    <h4 *ngIf="mode ==='edit'" class="d-block">Dr. {{prescData?.doctorId.name}} {{prescData?.doctorId.lastName}}</h4>
+                    <h4 *ngIf="mode ==='edit'" class="d-block">
+                      Dr. {{prescData?.doctorId.name}} {{prescData?.doctorId.lastName}}</h4>
                     <span *ngIf="mode ==='create'" class="d-block text-sm text-muted">{{doctorData?.speciality}}</span>
-                    <span *ngIf="mode ==='edit'" class="d-block text-sm text-muted">{{prescData?.doctorId.speciality}}</span>
-                    <span *ngIf="mode ==='create'" class="d-block text-sm text-muted">{{doctorData?.state}}, {{doctorData?.country}}</span>
-                    <span *ngIf="mode ==='edit'" class="d-block text-sm text-muted">{{prescData?.doctorId.state}}, {{prescData?.doctorId.country}}</span>
+                    <span *ngIf="mode ==='edit'"
+                          class="d-block text-sm text-muted">{{prescData?.doctorId.speciality}}</span>
+                    <span *ngIf="mode ==='create'" class="d-block text-sm text-muted">{{doctorData?.state}}
+                      , {{doctorData?.country}}</span>
+                    <span *ngIf="mode ==='edit'" class="d-block text-sm text-muted">{{prescData?.doctorId.state}}
+                      , {{prescData?.doctorId.country}}</span>
                   </div>
                 </div>
                 <div class="col-sm-6 text-sm-right">
@@ -119,23 +124,29 @@
                         <tbody>
                         <tr *ngFor="let creds of controls; let i = index" [formGroupName]="i">
                           <td>
-<!--                            <input [(ngModel)]="search"-->
-<!--                                   typeaheadOptionField="login"-->
-<!--                                   [typeahead]="suggestions$"-->
-<!--                                   [typeaheadAsync]="true"-->
-<!--                                   class="form-control"-->
-<!--                                   placeholder="Enter GitHub username">-->
-                            <input class="form-control" (input)="onTest($event, i)" [ngClass]="{'is-invalid': creds.controls.name.invalid && creds.controls.name.touched}" type="text"
+                            <!--                            <input [(ngModel)]="search"-->
+                            <!--                                   typeaheadOptionField="login"-->
+                            <!--                                   [typeahead]="suggestions$"-->
+                            <!--                                   [typeaheadAsync]="true"-->
+                            <!--                                   class="form-control"-->
+                            <!--                                   placeholder="Enter GitHub username">-->
+                            <input class="form-control" (input)="onTest($event, i)"
+                                   [ngClass]="{'is-invalid': creds.controls.name.invalid && creds.controls.name.touched}"
+                                   type="text"
                                    typeaheadOptionField="login"
                                    [typeahead]="suggestions$"
                                    [typeaheadAsync]="true"
                                    formControlName="name">
                           </td>
                           <td>
-                            <input class="form-control" [ngClass]="{'is-invalid': creds.controls.quantite.invalid && creds.controls.quantite.touched}" type="text" formControlName="quantite">
+                            <input class="form-control"
+                                   [ngClass]="{'is-invalid': creds.controls.quantite.invalid && creds.controls.quantite.touched}"
+                                   type="text" formControlName="quantite">
                           </td>
                           <td>
-                            <input class="form-control" [ngClass]="{'is-invalid': creds.controls.days.invalid && creds.controls.days.touched}" type="text" formControlName="days">
+                            <input class="form-control"
+                                   [ngClass]="{'is-invalid': creds.controls.days.invalid && creds.controls.days.touched}"
+                                   type="text" formControlName="days">
                           </td>
                           <td>
                             <div class="input-group">
@@ -146,7 +157,8 @@
                             </div>
                           </td>
                           <td>
-                            <a (click)="deleteCreds(i)" class="btn bg-danger-light trash"><i class="far fa-trash-alt"></i></a>
+                            <a (click)="deleteCreds(i)" class="btn bg-danger-light trash"><i
+                              class="far fa-trash-alt"></i></a>
                           </td>
                         </tr>
                         </tbody>
@@ -169,7 +181,8 @@
                       Click here to sign
                     </div>
                     <div class="sign-name">
-                      <p *ngIf="mode ==='edit'" class="mb-0">( Dr. {{prescData?.doctorId.name}} {{prescData?.doctorId.lastName}} )</p>
+                      <p *ngIf="mode ==='edit'" class="mb-0">(
+                        Dr. {{prescData?.doctorId.name}} {{prescData?.doctorId.lastName}} )</p>
                       <p *ngIf="mode ==='create'" class="mb-0">( Dr. {{doctorData?.name}} {{doctorData?.lastName}} )</p>
                       <span class="text-muted">Signature</span>
                     </div>
@@ -182,7 +195,9 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="submit-section">
-                    <button (click)="sendForm.click()" [disabled]="form.invalid" type="submit" class="btn btn-primary submit-btn">Save</button>
+                    <button (click)="sendForm.click()" [disabled]="form.invalid" type="submit"
+                            class="btn btn-primary submit-btn">Save
+                    </button>
                     <button (click)="clearForm()" type="reset" class="btn btn-secondary submit-btn">Clear</button>
                   </div>
                 </div>
@@ -202,7 +217,6 @@
 
 </div>
 <!-- /Main Wrapper -->
-
 
 
 </body>

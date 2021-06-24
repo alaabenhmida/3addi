@@ -4,9 +4,9 @@ import {
   HttpHandler,
   HttpErrorResponse
 } from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
+import {catchError} from 'rxjs/operators';
 import {Observable, throwError} from 'rxjs';
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {ErrorComponent} from './error/error.component';
 import {ToastrService} from 'ngx-toastr';
@@ -15,7 +15,8 @@ import {ToastrService} from 'ngx-toastr';
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
 
-  constructor(private dialog: MatDialog, private toaster: ToastrService) {}
+  constructor(private dialog: MatDialog, private toaster: ToastrService) {
+  }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<any> {
     return next.handle(req).pipe(

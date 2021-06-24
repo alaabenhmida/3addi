@@ -35,22 +35,22 @@ router.post("/addroom", (req, res, next) => {
 
 router.put("/getChat", (req, res, next) => {
 
-  if (req.body.role ==='doctor') {
+  if (req.body.role === 'doctor') {
     Doctor.findOne({_id: req.body.userId}).select({chatRoom: {$elemMatch: {name: req.body.roomName}}})
       .populate('chatRoom.with')
-          .then(result => {
-            res.status(200).json(result)
-          }).catch(error => {
-          res.json(error);
-        })
+      .then(result => {
+        res.status(200).json(result)
+      }).catch(error => {
+      res.json(error);
+    })
   } else {
     Patient.findOne({_id: req.body.userId}).select({chatRoom: {$elemMatch: {name: req.body.roomName}}})
       .populate('chatRoom.with')
-          .then(result => {
-            res.status(200).json(result)
-          }).catch(error => {
-          res.json(error);
-        })
+      .then(result => {
+        res.status(200).json(result)
+      }).catch(error => {
+      res.json(error);
+    })
   }
 })
 

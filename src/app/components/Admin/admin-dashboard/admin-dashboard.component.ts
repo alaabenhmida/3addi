@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DoctorServiceService} from '../../../services/doctor/doctor-service.service';
 import {PatientServiceService} from '../../../services/Patient/patient-service.service';
 import {PharmacieService} from '../../../services/pharmacie/pharmacie.service';
@@ -10,11 +10,11 @@ import {PharmacieService} from '../../../services/pharmacie/pharmacie.service';
 })
 export class AdminDashboardComponent implements OnInit {
   saleData = [
-    { name: "Mobiles", value: 105000 },
-    { name: "Laptop", value: 55000 },
-    { name: "AC", value: 15000 },
-    { name: "Headset", value: 150000 },
-    { name: "Fridge", value: 20000 }
+    {name: 'Mobiles', value: 105000},
+    {name: 'Laptop', value: 55000},
+    {name: 'AC', value: 15000},
+    {name: 'Headset', value: 150000},
+    {name: 'Fridge', value: 20000}
   ];
   doctorCount = 0;
   patientCount = 0;
@@ -24,7 +24,8 @@ export class AdminDashboardComponent implements OnInit {
 
   constructor(private doctorService: DoctorServiceService,
               private patientService: PatientServiceService,
-              private pharmacieService: PharmacieService) { }
+              private pharmacieService: PharmacieService) {
+  }
 
   ngOnInit(): void {
     this.doctorService.getspecialityCount('Dentiste').subscribe(result1 => {
@@ -40,12 +41,12 @@ export class AdminDashboardComponent implements OnInit {
               this.doctorService.getspecialityCount('Generale').subscribe(result6 => {
                 // this.doctorService.specialityUpdate.next({name: 'Generale', value: result});
                 this.specialityData = [
-                  { name: 'Dentiste', value: result1 },
-                  { name: 'Urologie', value: result2 },
-                  { name: 'Neurologie', value: result3 },
-                  { name: 'Orthopédique', value: result4 },
-                  { name: 'Cardiologue', value: result5 },
-                  { name: 'Generale', value: result6 }
+                  {name: 'Dentiste', value: result1},
+                  {name: 'Urologie', value: result2},
+                  {name: 'Neurologie', value: result3},
+                  {name: 'Orthopédique', value: result4},
+                  {name: 'Cardiologue', value: result5},
+                  {name: 'Generale', value: result6}
                 ];
                 // console.log(6);
               });

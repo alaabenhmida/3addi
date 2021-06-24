@@ -17,6 +17,7 @@ declare var klokantech;
 })
 export class MapGridComponent implements OnInit {
   doctors: Array<Doctor> = [];
+  allDoctors: Array<Doctor> = [];
   private today = moment(new Date()).toString();
   private isloggedIn = false;
   private isloggedInSub: Subscription;
@@ -40,6 +41,9 @@ export class MapGridComponent implements OnInit {
   ngOnInit(): void {
     this.getDirection();
     this.setCurrentLocation();
+    this.doctorService.getAllDoctors().subscribe(data => {
+      this.allDoctors = data.doctors;
+    });
     this.doctorService.getAllDoctors(this.doctorsPerPage, this.cuurentPage).subscribe(doctors => {
       this.doctors = doctors.doctors;
       this.totalDoctors = doctors.maxDoctors;

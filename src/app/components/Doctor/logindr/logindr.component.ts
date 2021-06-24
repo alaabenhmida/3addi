@@ -12,13 +12,15 @@ import {Router} from '@angular/router';
 })
 export class LogindrComponent implements OnInit {
 
-  constructor(public authService: PatientAuthService, public router: Router) { }
+  constructor(public authService: PatientAuthService, public router: Router) {
+  }
 
   ngOnInit(): void {
     if (this.authService.getIsAuth()) {
       this.router.navigate(['/']);
     }
   }
+
   onLogin(form: NgForm): void {
     if (form.invalid) {
       return;

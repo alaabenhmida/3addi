@@ -53,8 +53,10 @@
                 <div class="profile-det-info">
                   <h3>{{patientdata?.name}} {{patientdata?.lastName}}</h3>
                   <div class="patient-details">
-                    <h5><i class="fas fa-birthday-cake"></i> {{getDay(patientdata?.birthday, 'DD MMM YYYY')}}, {{calculateAge(patientdata?.birthday)}} ans</h5>
-                    <h5 class="mb-0"><i class="fas fa-map-marker-alt"></i> {{patientdata?.state}}, {{patientdata?.country}}</h5>
+                    <h5><i class="fas fa-birthday-cake"></i> {{getDay(patientdata?.birthday, 'DD MMM YYYY')}}
+                      , {{calculateAge(patientdata?.birthday)}} ans</h5>
+                    <h5 class="mb-0"><i class="fas fa-map-marker-alt"></i> {{patientdata?.state}}
+                      , {{patientdata?.country}}</h5>
                   </div>
                 </div>
               </div>
@@ -119,7 +121,8 @@
                             <span><i class="fa fa-upload"></i> télécharger photo</span>
                             <input type="file" class="upload" (change)="onImagePicked($event)">
                           </div>
-                          <small class="form-text text-muted">Formats autorisés JPG, GIF ou PNG. Max Taille de 2MB</small>
+                          <small class="form-text text-muted">Formats autorisés JPG, GIF ou PNG. Max Taille de
+                            2MB</small>
                         </div>
                       </div>
                     </div>

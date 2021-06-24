@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {SignupDrComponent} from '../../components/Doctor/signup-dr/signup-dr.component';
 import {LogindrComponent} from '../../components/Doctor/logindr/logindr.component';
@@ -17,20 +17,20 @@ import {PatientAuthGuard} from '../../auth/patient-auth.gards';
 import {ManageTimeComponent} from '../../components/Doctor/manage-time/manage-time.component';
 
 const appRoutes: Routes = [
-      { path: 'signup', component: SignupDrComponent },
-      { path: 'login', component: LogindrComponent },
-      { path: 'factures', component: InvoicesComponent, canActivate: [AuthGuard] },
-      { path: 'reviews', component: ReviewsComponent, canActivate: [AuthGuard] },
-      { path: 'search', component: SearchComponent },
-      { path: 'gererTemps', component: ManageTimeComponent, canActivate: [AuthGuard] },
-      { path: ':id', component: ProfileDocComponent },
-      { path: ':id/check/:rdvID', component: CheckoutComponent, canActivate: [PatientAuthGuard] },
-      { path: ':id/app', component: AppointmentComponent, canActivate: [PatientAuthGuard] },
-      { path: 'profile/dashboard', component: DocDashboardComponent, canActivate: [AuthGuard] },
-      { path: 'profile/myRDV', component: AppointementsComponent, canActivate: [AuthGuard] },
-      { path: 'profile/myPatients', component: MyPatientsComponent, canActivate: [AuthGuard] },
-      { path: 'profile/setting', component: DocProfilSettingComponent, canActivate: [AuthGuard] }
-  ];
+  {path: 'signup', component: SignupDrComponent},
+  {path: 'login', component: LogindrComponent},
+  {path: 'factures', component: InvoicesComponent, canActivate: [AuthGuard]},
+  {path: 'reviews', component: ReviewsComponent, canActivate: [AuthGuard]},
+  {path: 'search', component: SearchComponent},
+  {path: 'gererTemps', component: ManageTimeComponent, canActivate: [AuthGuard]},
+  {path: ':id', component: ProfileDocComponent},
+  {path: ':id/check/:rdvID', component: CheckoutComponent, canActivate: [PatientAuthGuard]},
+  {path: ':id/app', component: AppointmentComponent, canActivate: [PatientAuthGuard]},
+  {path: 'profile/dashboard', component: DocDashboardComponent, canActivate: [AuthGuard]},
+  {path: 'profile/myRDV', component: AppointementsComponent, canActivate: [AuthGuard]},
+  {path: 'profile/myPatients', component: MyPatientsComponent, canActivate: [AuthGuard]},
+  {path: 'profile/setting', component: DocProfilSettingComponent, canActivate: [AuthGuard]}
+];
 
 @NgModule({
   declarations: [],
@@ -38,4 +38,5 @@ const appRoutes: Routes = [
   exports: [RouterModule],
   providers: [AuthGuard, PatientAuthGuard]
 })
-export class DoctorRoutingModule { }
+export class DoctorRoutingModule {
+}

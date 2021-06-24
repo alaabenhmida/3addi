@@ -5,17 +5,16 @@ You can view all the flags here: http://hjnilsson.github.io/country-flags/
 
 This repository contains renders of all the worlds flags in SVG and PNG format.
 
-The source files were taken from Wikipedia and are not under copyright
-protection since flags are effectively in public domain (there may be other
-restrictions on how the flag can be used though).
+The source files were taken from Wikipedia and are not under copyright protection since flags are effectively in public
+domain (there may be other restrictions on how the flag can be used though).
 
-The flags are named by their 2-letter ISO-3166 country code, except for the
-constituent countries of Great Britain which have 6-letter codes "GB-ENG" etc).
+The flags are named by their 2-letter ISO-3166 country code, except for the constituent countries of Great Britain which
+have 6-letter codes "GB-ENG" etc).
 
-Kosovo uses the user-assigned country code `XK`, which is not part of the ISO standard, but in use by several multinational organizations.
+Kosovo uses the user-assigned country code `XK`, which is not part of the ISO standard, but in use by several
+multinational organizations.
 
-Also included is a JSON file that maps the ISO country code to the name of the
-country.
+Also included is a JSON file that maps the ISO country code to the name of the country.
 
 You can also install this as a NPM module:
 
@@ -24,14 +23,13 @@ You can also install this as a NPM module:
 Arbitrary Width
 ===============
 
-If you would like the flags in a different width than 100px, 250px or 1000px,
-you can run the node script 'build-pngs', you must first install the modules `svgexport` and `imagemin-cli`:
+If you would like the flags in a different width than 100px, 250px or 1000px, you can run the node script 'build-pngs',
+you must first install the modules `svgexport` and `imagemin-cli`:
 
     npm install -g svgexport imagemin-cli
     npm run build-pngs -- 1000:
 
-Replace `1000:` with whatever width you want (note the `:`), or type `:200` to get
-PNGs with a height of 200px.
+Replace `1000:` with whatever width you want (note the `:`), or type `:200` to get PNGs with a height of 200px.
 
 Arbitrary Width Manually
 ========================

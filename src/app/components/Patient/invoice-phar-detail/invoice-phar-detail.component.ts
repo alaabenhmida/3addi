@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Pharmacie} from '../../../models/Pharmacie/pharmacie.model';
 import {Patient} from '../../../models/Patient/patient.model';
 import {ActivatedRoute, ParamMap} from '@angular/router';
@@ -17,7 +17,8 @@ export class InvoicePharDetailComponent implements OnInit {
   total = 0;
 
   constructor(private route: ActivatedRoute,
-              private patientService: PatientServiceService) { }
+              private patientService: PatientServiceService) {
+  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
@@ -34,6 +35,7 @@ export class InvoicePharDetailComponent implements OnInit {
       });
     });
   }
+
   getDay(day: string, format: string): string {
     return moment(day).format(format);
   }

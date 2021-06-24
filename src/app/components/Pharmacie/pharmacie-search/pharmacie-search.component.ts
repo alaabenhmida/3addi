@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {PharmacieService} from '../../../services/pharmacie/pharmacie.service';
 import {Pharmacie} from '../../../models/Pharmacie/pharmacie.model';
 import {FormControl, FormGroup} from '@angular/forms';
@@ -12,7 +12,8 @@ export class PharmacieSearchComponent implements OnInit {
   pharmacieData: Pharmacie[];
   form: FormGroup;
 
-  constructor(private pharmacieService: PharmacieService) { }
+  constructor(private pharmacieService: PharmacieService) {
+  }
 
   ngOnInit(): void {
     this.pharmacieService.getAllPharmacies().subscribe(data => {

@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { PharmacieSearchComponent } from './pharmacie-search.component';
+import {PharmacieSearchComponent} from './pharmacie-search.component';
 
 describe('PharmacieSearchComponent', () => {
   let component: PharmacieSearchComponent;
@@ -8,9 +8,9 @@ describe('PharmacieSearchComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PharmacieSearchComponent ]
+      declarations: [PharmacieSearchComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

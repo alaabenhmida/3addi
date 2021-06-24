@@ -104,7 +104,8 @@
         <!-- / Profile Sidebar -->
         <div class="col-md-7 col-lg-8 col-xl-9">
           <div class="card">
-            <div class="card-body ">	<a [routerLink]="['/pharmacie/dashboard/addproduits']" class="btn book-btn add-btn" tabindex="0">Ajouter produit</a>
+            <div class="card-body "><a [routerLink]="['/pharmacie/dashboard/addproduits']" class="btn book-btn add-btn"
+                                       tabindex="0">Ajouter produit</a>
               <!-- Dependent Tab -->
               <div class="mt-4">
                 <div class="card card-table mb-0">
@@ -128,7 +129,7 @@
                               <a class="avatar avatar-sm mr-2">
                                 <img class="avatar-img rounded-circle" src="{{product?.image}}" alt="User Image">
                               </a>
-<!--                              <a href="doctor-profile.html">{{product?.name}} <span>Dental</span></a>-->
+                              <!--                              <a href="doctor-profile.html">{{product?.name}} <span>Dental</span></a>-->
                             </h2>
                           </td>
                           <td>{{product?.name}}</td>
@@ -137,8 +138,10 @@
                           <td>abc@gmail.com</td>
                           <td>
                             <div class="table-action">
-                              <a [routerLink]="[product?._id, 'editer']" class="btn btn-sm bg-info-light">	<i class="fas fa-edit"></i> Editer</a>
-                              <a (click)="onDelete(product?._id)" class="btn btn-sm bg-danger-light">	<i class="fas fa-times"></i> supprimer</a>
+                              <a [routerLink]="[product?._id, 'editer']" class="btn btn-sm bg-info-light"> <i
+                                class="fas fa-edit"></i> Editer</a>
+                              <a (click)="onDelete(product?._id)" class="btn btn-sm bg-danger-light"> <i
+                                class="fas fa-times"></i> supprimer</a>
                             </div>
                           </td>
                         </tr>

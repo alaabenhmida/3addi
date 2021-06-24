@@ -1,66 +1,66 @@
 const mongoose = require('mongoose');
 
 const doctorSchema = mongoose.Schema({
-  email: { type: String, required: true },
-  password: { type: String, required: true },
-  imagePath: { type: String, required: true },
-  name: { type: String, required: true },
-  lastName: { type: String, required: true },
-  gender: { type: String, required: true },
-  address: { type: String, required: true },
-  speciality : { type: String, required: true },
-  post : { type: String},
-  birthday: { type: String, required: true},
-  price: { type: Number, required: true },
-  phone: { type: String, required: true },
-  address1: { type: String},
-  address2: { type: String},
-  city: { type: String, required: true },
-  state: { type: String, required: true },
-  country: { type: String, required: true },
-  zip: { type: String, required: true },
-  aboutMe: { type: String},
-  reviews : [{
-    patientId : { type : mongoose.Schema.Types.ObjectId, ref: 'Patient' },
-    rate : { type : Number , min: 0, max: 5, default: 0},
-    title : {type : String},
-    review : {type : String}
+  email: {type: String, required: true},
+  password: {type: String, required: true},
+  imagePath: {type: String, required: true},
+  name: {type: String, required: true},
+  lastName: {type: String, required: true},
+  gender: {type: String, required: true},
+  address: {type: String, required: true},
+  speciality: {type: String, required: true},
+  post: {type: String},
+  birthday: {type: String, required: true},
+  price: {type: Number, required: true},
+  phone: {type: String, required: true},
+  address1: {type: String},
+  address2: {type: String},
+  city: {type: String, required: true},
+  state: {type: String, required: true},
+  country: {type: String, required: true},
+  zip: {type: String, required: true},
+  aboutMe: {type: String},
+  reviews: [{
+    patientId: {type: mongoose.Schema.Types.ObjectId, ref: 'Patient'},
+    rate: {type: Number, min: 0, max: 5, default: 0},
+    title: {type: String},
+    review: {type: String}
   }],
-  rdv : [{
-    patientId : { type : mongoose.Schema.Types.ObjectId, ref: 'Patient' },
-    patientname : { type : String },
-    patienimagePath : {type : String},
-    appDate : {type : String},
-    status : {type : String}
+  rdv: [{
+    patientId: {type: mongoose.Schema.Types.ObjectId, ref: 'Patient'},
+    patientname: {type: String},
+    patienimagePath: {type: String},
+    appDate: {type: String},
+    status: {type: String}
   }],
-  patients : [{
-    id: {type : mongoose.Schema.Types.ObjectId, ref: 'Patient' }
+  patients: [{
+    id: {type: mongoose.Schema.Types.ObjectId, ref: 'Patient'}
   }],
-  education : [{
-    Degree: {type : String},
-    College: {type : String},
-    Year_of_Completion: {type : String}
+  education: [{
+    Degree: {type: String},
+    College: {type: String},
+    Year_of_Completion: {type: String}
   }],
-  experience : [{
-    hospital_Name: {type : String},
-    from: {type : String},
-    to: {type : String},
-    designation: {type : String}
+  experience: [{
+    hospital_Name: {type: String},
+    from: {type: String},
+    to: {type: String},
+    designation: {type: String}
   }],
-  awards : [{
-    awards: {type : String},
-    year: {type : String}
+  awards: [{
+    awards: {type: String},
+    year: {type: String}
   }],
-  memberships : [{
-    Membership: {type : String}
+  memberships: [{
+    Membership: {type: String}
   }],
-  registrations : [{
-    registrations: {type : String},
-    year: {type : String}
+  registrations: [{
+    registrations: {type: String},
+    year: {type: String}
   }],
   chatRoom: [{
     name: {type: String},
-    with: { type : mongoose.Schema.Types.ObjectId, ref:'Patient' || 'Doctor'},
+    with: {type: mongoose.Schema.Types.ObjectId, ref: 'Patient' || 'Doctor'},
     messages: [{
       user: {type: String},
       to: {type: String},
@@ -69,7 +69,7 @@ const doctorSchema = mongoose.Schema({
     }]
   }],
   invoices: [{
-    patient: { type : mongoose.Schema.Types.ObjectId, ref: 'Patient'},
+    patient: {type: mongoose.Schema.Types.ObjectId, ref: 'Patient'},
     date: {type: String},
     price: {type: Number},
     paymentMethod: {type: String},
@@ -80,7 +80,7 @@ const doctorSchema = mongoose.Schema({
     duration: {type: String},
     from: {type: String},
     to: {type: String},
-    breackTimes : [{
+    breackTimes: [{
       type: Array
     }]
   },

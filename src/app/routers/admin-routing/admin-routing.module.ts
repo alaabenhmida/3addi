@@ -12,17 +12,19 @@ import {ListePatientsComponent} from '../../components/Admin/liste-patients/list
 import {DoctorsListeComponent} from '../../components/Admin/doctors-liste/doctors-liste.component';
 
 const appRoutes: Routes = [
-  { path: 'admin/dashboard', component: AdminDashboardComponent },
-  { path: 'admin/doctorcheck/:id', component: DocCheckDetailsComponent },
-  { path: 'admin/pharmaciecheck/:id', component: PharCheckDetailsComponent },
-  { path: 'admin/doctorsdemandes', component: DocDemandesComponent },
-  { path: 'admin/patients-list', component: ListePatientsComponent },
-  { path: 'admin/doctors-list', component: DoctorsListeComponent },
-  { path: 'admin/pharmaciesdemandes', component: PharDemandesComponent }
+  {path: 'admin/dashboard', component: AdminDashboardComponent},
+  {path: 'admin/doctorcheck/:id', component: DocCheckDetailsComponent},
+  {path: 'admin/pharmaciecheck/:id', component: PharCheckDetailsComponent},
+  {path: 'admin/doctorsdemandes', component: DocDemandesComponent},
+  {path: 'admin/patients-list', component: ListePatientsComponent},
+  {path: 'admin/doctors-list', component: DoctorsListeComponent},
+  {path: 'admin/pharmaciesdemandes', component: PharDemandesComponent}
 ];
+
 @NgModule({
   imports: [RouterModule.forRoot(appRoutes)],
   exports: [RouterModule],
   providers: [AuthGuard, PatientAuthGuard, LoginAuthGuard]
 })
-export class AdminRoutingModule { }
+export class AdminRoutingModule {
+}

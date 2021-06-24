@@ -5,7 +5,8 @@ import {Observable} from 'rxjs';
 
 @Injectable()
 export class PatientAuthGuard implements CanActivate {
-  constructor(private authService: PatientAuthService, private router: Router) {}
+  constructor(private authService: PatientAuthService, private router: Router) {
+  }
 
   canActivate(
     route: ActivatedRouteSnapshot,

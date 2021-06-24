@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {environment} from '../../../environments/environment';
 import {Socket} from 'ngx-socket-io';
 import {Observable} from 'rxjs';
@@ -10,7 +10,8 @@ import {HttpClient} from '@angular/common/http';
 })
 export class MessagesService {
 
-  constructor(private socket: Socket, private http: HttpClient) {}
+  constructor(private socket: Socket, private http: HttpClient) {
+  }
 
   createRoom(doctorId: string, patientId: string, roomName: string): void {
     this.http.post('http://localhost:3000/messages/addroom', {doctorId, patientId, roomName})
@@ -42,29 +43,29 @@ export class MessagesService {
   }
 
   public userLeftRoom = () => {
-    return new Observable<{user: string, to: string, room: string, message: string}>((observer) => {
+    return new Observable<{ user: string, to: string, room: string, message: string }>((observer) => {
       this.socket.on('left room', (data) => {
         console.log(data);
         observer.next(data);
       });
     });
-  }
+  };
 
   public newMessageReceived = () => {
-    return new Observable<{user: string, to: string, room: string, message: string}>((observer) => {
+    return new Observable<{ user: string, to: string, room: string, message: string }>((observer) => {
       this.socket.on('new message', (data) => {
         console.log(data);
         observer.next(data);
       });
     });
-  }
+  };
 
   public newUserJoined = () => {
-    return new Observable<{user: string, to: string, room: string, message: string}>((observer) => {
+    return new Observable<{ user: string, to: string, room: string, message: string }>((observer) => {
       this.socket.on('new user joined', (data) => {
         console.log(data);
         observer.next(data);
       });
     });
-  }
+  };
 }

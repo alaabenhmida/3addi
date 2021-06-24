@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ManageTimeComponent } from './manage-time.component';
+import {ManageTimeComponent} from './manage-time.component';
 
 describe('ManageTimeComponent', () => {
   let component: ManageTimeComponent;
@@ -8,9 +8,9 @@ describe('ManageTimeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ManageTimeComponent ]
+      declarations: [ManageTimeComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

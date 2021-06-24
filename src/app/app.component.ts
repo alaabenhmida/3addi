@@ -6,9 +6,10 @@ import {PatientAuthService} from './auth/Patient/patient-auth.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   constructor(private authService: PatientAuthService) {
   }
+
   title = 'PFEt2';
 
   ngOnInit(): void {

@@ -51,8 +51,10 @@
                 <div class="profile-det-info">
                   <h3>{{patientdata?.name}} {{patientdata?.lastName}}</h3>
                   <div class="patient-details">
-                    <h5><i class="fas fa-birthday-cake"></i> {{getDay(patientdata?.birthday, 'DD MMM YYYY')}}, {{calculateAge(patientdata?.birthday)}} ans</h5>
-                    <h5 class="mb-0"><i class="fas fa-map-marker-alt"></i> {{patientdata?.state}}, {{patientdata?.country}}</h5>
+                    <h5><i class="fas fa-birthday-cake"></i> {{getDay(patientdata?.birthday, 'DD MMM YYYY')}}
+                      , {{calculateAge(patientdata?.birthday)}} ans</h5>
+                    <h5 class="mb-0"><i class="fas fa-map-marker-alt"></i> {{patientdata?.state}}
+                      , {{patientdata?.country}}</h5>
                   </div>
                 </div>
               </div>
@@ -121,7 +123,8 @@
                 </div>
                 <div class="pro-content">
                   <h3 class="title">
-                    <a [routerLink]="['/doctor', doctor.doctor._id]">{{doctor?.doctor.name}} {{doctor?.doctor.lastName}}</a>
+                    <a
+                      [routerLink]="['/doctor', doctor.doctor._id]">{{doctor?.doctor.name}} {{doctor?.doctor.lastName}}</a>
                     <i class="fas fa-check-circle verified"></i>
                   </h3>
                   <p class="speciality">{{doctor?.doctor.speciality}}</p>
@@ -141,7 +144,9 @@
                       <i class="far fa-clock"></i> Available on {{getDay(today, 'ddd, DD MMM')}}
                     </li>
                     <li>
-                      <i class="far fa-money-bill-alt"></i> ${{doctor?.doctor.price}} <i class="fas fa-info-circle" data-toggle="tooltip" title="Lorem Ipsum"></i>
+                      <i class="far fa-money-bill-alt"></i> ${{doctor?.doctor.price}} <i class="fas fa-info-circle"
+                                                                                         data-toggle="tooltip"
+                                                                                         title="Lorem Ipsum"></i>
                     </li>
                   </ul>
                   <div class="row row-sm">

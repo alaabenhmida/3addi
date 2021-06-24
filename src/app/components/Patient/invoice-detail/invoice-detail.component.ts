@@ -19,10 +19,12 @@ export class InvoiceDetailComponent implements OnInit, OnDestroy {
   doctor: Doctor;
   role: string;
   roleSub: Subscription;
+
   constructor(public route: ActivatedRoute,
               private patientService: PatientServiceService,
               private doctorService: DoctorServiceService,
-              private auth: PatientAuthService) { }
+              private auth: PatientAuthService) {
+  }
 
   ngOnInit(): void {
     this.role = this.auth.getRole();
@@ -52,6 +54,7 @@ export class InvoiceDetailComponent implements OnInit, OnDestroy {
 
     });
   }
+
   getDay(day: string, format: string): string {
     return moment(day).format(format);
   }

@@ -47,10 +47,13 @@
                     <img src="{{patientData?.imagePath}}" alt="User Image">
                   </a>
                   <div class="profile-det-info">
-                    <h3><a [routerLink]="['/patient', patientData?._id]">{{patientData?.name}} {{patientData?.lastName}}</a></h3>
+                    <h3><a
+                      [routerLink]="['/patient', patientData?._id]">{{patientData?.name}} {{patientData?.lastName}}</a>
+                    </h3>
                     <div class="patient-details">
                       <h5><b>ID :</b> {{patientData?._id}}</h5>
-                      <h5 class="mb-0"><i class="fas fa-map-marker-alt"></i> {{patientData?.state}}, {{patientData?.country}}</h5>
+                      <h5 class="mb-0"><i class="fas fa-map-marker-alt"></i> {{patientData?.state}}
+                        , {{patientData?.country}}</h5>
                     </div>
                   </div>
                 </div>
@@ -85,7 +88,7 @@
                 <div class="col-sm-6 text-sm-right">
                   <div class="billing-info">
                     <h4 class="d-block">{{getdate(today, 'DD MMMM YYYY')}}</h4>
-<!--                    <span class="d-block text-muted">#INV0001</span>-->
+                    <!--                    <span class="d-block text-muted">#INV0001</span>-->
                   </div>
                 </div>
               </div>
@@ -96,26 +99,27 @@
                 <div class="card-body">
                   <div class="table-responsive">
                     <form [formGroup]="form" (submit)="onSubmit()">
-                    <table class="table table-hover table-center">
-                      <thead>
-                      <tr>
-                        <th style="min-width: 200px">De</th>
-                        <th style="min-width: 80px;">A</th>
-                      </tr>
-                      </thead>
-                      <tbody>
-                      <tr>
-                        <td>
-                          <input class="form-control" type="date" formControlName="from">
-                        </td>
-                        <td>
-                          <input class="form-control" type="date" formControlName="to">
-                        </td>
-                      </tr>
-                      </tbody>
-                      <input hidden #sendForm type="submit">
-                    </table>
-                      <textarea class="form-control" placeholder="descriptions" formControlName="description"></textarea>
+                      <table class="table table-hover table-center">
+                        <thead>
+                        <tr>
+                          <th style="min-width: 200px">De</th>
+                          <th style="min-width: 80px;">A</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                          <td>
+                            <input class="form-control" type="date" formControlName="from">
+                          </td>
+                          <td>
+                            <input class="form-control" type="date" formControlName="to">
+                          </td>
+                        </tr>
+                        </tbody>
+                        <input hidden #sendForm type="submit">
+                      </table>
+                      <textarea class="form-control" placeholder="descriptions"
+                                formControlName="description"></textarea>
                     </form>
                   </div>
                 </div>
@@ -142,7 +146,9 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="submit-section">
-                    <button (click)="sendForm.click()" [disabled]="form.invalid" type="submit" class="btn btn-primary submit-btn">Save</button>
+                    <button (click)="sendForm.click()" [disabled]="form.invalid" type="submit"
+                            class="btn btn-primary submit-btn">Save
+                    </button>
                     <button (click)="clearForm()" type="reset" class="btn btn-secondary submit-btn">Clear</button>
                   </div>
                 </div>

@@ -15,7 +15,7 @@ import {Patient} from '../../models/Patient/patient.model';
 export class MessagesComponent implements OnInit, OnDestroy {
   user: string;
   message: string;
-  messageArray: Array<{user: string, to: string, room: string, message: string}> = [];
+  messageArray: Array<{ user: string, to: string, room: string, message: string }> = [];
   newUserJoinedSub: Subscription;
   newMessageReceivedSub: Subscription;
   userLeftRoomSub: Subscription;
@@ -31,7 +31,8 @@ export class MessagesComponent implements OnInit, OnDestroy {
   withData: any;
 
   constructor(private chatService: MessagesService, private authService: PatientAuthService,
-              private patientService: PatientServiceService, private doctorService: DoctorServiceService) { }
+              private patientService: PatientServiceService, private doctorService: DoctorServiceService) {
+  }
 
   ngOnInit(): void {
     // autoAuthUser
@@ -48,7 +49,7 @@ export class MessagesComponent implements OnInit, OnDestroy {
     );
     console.log(this.role);
 
-    if (this.role === 'doctor'){
+    if (this.role === 'doctor') {
       this.doctorService.getDcotorByKey().subscribe(data => {
         this.doctorData = {
           id: data._id,
@@ -85,21 +86,21 @@ export class MessagesComponent implements OnInit, OnDestroy {
     } else {
       this.patientService.getPatientByKey().subscribe(data => {
         this.patientdata = {
-          id : data._id,
-          email : data.email,
-          password : data.password,
-          imagePath : data.imagePath,
-          name : data.name,
+          id: data._id,
+          email: data.email,
+          password: data.password,
+          imagePath: data.imagePath,
+          name: data.name,
           lastName: data.lastName,
-          address : data.address,
-          birthday : data.birthday,
-          bloodType : data.bloodType,
-          phone : data.phone,
+          address: data.address,
+          birthday: data.birthday,
+          bloodType: data.bloodType,
+          phone: data.phone,
           city: data.city,
           state: data.state,
           zip: data.zip,
           country: data.country,
-          rdv : data.rdv
+          rdv: data.rdv
         };
         this.chatRooms = data.chatRoom;
         this.chatService.joinRoom({user: data._id, room: data.chatRoom[0].name});

@@ -278,9 +278,9 @@ export class DocProfilSettingComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.form.invalid) {
-      return;
-    }
+    // if (this.form.invalid) {
+    //   return;
+    // }
     this.doctorService.modify(this.form.value.firstName, this.form.value.lastName,
       this.form.value.phone, this.form.value.gender, this.form.value.birthday,
       this.form.value.address1, this.form.value.address2, this.form.value.city,

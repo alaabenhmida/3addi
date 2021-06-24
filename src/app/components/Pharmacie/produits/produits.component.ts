@@ -14,7 +14,8 @@ export class ProduitsComponent implements OnInit, OnDestroy {
   pharmacieSub: Subscription;
 
   constructor(private pharmacieService: PharmacieService,
-              private toastr: ToastrService) { }
+              private toastr: ToastrService) {
+  }
 
   ngOnInit(): void {
     this.pharmacieService.getDataByKey().subscribe(data => {

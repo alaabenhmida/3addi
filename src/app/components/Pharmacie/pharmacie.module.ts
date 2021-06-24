@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {PharmacieProfileComponent} from './pharmacie-profile/pharmacie-profile.component';
 import {PharmacieSearchComponent} from './pharmacie-search/pharmacie-search.component';
 import {PharLoginComponent} from './phar-login/phar-login.component';
@@ -21,10 +21,10 @@ import {AgmCoreModule} from '@agm/core';
 import {AgmDirectionModule} from 'agm-direction';
 import {AgmSnazzyInfoWindowModule} from '@agm/snazzy-info-window';
 import {PharmacieRoutingModule} from '../../routers/pharmacie-routing/pharmacie-routing.module';
-import { PharmacieSignupComponent } from './pharmacie-signup/pharmacie-signup.component';
+import {PharmacieSignupComponent} from './pharmacie-signup/pharmacie-signup.component';
 import {MatSelectCountryModule} from '@angular-material-extensions/select-country';
-import { PaymentSuccessComponent } from './payment-success/payment-success.component';
-
+import {PaymentSuccessComponent} from './payment-success/payment-success.component';
+import {NgxStripeModule} from 'ngx-stripe';
 
 
 @NgModule({
@@ -58,7 +58,9 @@ import { PaymentSuccessComponent } from './payment-success/payment-success.compo
     AgmDirectionModule,
     AgmSnazzyInfoWindowModule,
     PharmacieRoutingModule,
-    MatSelectCountryModule.forRoot('fr')
+    MatSelectCountryModule.forRoot('fr'),
+    NgxStripeModule.forRoot('pk_test_51Iz3EFKNPi1VJcHg2s4jzJrl8hX5vSi5On4k0w2Z8AICRQcSf0z8mWLr1Utv862jdEVfXdZoD7T9RvpL21IqKqMY000A6GtnWf'),
   ]
 })
-export class PharmacieModule { }
+export class PharmacieModule {
+}

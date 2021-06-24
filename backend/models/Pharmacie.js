@@ -21,7 +21,7 @@ const pharmacieSchema = mongoose.Schema({
     stock: {type: Number}
   }],
   sales: [{
-    patient: {type : mongoose.Schema.Types.ObjectId, ref: 'Patient'},
+    patient: {type: mongoose.Schema.Types.ObjectId, ref: 'Patient'},
     name: {type: String},
     description: {type: String},
     price: {type: Number},
@@ -29,18 +29,18 @@ const pharmacieSchema = mongoose.Schema({
     quantity: {type: Number},
     date: {type: String}
   }],
-  reviews : [{
-    patientId : { type : mongoose.Schema.Types.ObjectId, ref: 'Patient' },
-    rate : { type : Number },
-    title : {type : String},
-    review : {type : String}
+  reviews: [{
+    patientId: {type: mongoose.Schema.Types.ObjectId, ref: 'Patient'},
+    rate: {type: Number},
+    title: {type: String},
+    review: {type: String}
   }],
   awards: [{
     awards: {type: String},
     year: {type: String}
   }],
   orders: [{
-    patient: { type : mongoose.Schema.Types.ObjectId, ref: 'Patient'},
+    patient: {type: mongoose.Schema.Types.ObjectId, ref: 'Patient'},
     products: [{
       product: {
         id: {type: mongoose.Schema.Types.ObjectId},

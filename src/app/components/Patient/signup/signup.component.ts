@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {PatientAuthService} from '../../../auth/Patient/patient-auth.service';
 import {mimeType} from '../../../shared/mime-type.validator';
@@ -16,27 +16,28 @@ export class SignupComponent implements OnInit {
   isLinear = false;
 
   constructor(public patientService: PatientAuthService,
-              private _formBuilder: FormBuilder) { }
+              private _formBuilder: FormBuilder) {
+  }
 
   ngOnInit(): void {
     this.firstFormGroup = this._formBuilder.group({
       email: new FormControl(null, {
         validators: [Validators.required, Validators.minLength(3)]
       }),
-      password: new FormControl(null, { validators: [Validators.required] }),
-      name: new FormControl(null, { validators: [Validators.required] }),
-      lastName: new FormControl(null, { validators: [Validators.required] }),
-      birthday: new FormControl(null, { validators: [Validators.required] }),
-      bloodType: new FormControl(null, { validators: [Validators.required] }),
-      phone: new FormControl(null, { validators: [Validators.required] }),
-      gender: new FormControl(null, { validators: [Validators.required] })
+      password: new FormControl(null, {validators: [Validators.required]}),
+      name: new FormControl(null, {validators: [Validators.required]}),
+      lastName: new FormControl(null, {validators: [Validators.required]}),
+      birthday: new FormControl(null, {validators: [Validators.required]}),
+      bloodType: new FormControl(null, {validators: [Validators.required]}),
+      phone: new FormControl(null, {validators: [Validators.required]}),
+      gender: new FormControl(null, {validators: [Validators.required]})
     });
     this.secondFormGroup = this._formBuilder.group({
-      address: new FormControl(null, { validators: [Validators.required] }),
-      city: new FormControl(null, { validators: [Validators.required] }),
-      state: new FormControl(null, { validators: [Validators.required] }),
-      zip: new FormControl(null, { validators: [Validators.required] }),
-      country: new FormControl(null, { validators: [Validators.required] }),
+      address: new FormControl(null, {validators: [Validators.required]}),
+      city: new FormControl(null, {validators: [Validators.required]}),
+      state: new FormControl(null, {validators: [Validators.required]}),
+      zip: new FormControl(null, {validators: [Validators.required]}),
+      country: new FormControl(null, {validators: [Validators.required]}),
     });
     this.form = new FormGroup({
       image: new FormControl(null, {
@@ -48,7 +49,7 @@ export class SignupComponent implements OnInit {
 
   onImagePicked(event: Event): void {
     const file = (event.target as HTMLInputElement).files[0];
-    this.form.patchValue({ image: file });
+    this.form.patchValue({image: file});
     this.form.get('image').updateValueAndValidity();
     const reader = new FileReader();
     reader.onload = () => {
@@ -56,8 +57,9 @@ export class SignupComponent implements OnInit {
     };
     reader.readAsDataURL(file);
   }
-  onSubmit(): void{
-    if (this.form.invalid){
+
+  onSubmit(): void {
+    if (this.form.invalid) {
       console.log(this.form.errors);
       return;
     }

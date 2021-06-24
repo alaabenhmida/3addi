@@ -5,7 +5,8 @@ import {PatientAuthService} from './Patient/patient-auth.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  constructor(private authService: PatientAuthService) {}
+  constructor(private authService: PatientAuthService) {
+  }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<any> {
     const authToken = this.authService.getToken();

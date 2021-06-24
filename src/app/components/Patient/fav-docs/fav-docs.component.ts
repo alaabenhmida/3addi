@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {PatientServiceService} from '../../../services/Patient/patient-service.service';
 import {Doctor} from '../../../models/Doctor/doctor.model';
 import {Patient} from '../../../models/Patient/patient.model';
@@ -14,7 +14,8 @@ export class FavDocsComponent implements OnInit {
   patientdata: Patient;
   private today = moment(new Date()).toString();
 
-  constructor(private patient: PatientServiceService) { }
+  constructor(private patient: PatientServiceService) {
+  }
 
   ngOnInit(): void {
     this.patient.getPatientByKey().subscribe(result => {
@@ -22,11 +23,13 @@ export class FavDocsComponent implements OnInit {
       this.favourits = result.favDocs;
     });
   }
+
   getDay(day: string, format: string): string {
     return moment(day).format(format);
   }
+
   calculateAge(birthday): number { // birthday is a date
     const age = moment.duration(moment().diff(moment(birthday)));
-    return  Math.floor(age.asYears());
+    return Math.floor(age.asYears());
   }
 }

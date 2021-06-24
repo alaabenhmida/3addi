@@ -112,13 +112,13 @@
                   <div class="col-12 col-md-6">
                     <div class="form-group">
                       <label>email</label>
-                        <p class="input-group-text">{{doctorData?.email}}</p>
+                      <p class="input-group-text">{{doctorData?.email}}</p>
                     </div>
                   </div>
                   <div class="col-12 col-md-6">
                     <div class="form-group">
                       <label>sexe</label>
-                        <p class="input-group-text">{{doctorData?.gender}}</p>
+                      <p class="input-group-text">{{doctorData?.gender}}</p>
                     </div>
                   </div>
                   <div class="col-12 col-md-6">
@@ -177,10 +177,12 @@
                   </div>
                 </div>
                 <div class="submit-section">
-                  <button (click)="onAccept(doctorData._id)" type="button" class="btn btn-primary submit-btn">accepter</button>
+                  <button (click)="onAccept(doctorData._id)" type="button" class="btn btn-primary submit-btn">accepter
+                  </button>
                 </div>
                 <div class="submit-section">
-                  <button (click)="onReject(doctorData._id)" type="button" class="btn btn-danger submit-btn">refusé</button>
+                  <button (click)="onReject(doctorData._id)" type="button" class="btn btn-danger submit-btn">refusé
+                  </button>
                 </div>
               </form>
               <!-- /Profile Settings Form -->

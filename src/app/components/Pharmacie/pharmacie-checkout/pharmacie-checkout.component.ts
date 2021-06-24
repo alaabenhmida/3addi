@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {CartItem} from '../../../models/Pharmacie/cartItem.model';
 import {CartService} from '../../../services/pharmacie/cart.service';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
@@ -9,6 +9,10 @@ import * as moment from 'moment';
 import {Product} from '../../../models/Pharmacie/product.model';
 import {DoctorServiceService} from '../../../services/doctor/doctor-service.service';
 import {PatientServiceService} from '../../../services/Patient/patient-service.service';
+import {StripeCardElementOptions, StripeElementsOptions} from '@stripe/stripe-js';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {StripeCardComponent, StripeService} from 'ngx-stripe';
+import {PaymentService} from '../../../services/payment/payment.service';
 
 @Component({
   selector: 'app-pharmacie-checkout',
@@ -25,16 +29,46 @@ export class PharmacieCheckoutComponent implements OnInit, OnDestroy {
   patientId: string;
   ordonnanceMode = false;
   day = moment(Date.now()).format('DDMMYYYYHH:mm');
+  @ViewChild(StripeCardComponent) card: StripeCardComponent;
+  element: Element;
+  paymentStatus: any;
+  loading: any;
+  cardOptions: StripeCardElementOptions = {
+    style: {
+      base: {
+        iconColor: '#666EE8',
+        color: '#31325F',
+        fontWeight: '300',
+        fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+        fontSize: '18px',
+        '::placeholder': {
+          color: '#CFD7E0',
+        },
+      },
+    },
+  };
+
+  elementsOptions: StripeElementsOptions = {
+    locale: 'fr'
+  };
+
+  stripeTest: FormGroup;
 
   constructor(private cartService: CartService,
               private route: ActivatedRoute,
               private router: Router,
               private pharmacieService: PharmacieService,
               private doctorService: DoctorServiceService,
-              private patientService: PatientServiceService) { }
+              private patientService: PatientServiceService,
+              private fb: FormBuilder, private stripeService: StripeService,
+              private paymentService: PaymentService) {
+  }
 
   ngOnInit(): void {
-    combineLatest(this.route.params, this.route.queryParams, (params, qparams) => ({ params, qparams }))
+    this.stripeTest = this.fb.group({
+      name: ['', [Validators.required]]
+    });
+    combineLatest(this.route.params, this.route.queryParams, (params, qparams) => ({params, qparams}))
       .subscribe(allParams => {
         this.pharmacieService.getPharmacie(allParams.params.id).subscribe(data => {
           this.pharmacieData = data;
@@ -74,48 +108,86 @@ export class PharmacieCheckoutComponent implements OnInit, OnDestroy {
   updatequantites(): Promise<any> {
     return new Promise<void>((resolve, reject) => {
       this.products.map(product => {
-          this.pharmacieService.updatequantity(product.product, product.quantity, this.day,
-            this.pharmacieId);
-        });
+        this.pharmacieService.updatequantity(product.product, product.quantity, this.day,
+          this.pharmacieId);
+      });
       resolve();
     });
   }
 
   onclick(): void {
     if (!this.ordonnanceMode) {
-      this.patientService.addInoicePharmaice(this.products, this.pharmacieId).subscribe(res => {
-        this.updatequantites().then(() => {
-          this.pharmacieService.addOrder(this.products, this.pharmacieId).subscribe(data => {
-            this.pharmacieService.deleteCart(this.pharmacieId).subscribe(result => {
-              this.router.navigate(['pharmacie', this.pharmacieId, 'payer', 'succee'], {
-                queryParams: {
-                  invoiceId: res
-                }
-              });
-            });
-          });
-        });
-      });
-    } else {
-      this.patientService.addInoicePharmaice(this.products, this.pharmacieId).subscribe(res => {
-        console.log(res);
-        this.updatequantites().then(() => {
-          this.pharmacieService.addOrder(this.products, this.pharmacieId).subscribe(data => {
-            this.pharmacieService.deleteCart(this.pharmacieId).subscribe(result => {
-              this.pharmacieService.signPrescription(this.pharmacieId, this.prescID).subscribe(resultat => {
-                this.router.navigate(['pharmacie', this.pharmacieId, 'payer', 'succee'], {
-                  queryParams: {
-                    invoiceId: res
-                  }
+      const name = this.stripeTest.get('name').value;
+      this.stripeService
+        .createToken(this.card.element, {name})
+        .subscribe((result) => {
+          if (result.token) {
+            this.paymentService.pay(result.token, this.getTotal()).subscribe(res => {
+              if (res.success) {
+                this.paymentStatus = res.status;
+                this.patientService.addInoicePharmaice(this.products, this.pharmacieId).subscribe(res => {
+                  this.updatequantites().then(() => {
+                    this.pharmacieService.addOrder(this.products, this.pharmacieId).subscribe(data => {
+                      this.pharmacieService.deleteCart(this.pharmacieId).subscribe(result => {
+                        this.router.navigate(['pharmacie', this.pharmacieId, 'payer', 'succee'], {
+                          queryParams: {
+                            invoiceId: res
+                          }
+                        });
+                      });
+                    });
+                  });
                 });
-              });
+              }
             });
-          });
+          }
         });
-      });
+    } else {
+      const name = this.stripeTest.get('name').value;
+      this.stripeService
+        .createToken(this.card.element, {name})
+        .subscribe((result) => {
+          if (result.token) {
+            this.paymentService.pay(result.token, this.getTotalAmount()).subscribe(res => {
+              if (res.success) {
+                this.paymentStatus = res.status;
+                this.patientService.addInoicePharmaice(this.products, this.pharmacieId).subscribe(res => {
+                  console.log(res);
+                  this.updatequantites().then(() => {
+                    this.pharmacieService.addOrder(this.products, this.pharmacieId).subscribe(data => {
+                      this.pharmacieService.deleteCart(this.pharmacieId).subscribe(result => {
+                        this.pharmacieService.signPrescription(this.pharmacieId, this.prescID).subscribe(resultat => {
+                          this.router.navigate(['pharmacie', this.pharmacieId, 'payer', 'succee'], {
+                            queryParams: {
+                              invoiceId: res
+                            }
+                          });
+                        });
+                      });
+                    });
+                  });
+                });
+              }
+            });
+          }
+        });
     }
   }
 
+  createToken(): void {
+    const name = this.stripeTest.get('name').value;
+    this.stripeService
+      .createToken(this.card.element, {name})
+      .subscribe((result) => {
+        if (result.token) {
+          this.paymentService.pay(result.token, this.getTotal()).subscribe(res => {
+            if (res.success) {
+              this.paymentStatus = res.status;
+            }
+          });
+        }
+      });
+  }
   public getTotalAmount(): number {
     // return this.cartItems.pipe(map((product: CartItem[]) => {
     return this.products.reduce((prev, curr: CartItem) => {

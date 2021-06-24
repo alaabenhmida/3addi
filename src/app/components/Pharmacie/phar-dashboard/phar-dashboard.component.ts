@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Pharmacie} from '../../../models/Pharmacie/pharmacie.model';
 import {PharmacieService} from '../../../services/pharmacie/pharmacie.service';
 import * as moment from 'moment';
@@ -17,7 +17,8 @@ export class PharDashboardComponent implements OnInit {
   todaySAlesQuantite = 0;
   totalSalesAMount = 0;
 
-  constructor(private pharmacieService: PharmacieService) { }
+  constructor(private pharmacieService: PharmacieService) {
+  }
 
   ngOnInit(): void {
     this.pharmacieService.getDataByKey().subscribe(data => {

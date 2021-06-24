@@ -79,55 +79,53 @@
                       </div>
                     </div>
                   </div>
-<!--                  <div class="exist-customer">Existing Customer? <a href="#">Click here to login</a></div>-->
+                  <!--                  <div class="exist-customer">Existing Customer? <a href="#">Click here to login</a></div>-->
                 </div>
                 <!-- /Personal Information -->
 
                 <div class="payment-widget">
 
-                  <h4 class="card-title">Mode de paiement</h4>
-
                   <!-- Credit Card Payment -->
                   <form novalidate (ngSubmit)="createToken()" [formGroup]="stripeTest">
-                  <div class="payment-list">
-                    <label class="payment-radio credit-card-option">
-                      <input type="radio" name="radio" checked>
-                      <span class="checkmark"></span>
-                      Carte de crédit
-                    </label>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group card-label">
-                          <label for="card_name">Nom sur la carte</label>
-                          <input formControlName="name" class="form-control" id="card_name" type="text">
+                    <div class="payment-list">
+                      <label class="payment-radio credit-card-option">
+                        <input type="radio" name="radio" checked>
+                        <span class="checkmark"></span>
+                        Carte de crédit
+                      </label>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group card-label">
+                            <label for="card_name">Nom sur la carte</label>
+                            <input formControlName="name" class="form-control" id="card_name" type="text">
+                          </div>
                         </div>
+                        <div class="col-md-12">
+                          <ngx-stripe-card
+                            class="form-control"
+                            [options]="cardOptions"
+                            [elementsOptions]="elementsOptions"
+                          ></ngx-stripe-card>
+                        </div>
+
                       </div>
-                      <div class="col-md-12">
-                        <ngx-stripe-card
-                          class="form-control"
-                          [options]="cardOptions"
-                          [elementsOptions]="elementsOptions"
-                        ></ngx-stripe-card>
+                    </div>
+                    <!-- /Credit Card Payment -->
+
+                    <!-- Terms Accept -->
+                    <div class="terms-accept">
+                      <div class="custom-checkbox">
+                        <input type="checkbox" id="terms_accept">
+                        <label for="terms_accept">J'ai lu et j'accepte <a href="#">les termes et conditions</a></label>
                       </div>
-
                     </div>
-                  </div>
-                  <!-- /Credit Card Payment -->
 
-                  <!-- Terms Accept -->
-                  <div class="terms-accept">
-                    <div class="custom-checkbox">
-                      <input type="checkbox" id="terms_accept">
-                      <label for="terms_accept">J'ai lu et j'accepte <a href="#">les termes et conditions</a></label>
+                    <!-- /Terms Accept -->
+
+                    <!-- Submit Section -->
+                    <div class="submit-section mt-4">
+                      <button type="submit" class="btn btn-primary submit-btn">Confirmer et payer</button>
                     </div>
-                  </div>
-
-                  <!-- /Terms Accept -->
-
-                  <!-- Submit Section -->
-                  <div class="submit-section mt-4">
-                    <button type="submit" class="btn btn-primary submit-btn">Confirmer et payer</button>
-                  </div>
                   </form>
                   <!-- /Submit Section -->
 
@@ -165,7 +163,8 @@
                     <span class="d-inline-block average-rating">{{rdv?.doctorId.reviews.length}}</span>
                   </div>
                   <div class="clinic-details">
-                    <p class="doc-location"><i class="fas fa-map-marker-alt"></i> {{rdv?.doctorId.state}}, {{rdv?.doctorId.country}}</p>
+                    <p class="doc-location"><i class="fas fa-map-marker-alt"></i> {{rdv?.doctorId.state}}
+                      , {{rdv?.doctorId.country}}</p>
                   </div>
                 </div>
               </div>
@@ -194,16 +193,16 @@
             </div>
           </div>
           <!-- /Booking Summary -->
-<!--          <form novalidate (ngSubmit)="createToken()" [formGroup]="stripeTest">-->
-<!--            <input type="text" formControlName="name" placeholder="Jane Doe">-->
-<!--            <ngx-stripe-card-->
-<!--              [options]="cardOptions"-->
-<!--              [elementsOptions]="elementsOptions"-->
-<!--            ></ngx-stripe-card>-->
-<!--            <button type="submit">-->
-<!--              CREATE TOKEN-->
-<!--            </button>-->
-<!--          </form>-->
+          <!--          <form novalidate (ngSubmit)="createToken()" [formGroup]="stripeTest">-->
+          <!--            <input type="text" formControlName="name" placeholder="Jane Doe">-->
+          <!--            <ngx-stripe-card-->
+          <!--              [options]="cardOptions"-->
+          <!--              [elementsOptions]="elementsOptions"-->
+          <!--            ></ngx-stripe-card>-->
+          <!--            <button type="submit">-->
+          <!--              CREATE TOKEN-->
+          <!--            </button>-->
+          <!--          </form>-->
 
         </div>
       </div>
@@ -215,6 +214,7 @@
 
 </div>
 <!-- /Main Wrapper -->
-<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-clip-rotate-multiple" [fullScreen] = "true"><p style="color: white" > Loading... </p></ngx-spinner>
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-clip-rotate-multiple"
+             [fullScreen]="true"><p style="color: white"> Loading... </p></ngx-spinner>
 </body>
 </html>

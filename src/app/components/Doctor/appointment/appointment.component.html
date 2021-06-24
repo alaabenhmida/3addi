@@ -46,7 +46,9 @@
                   <img src="{{doctorData?.imagePath}}" alt="User Image">
                 </a>
                 <div class="booking-info">
-                  <h4><a [routerLink]="['/doctor', doctorData?.id]">Dr. {{doctorData?.name}} {{doctorData?.lastName}}</a></h4>
+                  <h4><a
+                    [routerLink]="['/doctor', doctorData?.id]">Dr. {{doctorData?.name}} {{doctorData?.lastName}}</a>
+                  </h4>
                   <div class="rating">
                     <i class="fas fa-star filled"></i>
                     <i class="fas fa-star filled"></i>
@@ -55,7 +57,8 @@
                     <i class="fas fa-star"></i>
                     <span class="d-inline-block average-rating"> ({{doctorData?.reviews.length}}) </span>
                   </div>
-                  <p class="text-muted mb-0"><i class="fas fa-map-marker-alt"></i> {{doctorData?.state}}, {{doctorData?.country}}</p>
+                  <p class="text-muted mb-0"><i class="fas fa-map-marker-alt"></i> {{doctorData?.state}}
+                    , {{doctorData?.country}}</p>
                 </div>
               </div>
             </div>
@@ -84,7 +87,8 @@
                       </li>
                       <li *ngFor="let dayy of week">
                         <span>{{getDay(dayy, 'ddd')}}</span>
-                        <span class="slot-date">{{getDay(dayy, 'DD MMM')}} <small class="slot-year">{{getDay(dayy, 'YYYY')}}</small></span>
+                        <span class="slot-date">{{getDay(dayy, 'DD MMM')}} <small
+                          class="slot-year">{{getDay(dayy, 'YYYY')}}</small></span>
                       </li>
                       <li class="right-arrow">
                         <a href="#">
@@ -109,8 +113,10 @@
                   <div class="time-slot">
                     <ul class="clearfix">
                       <li *ngFor="let day of week">
-                        <a id="timi" *ngFor="let time of getSlots(day, x.nextSlot, x.breackTimes, x.startTime, x.endTime)" class="timing" (click)="onclick(time, day)" >
-                          <span>{{time}}</span > <span>AM</span>
+                        <a id="timi"
+                           *ngFor="let time of getSlots(day, x.nextSlot, x.breackTimes, x.startTime, x.endTime)"
+                           class="timing" (click)="onclick(time, day)">
+                          <span>{{time}}</span> <span>AM</span>
                         </a>
 
                       </li>

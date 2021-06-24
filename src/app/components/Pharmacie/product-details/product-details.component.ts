@@ -20,7 +20,8 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   constructor(private pharmacieService: PharmacieService,
               private route: ActivatedRoute,
               private cartService: CartService,
-              private headerService: HeaderService) { }
+              private headerService: HeaderService) {
+  }
 
   ngOnInit(): void {
     this.headerService.isInPharmacie.next(true);
@@ -43,6 +44,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
       });
     });
   }
+
   addTocart(): void {
     this.cartService.addToCart(this.product, 1, this.pharmacieId);
     this.headerService.productNumber.next(this.cartService.products.length);
