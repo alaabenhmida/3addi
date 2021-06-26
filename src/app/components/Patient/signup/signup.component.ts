@@ -24,19 +24,22 @@ export class SignupComponent implements OnInit {
       email: new FormControl(null, {
         validators: [Validators.required, Validators.minLength(3)]
       }),
-      password: new FormControl(null, {validators: [Validators.required]}),
+      password: new FormControl(null, {validators: [Validators.required,
+        Validators.minLength(8)]}),
       name: new FormControl(null, {validators: [Validators.required]}),
       lastName: new FormControl(null, {validators: [Validators.required]}),
       birthday: new FormControl(null, {validators: [Validators.required]}),
       bloodType: new FormControl(null, {validators: [Validators.required]}),
-      phone: new FormControl(null, {validators: [Validators.required]}),
+      phone: new FormControl(null, {validators: [Validators.required,
+          Validators.pattern(/^-?(0|[1-9]\d*)?$/)]}),
       gender: new FormControl(null, {validators: [Validators.required]})
     });
     this.secondFormGroup = this._formBuilder.group({
       address: new FormControl(null, {validators: [Validators.required]}),
       city: new FormControl(null, {validators: [Validators.required]}),
       state: new FormControl(null, {validators: [Validators.required]}),
-      zip: new FormControl(null, {validators: [Validators.required]}),
+      zip: new FormControl(null, {validators: [Validators.required,
+          Validators.pattern(/^-?(0|[1-9]\d*)?$/)]}),
       country: new FormControl(null, {validators: [Validators.required]}),
     });
     this.form = new FormGroup({
@@ -63,7 +66,7 @@ export class SignupComponent implements OnInit {
       console.log(this.form.errors);
       return;
     }
-    console.log(this.form.value);
+    console.log(this.secondFormGroup.value);
     this.patientService.signup(this.firstFormGroup.value.email,
       this.firstFormGroup.value.password,
       this.form.value.image,
@@ -74,7 +77,7 @@ export class SignupComponent implements OnInit {
       this.secondFormGroup.value.city,
       this.secondFormGroup.value.state,
       this.secondFormGroup.value.zip,
-      this.secondFormGroup.value.country,
+      this.secondFormGroup.value.country.name,
       this.firstFormGroup.value.birthday.toString(), this.firstFormGroup.value.bloodType, this.firstFormGroup.value.phone);
   }
 

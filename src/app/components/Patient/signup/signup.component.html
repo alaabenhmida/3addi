@@ -66,6 +66,7 @@
                             <mat-form-field appearance="outline">
                               <mat-label>email</mat-label>
                               <input matInput formControlName="email" required>
+                              <mat-error>email pas valide</mat-error>
                             </mat-form-field>
                           </div>
                         </div>
@@ -74,6 +75,7 @@
                             <mat-form-field appearance="outline">
                               <mat-label>mot de passe</mat-label>
                               <input matInput type="password" formControlName="password" required>
+                              <mat-error>mot de passe doive etre 4 charactere min</mat-error>
                             </mat-form-field>
                           </div>
                         </div>
@@ -82,6 +84,7 @@
                             <mat-form-field class="w-100" appearance="outline">
                               <mat-label>phone</mat-label>
                               <input matInput formControlName="phone" required>
+                              <mat-error>telephone non valide</mat-error>
                             </mat-form-field>
                           </div>
                         </div>
@@ -173,6 +176,7 @@
                             <mat-form-field appearance="outline">
                               <mat-label>zip</mat-label>
                               <input matInput formControlName="zip" required>
+                              <mat-error>zip non valide</mat-error>
                             </mat-form-field>
                           </div>
                         </div>
@@ -214,7 +218,7 @@
                         </div>
                         <div class="col-12 col-md-4">
                           <button mat-button (click)="onSubmit()" class="btn btn-primary btn-block btn-lg login-btn"
-                                  type="submit">Create account
+                                  type="submit">Créer un compte
                           </button>
                         </div>
                       </div>
