@@ -1,11 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {PatientAuthService} from '../../auth/Patient/patient-auth.service';
-import {ActivatedRoute, ParamMap, Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {LoginDialogComponent} from '../login-dialog/login-dialog.component';
 import {HeaderService} from '../../services/header/header.service';
-import {CartItem} from '../../models/Pharmacie/cartItem.model';
 import {CartService} from '../../services/pharmacie/cart.service';
 
 @Component({
@@ -36,8 +35,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
               public router: Router,
               private dialog: MatDialog,
               private route: ActivatedRoute,
-              private headerService: HeaderService,
-              private cartService: CartService) {
+              private headerService: HeaderService) {
   }
 
   ngOnInit(): void {

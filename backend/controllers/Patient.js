@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const Doctor = require("../models/Doctor");
 const Pharmacie = require("../models/Pharmacie");
+const Admin = require("../models/Admin");
 const moment = require("moment");
 
 exports.verifyPassword = (req, res, next) => {
@@ -631,9 +632,40 @@ exports.login = (req, res, next) => {
               return Pharmacie.findOne({email: req.body.email})
                 .then(user => {
                   if (!user) {
-                    return res.status(401).json({
-                      message: "email not exist"
-                    });
+                    return Admin.findOne({email: req.body.email})
+                      .then(user => {
+                        if (!user) {
+                          return res.status(401).json({
+                            message: "email not exist"
+                          });
+                        }
+                        fetchedUser = user;
+                        return bcrypt.compare(req.body.password, user.password);
+                      })
+                      .then(result => {
+                        if (!result) {
+                          return res.status(401).json({
+                            message: "password incorrect"
+                          });
+                        }
+                        const token = jwt.sign(
+                          {email: fetchedUser.email, userId: fetchedUser._id},
+                          "secret_this_should_be_longer",
+                          {expiresIn: "1h"}
+                        );
+                        res.status(200).json({
+                          token: token,
+                          expiresIn: 3600,
+                          user: fetchedUser,
+                          role: "admin"
+                        });
+                      })
+                      .catch(err => {
+                        return res.status(401).json({
+                          message: "error occurred",
+                          error: err
+                        });
+                      });
                   }
                   fetchedUser = user;
                   return bcrypt.compare(req.body.password, user.password);

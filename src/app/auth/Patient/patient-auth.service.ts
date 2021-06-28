@@ -108,8 +108,10 @@ export class PatientAuthService {
             this.router.navigate(['/']);
           } else if (response.role === 'doctor') {
             this.router.navigate(['/doctor/profile/dashboard']);
-          } else {
+          } else if (response.role === 'pharmacien') {
             this.router.navigate(['/pharmacie/dashboard']);
+          } else {
+            this.router.navigate(['/admin/dashboard']);
           }
         }
       });

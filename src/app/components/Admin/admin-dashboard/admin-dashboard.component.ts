@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {DoctorServiceService} from '../../../services/doctor/doctor-service.service';
 import {PatientServiceService} from '../../../services/Patient/patient-service.service';
 import {PharmacieService} from '../../../services/pharmacie/pharmacie.service';
+import {PatientAuthService} from '../../../auth/Patient/patient-auth.service';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -24,7 +25,8 @@ export class AdminDashboardComponent implements OnInit {
 
   constructor(private doctorService: DoctorServiceService,
               private patientService: PatientServiceService,
-              private pharmacieService: PharmacieService) {
+              private pharmacieService: PharmacieService,
+              private auth: PatientAuthService) {
   }
 
   ngOnInit(): void {
@@ -77,4 +79,7 @@ export class AdminDashboardComponent implements OnInit {
     });
   }
 
+  onLougout(): void {
+    this.auth.logout();
+  }
 }
