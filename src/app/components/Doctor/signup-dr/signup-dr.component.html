@@ -45,7 +45,7 @@
                     <form [formGroup]="firstFormGroup">
                       <div class="row form-row">
                         <ng-template matStepLabel>données personnels</ng-template>
-                        <div class="col-12 col-md-6">
+                        <div *ngIf="role === 'option1' || role === 'option2'" class="col-12 col-md-6">
                           <div class="form-group">
                             <mat-form-field class="w-100" appearance="outline">
                               <mat-label>Nom</mat-label>
@@ -53,7 +53,7 @@
                             </mat-form-field>
                           </div>
                         </div>
-                        <div class="col-12 col-md-6">
+                        <div *ngIf="role === 'option1' || role === 'option2'" class="col-12 col-md-6">
                           <div class="form-group">
                             <mat-form-field class="w-100" appearance="outline">
                               <mat-label>prenom</mat-label>
@@ -61,7 +61,7 @@
                             </mat-form-field>
                           </div>
                         </div>
-                        <div class="col-12 col-md-6">
+                        <div *ngIf="role === 'option1' || role === 'option2'" class="col-12 col-md-4">
                           <div class="form-group">
                             <mat-form-field appearance="outline">
                               <mat-label>email</mat-label>
@@ -69,7 +69,39 @@
                             </mat-form-field>
                           </div>
                         </div>
-                        <div class="col-12 col-md-6">
+                        <div *ngIf="role === 'option1' || role === 'option2'" class="col-12 col-md-4">
+                          <div class="form-group">
+                            <mat-form-field appearance="outline">
+                              <mat-label>mot de passe</mat-label>
+                              <input matInput type="password" formControlName="password" required>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div *ngIf="role === 'option3'" class="col-12 col-md-6">
+                          <div class="form-group">
+                            <mat-form-field class="w-100" appearance="outline">
+                              <mat-label>Nom</mat-label>
+                              <input matInput formControlName="firsName" required>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div *ngIf="role === 'option3'" class="col-12 col-md-6">
+                          <div class="form-group">
+                            <mat-form-field class="w-100" appearance="outline">
+                              <mat-label>téléphone</mat-label>
+                              <input matInput formControlName="phone" required>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div *ngIf="role === 'option3'" class="col-12 col-md-4">
+                          <div class="form-group">
+                            <mat-form-field appearance="outline">
+                              <mat-label>email</mat-label>
+                              <input matInput formControlName="email" required>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div *ngIf="role === 'option3'" class="col-12 col-md-4">
                           <div class="form-group">
                             <mat-form-field appearance="outline">
                               <mat-label>mot de passe</mat-label>
@@ -79,13 +111,25 @@
                         </div>
                         <div class="col-12 col-md-4">
                           <div class="form-group">
+                            <mat-form-field appearance="fill">
+                              <mat-label>Je suis</mat-label>
+                              <mat-select [(value)]="role">
+                                <mat-option value="option1">patient</mat-option>
+                                <mat-option value="option2">médecin</mat-option>
+                                <mat-option value="option3">pharmacien</mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div *ngIf="role === 'option1' || role === 'option2'" class="col-12 col-md-4">
+                          <div class="form-group">
                             <mat-form-field class="w-100" appearance="outline">
-                              <mat-label>phone</mat-label>
+                              <mat-label>téléphone</mat-label>
                               <input matInput formControlName="phone" required>
                             </mat-form-field>
                           </div>
                         </div>
-                        <div class="col-12 col-md-4">
+                        <div *ngIf="role === 'option1' || role === 'option2'" class="col-12 col-md-4">
                           <div class="form-group">
                             <mat-form-field class="w-100" appearance="outline">
                               <mat-label>date de naissance</mat-label>
@@ -93,7 +137,7 @@
                             </mat-form-field>
                           </div>
                         </div>
-                        <div class="col-12 col-md-4">
+                        <div *ngIf="role === 'option1' || role === 'option2'" class="col-12 col-md-4">
                           <div class="form-group">
                             <mat-form-field class="w-100" appearance="outline">
                               <mat-label>sexe</mat-label>
@@ -111,14 +155,14 @@
                       </div>
                     </form>
                   </mat-step>
-                  <mat-step [stepControl]="secondFormGroup">
-                    <form [formGroup]="secondFormGroup">
+                  <mat-step *ngIf="role === 'option3'" [stepControl]="pharmaciesecondFormGroup">
+                    <form [formGroup]="pharmaciesecondFormGroup">
                       <div class="row form-row">
                         <ng-template matStepLabel>adresse</ng-template>
                         <div class="col-12 col-md-12">
                           <div class="form-group">
                             <mat-form-field class="w-100" appearance="outline">
-                              <mat-label>Address</mat-label>
+                              <mat-label>Adresse</mat-label>
                               <input matInput formControlName="address" required>
                             </mat-form-field>
                           </div>
@@ -126,7 +170,7 @@
                         <div class="col-12 col-md-4">
                           <div class="form-group">
                             <mat-form-field appearance="outline">
-                              <mat-label>city</mat-label>
+                              <mat-label>ville</mat-label>
                               <input matInput formControlName="city" required>
                             </mat-form-field>
                           </div>
@@ -134,7 +178,76 @@
                         <div class="col-12 col-md-4">
                           <div class="form-group">
                             <mat-form-field appearance="outline">
-                              <mat-label>state</mat-label>
+                              <mat-label>gouvernorat</mat-label>
+                              <input matInput formControlName="state" required>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                          <div class="form-group">
+                            <mat-select-country placeHolder="pays" appearance="outline" formControlName="country"
+                                                required>
+                            </mat-select-country>
+                          </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                          <div class="form-group">
+                            <mat-form-field appearance="outline">
+                              <mat-label>zip</mat-label>
+                              <input matInput formControlName="zip" required>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                          <div class="form-group">
+                            <mat-form-field class="w-100" appearance="outline">
+                              <mat-label>specialité</mat-label>
+                              <select matNativeControl required formControlName="speciality">
+                                <option value="pharmacie">pharmacie</option>
+                                <option value="paramédical">paramédical</option>
+                                <option value="parapharmacie">parapharmacie</option>
+                              </select>
+                            </mat-form-field>
+                          </div>
+                        </div>
+
+                        <div class="col-12 col-md-6">
+                          <button class="btn btn-info btn-block btn-lg login-btn" mat-button matStepperPrevious>
+                            precedent
+                          </button>
+                        </div>
+                        <div class="col-12 col-md-6">
+                          <button class="btn btn-primary btn-block btn-lg login-btn" mat-button matStepperNext>suivant
+                          </button>
+                        </div>
+
+                      </div>
+                    </form>
+                  </mat-step>
+                  <mat-step *ngIf="role === 'option2'" [stepControl]="secondFormGroup">
+                    <form [formGroup]="secondFormGroup">
+                      <div class="row form-row">
+                        <ng-template matStepLabel>adresse</ng-template>
+                        <div class="col-12 col-md-12">
+                          <div class="form-group">
+                            <mat-form-field class="w-100" appearance="outline">
+                              <mat-label>Adresse</mat-label>
+                              <input matInput formControlName="address" required>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                          <div class="form-group">
+                            <mat-form-field appearance="outline">
+                              <mat-label>ville</mat-label>
+                              <input matInput formControlName="city" required>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                          <div class="form-group">
+                            <mat-form-field appearance="outline">
+                              <mat-label>gouvernorat</mat-label>
                               <input matInput formControlName="state" required>
                             </mat-form-field>
                           </div>
@@ -142,7 +255,7 @@
                         <div class="col-12 col-md-4">
                           <div class="form-group">
                             <mat-form-field appearance="outline">
-                              <mat-label>prix</mat-label>
+                              <mat-label>prix de consultation</mat-label>
                               <input matInput formControlName="price" required>
                             </mat-form-field>
                           </div>
@@ -191,7 +304,69 @@
                       </div>
                     </form>
                   </mat-step>
-                  <mat-step [stepControl]="localForm">
+                  <mat-step *ngIf="role === 'option1'" [stepControl]="patientsecondFormGroup">
+                    <form [formGroup]="patientsecondFormGroup">
+                      <div class="row form-row">
+                        <ng-template matStepLabel>adresse</ng-template>
+                        <div class="col-12 col-md-12">
+                          <div class="form-group">
+                            <mat-form-field class="w-100" appearance="outline">
+                              <mat-label>Adresse</mat-label>
+                              <input matInput formControlName="address" required>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                          <div class="form-group">
+                            <mat-form-field appearance="outline">
+                              <mat-label>ville</mat-label>
+                              <input matInput formControlName="city" required>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                          <div class="form-group">
+                            <mat-form-field appearance="outline">
+                              <mat-label>Gouvernorat</mat-label>
+                              <input matInput formControlName="state" required>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                          <div class="form-group">
+                          </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                          <div class="form-group">
+                            <mat-select-country placeHolder="pays" appearance="outline" formControlName="country"
+                                                required>
+                            </mat-select-country>
+                          </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                          <div class="form-group">
+                            <mat-form-field appearance="outline">
+                              <mat-label>zip</mat-label>
+                              <input matInput formControlName="zip" required>
+                              <mat-error>zip non valide</mat-error>
+                            </mat-form-field>
+                          </div>
+                        </div>
+
+                        <div class="col-12 col-md-6">
+                          <button class="btn btn-info btn-block btn-lg login-btn" mat-button matStepperPrevious>
+                            precedent
+                          </button>
+                        </div>
+                        <div class="col-12 col-md-6">
+                          <button class="btn btn-primary btn-block btn-lg login-btn" mat-button matStepperNext>suivant
+                          </button>
+                        </div>
+
+                      </div>
+                    </form>
+                  </mat-step>
+                  <mat-step *ngIf="role === 'option3' || role === 'option2'" [stepControl]="localForm">
                     <form [formGroup]="localForm">
                       <ng-template matStepLabel>localisation</ng-template>
                       <agm-map style="height: 300px"

@@ -20,6 +20,7 @@ import {CertificatDetailsComponent} from '../../components/Patient/certificat-de
 import {InvoicePharDetailComponent} from '../../components/Patient/invoice-phar-detail/invoice-phar-detail.component';
 import {ChangePasswordComponent} from '../../components/Patient/change-password/change-password.component';
 import {Error404Component} from '../../shared/error404/error404.component';
+import {SignupDrComponent} from '../../components/Doctor/signup-dr/signup-dr.component';
 
 
 const appRoutes: Routes = [
@@ -27,7 +28,7 @@ const appRoutes: Routes = [
   {path: 'profile/ordonnace/:id', component: PrescriptionDetailsComponent, canActivate: [PatientAuthGuard]},
   {path: 'certificat/:id', component: CertificatDetailsComponent, canActivate: [PatientAuthGuard]},
   {path: 'login', component: LoginComponent},
-  {path: 'signup', component: SignupComponent},
+  {path: 'signup', component: SignupDrComponent},
   {path: 'profile/setting', component: ProfileSettComponent, canActivate: [PatientAuthGuard]},
   {path: 'profile/dashboard', component: PatientDhashboardComponent, canActivate: [PatientAuthGuard]},
   {path: 'profile/favdocs', component: FavDocsComponent, canActivate: [PatientAuthGuard]},
