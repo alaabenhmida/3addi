@@ -213,7 +213,7 @@
                               <th>Nom du patient</th>
                               <th>Date de rendez-vous</th>
                               <th>Purpose</th>
-                              <th>Type</th>
+<!--                              <th>Type</th>-->
                               <th class="text-center">Montant payé</th>
                               <th></th>
                             </tr>
@@ -232,9 +232,9 @@
                               </td>
                               <td>{{getdate(rdv.appDate, 'DD MMM YYYY')}} <span
                                 class="d-block text-info">{{getdate(rdv.appDate, 'HH:mm')}}</span></td>
-                              <td>General</td>
-                              <td>New Patient</td>
-                              <td *ngIf="rdv.status == 'confirmed'"><span class="badge badge-pill bg-success-light">confirmé</span>
+                              <td>Generale</td>
+<!--                              <td>New Patient</td>-->
+                              <td *ngIf="rdv.status == 'confirmed'"><span class="badge badge-pill bg-success-light">{{doctorData.price}} TND</span>
                               </td>
                               <td *ngIf="rdv.status == 'pending'"><span class="badge badge-pill bg-warning-light">en attente</span>
                               </td>

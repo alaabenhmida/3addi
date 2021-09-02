@@ -1,6 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {environment} from '../../../environments/environment.prod';
+const BACKEND_URL = environment.apiUrl;
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +13,6 @@ export class PaymentService {
   }
 
   pay(token: any, amount: number): Observable<any> {
-    return this.http.post('http://localhost:3000/payment', {token, amount});
+    return this.http.post(BACKEND_URL + 'payment', {token, amount});
   }
 }

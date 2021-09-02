@@ -2,8 +2,9 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable, Subject} from 'rxjs';
 import {Product} from '../../models/Pharmacie/product.model';
-import {FormGroup} from '@angular/forms';
 import {CartItem} from '../../models/Pharmacie/cartItem.model';
+import {environment} from '../../../environments/environment.prod';
+const BACKEND_URL = environment.apiUrl;
 
 @Injectable({
   providedIn: 'root'
@@ -36,7 +37,7 @@ export class PharmacieService {
       pharmacie.append('longitude', longitude.toString());
       pharmacie.append('image', image, name);
       pharmacie.append('awards', JSON.stringify(awards));
-      return this.http.put('http://localhost:3000/pharmacies/edit', pharmacie);
+      return this.http.put(BACKEND_URL + 'pharmacies/edit', pharmacie);
     } else {
       const pharmacie = new FormData();
       pharmacie.append('name', name);
@@ -52,29 +53,29 @@ export class PharmacieService {
       pharmacie.append('latitude', latitude.toString());
       pharmacie.append('longitude', longitude.toString());
       pharmacie.append('awards', JSON.stringify(awards));
-      return this.http.put('http://localhost:3000/pharmacies/edit', pharmacie);
+      return this.http.put(BACKEND_URL + 'pharmacies/edit', pharmacie);
     }
   }
 
   deleteCart(pharmacieID: string): Observable<any> {
-    return this.http.put('http://localhost:3000/patient/deletecart', {pharmacieID});
+    return this.http.put(BACKEND_URL + 'patient/deletecart', {pharmacieID});
   }
 
   signPrescription(pharmacie: string, prescID: string): Observable<any> {
-    return this.http.put('http://localhost:3000/patient/signpresc', {pharmacie, prescID});
+    return this.http.put(BACKEND_URL + 'patient/signpresc', {pharmacie, prescID});
   }
 
   addOrder(cart: any, pharmacie: string): Observable<any> {
-    return this.http.put('http://localhost:3000/pharmacies/addorder', {cart, pharmacie});
+    return this.http.put(BACKEND_URL + 'pharmacies/addorder', {cart, pharmacie});
   }
 
   getOrder(id: string): Observable<any> {
-    return this.http.get('http://localhost:3000/pharmacies/order/' + id);
+    return this.http.get(BACKEND_URL + 'pharmacies/order/' + id);
   }
 
   updatequantity(product: Product, quantity: number, date: string, pharmacieId: string): void {
 
-    this.http.put('http://localhost:3000/pharmacies/decreasequantite', {product, quantity, date, pharmacieId})
+    this.http.put(BACKEND_URL + 'pharmacies/decreasequantite', {product, quantity, date, pharmacieId})
       .subscribe(data => {
         console.log(data);
       });
@@ -87,7 +88,7 @@ export class PharmacieService {
     product.append('price', price.toString());
     product.append('stock', stock.toString());
     product.append('image', image, name);
-    return this.http.put('http://localhost:3000/pharmacies/addproduct', product);
+    return this.http.put(BACKEND_URL + 'pharmacies/addproduct', product);
   }
 
   updateProduct(id, name, description, price, stock, image?: File): void {
@@ -98,7 +99,7 @@ export class PharmacieService {
       product.append('price', price.toString());
       product.append('stock', stock.toString());
       product.append('image', image, name);
-      this.http.put('http://localhost:3000/pharmacies/editproduct/' + id, product).subscribe(data => {
+      this.http.put(BACKEND_URL + 'pharmacies/editproduct/' + id, product).subscribe(data => {
         console.log('with image');
       });
     } else {
@@ -107,49 +108,49 @@ export class PharmacieService {
       product.append('description', description);
       product.append('price', price.toString());
       product.append('stock', stock.toString());
-      this.http.put('http://localhost:3000/pharmacies/editproduct/' + id, product).subscribe(data => {
+      this.http.put(BACKEND_URL + 'pharmacies/editproduct/' + id, product).subscribe(data => {
         console.log('without image!!!!!!!');
       });
     }
   }
 
   deleteProduct(id: string): Observable<any> {
-    return this.http.delete('http://localhost:3000/pharmacies/product/' + id);
+    return this.http.delete(BACKEND_URL + 'pharmacies/product/' + id);
   }
 
   getDataByKey(): Observable<any> {
-    return this.http.get('http://localhost:3000/pharmacies/getbykey');
+    return this.http.get(BACKEND_URL + 'pharmacies/getbykey');
   }
 
   search(city: string): Observable<any> {
-    return this.http.put('http://localhost:3000/pharmacies/find', {city});
+    return this.http.put(BACKEND_URL + 'pharmacies/find', {city});
   }
 
   byewithPresc(products: CartItem [], pharmacie): Observable<any> {
-    return this.http.put('http://localhost:3000/patient/addtocart', {products, pharmacie});
+    return this.http.put(BACKEND_URL + 'patient/addtocart', {products, pharmacie});
   }
 
   getProductbyid(productID: string): Observable<any> {
-    return this.http.put('http://localhost:3000/pharmacies/getProductbyid', {productID});
+    return this.http.put(BACKEND_URL + 'pharmacies/getProductbyid', {productID});
   }
 
   getProduct(pharmacieID: string, productID: string): Observable<any> {
-    return this.http.put('http://localhost:3000/pharmacies/getProduct', {pharmacieID, productID});
+    return this.http.put(BACKEND_URL + 'pharmacies/getProduct', {pharmacieID, productID});
   }
 
   getProductByName(pharmacieID: string, productName: string): Observable<any> {
-    return this.http.put('http://localhost:3000/pharmacies/getProductByName', {pharmacieID, productName});
+    return this.http.put(BACKEND_URL + 'pharmacies/getProductByName', {pharmacieID, productName});
   }
 
   getAllPharmacies(): Observable<any> {
-    return this.http.get('http://localhost:3000/pharmacies');
+    return this.http.get(BACKEND_URL + 'pharmacies');
   }
 
   getPharmacie(id: string): Observable<any> {
-    return this.http.get('http://localhost:3000/pharmacies/' + id);
+    return this.http.get(BACKEND_URL + 'pharmacies/' + id);
   }
 
   addReview(id: string, rate: number, title: string, review: string): Observable<any> {
-    return this.http.post('http://localhost:3000/pharmacies/' + id + '/addreview', {rate, title, review});
+    return this.http.post(BACKEND_URL + 'pharmacies/' + id + '/addreview', {rate, title, review});
   }
 }

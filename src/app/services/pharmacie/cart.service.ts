@@ -4,7 +4,8 @@ import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import {Product} from '../../models/Pharmacie/product.model';
 import {CartItem} from '../../models/Pharmacie/cartItem.model';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {map} from 'rxjs/operators';
+import {environment} from '../../../environments/environment.prod';
+const BACKEND_URL = environment.apiUrl;
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +26,7 @@ export class CartService {
   }
 
   getcart(pharmacie: string): void {
-    this.http.put<any>('http://localhost:3000/patient/getcart', {pharmacie})
+    this.http.put<any>(BACKEND_URL + 'patient/getcart', {pharmacie})
       .subscribe(items => {
         let products: CartItem[] = [];
         for (let product of items.cart[0].products) {
@@ -65,7 +66,7 @@ export class CartService {
       status = 'success';
       this.snackBar.open(message, '×', {panelClass: [status], verticalPosition: 'top', duration: 3000});
     }
-    this.http.put<any>('http://localhost:3000/patient/addtocart', {products: this.products, pharmacie})
+    this.http.put<any>(BACKEND_URL + 'patient/addtocart', {products: this.products, pharmacie})
       .subscribe(items => {
         // this.cartItems.next(items.cart[0].products);
         // this.products = items.cart[0].products;
@@ -96,7 +97,7 @@ export class CartService {
         if (qty !== 0 && stock) {
           this.products[index].quantity = qty;
         }
-        this.http.put<any>('http://localhost:3000/patient/addtocart', {products: this.products, pharmacie})
+        this.http.put<any>(BACKEND_URL + 'patient/addtocart', {products: this.products, pharmacie})
           .subscribe(items => {
             // this.cartItems.next(items.cart[0].products);
             // this.products = items.cart[0].products;
@@ -148,7 +149,7 @@ export class CartService {
     }
     const index = this.products.indexOf(item);
     this.products.splice(index, 1);
-    this.http.put<any>('http://localhost:3000/patient/addtocart', {products: this.products, pharmacie})
+    this.http.put<any>(BACKEND_URL + 'patient/addtocart', {products: this.products, pharmacie})
       .subscribe(items => {
         // this.cartItems.next(items.cart[0].products);
         // this.products = items.cart[0].products;

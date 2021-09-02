@@ -3,6 +3,8 @@ import {Observable, Subject} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {MedicalRecord} from '../../models/Doctor/medicalRecord.model';
 import * as moment from 'moment';
+import {environment} from '../../../environments/environment.prod';
+const BACKEND_URL = environment.apiUrl;
 
 @Injectable({
   providedIn: 'root'
@@ -18,19 +20,19 @@ export class DoctorServiceService {
   }
 
   verifypassword(password: string): Observable<any> {
-    return this.http.put('http://localhost:3000/doctor/verifyPassword', {password});
+    return this.http.put(BACKEND_URL + 'doctor/verifyPassword', {password});
   }
 
   deleteDoctor(id: string): Observable<any> {
-    return this.http.delete('http://localhost:3000/doctor/' + id);
+    return this.http.delete(BACKEND_URL + 'doctor/' + id);
   }
 
   deleteDoctorByKey(): Observable<any> {
-    return this.http.delete('http://localhost:3000/doctor/delete');
+    return this.http.delete(BACKEND_URL + 'doctor/delete');
   }
 
   getspecialityCount(speciality: string): Observable<any> {
-    return this.http.put('http://localhost:3000/doctor/speciality', {speciality});
+    return this.http.put(BACKEND_URL + 'doctor/speciality', {speciality});
   }
 
   getDatalistener(): Observable<any> {
@@ -70,7 +72,7 @@ export class DoctorServiceService {
       image.append('registrations', JSON.stringify(registrations));
       image.append('image', images, firstName);
 
-      return this.http.put('http://localhost:3000/doctor', image);
+      return this.http.put(BACKEND_URL + 'doctor', image);
     } else {
       const image = new FormData();
       image.append('firstName', firstName);
@@ -94,12 +96,12 @@ export class DoctorServiceService {
       image.append('memberships', JSON.stringify(memberships));
       image.append('registrations', JSON.stringify(registrations));
 
-      return this.http.put('http://localhost:3000/doctor', image);
+      return this.http.put(BACKEND_URL + 'doctor', image);
     }
   }
 
   acceptRDV(patientId: string, appDate: string): void {
-    this.http.post('http://localhost:3000/doctor/rdv/accept', {patientId, appDate})
+    this.http.post(BACKEND_URL + 'doctor/rdv/accept', {patientId, appDate})
       .subscribe(result => {
         console.log(result);
         this.getDcotorByKey().subscribe(data => {
@@ -109,7 +111,7 @@ export class DoctorServiceService {
   }
 
   rejectRDV(patientId: string, appDate: string): void {
-    this.http.post('http://localhost:3000/doctor/rdv/cancel', {patientId, appDate})
+    this.http.post(BACKEND_URL + 'doctor/rdv/cancel', {patientId, appDate})
       .subscribe(result => {
         console.log(result);
         this.getDcotorByKey().subscribe(data => {
@@ -119,54 +121,54 @@ export class DoctorServiceService {
   }
 
   getDoctor(id: string): Observable<any> {
-    return this.http.get('http://localhost:3000/doctor/' + id);
+    return this.http.get(BACKEND_URL + 'doctor/' + id);
   }
 
   getDcotorByKey(): Observable<any> {
-    return this.http.get('http://localhost:3000/doctor/getdocbykey');
+    return this.http.get(BACKEND_URL + 'doctor/getdocbykey');
   }
 
   getAllDoctors(postPerPage?: number, currentPage?: number): Observable<any> {
     const queryParams = `?pagesize=${postPerPage}&page=${currentPage}`;
-    return this.http.get('http://localhost:3000/doctor' + queryParams);
+    return this.http.get(BACKEND_URL + 'doctor' + queryParams);
   }
 
   getInvoice(id: string): Observable<any> {
-    return this.http.get('http://localhost:3000/doctor/invoice/' + id);
+    return this.http.get(BACKEND_URL + 'doctor/invoice/' + id);
   }
 
   updatePrescription(patientId: string, prescID: string, presc: any, description: string): Observable<any> {
-    return this.http.put('http://localhost:3000/patient/' + patientId + '/updatepresc', {prescID, presc, description});
+    return this.http.put(BACKEND_URL + 'patient/' + patientId + '/updatepresc', {prescID, presc, description});
   }
 
   search(name: string, genders?: string[], speciality?: string[]): Observable<any> {
-    return this.http.put('http://localhost:3000/doctor/find', {name, genders, speciality});
+    return this.http.put(BACKEND_URL + 'doctor/find', {name, genders, speciality});
   }
 
   workingTime(duration: number, from: string, to: string, breackTimes: any): Observable<any> {
-    return this.http.put('http://localhost:3000/doctor/workingtimes', {duration, from, to, breackTimes});
+    return this.http.put(BACKEND_URL + 'doctor/workingtimes', {duration, from, to, breackTimes});
   }
 
   getPrescription(patiendId: string, prescID: string): Observable<any> {
-    return this.http.put('http://localhost:3000/patient/' + patiendId + '/getpresc', {prescID});
+    return this.http.put(BACKEND_URL + 'patient/' + patiendId + '/getpresc', {prescID});
   }
 
   addPrescription(presc: string[], patientId: string, description: string): Observable<any> {
-    return this.http.post('http://localhost:3000/doctor/patient/' + patientId + '/addpresc', {
+    return this.http.post(BACKEND_URL + 'doctor/patient/' + patientId + '/addpresc', {
       presc,
       date: moment(Date.now()).format('YYYY-MM-DDTHH:mm:ss'), description
     });
   }
 
   addCertificat(patientId: string, from: string, to: string, description: string): Observable<any> {
-    return this.http.post('http://localhost:3000/doctor/patient/' + patientId + '/addcertificat', {
+    return this.http.post(BACKEND_URL + 'doctor/patient/' + patientId + '/addcertificat', {
       from, to,
       date: moment(Date.now()).format('YYYY-MM-DDTHH:mm:ss'), description
     });
   }
 
   deletePrescription(patientId: string, recId: string): Observable<any> {
-    return this.http.put('http://localhost:3000/patient/' + patientId + '/delpresc', {recId});
+    return this.http.put(BACKEND_URL + 'patient/' + patientId + '/delpresc', {recId});
   }
 
   addrecord(id: string, nom: string, desc: string, file: File): Observable<any> {
@@ -179,14 +181,14 @@ export class DoctorServiceService {
     //   description : desc,
     //   file
     // };
-    return this.http.put('http://localhost:3000/patient/' + id, medrecord);
+    return this.http.put(BACKEND_URL + 'patient/' + id, medrecord);
   }
 
   deleteRecord(patientid: string, recId: string): Observable<any> {
-    return this.http.put('http://localhost:3000/patient/' + patientid + '/delrecord', {recId});
+    return this.http.put(BACKEND_URL + 'patient/' + patientid + '/delrecord', {recId});
   }
 
   addReview(id: string, rate: number, title: string, review: string): Observable<any> {
-    return this.http.post('http://localhost:3000/doctor/' + id + '/addreview', {rate, title, review});
+    return this.http.post(BACKEND_URL + 'doctor/' + id + '/addreview', {rate, title, review});
   }
 }

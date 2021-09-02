@@ -42,6 +42,7 @@
               "src/assets/css/style.css",
               "node_modules/ngx-toastr/toastr.css",
               "node_modules/snazzy-info-window/dist/snazzy-info-window.css",
+              "node_modules/intl-tel-input/build/css/intlTelInput.css",
               "src/styles.css"
             ],
             "scripts": [
@@ -60,7 +61,8 @@
               "src/assets/plugins/dropzone/dropzone.min.js",
               "src/assets/plugins/bootstrap-tagsinput/js/bootstrap-tagsinput.js",
               "src/assets/js/profile-settings.js",
-              "src/assets/js/script.js"
+              "src/assets/js/script.js",
+              "node_modules/intl-tel-input/build/js/intlTelInput.min.js"
             ]
           },
           "configurations": {

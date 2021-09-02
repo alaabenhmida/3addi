@@ -1,6 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {environment} from '../../../environments/environment.prod';
+const BACKEND_URL = environment.apiUrl;
 
 @Injectable({
   providedIn: 'root'
@@ -36,31 +38,31 @@ export class AdminService {
     doctorData.append('zip', zip);
     doctorData.append('latitude', latitude.toString());
     doctorData.append('longitude', longitude.toString());
-    return this.http.post('http://localhost:3000/pharmacies/signup', doctorData);
+    return this.http.post(BACKEND_URL + 'pharmacies/signup', doctorData);
   }
 
   sendmail(to: string, subject: string, text: string): Observable<any> {
-    return this.http.post('http://localhost:3000/admin/sendmail', {to, subject, text});
+    return this.http.post(BACKEND_URL + 'admin/sendmail', {to, subject, text});
   }
 
   delDoctor(id: string): Observable<any> {
-    return this.http.delete('http://localhost:3000/admin/deldoc/' + id);
+    return this.http.delete(BACKEND_URL + 'admin/deldoc/' + id);
   }
 
   delPharmacie(id: string): Observable<any> {
-    return this.http.delete('http://localhost:3000/admin/delphar/' + id);
+    return this.http.delete(BACKEND_URL + 'admin/delphar/' + id);
   }
 
   getAdmin(): Observable<any> {
-    return this.http.get('http://localhost:3000/admin');
+    return this.http.get(BACKEND_URL + 'admin');
   }
 
   getDoctor(id: string): Observable<any> {
-    return this.http.get('http://localhost:3000/admin/getdoctor/' + id);
+    return this.http.get(BACKEND_URL + 'admin/getdoctor/' + id);
   }
 
   getPharmacie(id: string): Observable<any> {
-    return this.http.get('http://localhost:3000/admin/getpharmacie/' + id);
+    return this.http.get(BACKEND_URL + 'admin/getpharmacie/' + id);
   }
 
   addDoctor(email: string, password: string,
@@ -97,7 +99,7 @@ export class AdminService {
     doctorData.append('zip', zip);
     doctorData.append('latitude', latitude.toString());
     doctorData.append('longitude', longitude.toString());
-    this.http.post('http://localhost:3000/admin/adddoctor', doctorData)
+    this.http.post(BACKEND_URL + 'admin/adddoctor', doctorData)
       .subscribe(responsedata => {
         console.log(responsedata);
       }, error => {
@@ -131,7 +133,7 @@ export class AdminService {
     doctorData.append('zip', zip);
     doctorData.append('latitude', latitude.toString());
     doctorData.append('longitude', longitude.toString());
-    this.http.post('http://localhost:3000/admin/addpharmacie', doctorData)
+    this.http.post(BACKEND_URL + 'admin/addpharmacie', doctorData)
       .subscribe(responsedata => {
         console.log(responsedata);
       }, error => {

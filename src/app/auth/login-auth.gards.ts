@@ -15,7 +15,7 @@ export class LoginAuthGuard implements CanActivate {
     const isAuth = this.authService.getIsAuth();
     const role = this.authService.getRole();
     if (isAuth) {
-      this.router.navigate(['/']);
+      this.router.navigate(['/login']);
     }
     return isAuth;
   }

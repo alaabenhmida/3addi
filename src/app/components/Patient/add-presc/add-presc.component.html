@@ -152,7 +152,7 @@
                             <div class="input-group">
                               <input type="text" placeholder="Matin" class="form-control" formControlName="mor">
                               <input type="text" placeholder="Après midi" class="form-control" formControlName="af">
-                              <input type="text" placeholder="Soir" class="form-control" formControlName="ev">
+<!--                              <input type="text" placeholder="Soir" class="form-control" formControlName="ev">-->
                               <input type="text" placeholder="Nuit" class="form-control" formControlName="nght">
                             </div>
                           </td>
@@ -177,9 +177,9 @@
               <div class="row">
                 <div class="col-md-12 text-right">
                   <div class="signature-wrap">
-                    <div class="signature">
-                      Click here to sign
-                    </div>
+<!--                    <div class="signature">-->
+<!--                      Click here to sign-->
+<!--                    </div>-->
                     <div class="sign-name">
                       <p *ngIf="mode ==='edit'" class="mb-0">(
                         Dr. {{prescData?.doctorId.name}} {{prescData?.doctorId.lastName}} )</p>
@@ -196,9 +196,9 @@
                 <div class="col-md-12">
                   <div class="submit-section">
                     <button (click)="sendForm.click()" [disabled]="form.invalid" type="submit"
-                            class="btn btn-primary submit-btn">Save
+                            class="btn btn-primary submit-btn">sauvegarder
                     </button>
-                    <button (click)="clearForm()" type="reset" class="btn btn-secondary submit-btn">Clear</button>
+                    <button (click)="clearForm()" type="reset" class="btn btn-secondary submit-btn">réinitialiser</button>
                   </div>
                 </div>
               </div>

@@ -28,6 +28,7 @@ export class MapListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.setCurrentLocation();
     this.route.queryParams.subscribe((params: Params) => {
       if (params.ordID) {
         this.prescID = params.ordID;

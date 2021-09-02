@@ -2,6 +2,8 @@ import {Injectable} from '@angular/core';
 import {Observable, Subject} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import * as moment from 'moment';
+import {environment} from '../../../environments/environment.prod';
+const BACKEND_URL = environment.apiUrl + 'patient/';
 
 @Injectable({
   providedIn: 'root'
@@ -18,37 +20,37 @@ export class PatientServiceService {
   }
 
   deleteUser(id: string): Observable<any> {
-    return this.http.delete('http://localhost:3000/patient/' + id);
+    return this.http.delete(BACKEND_URL + id);
   }
 
   getPatient(id: string): Observable<any> {
-    return this.http.get('http://localhost:3000/patient/' + id);
+    return this.http.get(BACKEND_URL + id);
   }
 
   verifypassword(password: string): Observable<any> {
-    return this.http.put('http://localhost:3000/patient/verifyPassword', {password});
+    return this.http.put(BACKEND_URL + 'verifyPassword', {password});
   }
 
   changepassword(password: string): Observable<any> {
-    return this.http.put('http://localhost:3000/patient/changepassword', {password});
+    return this.http.put(BACKEND_URL + 'changepassword', {password});
   }
 
   addInvoice(doctor: string, date: string, price: number, paymentMethod: string,
              cardNumber: string, rdvDate: string): Observable<any> {
-    return this.http.put('http://localhost:3000/patient/addinvoice',
+    return this.http.put(BACKEND_URL + 'addinvoice',
       {doctor, date, price, paymentMethod, cardNumber, rdvDate});
   }
 
   getCertificat(patiendId: string, certID: string): Observable<any> {
-    return this.http.put('http://localhost:3000/patient/' + patiendId + '/getcertificat', {certID});
+    return this.http.put(BACKEND_URL + patiendId + '/getcertificat', {certID});
   }
 
   getInvoice(id: string): Observable<any> {
-    return this.http.get('http://localhost:3000/patient/invoice/' + id);
+    return this.http.get(BACKEND_URL + 'invoice/' + id);
   }
 
   addFavourite(doctorId: string): Observable<any> {
-    return this.http.put('http://localhost:3000/patient/addfav', {doctorId});
+    return this.http.put(BACKEND_URL + 'addfav', {doctorId});
   }
 
   modify(email: string, name: string, lastName: string, address: string, birthday: string,
@@ -68,7 +70,7 @@ export class PatientServiceService {
       patient.append('zip', zip);
       patient.append('country', country);
       patient.append('image', image, name);
-      return this.http.put('http://localhost:3000/patient', patient);
+      return this.http.put(BACKEND_URL, patient);
     } else {
       const patient = new FormData();
       patient.append('email', email);
@@ -82,29 +84,29 @@ export class PatientServiceService {
       patient.append('state', state);
       patient.append('zip', zip);
       patient.append('country', country);
-      return this.http.put('http://localhost:3000/patient', patient);
+      return this.http.put(BACKEND_URL, patient);
     }
   }
 
 
   getPatientByKey(): Observable<any> {
-    return this.http.get('http://localhost:3000/patient/getPatbykey');
+    return this.http.get(BACKEND_URL + 'getPatbykey');
   }
 
   getRdv(rdvId: string): Observable<any> {
-    return this.http.get('http://localhost:3000/patient/' + rdvId + '/getrdv/');
+    return this.http.get(BACKEND_URL + rdvId + '/getrdv/');
   }
 
   addInoicePharmaice(cart: any, pharmacie: string): Observable<any> {
-    return this.http.put('http://localhost:3000/patient/addinvoicephar', {cart, pharmacie});
+    return this.http.put(BACKEND_URL + 'addinvoicephar', {cart, pharmacie});
   }
 
   getInoicePharmaice(id: string): Observable<any> {
-    return this.http.get('http://localhost:3000/patient/getinvoicePhar/' + id);
+    return this.http.get(BACKEND_URL + 'getinvoicePhar/' + id);
   }
 
   addRdv(id: string, rdvDate: string): Observable<any> {
-    return this.http.post('http://localhost:3000/patient/' + id + '/rdv',
+    return this.http.post(BACKEND_URL + id + '/rdv',
       {
         appDate: moment(Date.now()).format('YYYY-MM-DDTHH:mm:ss'),
         rdvDate
@@ -112,6 +114,6 @@ export class PatientServiceService {
   }
 
   getAllPAtient(): Observable<any> {
-    return this.http.get('http://localhost:3000/patient/');
+    return this.http.get(BACKEND_URL);
   }
 }

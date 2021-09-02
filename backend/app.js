@@ -13,7 +13,7 @@ const app = express();
 
 mongoose
   .connect(
-    "mongodb://127.0.0.1:27017/pfeTest", {useNewUrlParser: true, useUnifiedTopology: true}
+    process.env.MONGO_PARAMETER, {useNewUrlParser: true, useUnifiedTopology: true}
   )
   .then(() => {
     console.log("Connected to database!");

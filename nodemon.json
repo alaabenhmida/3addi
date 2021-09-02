@@ -1,0 +1,7 @@
+{
+  "env": {
+    "MONGO_PARAMETER": "mongodb+srv://alaa:QfpAYWQGRFOy2zay@cluster0.b1cvl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+    "JWT_KEY": "secret_this_should_be_longer"
+  }
+}
+
