@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl : 'http://localhost:3000/'
+  apiUrl : 'https://serene-hamlet-33579.herokuapp.com/'
 };

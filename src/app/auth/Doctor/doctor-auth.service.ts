@@ -1,10 +1,12 @@
 import {Injectable} from '@angular/core';
 import {Observable, Subject} from 'rxjs';
-import {Patient} from '../../models/Patient/patient.model';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {Doctor} from '../../models/Doctor/doctor.model';
 import {AuthData} from '../auth-data';
+
+import {environment} from '../../../environments/environment.prod';
+const BACKEND_URL = environment.apiUrl;
 
 @Injectable({
   providedIn: 'root'
@@ -70,7 +72,7 @@ export class DoctorAuthService {
     const authData: AuthData = {email, password};
     this.http
       .post<{ token: string; expiresIn: number, user: any }>(
-        'http://localhost:3000/doctor/login',
+        BACKEND_URL + 'doctor/login',
         authData
       )
       .subscribe(response => {
@@ -203,6 +205,6 @@ export class DoctorAuthService {
     doctorData.append('zip', zip);
     doctorData.append('latitude', latitude.toString());
     doctorData.append('longitude', longitude.toString());
-    return this.http.post('http://localhost:3000/doctor/signup', doctorData);
+    return this.http.post(BACKEND_URL + 'doctor/signup', doctorData);
   }
 }

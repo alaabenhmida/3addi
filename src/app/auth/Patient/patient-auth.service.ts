@@ -1,10 +1,12 @@
 import {Injectable} from '@angular/core';
-import {Patient} from '../../models/Patient/patient.model';
 import {Observable, Subject} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {AuthData} from '../auth-data';
 import {ToastrService} from 'ngx-toastr';
+
+import {environment} from '../../../environments/environment.prod';
+const BACKEND_URL = environment.apiUrl;
 
 @Injectable({
   providedIn: 'root'
@@ -79,7 +81,7 @@ export class PatientAuthService {
     const authData: AuthData = {email, password};
     this.http
       .post<{ token: string; expiresIn: number, user: any, role: string }>(
-        'http://localhost:3000/patient/login',
+        BACKEND_URL + 'patient/login',
         authData
       )
       .subscribe(response => {
@@ -215,7 +217,7 @@ export class PatientAuthService {
     patientData.append('birthday', birthday);
     patientData.append('bloodType', bloodType);
     patientData.append('phone', phone);
-    this.http.post('http://localhost:3000/patient/signup', patientData)
+    this.http.post(BACKEND_URL + 'patient/signup', patientData)
       .subscribe(responsedata => {
         this.toastr.success('compte créé avec succès', '', {
           positionClass: 'toast-bottom-right'

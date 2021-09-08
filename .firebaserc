@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "gdhju": "ghjukfdght",
+    "default": "ghjukfdght"
+  },
+  "targets": {
+    "ghjukfdght": {
+      "hosting": {
+        "PFEt2": [
+          "ghjukfdght"
+        ]
+      }
+    }
+  }
+}
