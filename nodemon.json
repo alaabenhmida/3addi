@@ -1,6 +1,6 @@
 {
   "env": {
-    "MONGO_PARAMETER": "mongodb+srv://alaa:QfpAYWQGRFOy2zay@cluster0.b1cvl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+    "MONGO_PARAMETER": "mongodb://localhost:27017/pfeTest",
     "JWT_KEY": "secret_this_should_be_longer"
   }
 }

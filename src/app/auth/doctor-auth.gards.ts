@@ -15,7 +15,7 @@ export class AuthGuard implements CanActivate {
     const isAuth = this.authService.getIsAuth();
     const role = this.authService.getRole();
     if (role !== 'doctor') {
-      this.router.navigate(['/login']);
+      this.router.navigate(['/not-found']);
     }
     return isAuth;
   }

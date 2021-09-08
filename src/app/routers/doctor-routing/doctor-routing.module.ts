@@ -15,6 +15,8 @@ import {SearchComponent} from '../../components/Doctor/search/search.component';
 import {AuthGuard} from '../../auth/doctor-auth.gards';
 import {PatientAuthGuard} from '../../auth/patient-auth.gards';
 import {ManageTimeComponent} from '../../components/Doctor/manage-time/manage-time.component';
+import {DoctorAuthService} from '../../auth/Doctor/doctor-auth.service';
+import {LoginAuthGuard} from '../../auth/login-auth.gards';
 
 const appRoutes: Routes = [
   {path: 'signup', component: SignupDrComponent},
@@ -23,7 +25,7 @@ const appRoutes: Routes = [
   {path: 'reviews', component: ReviewsComponent, canActivate: [AuthGuard]},
   {path: 'search', component: SearchComponent},
   {path: 'gererTemps', component: ManageTimeComponent, canActivate: [AuthGuard]},
-  {path: ':id', component: ProfileDocComponent},
+  {path: ':id', component: ProfileDocComponent, canActivate: [LoginAuthGuard]},
   {path: ':id/check/:rdvID', component: CheckoutComponent, canActivate: [PatientAuthGuard]},
   {path: ':id/app', component: AppointmentComponent, canActivate: [PatientAuthGuard]},
   {path: 'profile/dashboard', component: DocDashboardComponent, canActivate: [AuthGuard]},
@@ -36,7 +38,7 @@ const appRoutes: Routes = [
   declarations: [],
   imports: [RouterModule.forChild(appRoutes)],
   exports: [RouterModule],
-  providers: [AuthGuard, PatientAuthGuard]
+  providers: [AuthGuard, PatientAuthGuard, LoginAuthGuard]
 })
 export class DoctorRoutingModule {
 }

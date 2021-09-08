@@ -4,7 +4,7 @@ import {PatientAuthService} from './Patient/patient-auth.service';
 import {Observable} from 'rxjs';
 
 @Injectable()
-export class LoginAuthGuard implements CanActivate {
+export class AdminAuthGard implements CanActivate {
   constructor(private authService: PatientAuthService, private router: Router) {
   }
 
@@ -13,8 +13,9 @@ export class LoginAuthGuard implements CanActivate {
     state: RouterStateSnapshot
   ): boolean | Observable<boolean> | Promise<boolean> {
     const isAuth = this.authService.getIsAuth();
-    if (!isAuth) {
-      this.router.navigate(['/login']);
+    const role = this.authService.getRole();
+    if (role !== 'admin') {
+      this.router.navigate(['/not-found']);
     }
     return isAuth;
   }
