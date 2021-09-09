@@ -378,7 +378,7 @@
                   <div>
                     <div class="profile-widget" style="width: 100%; display: inline-block;">
                       <div class="doc-img">
-                        <a [routerLink]="['doctor', doctor?._id]" tabindex="0">
+                        <a [routerLink]="['/doctor', doctor?._id]" tabindex="0">
                           <img class="img-fluid" alt="User Image" src="{{doctor?.imagePath}}">
                         </a>
                         <a *ngIf="isloggedIn" (click)="onAddFavDoc(doctor._id)" href="javascript:void(0)"
@@ -387,7 +387,7 @@
                       </div>
                       <div class="pro-content">
                         <h3 class="title">
-                          <a [routerLink]="['doctor', doctor?._id]"
+                          <a [routerLink]="['/doctor', doctor?._id]"
                              tabindex="0">{{doctor?.name}} {{doctor?.lastName}}</a>
                           <i class="fas fa-check-circle verified"></i>
                         </h3>
@@ -419,10 +419,10 @@
                           </li>
                         </ul>
                         <div class="row row-sm">
-                          <div class="col-6"><a [routerLink]="['doctor', doctor?._id]" class="btn view-btn"
+                          <div class="col-6"><a [routerLink]="['/doctor', doctor?._id]" class="btn view-btn"
                                                 tabindex="0">Voir le profil</a>
                           </div>
-                          <div class="col-6"><a [routerLink]="['doctor', doctor?._id, 'app']" class="btn book-btn"
+                          <div class="col-6"><a [routerLink]="['/doctor', doctor?._id, 'app']" class="btn book-btn"
                                                 tabindex="0">Rendez-vous</a>
                           </div>
                         </div>

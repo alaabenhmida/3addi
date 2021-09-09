@@ -141,6 +141,10 @@ export class ProfileDocComponent implements OnInit, OnDestroy {
         }
         this.workingTime = data.workingTime;
         this.rate = this.rating / data.reviews.length;
+      }, error => {
+        if (error.status === 404) {
+          this.router.navigate(['/not-found']);
+        }
       });
     });
     // console.log(this.doctorData);

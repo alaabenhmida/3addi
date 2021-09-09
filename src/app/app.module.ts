@@ -27,7 +27,6 @@ import {AlertModule} from 'ngx-bootstrap/alert';
 import {PaginationModule} from 'ngx-bootstrap/pagination';
 import {ErrorInterceptor} from './error-interceptor';
 import {ErrorComponent} from './error/error.component';
-import {PharmacieRoutingModule} from './routers/pharmacie-routing/pharmacie-routing.module';
 import {AgmDirectionModule} from 'agm-direction';
 import {LoginDialogComponent} from './shared/login-dialog/login-dialog.component';
 import {AdminDashboardComponent} from './components/Admin/admin-dashboard/admin-dashboard.component';
@@ -84,9 +83,9 @@ const config: SocketIoConfig = {url: 'http://localhost:3000', options: {}};
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
-    AppRoutingModule,
     PatientRoutingModule,
     AdminRoutingModule,
+    AppRoutingModule,
     FormsModule,
     DlDateTimeDateModule,  // <--- Determines the data type of the model
     DlDateTimePickerModule,

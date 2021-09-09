@@ -9,14 +9,14 @@ import {MapListComponent} from './components/Pharmacie/map-list/map-list.compone
 import {Error404Component} from './shared/error404/error404.component';
 
 const appRoutes: Routes = [
-  {path: '', component: IndexComponent},
-  // {path: '', redirectTo: '/home', pathMatch: 'full'},
+  {path: 'home', component: IndexComponent},
+  {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: 'doctors', component: MapGridComponent},
   {path: 'pharmacies', component: MapListComponent},
   {path: 'doctor', loadChildren: () => import('./components/Doctor/doctor.module').then(m => m.DoctorModule)},
   {path: 'pharmacie', loadChildren: () => import('./components/Pharmacie/pharmacie.module').then(p => p.PharmacieModule)},
   {path: 'not-found', component: Error404Component},
-  // {path: '**', redirectTo: '/not-found', pathMatch: 'full'},
+  {path: '**', redirectTo: '/not-found', pathMatch: 'full'},
 ];
 
 
