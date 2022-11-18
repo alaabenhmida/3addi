@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "appointment-picker": "^2.0.0",
-    "bcrypt": "^5.0.1",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "faker": "^5.4.0",
@@ -20,5 +20,8 @@
     "scriptjs": "^2.5.9",
     "socket.io": "^4.0.1",
     "stripe": "^8.154.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
   }
 }

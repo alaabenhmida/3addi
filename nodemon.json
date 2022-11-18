@@ -1,6 +1,6 @@
 {
   "env": {
-    "MONGO_PARAMETER": "mongodb://localhost:27017/pfeTest",
+    "MONGO_ATLAS_PW": "alafarhat12",
     "JWT_KEY": "secret_this_should_be_longer"
   }
 }

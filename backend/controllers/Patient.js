@@ -1,6 +1,6 @@
 const Patient = require("../models/patient");
 const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const Doctor = require("../models/Doctor");
 const Pharmacie = require("../models/Pharmacie");
 const Admin = require("../models/Admin");
@@ -152,7 +152,6 @@ exports.getCart = (req, res, next) => {
 }
 
 exports.signup = (req, res, next) => {
-  console.log(req.body);
   bcrypt.hash(req.body.password, 10).then(hash => {
     const url = req.protocol + "://" + req.get("host");
     const patient = new Patient({
@@ -622,6 +621,7 @@ exports.addRDV = (req, res, next) => {
 
 
 exports.login = (req, res, next) => {
+  //console.log(req.body);
   let fetchedUser;
   Patient.findOne({email: req.body.email})
     .then(user => {
@@ -734,7 +734,7 @@ exports.login = (req, res, next) => {
       }
       const token = jwt.sign(
         {email: fetchedUser.email, userId: fetchedUser._id},
-        process.env.JWT_KEY,
+        "secret_this_should_be_longer",
         {expiresIn: "1h"}
       );
       res.status(200).json({
@@ -745,7 +745,8 @@ exports.login = (req, res, next) => {
       });
     })
     .catch(err => {
-      return res.status(201).json({
+      console.log(err);
+      return res.status(500).json({
         message: "error occurred",
         error: err
       });

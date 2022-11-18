@@ -94,6 +94,7 @@ export class SignupDrComponent implements OnInit {
   }
 
   onSubmit(): void {
+    console.log(this.role);
     if (this.role === 'option2') {
       // if (this.form.invalid){
       //   return;

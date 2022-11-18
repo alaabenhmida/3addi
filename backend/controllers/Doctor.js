@@ -1,7 +1,7 @@
 const Doctor = require("../models/Doctor");
 const jwt = require("jsonwebtoken");
 const Patient = require("../models/patient");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 
 exports.getAllDoctors = (req, res, next) => {
   const pageSize = +req.query.pagesize;

@@ -10,10 +10,14 @@ const admin = require("./routes/Admin");
 const payment = require("./routes/Payment");
 
 const app = express();
+//process.env.MONGO_PARAMETER
 
 mongoose
   .connect(
-    process.env.MONGO_PARAMETER, {useNewUrlParser: true, useUnifiedTopology: true}
+    "mongodb+srv://alaa:" + process.env.MONGO_ATLAS_PW + "@cluster0.b1cvl.mongodb.net/?retryWrites=true&w=majority", {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    }
   )
   .then(() => {
     console.log("Connected to database!");

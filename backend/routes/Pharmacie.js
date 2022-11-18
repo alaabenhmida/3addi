@@ -1,38 +1,14 @@
 const express = require("express");
 const checkAuth = require("../middleware/check-auth");
+const extractImage = require("../middleware/image");
 const router = express.Router();
 const Pharmacie = require("../models/Pharmacie");
 const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
-const multer = require("multer");
+const bcrypt = require("bcryptjs");
 const moment = require("moment");
 
-const MIME_TYPE_MAP = {
-  "image/png": "png",
-  "image/jpeg": "jpg",
-  "image/jpg": "jpg"
-};
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    const isValid = MIME_TYPE_MAP[file.mimetype];
-    let error = new Error("Invalid mime type");
-    if (isValid) {
-      error = null;
-    }
-    cb(error, "backend/images");
-  },
-  filename: (req, file, cb) => {
-    const name = file.originalname
-      .toLowerCase()
-      .split(" ")
-      .join("-");
-    const ext = MIME_TYPE_MAP[file.mimetype];
-    cb(null, name + "-" + Date.now() + "." + ext);
-  }
-});
-
-router.post("/signup", multer({storage: storage}).single("image"), (req, res, next) => {
+router.post("/signup", extractImage, (req, res, next) => {
   const pharmacie = new Pharmacie({
     email: req.body.email,
     password: req.body.password,
@@ -63,7 +39,7 @@ router.post("/signup", multer({storage: storage}).single("image"), (req, res, ne
   });
 });
 
-router.put("/edit", multer({storage: storage}).single("image"), checkAuth,
+router.put("/edit", extractImage, checkAuth,
   (req, res, next) => {
     let imagePath = req.body.image;
     if (req.file) {
@@ -170,7 +146,6 @@ router.get("/order/:id", checkAuth, (req, res, next) => {
 });
 
 router.put("/addorder", checkAuth, (req, res, next) => {
-  console.log("wsollllll!!!!");
   Pharmacie.findOneAndUpdate({_id: req.body.pharmacie},
     {
       $push: {
@@ -229,7 +204,7 @@ router.put("/decreasequantite", checkAuth, (req, res, next) => {
 });
 
 router.put("/editproduct/:id",
-  multer({storage: storage}).single("image"), checkAuth,
+  extractImage, checkAuth,
   (req, res, next) => {
     if (req.file) {
       let imagePath = req.body.image;
@@ -278,7 +253,7 @@ router.put("/editproduct/:id",
   });
 
 router.put("/addproduct",
-  multer({storage: storage}).single("image"), checkAuth, (req, res, next) => {
+  extractImage, checkAuth, (req, res, next) => {
     let imagePath = req.body.image;
     const url = req.protocol + "://" + req.get("host");
     imagePath = url + "/images/" + req.file.filename;
