@@ -90,5 +90,55 @@ Set environment variables for API endpoints and other configurations in the `.en
 Technologies used in the project:
 
 *   angular
+*   nodejs
+*   expressjs
+*   mongodb
+
+# API
+
+<h2>🧐 Features</h2>
+
+- **Authentication:**
+  - JWT-based authentication for secure user access.
+  - Authorization checks for protected routes.
+
+- **Appointments:**
+  - Create, manage, and view appointments.
+  - Accept or cancel appointments.
+
+- **Prescriptions:**
+  - Generate prescriptions for patients.
+  - View prescription details.
+
+- **Medical Records:**
+  - Maintain and edit patient medical records.
+  - Accessible only by the relevant doctor.
+
+- **Stripe Integration:**
+  - Secure payment processing with Stripe.
+
+- **Location Services:**
+  - Map integration for doctor and pharmacist location setup.
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js
+- MongoDB
+- Stripe API Key
+
+<h2>🛠️ Installation Steps:</h2>
 
 
+<p>1. Install dependencies:</p>
+
+```
+cd backend
+npm install
+```
+<p>2. Run the application:</p>
+
+```
+npm start
+```
