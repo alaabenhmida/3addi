@@ -14,7 +14,7 @@ const app = express();
 
 mongoose
   .connect(
-    "mongodb+srv://alaa:" + process.env.MONGO_ATLAS_PW + "@cluster0.b1cvl.mongodb.net/?retryWrites=true&w=majority", {
+    "mongodb+srv://alaa:" + process.env.MONGO_ATLAS_PW + "@yourcluster.mongodb.net/?retryWrites=true&w=majority", {
       useNewUrlParser: true,
       useUnifiedTopology: true
     }
